@@ -1,38 +1,45 @@
-.App {
-  text-align: center;
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.MainContainer {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(29, 55, 139);
+  animation: fadeIn 500ms 1 0s forwards;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.Overlay {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgb(29, 55, 139);
+  opacity: 0.8;
+  z-index: -1;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.Header {
   display: flex;
-  flex-direction: column;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 90%;
+  height: 100px;
+  padding-left: 5%;
+  padding-right: 5%;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.HeaderOverlay {
+  position: absolute;
+  width: 100%;
+  margin-left: -5%;
+  height: 100px;
+  background-color: rgb(18, 35, 90);
+  opacity: 0.5;
+  z-index: -1;
+}
+
+.Header h1 {
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
