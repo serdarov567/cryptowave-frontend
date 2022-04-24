@@ -24,10 +24,9 @@ function App() {
           minWidth: 200.0,
           scale: 1.0,
           scaleMobile: 1.0,
-          shininess: 80.00,
-          waveHeight: 40.00,
-          waveSpeed: 0.60,
-          zoom: 0.65
+          waveHeight: 20.00,
+          waveSpeed: 0.50,
+          zoom: 1
         })
       );
     }
