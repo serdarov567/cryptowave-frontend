@@ -2,48 +2,34 @@ import React, { useState, useRef, useEffect } from "react";
 
 import logo from "./logo.svg";
 import "./App.css";
-
-import WAVES from "vanta/dist/vanta.waves.min";
-
-import * as THREE from "three";
+import Navbar from "./components/Navbar";
+import { Box, Flex, useColorModeValue, Image, Text } from "@chakra-ui/react";
+import Phone from "./vectors/Phone";
+import nigga from "./nigga.png";
 
 function App() {
-  const [vantaEffect, setVantaEffect] = useState(null);
-  const vantaRef = useRef(null);
-
-  useEffect(() => {
-    if (!vantaEffect) {
-      setVantaEffect(
-        WAVES({
-          el: vantaRef.current,
-          THREE: THREE,
-          mouseControls: true,
-          touchControls: true,
-          gyroControls: false,
-          minHeight: 200.0,
-          minWidth: 200.0,
-          scale: 1.0,
-          scaleMobile: 1.0,
-          waveHeight: 20.00,
-          waveSpeed: 0.50,
-          zoom: 1
-        })
-      );
-    }
-
-    return () => {
-      if (vantaEffect) vantaEffect.destroy();
-    };
-  }, [vantaEffect]);
-
   return (
-    <div ref={vantaRef} className="MainContainer">
-      <div className="Overlay" />
-      <div className="Header">
-        <div className="HeaderOverlay"/>
-        <h1>CryptoWave</h1>
-      </div>
-    </div>
+    <Box
+      height={"100vh"}
+      bg={useColorModeValue("background.200", "background.900")}
+    >
+      <Navbar />
+      <Flex position={"absolute"} top={"120px"} align={"center"}>
+        <Image boxSize={"450px"} src={nigga} />
+        <Text
+          fontFamily={"heading"}
+          fontSize={"5xl"}
+          color={"white"}
+          width={"400px"}
+        >
+          SERIK GARA <br/>iň ynamly satrudnik
+        </Text>
+      </Flex>
+
+      <Box minH={"200px"} position={"absolute"} right={"100px"} top={"180px"}>
+        <Phone width={"500px"} height={"500px"} />
+      </Box>
+    </Box>
   );
 }
 
