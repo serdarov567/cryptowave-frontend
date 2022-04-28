@@ -36,7 +36,7 @@ function Landing() {
   return (
     <Box
       scrollBehavior="smooth"
-      bg={useColorModeValue("background.200", "background.900")}
+      bgGradient={"radial(background.100, background.900)"}
     >
       <Navbar {...fadeProps} />
       <Container
@@ -110,23 +110,22 @@ function Tariffs() {
       overflow="hidden"
     >
       <Flex
-        flex={1}
+        width={"full"}
         overflow={"hidden"}
         bg={"background.900"}
         borderRadius={20}
         flexDirection={"column"}
         justifyContent={"space-evenly"}
+        alignItems={"center"}
       >
         <Heading
-          flex={1}
-          alignSelf={"center"}
           fontSize={useBreakpointValue({ base: "3xl", md: "5xl" })}
           color={"white"}
         >
           Tariffs
         </Heading>
         <HStack
-          flex={5}
+          width={"full"}
           display={"flex"}
           flexDirection={useBreakpointValue({ base: "column", md: "row" })}
           spacing={10}
@@ -139,10 +138,8 @@ function Tariffs() {
             borderRadius={20}
             _hover={{
               boxShadow: "5px 10px",
-              marginBottom: "10px",
-              marginRight: "5px",
             }}
-            transition="500ms"
+            transition="100ms"
           />
           <Box
             flex={1}
@@ -151,10 +148,8 @@ function Tariffs() {
             borderRadius={20}
             _hover={{
               boxShadow: "5px 10px",
-              marginBottom: "10px",
-              marginRight: "5px",
             }}
-            transition="500ms"
+            transition="100ms"
           />
           <Box
             flex={1}
@@ -163,10 +158,8 @@ function Tariffs() {
             borderRadius={20}
             _hover={{
               boxShadow: "5px 10px",
-              marginBottom: "10px",
-              marginRight: "5px",
             }}
-            transition="500ms"
+            transition="100ms"
           />
         </HStack>
       </Flex>
