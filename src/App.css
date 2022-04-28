@@ -18,6 +18,30 @@
   }
 }
 
+@keyframes SlideFadeIn {
+  0% {
+    opacity: 0;
+    margin-top: 50px;
+  }
+
+  100% {
+    opacity: 1;
+    margin-top: 0px;
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+    margin-left: 1000px;
+  }
+
+  100% {
+    transform: rotate(-720deg);
+    margin-left: 0px;
+  }
+}
+
 a {
   transition: 2s all;
 }

@@ -31,7 +31,7 @@ export default function Navbar(props) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box width={"100vw"} position={"fixed"}>
+    <Box width={"100vw"} position={"fixed"} zIndex={100}>
       <Box
         position={"absolute"}
         width={"100vw"}
@@ -66,7 +66,7 @@ export default function Navbar(props) {
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
-            fontSize={"3xl"}
+            fontSize={useBreakpointValue({ md: "3xl", base: "md" })}
             fontWeight={"bold"}
             color={useColorModeValue("white", "white")}
           >
@@ -86,21 +86,24 @@ export default function Navbar(props) {
         >
           <Button
             as={"a"}
-            fontSize={"md"}
+            fontSize={useBreakpointValue({ base: "sm", md: "md" })}
             fontWeight={400}
             variant={"link"}
             color={"white"}
-            href={"#"}
+            _focus={{ boxShadow: "none" }}
+            href={"/sign/in"}
           >
             Sign In
           </Button>
           <Button
+            as={"a"}
             display={{ base: "none", md: "inline-flex" }}
             fontSize={"md"}
             fontWeight={600}
             color={"white"}
             bg={"accent.200"}
-            href={"#"}
+            href={"/sign/up"}
+            _focus={{ boxShadow: "none" }}
             _hover={{
               bg: "accent.900",
             }}
@@ -235,7 +238,7 @@ const MobileNav = () => {
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem, props) => {
+const MobileNavItem = ({ label, children, href, onClick }) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -249,7 +252,7 @@ const MobileNavItem = ({ label, children, href }: NavItem, props) => {
         _hover={{
           textDecoration: "none",
         }}
-        onClick={props.onClick}
+        onClick={onClick}
       >
         <Text
           fontWeight={600}
@@ -318,11 +321,7 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "#tariffs",
   },
   {
-    label: "Learn Design",
-    href: "#",
-  },
-  {
     label: "About us",
-    href: "#",
+    href: "#aboutus",
   },
 ];
