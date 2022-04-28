@@ -23,7 +23,7 @@ import {
 } from "@chakra-ui/icons";
 
 const scrollHandler = (index) => {
-  let top = window.innerHeight * index;
+  let top = window.outerHeight * index;
   window.scrollTo({ top, behavior: "smooth" });
 };
 
@@ -36,7 +36,7 @@ export default function Navbar(props) {
         position={"absolute"}
         width={"100vw"}
         minH={"70px"}
-        bgColor={"accent.200"}
+        bgColor={"background.900"}
         zIndex={-1}
         {...props}
       />

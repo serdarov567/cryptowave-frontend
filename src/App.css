@@ -1,3 +1,7 @@
+body {
+  background-color: "black" !important;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -34,11 +38,13 @@
   0% {
     transform: rotate(0deg);
     margin-left: 1000px;
+    filter: drop-shadow(-5px -5px -5px #222);
   }
 
   100% {
     transform: rotate(-720deg);
     margin-left: 0px;
+    filter: drop-shadow(5px 5px 5px #222);
   }
 }
 

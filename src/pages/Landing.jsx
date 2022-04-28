@@ -19,7 +19,7 @@ import Coin from "../assets/images/coin.webp";
 function Landing() {
   const [isVisible, setShow, fadeProps] = useFade(false);
   const onScroll = () => {
-    if (window.scrollY > 100) {
+    if (window.scrollY > 20) {
       setShow(true);
     } else {
       setShow(false);
@@ -56,21 +56,24 @@ function Home() {
     <Flex
       maxW={"container.xl"}
       minH={"100vh"}
-      py={useBreakpointValue({ base: 0, md: 20 })}
+      py={useBreakpointValue({ base: "50px", md: "100px" })}
       overflow="hidden"
+      paddingTop={useBreakpointValue({ base: "-40px", md: "-60px" })}
     >
       <Flex
-        spacing={4}
         flex={1}
         overflow={"hidden"}
+        justifyContent={"center"}
+        alignItems={"center"}
         flexDirection={useBreakpointValue({ base: "column", md: "row" })}
       >
         <VStack
-          flex={1}
-          align={"left"}
+          align={"center"}
           alignItems={"center"}
           justifyContent={"center"}
-          animation={"SlideFadeIn 1s forwards"}
+          m={10}
+          opacity={0}
+          animation={"SlideFadeIn 1s 2s forwards"}
         >
           <Heading
             fontSize={useBreakpointValue({ base: "4xl", md: "7xl" })}
@@ -86,7 +89,7 @@ function Home() {
             lorem ipsum dolor sit
           </Text>
         </VStack>
-        <Box flex={1} alignSelf={"center"} overflow={"hidden"}>
+        <Box overflow={"hidden"}>
           <Image
             height={"auto"}
             maxH={useBreakpointValue({ base: "300px", md: "500px" })}
@@ -107,6 +110,7 @@ function Tariffs() {
       maxW={"container.xl"}
       minH={"100vh"}
       py={useBreakpointValue({ base: 0, md: 20 })}
+      alignItems={"center"}
       overflow="hidden"
     >
       <Flex
@@ -117,6 +121,8 @@ function Tariffs() {
         flexDirection={"column"}
         justifyContent={"space-evenly"}
         alignItems={"center"}
+        py={"20px"}
+        marginTop={"60px"}
       >
         <Heading
           fontSize={useBreakpointValue({ base: "3xl", md: "5xl" })}
@@ -124,17 +130,35 @@ function Tariffs() {
         >
           Tariffs
         </Heading>
-        <HStack
+        <Flex
+          flex={1}
           width={"full"}
+          minH={"450px"}
           display={"flex"}
-          flexDirection={useBreakpointValue({ base: "column", md: "row" })}
-          spacing={10}
+          alignItems={useBreakpointValue({ base: "", md: "center" })}
+          flexDirection={useBreakpointValue({
+            base: "column",
+            sm: "column",
+            md: "row",
+          })}
           px={10}
         >
           <Box
             flex={1}
             bg={"white"}
             height={"350px"}
+            margin={"10px"}
+            borderRadius={20}
+            _hover={{
+              boxShadow: "5px 10px",
+            }}
+            transition="100ms"
+          />
+          <Box
+            flex={1}
+            bg={"white"}
+            height={"350px"}
+            margin={"10px"}
             borderRadius={20}
             _hover={{
               boxShadow: "5px 10px",
@@ -146,22 +170,13 @@ function Tariffs() {
             bg={"white"}
             height={"350px"}
             borderRadius={20}
+            margin={"10px"}
             _hover={{
               boxShadow: "5px 10px",
             }}
             transition="100ms"
           />
-          <Box
-            flex={1}
-            bg={"white"}
-            height={"350px"}
-            borderRadius={20}
-            _hover={{
-              boxShadow: "5px 10px",
-            }}
-            transition="100ms"
-          />
-        </HStack>
+        </Flex>
       </Flex>
     </Flex>
   );
