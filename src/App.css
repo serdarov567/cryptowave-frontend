@@ -1,45 +1,23 @@
 @keyframes fadeIn {
-  from {opacity: 0;}
-  to {opacity: 1;}
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0.5;
+  }
 }
 
-.MainContainer {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(29, 55, 139);
-  animation: fadeIn 500ms 1 0s forwards;
+@keyframes fadeOut {
+  0% {
+    opacity: 0.5;
+  }
+
+  100% {
+    opacity: 0;
+  }
 }
 
-.Overlay {
-  width: 100vw;
-  height: 100vh;
-  background-color: rgb(29, 55, 139);
-  opacity: 0.8;
-  z-index: -1;
-}
-
-.Header {
-  display: flex;
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 90%;
-  height: 100px;
-  padding-left: 5%;
-  padding-right: 5%;
-  align-items: center;
-}
-
-.HeaderOverlay {
-  position: absolute;
-  width: 100%;
-  margin-left: -5%;
-  height: 100px;
-  background-color: rgb(18, 35, 90);
-  opacity: 0.5;
-  z-index: -1;
-}
-
-.Header h1 {
-  color: white;
+a {
+  transition: 2s all;
 }

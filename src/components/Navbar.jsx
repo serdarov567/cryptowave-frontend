@@ -22,11 +22,24 @@ import {
   ChevronRightIcon,
 } from "@chakra-ui/icons";
 
-export default function Navbar() {
+const scrollHandler = (index) => {
+  let top = window.innerHeight * index;
+  window.scrollTo({ top, behavior: "smooth" });
+};
+
+export default function Navbar(props) {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
-    <Box>
+    <Box width={"100vw"} position={"fixed"}>
+      <Box
+        position={"absolute"}
+        width={"100vw"}
+        minH={"70px"}
+        bgColor={"accent.200"}
+        zIndex={-1}
+        {...props}
+      />
       <Flex
         bg={"transparent"}
         color={useColorModeValue("white", "white")}
@@ -53,8 +66,8 @@ export default function Navbar() {
           <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
-            fontSize={'3xl'}
-            fontWeight={'bold'}
+            fontSize={"3xl"}
+            fontWeight={"bold"}
             color={useColorModeValue("white", "white")}
           >
             CryptoWave
@@ -110,15 +123,20 @@ const DesktopNav = () => {
   const popoverContentBgColor = useColorModeValue("white", "white");
 
   return (
-    <Stack direction={"row"} spacing={4} align='center'>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
+    <Stack direction={"row"} spacing={4} align="center">
+      {NAV_ITEMS.map((navItem, index) => (
+        <Box
+          key={navItem.label}
+          onClick={() => {
+            scrollHandler(index);
+          }}
+        >
           <Popover trigger={"hover"} placement={"bottom-start"}>
             <PopoverTrigger>
               <Link
                 p={2}
                 href={navItem.href ?? "#"}
-                fontSize={'md'}
+                fontSize={"md"}
                 fontWeight={500}
                 color={linkColor}
                 _hover={{
@@ -204,14 +222,20 @@ const MobileNav = () => {
       p={4}
       display={{ md: "none" }}
     >
-      {NAV_ITEMS.map((navItem) => (
-        <MobileNavItem key={navItem.label} {...navItem} />
+      {NAV_ITEMS.map((navItem, index) => (
+        <MobileNavItem
+          key={navItem.label}
+          {...navItem}
+          onClick={() => {
+            scrollHandler(index);
+          }}
+        />
       ))}
     </Stack>
   );
 };
 
-const MobileNavItem = ({ label, children, href }: NavItem) => {
+const MobileNavItem = ({ label, children, href }: NavItem, props) => {
   const { isOpen, onToggle } = useDisclosure();
 
   return (
@@ -225,6 +249,7 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
         _hover={{
           textDecoration: "none",
         }}
+        onClick={props.onClick}
       >
         <Text
           fontWeight={600}
@@ -273,34 +298,24 @@ interface NavItem {
 
 const NAV_ITEMS: Array<NavItem> = [
   {
-    label: "Inspiration",
-    children: [
-      {
-        label: "Explore Design Work",
-        subLabel: "Trending Design to inspire you",
-        href: "#",
-      },
-      {
-        label: "New & Noteworthy",
-        subLabel: "Up-and-coming Designers",
-        href: "#",
-      },
-    ],
+    label: "Home",
+    href: "#home",
+    // children: [
+    //   {
+    //     label: "Explore Design Work",
+    //     subLabel: "Trending Design to inspire you",
+    //     href: "#home",
+    //   },
+    //   {
+    //     label: "New & Noteworthy",
+    //     subLabel: "Up-and-coming Designers",
+    //     href: "#",
+    //   },
+    // ],
   },
   {
-    label: "Find Work",
-    children: [
-      {
-        label: "Job Board",
-        subLabel: "Find your dream design job",
-        href: "#",
-      },
-      {
-        label: "Freelance Projects",
-        subLabel: "An exclusive list for contract work",
-        href: "#",
-      },
-    ],
+    label: "Tariffs",
+    href: "#tariffs",
   },
   {
     label: "Learn Design",
