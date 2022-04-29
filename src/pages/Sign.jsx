@@ -17,7 +17,7 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import validator from "validator";
-import { signUp, verify } from "../utils/network";
+import { forgot, signIn, signUp, verify } from "../utils/network";
 
 const passwordOptions = {
   minLength: 8,
@@ -240,13 +240,57 @@ function SignIn(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const togglePassword = () => {
     setShow(!show);
   };
 
+  const handleSignIn = (email, password) => {
+    if (
+      validator.isEmail(email) &&
+      validator.isStrongPassword(password, passwordOptions)
+    ) {
+      setIsLoading(true);
+      setError("");
+      signIn(email, password)
+        .then((result) => {
+          if (result.status === 200 && result.data !== "non-verified") {
+            setError("");
+            localStorage.setItem("email", email);
+            localStorage.setItem("token", result.data.token);
+            navigate("/#home", { replace: true });
+          } else if (result.data === "non-verified") {
+            setError("");
+            localStorage.setItem("email", email);
+            navigate("/sign/verify");
+          }
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          if (err.response.status === 403) {
+            setError("Email or password is wrong!");
+          } else if (err.response.status === 404) {
+            setError("User does not exist!");
+          } else if (err.response.status === 406) {
+            setError("Not acceptable inputs!");
+          } else if (err.response.status === 500) {
+            setError("Server error!");
+          } else {
+            setError("Network error!");
+          }
+          setIsLoading(false);
+          console.error(err);
+        });
+    } else {
+      setError("Fill the fields as required!");
+    }
+  };
+
   return (
     <>
+      {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
         <FormLabel>Email</FormLabel>
         <Input
@@ -313,8 +357,9 @@ function SignIn(props) {
           bg: "accent.900",
         }}
         color={"white"}
+        isLoading={isLoading}
         onClick={() => {
-          alert("shio");
+          handleSignIn(email, password);
         }}
       >
         Sign in
@@ -353,7 +398,7 @@ function Verify(props) {
         })
         .catch((err) => {
           if (err.response.status === 403) {
-            setError("Invalid code!");
+            setError("Invalid code! We sent a new code to your email!");
           } else if (err.response.status === 404) {
             setError("Account has not been registered!");
             navigate(-1);
@@ -407,13 +452,60 @@ function Verify(props) {
 }
 
 function Forgot(props) {
+  const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [show, setShow] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const togglePassword = () => {
+    setShow(!show);
+  };
+
+  const handleForgot = (email) => {
+    if (validator.isEmail(email)) {
+      setIsLoading(true);
+      setError("");
+      forgot(email)
+        .then((result) => {
+          if (result.status === 200) {
+            setError("");
+            localStorage.setItem("email", email);
+            navigate("/sign/verify");
+          }
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          if (err.response.status === 404) {
+            setError("User does not exist!");
+          } else if (err.response.status === 406) {
+            setError("Not acceptable inputs!");
+          } else if (err.response.status === 500) {
+            setError("Server error!");
+          } else {
+            setError("Network error!");
+          }
+          setIsLoading(false);
+          console.error(err);
+        });
+    } else {
+      setError("Fill the fields as required!");
+    }
+  };
+
   return (
     <>
-      <FormControl>
+      {error.length > 0 && <Text color={"red"}>{error}</Text>}
+      <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
         <FormLabel>Email</FormLabel>
-        <Input placeholder="example@email.com" />
+        <Input
+          placeholder="example@email.com"
+          onChange={(event) => {
+            setEmail(event.target.value);
+          }}
+        />
+        <FormErrorMessage>Not a valid email.</FormErrorMessage>
       </FormControl>
-
       <Button
         bg={"accent.200"}
         _focus={{ boxShadow: "none" }}
@@ -422,10 +514,10 @@ function Forgot(props) {
         }}
         color={"white"}
         onClick={() => {
-          alert("shio");
+          handleForgot(email);
         }}
       >
-        {"Send the code"}
+        Send the code
       </Button>
     </>
   );

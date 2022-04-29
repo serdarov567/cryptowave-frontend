@@ -2,6 +2,11 @@ body {
   background-color: "black" !important;
 }
 
+@font-face {
+  font-family: "Manrope";
+  src: url("./fonts/Manrope/Manrope-VariableFont_wght.ttf") format("truetype");
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -50,4 +55,12 @@ body {
 
 a {
   transition: 2s all;
+}
+
+.Motto {
+  font-family: "Manrope";
+  font-size: larger;
+  background: -webkit-linear-gradient(120deg, #639bff, #a7c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

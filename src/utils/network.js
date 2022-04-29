@@ -26,4 +26,8 @@ const signIn = (email, password) => {
   );
 };
 
-export { signUp, verify };
+const forgot = (email) => {
+  return axiosInstance.post("api/sign/forgot", { email }, { timeout: 3000 });
+};
+
+export { signUp, verify, signIn, forgot };

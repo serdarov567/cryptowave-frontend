@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
+import Main from "../assets/images/main.png";
 
 import Navbar from "../components/Navbar";
 import {
@@ -15,36 +16,24 @@ import {
 } from "@chakra-ui/react";
 import { useFade } from "../hooks";
 import Coin from "../assets/images/coin.webp";
+import Shield from "../assets/vectors/Shield";
+import Motto from "../assets/vectors/Motto";
+import GradientButton from "../components/GradientButton";
 
 function Landing() {
-  const [isVisible, setShow, fadeProps] = useFade(false);
-  const onScroll = () => {
-    if (window.scrollY > 20) {
-      setShow(true);
-    } else {
-      setShow(false);
-    }
-  };
-
-  useEffect(() => {
-    window.addEventListener("scroll", onScroll, true);
-
-    return () => {
-      window.removeEventListener("scroll", onScroll, true);
-    };
-  }, []);
+  const isSignedIn =
+    localStorage.getItem("email") !== null &&
+    localStorage.getItem("token") !== null;
   return (
-    <Box
-      scrollBehavior="smooth"
-      bgGradient={"radial(background.100, background.900)"}
-    >
-      <Navbar {...fadeProps} />
+    <Box scrollBehavior="smooth" bgColor={"background.900"}>
+      <Navbar isSignedIn={isSignedIn} />
       <Container
+        display={"flex"}
         maxWidth={"container.xl"}
-        px={useBreakpointValue({ base: 10, md: 20 })}
+        justifyContent={"center"}
       >
         <Home />
-        <Tariffs />
+        <Plans />
         <AboutUs />
       </Container>
     </Box>
@@ -53,58 +42,69 @@ function Landing() {
 
 function Home() {
   return (
-    <Flex
-      maxW={"container.xl"}
+    <Container
+      display={"flex"}
+      maxW={"full"}
+      marginX={useBreakpointValue({
+        md: "40px",
+        lg: "40px",
+        xl: "0px",
+      })}
       minH={"100vh"}
-      py={useBreakpointValue({ base: "50px", md: "100px" })}
+      flexDir={useBreakpointValue({ base: "column", md: "row" })}
+      py={useBreakpointValue({ base: "70px", md: "120px" })}
       overflow="hidden"
-      paddingTop={useBreakpointValue({ base: "-40px", md: "-60px" })}
+      paddingLeft={0}
+      justifyContent={useBreakpointValue({
+        base: "center",
+        md: "space-between",
+      })}
     >
-      <Flex
-        flex={1}
-        overflow={"hidden"}
-        justifyContent={"center"}
-        alignItems={"center"}
-        flexDirection={useBreakpointValue({ base: "column", md: "row" })}
-      >
-        <VStack
-          align={"center"}
-          alignItems={"center"}
+      <VStack alignSelf={"center"} spacing={4}>
+        <HStack
+          backgroundColor={"background.500"}
+          px={"10px"}
+          py={"5px"}
+          borderRadius={"5px"}
+          alignSelf={"start"}
           justifyContent={"center"}
-          m={10}
-          opacity={0}
-          animation={"SlideFadeIn 1s 2s forwards"}
+          alignItems={"center"}
         >
-          <Heading
-            fontSize={useBreakpointValue({ base: "4xl", md: "7xl" })}
-            color={"white"}
-          >
-            Motto
-          </Heading>
+          <Shield />
           <Text
-            fontFamily={"sans-serif"}
-            fontSize={useBreakpointValue({ base: "md", md: "2xl" })}
-            color={"white"}
+            fontSize={useBreakpointValue({ base: "xx-small", md: "sm" })}
+            color={"#89FFB1"}
+            opacity={0.5}
           >
-            lorem ipsum dolor sit
+            Secured
           </Text>
-        </VStack>
-        <Box overflow={"hidden"}>
-          <Image
-            height={"auto"}
-            maxH={useBreakpointValue({ base: "300px", md: "500px" })}
-            width={"auto"}
-            p={useBreakpointValue({ base: 0, md: 10 })}
-            animation={"rotate 2s forwards"}
-            src={Coin}
-          />
-        </Box>
-      </Flex>
-    </Flex>
+        </HStack>
+        <Heading
+          fontSize={useBreakpointValue({ base: "sm", sm: "2xl", md: "4xl" })}
+          fontFamily={"Manrope"}
+          color={"#FFF"}
+        >
+          Manage your transactions with <Motto />
+        </Heading>
+
+        <GradientButton
+          marginTop={"30px"}
+          alignSelf={"start"}
+          as={"a"}
+          href={"/sign/up"}
+        >
+          Sign Up
+        </GradientButton>
+      </VStack>
+
+      <Box alignSelf={"center"}>
+        <Image src={Main} />
+      </Box>
+    </Container>
   );
 }
 
-function Tariffs() {
+function Plans() {
   return (
     <Flex
       maxW={"container.xl"}
@@ -112,73 +112,7 @@ function Tariffs() {
       py={useBreakpointValue({ base: 0, md: 20 })}
       alignItems={"center"}
       overflow="hidden"
-    >
-      <Flex
-        width={"full"}
-        overflow={"hidden"}
-        bg={"background.900"}
-        borderRadius={20}
-        flexDirection={"column"}
-        justifyContent={"space-evenly"}
-        alignItems={"center"}
-        py={"20px"}
-        marginTop={"60px"}
-      >
-        <Heading
-          fontSize={useBreakpointValue({ base: "3xl", md: "5xl" })}
-          color={"white"}
-        >
-          Tariffs
-        </Heading>
-        <Flex
-          flex={1}
-          width={"full"}
-          minH={"450px"}
-          display={"flex"}
-          alignItems={useBreakpointValue({ base: "", md: "center" })}
-          flexDirection={useBreakpointValue({
-            base: "column",
-            sm: "column",
-            md: "row",
-          })}
-          px={10}
-        >
-          <Box
-            flex={1}
-            bg={"white"}
-            height={"350px"}
-            margin={"10px"}
-            borderRadius={20}
-            _hover={{
-              boxShadow: "5px 10px",
-            }}
-            transition="100ms"
-          />
-          <Box
-            flex={1}
-            bg={"white"}
-            height={"350px"}
-            margin={"10px"}
-            borderRadius={20}
-            _hover={{
-              boxShadow: "5px 10px",
-            }}
-            transition="100ms"
-          />
-          <Box
-            flex={1}
-            bg={"white"}
-            height={"350px"}
-            borderRadius={20}
-            margin={"10px"}
-            _hover={{
-              boxShadow: "5px 10px",
-            }}
-            transition="100ms"
-          />
-        </Flex>
-      </Flex>
-    </Flex>
+    ></Flex>
   );
 }
 
@@ -189,46 +123,7 @@ function AboutUs() {
       minH={"100vh"}
       py={useBreakpointValue({ base: 0, md: 20 })}
       overflow="hidden"
-    >
-      <Flex
-        spacing={4}
-        flex={1}
-        overflow={"hidden"}
-        flexDirection={useBreakpointValue({ base: "column", md: "row" })}
-      >
-        <VStack
-          flex={1}
-          align={"left"}
-          alignItems={"center"}
-          justifyContent={"center"}
-          animation={"SlideFadeIn 1s forwards"}
-        >
-          <Heading
-            fontSize={useBreakpointValue({ base: "4xl", md: "7xl" })}
-            color={"white"}
-          >
-            Motto
-          </Heading>
-          <Text
-            fontFamily={"sans-serif"}
-            fontSize={useBreakpointValue({ base: "md", md: "2xl" })}
-            color={"white"}
-          >
-            lorem ipsum dolor sit
-          </Text>
-        </VStack>
-        <Box flex={1} alignSelf={"center"} overflow={"hidden"}>
-          <Image
-            height={"auto"}
-            maxH={useBreakpointValue({ base: "300px", md: "500px" })}
-            width={"auto"}
-            p={useBreakpointValue({ base: 0, md: 10 })}
-            animation={"rotate 2s forwards"}
-            src={Coin}
-          />
-        </Box>
-      </Flex>
-    </Flex>
+    ></Flex>
   );
 }
 
