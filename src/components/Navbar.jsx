@@ -127,24 +127,31 @@ export default function Navbar(props) {
               spacing={6}
             >
               {props.isSignedIn ? (
-                <Box
+                <OutlinedButton
                   backgroundColor={"background.600"}
                   px={"10px"}
                   py={"5px"}
                   borderRadius={"5px"}
-                  borderWidth="1px"
+                  firstColor={colors.background[200]}
+                  secondColor={colors.background[900]}
+                  angle={"0deg"}
                   alignSelf={"start"}
                   justifyContent={"center"}
                   alignItems={"center"}
                 >
                   <Text
                     fontSize={buttonFontSize}
-                    color={"#89FFB1"}
-                    opacity={0.5}
+                    fontFamily={"Manrope"}
+                    fontWeight={200}
+                    bgGradient={
+                      "-webkit-linear-gradient(110deg, violet.200, #fff)"
+                    }
+                    bgClip={"text"}
+                    fill={"transparent"}
                   >
-                    Secured
+                    serdarovv567
                   </Text>
-                </Box>
+                </OutlinedButton>
               ) : (
                 <OutlinedButton
                   leftIcon={buttonIcon}
@@ -224,6 +231,7 @@ const DesktopNav = () => {
                   textDecoration: "none",
                   color: linkHoverColor,
                 }}
+                _focus={{}}
               >
                 {navItem.label}
               </Link>

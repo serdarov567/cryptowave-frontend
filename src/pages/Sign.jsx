@@ -259,7 +259,7 @@ function SignIn(props) {
           if (result.status === 200 && result.data !== "non-verified") {
             setError("");
             localStorage.setItem("email", email);
-            localStorage.setItem("token", result.data.token);
+            localStorage.setItem("token", result.data);
             navigate("/#home", { replace: true });
           } else if (result.data === "non-verified") {
             setError("");

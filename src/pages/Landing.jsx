@@ -44,7 +44,7 @@ function Home() {
   return (
     <Container
       display={"flex"}
-      maxW={"full"}
+      maxW={"container.xl"}
       marginX={useBreakpointValue({
         md: "40px",
         lg: "40px",

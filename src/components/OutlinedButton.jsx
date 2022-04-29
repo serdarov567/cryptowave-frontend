@@ -23,6 +23,7 @@ export default function OutlinedButton(props) {
         _hover={{
           backgroundColor: "background.900",
         }}
+        _focus={{}}
       />
     </Box>
   );

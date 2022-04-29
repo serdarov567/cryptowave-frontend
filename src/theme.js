@@ -23,7 +23,7 @@ const colors = {
   transparent: "transparent",
   background: {
     100: "#336699",
-    200: "#154C7C",
+    200: "#2c2c2c",
     500: "#282828",
     600: "#242424",
     800: "#212128",
