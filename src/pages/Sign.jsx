@@ -7,6 +7,7 @@ import {
   FormErrorMessage,
   FormLabel,
   Heading,
+  HStack,
   Input,
   InputGroup,
   InputRightElement,
@@ -20,7 +21,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import validator from "validator";
 import Eye from "../assets/vectors/Eye";
 import Logo from "../assets/vectors/Logo";
+import GradientButton from "../components/GradientButton";
+import SecuredBadge from "../components/SecuredBadge";
 import Navbar from "../components/Navbar";
+import TextButton from "../components/TextButton";
 import { colors } from "../theme";
 import { forgot, signIn, signUp, verify } from "../utils/network";
 
@@ -64,7 +68,7 @@ export default function Sign() {
       break;
     }
     default: {
-      header = "Welcome!";
+      header = "Welcome";
       sectionName = "Sign up";
       form = <SignUp />;
       break;
@@ -85,8 +89,8 @@ export default function Sign() {
           }}
         />
       </Flex>
-      <VStack
-        display={"flex"}
+      <Flex
+        flexDir={"column"}
         w={"100vw"}
         h={"100vh"}
         marginTop={useBreakpointValue({ base: "-60px", md: "-110px" })}
@@ -95,17 +99,20 @@ export default function Sign() {
         alignItems={"center"}
         justifyContent={"center"}
       >
+        <SecuredBadge alignSelf={"center"} marginBottom={"5px"} />
+
         <Heading
           fontSize={useBreakpointValue({
             base: "36px",
             md: "45px",
           })}
-          m={10}
           textAlign={"center"}
           color={"white"}
+          marginBottom={"40px"}
         >
           {header}
         </Heading>
+
         <Container
           minW={useBreakpointValue({ base: "100px", md: "300px" })}
           py={"30px"}
@@ -131,7 +138,7 @@ export default function Sign() {
             {form}
           </VStack>
         </Container>
-      </VStack>
+      </Flex>
     </>
   );
 }
@@ -241,27 +248,18 @@ function SignUp(props) {
           numeral, 1 lowercase letter and must be longer that 8 characters.
         </FormErrorMessage>
       </FormControl>
-      <a
-        fontSize={"sm"}
-        textAlign={"left"}
-        w={"full"}
-        href={"/sign/in"}
-        cursor={"pointer"}
-      >
-        Already have an account? then Sign in!
-      </a>
-      <Button
-        bg={"accent.200"}
-        _focus={{ boxShadow: "none" }}
-        _hover={{
-          bg: "accent.900",
-        }}
-        color={"white"}
-        isLoading={isLoading}
-        onClick={() => handleSignUp(email, username, password)}
-      >
-        Sign up
-      </Button>
+      <HStack w={"full"} justifyContent={"space-between"}>
+        <TextButton href={"/sign/in"}>
+          Already have an account? then{" "}
+          <span style={{ color: "#6B68FF" }}>Sign in!</span>
+        </TextButton>
+        <GradientButton
+          isLoading={isLoading}
+          onClick={() => handleSignUp(email, username, password)}
+        >
+          Sign up
+        </GradientButton>
+      </HStack>
     </>
   );
 }
@@ -356,47 +354,26 @@ function SignIn(props) {
             }}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={togglePassword}>
-              {show ? "Hide" : "Show"}
-            </Button>
+            <Eye onClick={togglePassword} eyeClosed={!show} />
           </InputRightElement>
         </InputGroup>
 
         <FormErrorMessage>Not a valid password</FormErrorMessage>
 
-        <a
-          fontSize={"sm"}
-          textAlign={"left"}
-          w={"full"}
-          href={"/sign/forgot"}
-          cursor={"pointer"}
-        >
-          Forgot password
-        </a>
+        <TextButton href={"/sign/forgot"}>Forgot password</TextButton>
       </FormControl>
-      <a
-        fontSize={"sm"}
-        textAlign={"left"}
-        w={"full"}
-        href={"/sign/up"}
-        cursor={"pointer"}
-      >
-        Don't have an account? then Sign Up
-      </a>
-      <Button
-        bg={"accent.200"}
-        _focus={{ boxShadow: "none" }}
-        _hover={{
-          bg: "accent.900",
-        }}
-        color={"white"}
+      <TextButton href={"/sign/up"}>
+        Don't have an account? then{" "}
+        <span style={{ color: "#6B68FF" }}>Sign up!</span>
+      </TextButton>
+      <GradientButton
         isLoading={isLoading}
         onClick={() => {
           handleSignIn(email, password);
         }}
       >
         Sign in
-      </Button>
+      </GradientButton>
     </>
   );
 }
@@ -467,20 +444,14 @@ function Verify(props) {
         <FormErrorMessage>Code must be 4 digits</FormErrorMessage>
       </FormControl>
 
-      <Button
-        bg={"accent.200"}
-        _focus={{ boxShadow: "none" }}
-        _hover={{
-          bg: "accent.900",
-        }}
-        color={"white"}
+      <GradientButton
         isLoading={isLoading}
         onClick={() => {
           handleVerify(code);
         }}
       >
         Verify
-      </Button>
+      </GradientButton>
     </>
   );
 }
@@ -541,19 +512,14 @@ function Forgot(props) {
         />
         <FormErrorMessage>Not a valid email.</FormErrorMessage>
       </FormControl>
-      <Button
-        bg={"accent.200"}
-        _focus={{ boxShadow: "none" }}
-        _hover={{
-          bg: "accent.900",
-        }}
-        color={"white"}
+      <GradientButton
+        isLoading={isLoading}
         onClick={() => {
           handleForgot(email);
         }}
       >
         Send the code
-      </Button>
+      </GradientButton>
     </>
   );
 }

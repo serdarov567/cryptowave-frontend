@@ -2,7 +2,7 @@ import { HStack, Text, useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import Shield from "../assets/vectors/Shield";
 
-export default function SecuredBadge() {
+export default function SecuredBadge(props) {
   return (
     <HStack
       backgroundColor={"background.500"}
@@ -12,6 +12,7 @@ export default function SecuredBadge() {
       alignSelf={"start"}
       justifyContent={"center"}
       alignItems={"center"}
+      {...props}
     >
       <Shield />
       <Text

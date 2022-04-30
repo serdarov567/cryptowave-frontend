@@ -94,6 +94,16 @@ const theme = extendTheme({
         },
       },
     },
+    Heading: {
+      defaultProps: {
+        variant: "primary",
+      },
+      variants: {
+        primary: {
+          fontFamily: "Manrope",
+        },
+      },
+    },
   },
 });
 
