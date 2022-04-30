@@ -149,7 +149,7 @@ export default function Navbar(props) {
                     bgClip={"text"}
                     fill={"transparent"}
                   >
-                    serdarovv567
+                    begzada
                   </Text>
                 </OutlinedButton>
               ) : (

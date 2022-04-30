@@ -36,10 +36,12 @@ const colors = {
   },
   blue: {
     200: "#8FC9FF",
+    400: "#639BFF",
     500: "#0D8BFF",
     900: "#0A6FCC",
   },
   violet: {
+    100: "#A7C6FF",
     200: "#A9A7FF",
     500: "#6B68FF",
     900: "#5653CC",

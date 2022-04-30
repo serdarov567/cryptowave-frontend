@@ -7,6 +7,11 @@ body {
   src: url("./fonts/Manrope/Manrope-VariableFont_wght.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "Manrope-ExtraBold";
+  src: url("./fonts/Manrope/static/Manrope-ExtraBold.ttf") format("truetype");
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -50,6 +55,20 @@ body {
     transform: rotate(-720deg);
     margin-left: 0px;
     filter: drop-shadow(5px 5px 5px #222);
+  }
+}
+
+@keyframes updown {
+  0% {
+    margin-top: 12px;
+  }
+
+  50% {
+    margin-top: 2px;
+  }
+
+  100% {
+    margin-top: 12px;
   }
 }
 
