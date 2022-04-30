@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   FormControl,
   FormErrorMessage,
   FormLabel,
@@ -17,6 +18,10 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import validator from "validator";
+import Eye from "../assets/vectors/Eye";
+import Logo from "../assets/vectors/Logo";
+import Navbar from "../components/Navbar";
+import { colors } from "../theme";
 import { forgot, signIn, signUp, verify } from "../utils/network";
 
 const passwordOptions = {
@@ -59,7 +64,7 @@ export default function Sign() {
       break;
     }
     default: {
-      header = "Welcome to CryptoWave!";
+      header = "Welcome!";
       sectionName = "Sign up";
       form = <SignUp />;
       break;
@@ -67,42 +72,67 @@ export default function Sign() {
   }
 
   return (
-    <Box
-      display={"flex"}
-      flexDirection={useBreakpointValue({ base: "column", lg: "row" })}
-      w={"100vw"}
-      h={"100vh"}
-      bg={"background.200"}
-      px={useBreakpointValue({ base: 7, md: 20 })}
-      alignItems={"center"}
-      justifyContent={"center"}
-    >
-      <Heading
-        m={10}
-        marginTop={useBreakpointValue({ base: "-200px", md: "-100px", lg: 0 })}
-        textAlign={"center"}
-        fontSize={useBreakpointValue({ base: "4xl", md: "7xl" })}
-        color={"white"}
+    <>
+      <Flex
+        justifyContent={"center"}
+        w={"100vw"}
+        h={useBreakpointValue({ base: "60px", md: "110px" })}
+        bg={"background.900"}
       >
-        {header}
-      </Heading>
-      <Container
-        marginRight={useBreakpointValue({ base: "50px", md: "20px" })}
-        marginLeft={useBreakpointValue({ base: "50px", md: "20px" })}
-        py={5}
-        px={useBreakpointValue({ base: 5, md: 10 })}
-        bg={"#d4d4d4"}
-        opacity={0}
-        transitionDuration={"500ms"}
-        borderRadius={useBreakpointValue({ base: 20, md: 10 })}
-        animation={"SlideFadeIn 1s forwards"}
+        <Logo
+          onClick={() => {
+            navigate("/", { replace: true });
+          }}
+        />
+      </Flex>
+      <VStack
+        display={"flex"}
+        w={"100vw"}
+        h={"100vh"}
+        marginTop={useBreakpointValue({ base: "-60px", md: "-110px" })}
+        bg={"background.900"}
+        px={useBreakpointValue({ base: 7, md: 20 })}
+        alignItems={"center"}
+        justifyContent={"center"}
       >
-        <VStack spacing={useBreakpointValue({ base: 1, md: 5 })}>
-          <Heading fontSize={"3xl"}>{sectionName}</Heading>
-          {form}
-        </VStack>
-      </Container>
-    </Box>
+        <Heading
+          fontSize={useBreakpointValue({
+            base: "36px",
+            md: "45px",
+          })}
+          m={10}
+          textAlign={"center"}
+          color={"white"}
+        >
+          {header}
+        </Heading>
+        <Container
+          minW={useBreakpointValue({ base: "100px", md: "300px" })}
+          py={"30px"}
+          px={useBreakpointValue({ base: "10px", md: "60px" })}
+          background={`linear-gradient(${colors.background[50]}, ${colors.background[50]}) padding-box, linear-gradient(100deg, #404040, transparent) border-box`}
+          style={{
+            border: "3px solid transparent",
+          }}
+          opacity={0}
+          transitionDuration={"500ms"}
+          borderRadius={useBreakpointValue({ base: "15px", md: "12px" })}
+          animation={"SlideFadeIn 1s forwards"}
+        >
+          <VStack spacing={useBreakpointValue({ base: 1, md: 5 })}>
+            <Heading
+              fontFamily={"Manrope"}
+              fontWeight={500}
+              fontSize={"30px"}
+              color={"white"}
+            >
+              {sectionName}
+            </Heading>
+            {form}
+          </VStack>
+        </Container>
+      </VStack>
+    </>
   );
 }
 
@@ -158,8 +188,9 @@ function SignUp(props) {
     <>
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
-        <FormLabel>Email</FormLabel>
+        <FormLabel variant={"primary"}>Email</FormLabel>
         <Input
+          variant={"primary"}
           placeholder="example@email.com"
           onChange={(event) => {
             setEmail(event.target.value);
@@ -171,8 +202,9 @@ function SignUp(props) {
       <FormControl
         isInvalid={username.length < 4 && username.length > 0 && true}
       >
-        <FormLabel>Username</FormLabel>
+        <FormLabel variant={"primary"}>Username</FormLabel>
         <Input
+          variant={"primary"}
           placeholder="John"
           onChange={(event) => {
             setUsername(event.target.value);
@@ -189,9 +221,10 @@ function SignUp(props) {
           !validator.isStrongPassword(password, passwordOptions)
         }
       >
-        <FormLabel>Password</FormLabel>
+        <FormLabel variant={"primary"}>Password</FormLabel>
         <InputGroup>
           <Input
+            variant={"primary"}
             placeholder="Password"
             type={show ? "text" : "password"}
             onChange={(event) => {
@@ -199,9 +232,7 @@ function SignUp(props) {
             }}
           />
           <InputRightElement width="4.5rem">
-            <Button h="1.75rem" size="sm" onClick={togglePassword}>
-              {show ? "Hide" : "Show"}
-            </Button>
+            <Eye onClick={togglePassword} eyeClosed={!show} />
           </InputRightElement>
         </InputGroup>
 
@@ -292,8 +323,9 @@ function SignIn(props) {
     <>
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
-        <FormLabel>Email</FormLabel>
+        <FormLabel variant={"primary"}>Email</FormLabel>
         <Input
+          variant={"primary"}
           placeholder="example@email.com"
           onChange={(event) => {
             setEmail(event.target.value);
@@ -313,9 +345,10 @@ function SignIn(props) {
           })
         }
       >
-        <FormLabel>Password</FormLabel>
+        <FormLabel variant={"primary"}>Password</FormLabel>
         <InputGroup>
           <Input
+            variant={"primary"}
             placeholder="Password"
             type={show ? "text" : "password"}
             onChange={(event) => {
@@ -423,8 +456,9 @@ function Verify(props) {
     <>
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={code.length > 0 && code.length < 4}>
-        <FormLabel>Verification code</FormLabel>
+        <FormLabel variant={"primary"}>Verification code</FormLabel>
         <Input
+          variant={"primary"}
           placeholder="1234"
           onChange={(event) => {
             setCode(event.target.value);
@@ -497,8 +531,9 @@ function Forgot(props) {
     <>
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
-        <FormLabel>Email</FormLabel>
+        <FormLabel variant={"primary"}>Email</FormLabel>
         <Input
+          variant={"primary"}
           placeholder="example@email.com"
           onChange={(event) => {
             setEmail(event.target.value);

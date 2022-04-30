@@ -22,6 +22,7 @@ const fontSizes = {
 const colors = {
   transparent: "transparent",
   background: {
+    50: "#171717",
     100: "#336699",
     200: "#2c2c2c",
     500: "#282828",
@@ -63,6 +64,36 @@ const theme = extendTheme({
   colors: { ...colors },
   components: {
     Button: { ...buttonStyles },
+    FormLabel: {
+      variants: {
+        primary: {
+          fontFamily: "Manrope",
+          fontSize: "20px",
+          color: "#B8B8B8",
+        },
+      },
+    },
+    Input: {
+      variants: {
+        primary: {
+          field: {
+            height: "50px",
+            backgroundColor: "transparent",
+            fontFamily: "Manrope",
+            fontSize: "15px",
+            color: "#FFF",
+            borderWidth: "1px",
+            borderColor: "#939393",
+            _focus: {
+              borderColor: "#A9A7FF",
+            },
+            _placeholder: {
+              color: "#363636",
+            },
+          },
+        },
+      },
+    },
   },
 });
 

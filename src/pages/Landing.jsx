@@ -13,6 +13,7 @@ import {
   VStack,
   useBreakpointValue,
   Heading,
+  useBreakpoint,
 } from "@chakra-ui/react";
 import { useFade } from "../hooks";
 import Coin from "../assets/images/coin.webp";
@@ -20,8 +21,7 @@ import Shield from "../assets/vectors/Shield";
 import Tilde from "../assets/vectors/Tilde";
 import GradientButton from "../components/GradientButton";
 import { colors } from "../theme";
-
-const scrollBarWidth = window.outerWidth - window.innerWidth;
+import SecuredBadge from "../components/SecuredBadge";
 
 function Landing() {
   const isSignedIn =
@@ -34,7 +34,8 @@ function Landing() {
         display={"flex"}
         flexDir={"column"}
         overflowX={"hidden"}
-        maxWidth={"100vw"}
+        maxWidth={"container.xl"}
+        paddingX={"0px"}
         justifyContent={"center"}
       >
         <Home />
@@ -46,32 +47,6 @@ function Landing() {
 }
 
 function Home() {
-  const [isScrollbarVisible, setIsScrollbarVisible] = useState(
-    window.scrollbars.visible
-  );
-
-  useEffect(() => {
-    const resizeHandler = () => {
-      setTimeout(() => {
-        if (window.scrollbars.visible) {
-          if (!isScrollbarVisible) {
-            setIsScrollbarVisible(!isScrollbarVisible);
-          }
-        } else {
-          if (isScrollbarVisible) {
-            setIsScrollbarVisible(!isScrollbarVisible);
-          }
-        }
-      }, 500);
-    };
-
-    window.addEventListener("resize", resizeHandler);
-
-    return () => {
-      window.removeEventListener("resize", resizeHandler);
-    };
-  }, []);
-
   return (
     <Container
       display={"flex"}
@@ -90,31 +65,19 @@ function Home() {
           md: "space-between",
         })}
         marginX={useBreakpointValue({
-          md: "40px",
-          lg: "40px",
-          xl: "40px",
+          base: "15px",
+          md: "55px",
+          lg: "55px",
+          xl: "25px",
           "2xl": "25px",
         })}
       >
-        <VStack alignSelf={"center"} spacing={4}>
-          <HStack
-            backgroundColor={"background.500"}
-            px={"10px"}
-            py={"5px"}
-            borderRadius={"5px"}
-            alignSelf={"start"}
-            justifyContent={"center"}
-            alignItems={"center"}
-          >
-            <Shield />
-            <Text
-              fontSize={useBreakpointValue({ base: "xx-small", md: "sm" })}
-              color={"#89FFB1"}
-              opacity={0.5}
-            >
-              Secured
-            </Text>
-          </HStack>
+        <VStack
+          alignSelf={"center"}
+          spacing={4}
+          px={useBreakpointValue({ base: "10px", md: "0px" })}
+        >
+          <SecuredBadge />
           <Heading
             fontSize={useBreakpointValue({ base: "sm", sm: "2xl", md: "4xl" })}
             fontFamily={"Manrope"}
@@ -123,7 +86,11 @@ function Home() {
             Manage your transactions with{" "}
             <span
               style={{
-                fontSize: '15px'
+                fontSize: useBreakpointValue({
+                  base: "18px",
+                  sm: "32px",
+                  md: "42px",
+                }),
                 fontFamily: "Manrope-ExtraBold",
                 fontWeight: 900,
                 background: `linear-gradient(110deg, ${colors.violet[100]}, ${colors.blue[400]})`,
@@ -145,18 +112,22 @@ function Home() {
           </GradientButton>
         </VStack>
 
-        <Box alignSelf={"center"}>
+        <Box
+          alignSelf={"center"}
+          minW={useBreakpointValue({ base: "50px", sm: "80px", md: "400px" })}
+          maxW={useBreakpointValue({ base: "200px", sm: "350px", md: "500px" })}
+        >
           <Image src={Main} />
         </Box>
       </Flex>
 
       <VStack
-        width={"80vw"}
+        width={"fit-content"}
         height={"50px"}
         display={"flex"}
         flexDirection={"column"}
         alignSelf={"center"}
-        marginLeft={isScrollbarVisible ? `${scrollBarWidth}px` : "0px"}
+        marginLeft={`${(window.outerHeight - window.innerHeight) / 5}px`}
       >
         <Text
           cursor={"pointer"}
@@ -178,13 +149,25 @@ function Home() {
 
 function Plans() {
   return (
-    <Flex
-      maxW={"container.xl"}
+    <Container
+      display={"flex"}
+      flexDir={"column"}
+      maxW={window.innerWidth}
       minH={"100vh"}
-      py={useBreakpointValue({ base: 0, md: 20 })}
-      alignItems={"center"}
-      overflow="hidden"
-    ></Flex>
+      marginTop={useBreakpointValue({ base: "100px", md: "250px" })}
+      paddingX={0}
+    >
+      <Heading
+        marginLeft={`${(window.outerHeight - window.innerHeight) / 5}px`}
+        bgColor={"blackAlpha.100"}
+        alignSelf={"center"}
+        fontSize={useBreakpointValue({ base: "sm", sm: "2xl", md: "4xl" })}
+        fontFamily={"Manrope"}
+        color={"#FFF"}
+      >
+        PLANS
+      </Heading>
+    </Container>
   );
 }
 
