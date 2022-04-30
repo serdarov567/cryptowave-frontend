@@ -91,7 +91,7 @@ export default function Sign() {
         marginLeft={useBreakpointValue({ base: "50px", md: "20px" })}
         py={5}
         px={useBreakpointValue({ base: 5, md: 10 })}
-        bg={"white"}
+        bg={"#d4d4d4"}
         opacity={0}
         transitionDuration={"500ms"}
         borderRadius={useBreakpointValue({ base: 20, md: 10 })}
