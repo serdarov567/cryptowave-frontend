@@ -1,10 +1,11 @@
 import React from "react";
 
-import Landing from "./pages/Landing";
-import logo from "./logo.svg";
-import "./App.css";
+import Landing from "src/pages/Landing";
+import logo from "src/logo.svg";
+import "src/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Sign from "./pages/Sign";
+import Sign from "src/pages/Sign";
+import Dashboard from "src/pages/Dashboard";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/sign/:type" element={<Sign />} />
+        <Route path="/dashboard" element={<Dashboard />} />
       </Routes>
     </BrowserRouter>
   );

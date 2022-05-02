@@ -3,45 +3,37 @@ import {
   Flex,
   Text,
   IconButton,
-  Button,
   Stack,
   Collapse,
   Icon,
   Link,
   Popover,
   PopoverTrigger,
-  PopoverContent,
   useColorModeValue,
   useBreakpointValue,
   useDisclosure,
   Container,
-  ButtonGroup,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Logo from "../assets/vectors/Logo";
-import LogIn from "../assets/vectors/LogIn";
-import OutlinedButton from "./OutlinedButton";
-import { colors } from "../theme";
-import GradientButton from "./GradientButton";
-import DashboardIcon from "../assets/vectors/DashboardIcon";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const scrollHandler = (index) => {
   let top = window.outerHeight * (index + 1);
   window.scrollTo({ top, behavior: "smooth" });
 };
 
-export default function Navbar(props) {
+const Navbar = (props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const buttonFontSize = useBreakpointValue({ base: "sm", md: "md" });
-  const buttonIcon = useBreakpointValue({ md: <LogIn /> });
+
+  const location = useLocation();
+
+  const navigate = useNavigate();
+
+  scrollHandler(NAV_ITEMS.findIndex((item) => item.href === location.hash));
 
   return (
-    <Box width={"100vw"} position={"fixed"} zIndex={100}>
+    <Box position={"fixed"} left={0} width={"100vw"} zIndex={100}>
       <Flex
         bg={"background.900"}
         color={useColorModeValue("white", "white")}
@@ -51,25 +43,7 @@ export default function Navbar(props) {
         align={"center"}
       >
         <Container maxW={"container.xl"} display={"flex"} flexDir={"row"}>
-          <Box
-            pos={"fixed"}
-            h={"200vh"}
-            w={"1px"}
-            top={"0px"}
-            backgroundColor={"#A9A7FF"}
-            opacity={0.1}
-            zIndex={1000000}
-          />
-          <Box
-            pos={"fixed"}
-            h={"200vh"}
-            w={"1px"}
-            top={"0px"}
-            left={"50vw"}
-            backgroundColor={"#A9A7FF"}
-            opacity={0.1}
-            zIndex={1000000}
-          />
+
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             {/* <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
@@ -105,6 +79,9 @@ export default function Navbar(props) {
             >
               <Logo
                 onClick={() => {
+                  if (location.pathname !== "/") {
+                    navigate("/", { replace: true });
+                  }
                   scrollHandler(-1);
                 }}
               />
@@ -119,76 +96,15 @@ export default function Navbar(props) {
             </Flex>
           </Flex>
 
-          <Flex flex={1} flexDir={"row"} justifyContent={"flex-end"}>
+          <Flex flex={1} flexDir={"row"} justifyContent={"flex-end"} alignItems={'center'}>
             <Stack
               flex={{ base: 1, md: 0 }}
               justify={"flex-end"}
               direction={"row"}
               spacing={6}
             >
-              {props.isSignedIn ? (
-                <OutlinedButton
-                  backgroundColor={"background.600"}
-                  px={"10px"}
-                  py={"5px"}
-                  borderRadius={"5px"}
-                  firstColor={colors.background[200]}
-                  secondColor={colors.background[900]}
-                  angle={"0deg"}
-                  alignSelf={"start"}
-                  justifyContent={"center"}
-                  alignItems={"center"}
-                >
-                  <Text
-                    fontSize={buttonFontSize}
-                    fontFamily={"Manrope"}
-                    fontWeight={200}
-                    bgGradient={
-                      "-webkit-linear-gradient(110deg, violet.200, #fff)"
-                    }
-                    bgClip={"text"}
-                    fill={"transparent"}
-                  >
-                    begzada
-                  </Text>
-                </OutlinedButton>
-              ) : (
-                <OutlinedButton
-                  leftIcon={buttonIcon}
-                  as={"a"}
-                  fontSize={buttonFontSize}
-                  fontWeight={500}
-                  fontFamily={"Manrope"}
-                  h={"38px"}
-                  color={"white"}
-                  angle={"110deg"}
-                  paddingInline={"20px"}
-                  firstColor={colors.violet[500]}
-                  secondColor={colors.blue[500]}
-                  href={"/sign/in"}
-                >
-                  Sign In
-                </OutlinedButton>
-              )}
-
-              <GradientButton
-                leftIcon={props.isSignedIn && <DashboardIcon />}
-                as={"a"}
-                href={"/sign/up"}
-                display={{ base: "none", md: "flex" }}
-              >
-                {props.isSignedIn ? "Dashboard" : "Sign Up"}
-              </GradientButton>
+              {props.children}
             </Stack>
-            <Box
-              pos={"fixed"}
-              h={"200vh"}
-              w={"1px"}
-              top={"0px"}
-              backgroundColor={"#A9A7FF"}
-              opacity={0.1}
-              zIndex={1000000}
-            />
           </Flex>
         </Container>
       </Flex>
@@ -198,7 +114,7 @@ export default function Navbar(props) {
       </Collapse>
     </Box>
   );
-}
+};
 
 const DesktopNav = () => {
   const linkColor = useColorModeValue(
@@ -206,7 +122,10 @@ const DesktopNav = () => {
     "-webkit-linear-gradient(110deg, blue.200, violet.200)"
   );
   const linkHoverColor = useColorModeValue("gray.400", "white");
-  const popoverContentBgColor = useColorModeValue("white", "white");
+  //const popoverContentBgColor = useColorModeValue("white", "white");
+
+  const location = useLocation();
+  const navigate = useNavigate();
 
   return (
     <Stack direction={"row"} spacing={"50px"} align="center">
@@ -232,6 +151,11 @@ const DesktopNav = () => {
                   color: linkHoverColor,
                 }}
                 _focus={{}}
+                onClick={() => {
+                  if (location.pathname !== "/") {
+                    navigate("/");
+                  }
+                }}
               >
                 {navItem.label}
               </Link>
@@ -411,3 +335,5 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "#aboutus",
   },
 ];
+
+export default Navbar;

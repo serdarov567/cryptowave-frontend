@@ -38,6 +38,7 @@ const colors = {
   blue: {
     200: "#8FC9FF",
     400: "#639BFF",
+    450: "#0F89FF",
     500: "#0D8BFF",
     900: "#0A6FCC",
   },
@@ -101,6 +102,7 @@ const theme = extendTheme({
       variants: {
         primary: {
           fontFamily: "Manrope",
+          color: "#FFF",
         },
       },
     },

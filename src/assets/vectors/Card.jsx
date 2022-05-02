@@ -1,11 +1,12 @@
+import { useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 import { useNavigate } from "react-router-dom";
 
 export default function DashboardIcon(props) {
   return (
     <svg
-      width="20"
-      height="21"
+      width={useBreakpointValue({base: '15px', md: '20px'})}
+      height={useBreakpointValue({base: '16px', md: '21px'})}
       viewBox="0 0 20 21"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

@@ -1,35 +1,32 @@
-import React, { useState, useRef, useEffect } from "react";
-import Main from "../assets/images/main.png";
-
-import Navbar from "../components/Navbar";
+import React from "react";
+import Main from "src/assets/images/main.png";
+import Navbar from "src/components/Navbar";
 import {
   Box,
   Flex,
-  useColorModeValue,
   Image,
   Text,
   Container,
-  HStack,
   VStack,
   useBreakpointValue,
   Heading,
-  useBreakpoint,
 } from "@chakra-ui/react";
-import { useFade } from "../hooks";
-import Coin from "../assets/images/coin.webp";
-import Shield from "../assets/vectors/Shield";
-import Tilde from "../assets/vectors/Tilde";
-import GradientButton from "../components/GradientButton";
-import { colors } from "../theme";
-import SecuredBadge from "../components/SecuredBadge";
+import Tilde from "src/assets/vectors/Tilde";
+import GradientButton from "src/components/GradientButton";
+import { colors } from "src/theme";
+import SecuredBadge from "src/components/SecuredBadge";
+import { isSignedIn } from "src/utils/user";
+import DashboardIcon from "src/assets/vectors/Card";
+import OutlinedButton from "src/components/OutlinedButton";
+import LogIn from "src/assets/vectors/LogIn";
 
 function Landing() {
-  const isSignedIn =
-    localStorage.getItem("email") !== null &&
-    localStorage.getItem("token") !== null;
   return (
     <Box scrollBehavior="smooth" bgColor={"background.900"}>
-      <Navbar isSignedIn={isSignedIn} />
+      <Navbar>
+        <SecondaryActionButton />
+        <PrimaryActionButton />
+      </Navbar>
       <Container
         display={"flex"}
         flexDir={"column"}
@@ -53,12 +50,13 @@ function Home() {
       flexDir={"column"}
       maxW={"container.xl"}
       minH={"100vh"}
-      justifyContent="center"
+      justifyContent="flex-start"
+      marginTop={useBreakpointValue({ base: "70px", md: "110px" })}
       paddingX={0}
     >
       <Flex
         flexDir={useBreakpointValue({ base: "column", md: "row" })}
-        py={useBreakpointValue({ base: "70px", md: "120px" })}
+        paddingTop={useBreakpointValue({ base: "30px", md: "70px" })}
         overflow="hidden"
         justifyContent={useBreakpointValue({
           base: "center",
@@ -75,11 +73,16 @@ function Home() {
         <VStack
           alignSelf={"center"}
           spacing={4}
-          px={useBreakpointValue({ base: "10px", md: "0px" })}
+          px={useBreakpointValue({ base: "25px", md: "0px" })}
         >
           <SecuredBadge />
           <Heading
-            fontSize={useBreakpointValue({ base: "sm", sm: "2xl", md: "4xl" })}
+            maxW={useBreakpointValue({ base: "sm", sm: "2xl", md: "500px" })}
+            fontSize={useBreakpointValue({
+              base: "2xl",
+              sm: "4xl",
+              md: "45px",
+            })}
             fontFamily={"Manrope"}
             color={"#FFF"}
           >
@@ -87,12 +90,12 @@ function Home() {
             <span
               style={{
                 fontSize: useBreakpointValue({
-                  base: "18px",
-                  sm: "32px",
-                  md: "42px",
+                  base: "28px",
+                  sm: "40px",
+                  md: "45px",
                 }),
                 fontFamily: "Manrope-ExtraBold",
-                fontWeight: 900,
+                fontWeight: 700,
                 background: `linear-gradient(110deg, ${colors.violet[100]}, ${colors.blue[400]})`,
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
@@ -103,16 +106,18 @@ function Home() {
           </Heading>
 
           <GradientButton
-            marginTop={"30px"}
             alignSelf={"start"}
+            leftIcon={isSignedIn && <DashboardIcon />}
             as={"a"}
-            href={"/sign/up"}
+            href={isSignedIn ? "/dashboard" : "/sign/up"}
           >
-            Sign Up
+            {isSignedIn ? "Dashboard" : "Sign Up"}
           </GradientButton>
         </VStack>
 
         <Box
+          display={"flex"}
+          flexDir={"row"}
           alignSelf={"center"}
           minW={useBreakpointValue({ base: "50px", sm: "80px", md: "400px" })}
           maxW={useBreakpointValue({ base: "200px", sm: "350px", md: "500px" })}
@@ -121,28 +126,7 @@ function Home() {
         </Box>
       </Flex>
 
-      <VStack
-        width={"fit-content"}
-        height={"50px"}
-        display={"flex"}
-        flexDirection={"column"}
-        alignSelf={"center"}
-        marginLeft={`${(window.outerHeight - window.innerHeight) / 5}px`}
-      >
-        <Text
-          cursor={"pointer"}
-          onClick={() => {
-            let top = window.outerHeight * 1;
-            window.scrollTo({ top, behavior: "smooth" });
-          }}
-          color={"#505070"}
-        >
-          Scroll down
-        </Text>
-        <Box style={{ animation: "updown 1.5s infinite forwards" }}>
-          <Tilde />
-        </Box>
-      </VStack>
+      <ScrollDown />
     </Container>
   );
 }
@@ -179,6 +163,86 @@ function AboutUs() {
       py={useBreakpointValue({ base: 0, md: 20 })}
       overflow="hidden"
     ></Flex>
+  );
+}
+
+function PrimaryActionButton() {
+  return (
+    <GradientButton
+      leftIcon={isSignedIn && <DashboardIcon />}
+      as={"a"}
+      href={isSignedIn ? "/dashboard" : "/sign/up"}
+      display={{ base: "none", md: "flex" }}
+    >
+      {isSignedIn ? "Dashboard" : "Sign Up"}
+    </GradientButton>
+  );
+}
+
+function SecondaryActionButton() {
+  const buttonFontSize = useBreakpointValue({ base: "sm", md: "mdb" });
+  const buttonIcon = useBreakpointValue({ md: <LogIn /> });
+  return (
+    <OutlinedButton
+      leftIcon={!isSignedIn && buttonIcon}
+      as={"a"}
+      fontWeight={500}
+      fontFamily={"Manrope"}
+      backgroundColor={"background.600"}
+      py={"5px"}
+      color={"white"}
+      angle={isSignedIn ? "0deg" : "110deg"}
+      firstColor={isSignedIn ? colors.background[200] : colors.violet[500]}
+      secondColor={isSignedIn ? colors.background[900] : colors.blue[500]}
+      href={!isSignedIn && "/sign/in"}
+      alignSelf={"start"}
+      justifyContent={"center"}
+      alignItems={"center"}
+    >
+      {isSignedIn ? (
+        <Text
+          fontSize={buttonFontSize}
+          fontFamily={"Manrope"}
+          fontWeight={200}
+          bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
+          bgClip={"text"}
+          fill={"transparent"}
+        >
+          begzada
+        </Text>
+      ) : (
+        "Sign In"
+      )}
+    </OutlinedButton>
+  );
+}
+
+function ScrollDown() {
+  return (
+    <VStack
+      position={"absolute"}
+      top={"90vh"}
+      width={"fit-content"}
+      height={"50px"}
+      display={"flex"}
+      flexDirection={"column"}
+      alignSelf={"center"}
+      marginLeft={`${(window.outerHeight - window.innerHeight) / 4}px`}
+    >
+      <Text
+        cursor={"pointer"}
+        onClick={() => {
+          let top = window.outerHeight;
+          window.scrollTo({ top, behavior: "smooth" });
+        }}
+        color={"#505070"}
+      >
+        Scroll down
+      </Text>
+      <Box style={{ animation: "updown 1.5s infinite forwards" }}>
+        <Tilde />
+      </Box>
+    </VStack>
   );
 }
 

@@ -1,6 +1,4 @@
 import {
-  Box,
-  Button,
   Container,
   Flex,
   FormControl,
@@ -11,7 +9,6 @@ import {
   Input,
   InputGroup,
   InputRightElement,
-  Link,
   Text,
   useBreakpointValue,
   VStack,
@@ -19,14 +16,13 @@ import {
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import validator from "validator";
-import Eye from "../assets/vectors/Eye";
-import Logo from "../assets/vectors/Logo";
-import GradientButton from "../components/GradientButton";
-import SecuredBadge from "../components/SecuredBadge";
-import Navbar from "../components/Navbar";
-import TextButton from "../components/TextButton";
-import { colors } from "../theme";
-import { forgot, signIn, signUp, verify } from "../utils/network";
+import Eye from "src/assets/vectors/Eye";
+import Logo from "src/assets/vectors/Logo";
+import GradientButton from "src/components/GradientButton";
+import SecuredBadge from "src/components/SecuredBadge";
+import TextButton from "src/components/TextButton";
+import { colors } from "src/theme";
+import { forgot, signIn, signUp, verify } from "src/utils/network";
 
 const passwordOptions = {
   minLength: 8,
@@ -436,7 +432,7 @@ function Verify(props) {
         <FormLabel variant={"primary"}>Verification code</FormLabel>
         <Input
           variant={"primary"}
-          placeholder="1234"
+          placeholder="1919"
           onChange={(event) => {
             setCode(event.target.value);
           }}
@@ -459,13 +455,8 @@ function Verify(props) {
 function Forgot(props) {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
-  const togglePassword = () => {
-    setShow(!show);
-  };
 
   const handleForgot = (email) => {
     if (validator.isEmail(email)) {
