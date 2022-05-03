@@ -22,6 +22,7 @@ import GradientButton from "src/components/GradientButton";
 import SecuredBadge from "src/components/SecuredBadge";
 import TextButton from "src/components/TextButton";
 import { colors } from "src/theme";
+import { AxiosError} from 'axios'
 import { forgot, signIn, signUp, verify } from "src/utils/network";
 
 const passwordOptions = {
@@ -152,7 +153,7 @@ function SignUp(props) {
     setShow(!show);
   };
 
-  const handleSignUp = (email, username, password) => {
+  const handleSignUp = async (email, username, password) => {
     if (
       validator.isEmail(email) &&
       username.length >= 4 &&
@@ -160,28 +161,50 @@ function SignUp(props) {
     ) {
       setIsLoading(true);
       setError("");
-      signUp(email, username, password)
-        .then((result) => {
-          if (result.status === 200 && result.data !== "exists") {
-            setError("");
-            localStorage.setItem("email", email);
-            navigate("/sign/verify");
-          } else if (result.data === "exists") {
-            setError("User already exists!");
-          }
-          setIsLoading(false);
-        })
-        .catch((err) => {
-          if (err.response.status === 406) {
-            setError("Not acceptable inputs!");
-          } else if (err.response.status === 500) {
-            setError("Server error!");
-          } else {
-            setError("Network error!");
-          }
-          setIsLoading(false);
-          console.error(err);
-        });
+      try{
+        const result = await signUp(email, username, password)
+        if (result.status === 200 && result.data !== "exists") {
+          setError("");
+          localStorage.setItem("email", email);
+          navigate("/sign/verify");
+        } else if (result.data === "exists") {
+          setError("User already exists!");
+        }
+        setIsLoading(false);
+      } catch (err) {
+        if (err.response.status === 406) {
+          setError("Not acceptable inputs!");
+        } else if (err.response.status === 500) {
+          setError("Server error!");
+        } else {
+          setError("Network error!");
+        }
+        setIsLoading(false);
+        console.error(err);
+      }
+
+      // signUp(email, username, password)
+      //   .then((result) => {
+      //     if (result.status === 200 && result.data !== "exists") {
+      //       setError("");
+      //       localStorage.setItem("email", email);
+      //       navigate("/sign/verify");
+      //     } else if (result.data === "exists") {
+      //       setError("User already exists!");
+      //     }
+      //     setIsLoading(false);
+      //   })
+      //   .catch((err) => {
+      //     if (err.response.status === 406) {
+      //       setError("Not acceptable inputs!");
+      //     } else if (err.response.status === 500) {
+      //       setError("Server error!");
+      //     } else {
+      //       setError("Network error!");
+      //     }
+      //     setIsLoading(false);
+      //     console.error(err);
+      //   });
     } else {
       setError("Fill the fields as required!");
     }

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://localhost:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.31.165:1919/" });
 
 const signUp = (email, username, password) => {
   return axiosInstance.post(
