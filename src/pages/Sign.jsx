@@ -22,8 +22,8 @@ import GradientButton from "src/components/GradientButton";
 import SecuredBadge from "src/components/SecuredBadge";
 import TextButton from "src/components/TextButton";
 import { colors } from "src/theme";
-import { AxiosError} from 'axios'
 import { forgot, signIn, signUp, verify } from "src/utils/network";
+import { useIsSignedIn } from "src/utils/user";
 
 const passwordOptions = {
   minLength: 8,
@@ -34,12 +34,14 @@ const passwordOptions = {
 };
 
 export default function Sign() {
-  const existingEmail = localStorage.getItem("email");
-  const token = localStorage.getItem("token");
+  const [isSignedIn, loading] = useIsSignedIn();
   const navigate = useNavigate();
-  if (existingEmail !== null && token !== null) {
-    navigate("/#home", { replace: true });
-  }
+
+  useEffect(() => {
+    if (!loading) {
+      if (isSignedIn) navigate("/#home", { replace: true });
+    }
+  }, [loading]);
 
   const { type } = useParams();
 
@@ -161,8 +163,8 @@ function SignUp(props) {
     ) {
       setIsLoading(true);
       setError("");
-      try{
-        const result = await signUp(email, username, password)
+      try {
+        const result = await signUp(email, username, password);
         if (result.status === 200 && result.data !== "exists") {
           setError("");
           localStorage.setItem("email", email);
@@ -399,14 +401,7 @@ function SignIn(props) {
 
 function Verify(props) {
   const email = localStorage.getItem("email");
-  const token = localStorage.getItem("token");
   const navigate = useNavigate();
-
-  useEffect(() => {
-    if (email === null || token !== null) {
-      navigate("/#home", { replace: true });
-    }
-  }, []);
 
   const [code, setCode] = useState("");
   const [error, setError] = useState("");

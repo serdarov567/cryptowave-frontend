@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Box,
   Container,
@@ -7,18 +8,31 @@ import {
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
-import React from "react";
+import { useNavigate } from "react-router-dom";
 import Clock from "src/assets/vectors/Clock";
 import FilePlus from "src/assets/vectors/FilePlus";
+import LogIn from "src/assets/vectors/LogIn";
 import BoardButton from "src/components/BoardButton";
 import Navbar from "src/components/Navbar";
 import OutlinedButton from "src/components/OutlinedButton";
 import { colors } from "src/theme";
+import { signOut, useIsSignedIn } from "src/utils/user";
 
 function Dashboard() {
+  const [isSignedIn, loading] = useIsSignedIn();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!loading) {
+      if (!isSignedIn) navigate("/#home", { replace: true });
+    }
+  }, [loading]);
+
   return (
     <Box backgroundColor={"background.900"} height={"100vh"}>
-      <Navbar />
+      <Navbar>
+        <SignOutButton />
+      </Navbar>
       <Container maxWidth={"container.xl"} paddingTop={"120px"}>
         <VStack>
           <Flex
@@ -56,7 +70,7 @@ function Dashboard() {
               flex={1}
               justifyContent={"flex-start"}
               alignSelf={"center"}
-              marginTop={useBreakpointValue({base: '30px', sm: 0})}
+              marginTop={useBreakpointValue({ base: "30px", sm: 0 })}
             >
               <Heading>Total earning</Heading>
               <HStack display={"flex"} alignItems={"center"} height={"70px"}>
@@ -86,5 +100,32 @@ function Dashboard() {
     </Box>
   );
 }
+
+const SignOutButton = () => {
+  const navigate = useNavigate();
+  const buttonIcon = useBreakpointValue({ md: <LogIn /> });
+  return (
+    <OutlinedButton
+      leftIcon={buttonIcon}
+      fontWeight={500}
+      fontFamily={"Manrope"}
+      backgroundColor={"background.600"}
+      py={"5px"}
+      color={"white"}
+      angle={"110deg"}
+      firstColor={colors.violet[500]}
+      secondColor={colors.blue[500]}
+      alignSelf={"start"}
+      justifyContent={"center"}
+      alignItems={"center"}
+      onClick={() => {
+        signOut();
+        navigate("/#home", { replace: true });
+      }}
+    >
+      Sign Out
+    </OutlinedButton>
+  );
+};
 
 export default Dashboard;

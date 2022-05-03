@@ -15,7 +15,7 @@ import Tilde from "src/assets/vectors/Tilde";
 import GradientButton from "src/components/GradientButton";
 import { colors } from "src/theme";
 import SecuredBadge from "src/components/SecuredBadge";
-import { isSignedIn } from "src/utils/user";
+import { useIsSignedIn } from "src/utils/user";
 import DashboardIcon from "src/assets/vectors/Card";
 import OutlinedButton from "src/components/OutlinedButton";
 import LogIn from "src/assets/vectors/LogIn";
@@ -44,6 +44,8 @@ function Landing() {
 }
 
 function Home() {
+  const [isSignedIn, loading] = useIsSignedIn();
+
   return (
     <Container
       display={"flex"}
@@ -110,6 +112,7 @@ function Home() {
             leftIcon={isSignedIn && <DashboardIcon />}
             as={"a"}
             href={isSignedIn ? "/dashboard" : "/sign/up"}
+            isLoading={loading}
           >
             {isSignedIn ? "Dashboard" : "Sign Up"}
           </GradientButton>
@@ -167,12 +170,14 @@ function AboutUs() {
 }
 
 function PrimaryActionButton() {
+  const [isSignedIn, loading] = useIsSignedIn();
   return (
     <GradientButton
       leftIcon={isSignedIn && <DashboardIcon />}
       as={"a"}
       href={isSignedIn ? "/dashboard" : "/sign/up"}
       display={{ base: "none", md: "flex" }}
+      isLoading={loading}
     >
       {isSignedIn ? "Dashboard" : "Sign Up"}
     </GradientButton>
@@ -180,8 +185,10 @@ function PrimaryActionButton() {
 }
 
 function SecondaryActionButton() {
+  const [isSignedIn, loading] = useIsSignedIn();
   const buttonFontSize = useBreakpointValue({ base: "sm", md: "mdb" });
   const buttonIcon = useBreakpointValue({ md: <LogIn /> });
+  const email = localStorage.getItem("email");
   return (
     <OutlinedButton
       leftIcon={!isSignedIn && buttonIcon}
@@ -198,6 +205,7 @@ function SecondaryActionButton() {
       alignSelf={"start"}
       justifyContent={"center"}
       alignItems={"center"}
+      isLoading={loading}
     >
       {isSignedIn ? (
         <Text
@@ -208,7 +216,7 @@ function SecondaryActionButton() {
           bgClip={"text"}
           fill={"transparent"}
         >
-          begzada
+          {email}
         </Text>
       ) : (
         "Sign In"

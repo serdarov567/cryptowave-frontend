@@ -30,4 +30,12 @@ const forgot = (email) => {
   return axiosInstance.post("api/sign/forgot", { email }, { timeout: 3000 });
 };
 
-export { signUp, verify, signIn, forgot };
+const checkToken = (email, token) => {
+  return axiosInstance.post(
+    "api/sign/checktoken",
+    { email, token },
+    { timeout: 3000 }
+  );
+};
+
+export { signUp, verify, signIn, forgot, checkToken };
