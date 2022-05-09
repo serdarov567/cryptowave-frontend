@@ -1,17 +1,15 @@
-import { Box } from "@chakra-ui/react";
 import React from "react";
-import { useNavigate } from "react-router-dom";
 
 export default function Eye(props) {
   return (
     <div
-      style={{ cursor: "pointer", marginTop: "10px" }}
+      style={{ cursor: "pointer"}}
       onClick={props.onClick}
     >
       {props.eyeClosed ? (
         <svg
-          width="24"
-          height="24"
+          width={props.size ? props.size : "24"}
+          height={props.size ? props.size : "24"}
           viewBox="0 0 24 24"
           fill="none"
           xmlns="http://www.w3.org/2000/svg"

@@ -1,33 +1,26 @@
-import {
-  Box,
-  Button,
-  useBreakpoint,
-  useBreakpointValue,
-} from "@chakra-ui/react";
 import React from "react";
+import { Button, useBreakpointValue } from "@chakra-ui/react";
+import { colors } from "src/theme";
 
 export default function GradientButton(props) {
   return (
     <Button
-      {...props}
-      fontSize={useBreakpointValue({ base: "14px", md: "mdb" })}
+      fontSize={useBreakpointValue({ base: "small", md: "mdb" })}
       fontWeight={500}
       h={useBreakpointValue({ base: "33px", md: "38px" })}
-      paddingInline={useBreakpointValue({base: "15px", md: "20px"})}
+      paddingInline={useBreakpointValue({ base: "15px", md: "20px" })}
       fontFamily={"Manrope"}
       color={"white"}
       bgGradient={"-webkit-linear-gradient(110deg, blue.500, violet.500)"}
       _focus={{
         boxShadow: "none",
-        bgGradient: "-webkit-linear-gradient(110deg, blue.200, violet.200)",
+        bgGradient: "linear-gradient(110deg, blue.200, violet.200)",
       }}
       _hover={{
-        bgGradient: "-webkit-linear-gradient(110deg, blue.900, violet.900)",
+        bgGradient: `linear-gradient(110deg, ${colors.blue[900]}, ${colors.violet[900]}) padding-box`,
       }}
-      transition="0.3s all"
       boxShadow={"7px 6px 20px 0px #6B68FF50"}
-      backgroundColor={"background.800"}
-      style={{ transform: "scaleX(0.99) scaleY(0.95)" }}
+      {...props}
     />
   );
 }

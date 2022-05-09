@@ -2,22 +2,31 @@ import { useEffect, useState } from "react";
 import { checkToken } from "./network";
 
 const useIsSignedIn = () => {
-  const [isSignedIn, setIsSignedIn] = useState();
+  const email = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
+
+  const [isSignedIn, setIsSignedIn] = useState(
+    email !== null && token !== null
+  );
   const [loading, setLoading] = useState(true);
-  useEffect(() => {
-    checkToken(localStorage.getItem("email"), localStorage.getItem("token"))
-      .then((result) => {
-        if (result.status === 200) {
-          setIsSignedIn(true);
-        } else {
-          setIsSignedIn(false);
-        }
-        setLoading(false);
-      })
-      .catch((error) => {
+
+  const verifyUser = async () => {
+    try {
+      const result = await checkToken(email, token);
+      if (result.status === 200) {
+        setIsSignedIn(true);
+      } else {
         setIsSignedIn(false);
-        setLoading(false);
-      });
+      }
+      setLoading(false);
+    } catch (error) {
+      setIsSignedIn(false);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    verifyUser();
   }, []);
 
   return [isSignedIn, loading];
@@ -27,4 +36,11 @@ const signOut = () => {
   localStorage.clear();
 };
 
-export { useIsSignedIn, signOut };
+const getCredits = () => {
+  return {
+    email: localStorage.getItem("email"),
+    token: localStorage.getItem("token"),
+  };
+};
+
+export { useIsSignedIn, signOut, getCredits };

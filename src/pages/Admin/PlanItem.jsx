@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   Flex,
@@ -9,17 +9,11 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Timeline from "src/assets/vectors/Timeline";
-import OutlinedButton from "./OutlinedButton";
+import OutlinedButton from "src/components/OutlinedButton";
 import { colors, styles } from "src/theme";
 import DollarSign from "src/assets/vectors/DollarSign";
 import { useCountdown } from "src/pages/Dashboard/useUserDashboard";
 import dateToString from "src/utils/dateToString";
-
-const SUPPORTED_WALLETS = {
-  BTC: "1CwE5wYeZEHNoLLf7Cv8fvVTtGEC7Ckx3d",
-  ETH: "0x2a011810c6bd88cd8736dbfdfae5a8e1a98f97a9",
-  USDTTRC20: "TVZL1ADycCrhL2RfqJXx4AjSbu8Uhnff2z",
-};
 
 function PlanItem(props) {
   const headerFontSize = useBreakpointValue({
@@ -43,24 +37,29 @@ function PlanItem(props) {
     lg: "12px",
   });
 
-  const earnedTitleFontSize = useBreakpointValue({
-    base: "23px",
-    sm: "22px",
-    md: "16px",
-    lg: "23px",
+  const widthOfContainer = useBreakpointValue({
+    base: "300px",
+    sm: "350px",
+    md: "full",
   });
-  const earnedFlexDir = useBreakpointValue({ base: "row", sm: "column" });
-  const earnedBodyMarginTop = useBreakpointValue({ base: "0px" });
 
-  let { days, hours, minutes } = useCountdown(props.dateOfExpiration);
+  const timerFontSize = useBreakpointValue({
+    base: "14px",
+    sm: "18px",
+    md: "14px",
+    lg: "18px",
+  });
+
+  const { days, hours, minutes } = useCountdown(props.dateOfExpiration);
 
   return (
     <Box
       key={props.uniqueKey}
       bgColor={"#000"}
       minH={"150px"}
-      w={useBreakpointValue({ base: "300px", sm: "350px", md: "full" })}
+      w={widthOfContainer}
       borderRadius={"5px"}
+      transition={"100ms all"}
     >
       <Flex
         flexDir={useBreakpointValue({
@@ -190,7 +189,7 @@ function PlanItem(props) {
           justifyContent={useBreakpointValue({
             base: "center",
             sm: "space-between",
-            md: "space-evenly",
+            md: "space-between",
           })}
           alignItems={"center"}
           h={"150px"}
@@ -202,51 +201,28 @@ function PlanItem(props) {
           paddingLeft={useBreakpointValue({
             base: "0px",
             sm: "25px",
-            md: "0px",
+            md: "50px",
           })}
           paddingRight={useBreakpointValue({
             base: "0px",
             sm: "50px",
-            md: "0px",
+            md: "50px",
           })}
           paddingY={useBreakpointValue({ base: "20px", sm: "20px", md: "0px" })}
           borderRadius={"5px"}
           bgColor={"background.700"}
         >
-          {props.status !== "Pending..." ? (
-            <>
-              <Detail
-                key={props.uniqueKey}
-                title={`Earned`}
-                titleFontSize={earnedTitleFontSize}
-                bodyFontSize={headerFontSize}
-                flexDir={earnedFlexDir}
-                bodyMarginTop={earnedBodyMarginTop}
-              >
-                <span style={styles.blueText}>
-                  {minutes > 0 ? props.earned : props.reward}
-                </span>
-                $
-              </Detail>
-              {minutes > 0 || props.status !== "Completed" ? (
-                <Heading key={props.uniqueKey} fontSize={titleFontSize}>
-                  Time left: {days > 0 && days > 9 ? days : `0${days}`}d:
-                  {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
-                  {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
-                </Heading>
-              ) : (
-                <Heading fontSize={titleFontSize}>{props.status}</Heading>
-              )}
-            </>
-          ) : (
-            <>
-              <Text key={props.uniqueKey} paddingX={"50px"} color={"gray.400"}>
-                Send {props.deposit}$ to {props.walletType} address{" "}
-                {SUPPORTED_WALLETS[props.walletType]} in order to activate your
-                plan. Then wait until we approve your payment.
-              </Text>
-            </>
+          {props.status === "Active" && (
+            <VStack>
+              <Heading fontSize={timerFontSize}>Time left</Heading>
+              <Heading fontSize={timerFontSize}>
+                {days > 0 && days > 9 ? days : `0${days}`}d:
+                {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
+                {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
+              </Heading>
+            </VStack>
           )}
+          {props.children}
         </Flex>
       </Flex>
     </Box>

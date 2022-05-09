@@ -16,7 +16,7 @@ export default function SecuredBadge(props) {
     >
       <Shield />
       <Text
-        fontSize={useBreakpointValue({ base: "xx-small", md: "sm" })}
+        fontSize={useBreakpointValue({ base: "x-small", md: "sm" })}
         color={"#89FFB1"}
         opacity={0.5}
       >

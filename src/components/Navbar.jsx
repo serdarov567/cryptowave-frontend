@@ -1,3 +1,4 @@
+import React, { useEffect } from "react";
 import {
   Box,
   Flex,
@@ -17,33 +18,56 @@ import {
 import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Logo from "../assets/vectors/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
-
-const scrollHandler = (index) => {
-  let top = window.outerHeight * (index + 1);
-  window.scrollTo({ top, behavior: "smooth" });
-};
+import { useFade, useHeight } from "src/hooks";
+import { scrollHandler } from "src/utils/scrollHandler";
 
 const Navbar = (props) => {
   const { isOpen, onToggle } = useDisclosure();
 
-  const location = useLocation();
-
   const navigate = useNavigate();
 
-  scrollHandler(NAV_ITEMS.findIndex((item) => item.href === location.hash));
+  const [isVisible, setShow, fadeProps] = useFade(false);
+
+  const [isGrow, setGrow, growProps] = useHeight(false);
+
+  const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
+
+  useEffect(() => {
+    const fadeBar = () => {
+      if (window.scrollY > 50) {
+        setShow(true);
+        setGrow(false);
+      } else {
+        setShow(false);
+        setGrow(true);
+      }
+    };
+
+    window.addEventListener("scroll", fadeBar);
+
+    return () => [window.removeEventListener("scroll", fadeBar)];
+  }, []);
 
   return (
     <Box position={"fixed"} left={0} width={"100vw"} zIndex={100}>
       <Flex
-        bg={"background.900"}
         color={useColorModeValue("white", "white")}
-        minH={useBreakpointValue({ base: "60px", md: "110px" })}
+        h={useBreakpointValue({ base: "60px", md: "120px" })}
+        {...growProps}
         py={{ base: 3 }}
         px={{ base: 2, md: 10 }}
         align={"center"}
       >
+        <Flex
+          position={"absolute"}
+          left={0}
+          w={"100vw"}
+          h={"100%"}
+          bgColor={"background.900"}
+          {...fadeProps}
+          zIndex={-1}
+        />
         <Container maxW={"container.xl"} display={"flex"} flexDir={"row"}>
-
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
             {/* <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
@@ -79,10 +103,10 @@ const Navbar = (props) => {
             >
               <Logo
                 onClick={() => {
-                  if (location.pathname !== "/") {
-                    navigate("/", { replace: true });
-                  }
-                  scrollHandler(-1);
+                  navigate("/#home", {
+                    replace: global.location.pathname === "/",
+                  });
+                  scrollHandler("home", navbarHeight);
                 }}
               />
             </Flex>
@@ -96,7 +120,12 @@ const Navbar = (props) => {
             </Flex>
           </Flex>
 
-          <Flex flex={1} flexDir={"row"} justifyContent={"flex-end"} alignItems={'center'}>
+          <Flex
+            flex={1}
+            flexDir={"row"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
+          >
             <Stack
               flex={{ base: 1, md: 0 }}
               justify={"flex-end"}
@@ -133,7 +162,10 @@ const DesktopNav = () => {
         <Box
           key={navItem.label}
           onClick={() => {
-            scrollHandler(index);
+            navigate("/" + navItem.href, {
+              replace: global.location.pathname === "/",
+            });
+            scrollHandler(navItem.href.slice(1), 90);
           }}
         >
           <Popover trigger={"hover"} placement={"bottom-start"}>
@@ -229,6 +261,7 @@ const DesktopNav = () => {
 // };
 
 const MobileNav = () => {
+  const navigate = useNavigate();
   return (
     <Stack
       bg={useColorModeValue("white", "gray.800")}
@@ -240,7 +273,10 @@ const MobileNav = () => {
           key={navItem.label}
           {...navItem}
           onClick={() => {
-            scrollHandler(index);
+            navigate("/" + navItem.href, {
+              replace: global.location.pathname === "/",
+            });
+            scrollHandler(navItem.href.slice(1), 60);
           }}
         />
       ))}

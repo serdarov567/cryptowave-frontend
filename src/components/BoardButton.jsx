@@ -1,11 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import { colors } from "src/theme";
+import FilePlus from "src/assets/vectors/FilePlus";
+import Clock from "src/assets/vectors/Clock";
+import Card from "src/assets/vectors/Card";
 
 function BoardButton(props) {
   let configs;
 
-  const width = useBreakpointValue({ base: "80px", sm: "100px", md: "150px" });
+  const [hover, setHover] = useState(false);
+
+  const width = useBreakpointValue({ base: "70px", sm: "100px", md: "150px" });
   const height = useBreakpointValue({
     base: "100px",
     sm: "150px",
@@ -25,27 +30,48 @@ function BoardButton(props) {
     };
   }
 
+  const hoverEffect = {
+    onMouseEnter: () => {
+      setHover(true);
+    },
+    onMouseLeave: () => {
+      setHover(false);
+    },
+  };
+
   return (
     <Box
-      width={width}
+      key={props.uniqueKey}
+      minW={width}
       height={height}
       borderRadius={"5px"}
       cursor={"pointer"}
+      onClick={props.onClick}
+      {...hoverEffect}
       {...configs}
     >
       {props.isColorful && (
         <Box
           position={"absolute"}
-          width={width}
+          minW={width}
           height={height}
           borderRadius={"5px"}
           background={`linear-gradient(110deg, ${colors.blue[500]}, ${colors.violet[500]})`}
           opacity={0.15}
+          _hover={{
+            opacity: 0.1,
+          }}
         />
       )}
       <Flex flexDir={"column"} height={height}>
         <Flex flex={1} justifyContent={"center"} alignItems={"flex-end"}>
-          {props.icon}
+          {props.icon === "clock" ? (
+            <Clock hover={hover} />
+          ) : props.icon === "filePlus" ? (
+            <FilePlus hover={hover} />
+          ) : (
+            <Card big={true} hover={hover} />
+          )}
         </Flex>
         <Flex flex={1} justifyContent={"center"} alignItems={"center"}>
           <Text

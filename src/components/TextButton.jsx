@@ -5,8 +5,12 @@ export default function TextButton(props) {
   return (
     <a
       style={{
-        fontSize: "15px",
-        color: hover ? "#FFF" : "#959595",
+        fontSize: props.fontSize ? props.fontSize : "20px",
+        color: hover
+          ? "#FFF"
+          : props.accentColor
+          ? props.accentColor
+          : "#959595",
         transition: "200ms all",
         cursor: "pointer",
       }}

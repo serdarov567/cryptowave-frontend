@@ -1,10 +1,12 @@
 import React from "react";
 import { useBreakpointValue } from "@chakra-ui/react";
 
-function FilePlus() {
-  const size = useBreakpointValue({base: '40px', md: '60px'});
+function FilePlus(props) {
+  const size = useBreakpointValue({ base: "40px", md: "60px" });
   return (
     <svg
+      className="Icon"
+      style={{ transform: `scale(${props.hover ? 1.1 : 1.0})` }}
       width={size}
       height={size}
       viewBox="0 0 60 60"
