@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.1.21:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://137.184.224.35:1919/" });
 
 const signUp = (email, username, password) => {
   return axiosInstance.post(
