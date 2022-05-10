@@ -22,7 +22,7 @@ const TermsAndConditions = () => {
           <Heading marginBottom={"20px"}>Terms and Conditions</Heading>
           <Text
             fontFamily={"Manrope-Bold"}
-            paddingX={"100px"}
+            paddingX={useBreakpointValue({ base: "20px", md: "100px" })}
             textAlign={"justify"}
             whiteSpace={"break-spaces"}
             bgColor={"background.200"}
@@ -128,7 +128,7 @@ const TermsAndConditions = () => {
           <Heading marginBlock={"20px"}>Privacy policy</Heading>
           <Text
             fontFamily={"Manrope-Bold"}
-            paddingX={"100px"}
+            paddingX={useBreakpointValue({ base: "20px", md: "100px" })}
             textAlign={"justify"}
             whiteSpace={"break-spaces"}
             bgColor={"background.200"}

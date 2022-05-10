@@ -21,6 +21,8 @@ import {
   RadioGroup,
   Radio,
   Stack,
+  SimpleGrid,
+  GridItem,
 } from "@chakra-ui/react";
 import Eye from "src/assets/vectors/Eye";
 import GradientButton from "src/components/GradientButton";
@@ -81,12 +83,16 @@ const Admin = () => {
       <Tabs isFitted variant="enclosed">
         <TabList borderWidth={"0px"} mb="1em">
           <Tab {...styles.tab}>Users</Tab>
+          <Tab {...styles.tab}>Withdraw requests</Tab>
           <Tab {...styles.tab}>Plans</Tab>
           <Tab {...styles.tab}>Support</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
             <Users />
+          </TabPanel>
+          <TabPanel>
+            <Withdraws />
           </TabPanel>
           <TabPanel>
             <Plans />
@@ -243,6 +249,106 @@ const Users = () => {
 
     const interval = setInterval(() => {
       setUpdate(!update);
+    }, MINUTE);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [update]);
+
+  const renderUsers = useMemo(() => {
+    return users.map((user) => {
+      return (
+        <VStack
+          key={user._id}
+          w={"100%"}
+          py={"30px"}
+          px={"50px"}
+          marginBottom={"50px"}
+          fontFamily={"Manrope-Bold"}
+          alignItems={"start"}
+          bgColor={"background.200"}
+          borderRadius={"10px"}
+        >
+          <Flex
+            fontSize={"20px"}
+            w={"100%"}
+            justifyContent={"space-evenly"}
+            marginBottom={"20px"}
+          >
+            <Text>Username: {user.username}</Text>
+            <Text marginInline={"40px"}>Email: {user.email}</Text>
+            <Text>Balance: {user.balance}$</Text>
+          </Flex>
+
+          <Flex w={"100%"} flexDirection={"row"}>
+            <VStack flex={4}>
+              <Text fontSize={"25px"} fontFamily={"Manrope-ExtraBold"}>
+                Wallets
+              </Text>
+              {user.wallets.map((wallet) => {
+                return (
+                  <SimpleGrid fontFamily={"Manrope"} spacing={1} columns={4}>
+                    <Text>Title: {wallet.title}</Text>
+                    <Text>Type: {wallet.type}</Text>
+                    <GridItem colSpan={2}>
+                      <Text>Address: {wallet.address}</Text>
+                    </GridItem>
+                  </SimpleGrid>
+                );
+              })}
+            </VStack>
+
+            <VStack flex={5}>
+              <Text fontSize={"25px"} fontFamily={"Manrope-ExtraBold"}>
+                Plans
+              </Text>
+              {user.plans.map((plan) => {
+                return (
+                  <SimpleGrid
+                    fontFamily={"Manrope"}
+                    spacing={"60px"}
+                    columns={4}
+                  >
+                    <Text>Plan: {plan.title}</Text>
+                    <Text>Number: {plan.number}</Text>
+                    <Text>Deposit: {plan.deposit}</Text>
+                    <Text>Status: {plan.status}</Text>
+                  </SimpleGrid>
+                );
+              })}
+            </VStack>
+          </Flex>
+        </VStack>
+      );
+    });
+  }, [users]);
+
+  return (
+    <VStack w={"full"} h={"full"}>
+      {renderUsers}
+    </VStack>
+  );
+};
+
+const Withdraws = () => {
+  const [users, setUsers] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("admin-token");
+
+    const fetchData = async () => {
+      const result = await getAllUsers(token);
+      if (result.data !== null && result.data !== undefined) {
+        setUsers(result.data);
+      }
+    };
+
+    fetchData();
+
+    const interval = setInterval(() => {
+      setUpdate(!update);
     }, 5 * MINUTE);
 
     return () => {
@@ -306,12 +412,8 @@ const Plans = () => {
               >
                 <VStack alignItems={"start"}>
                   <Text fontSize={textFontSize}>From: {user.email}</Text>
-                  <Text fontSize={textFontSize}>
-                    {plan.wallet.type}:
-                  </Text>
-                  <Text fontSize={textFontSize}>
-                    {plan.wallet.address}
-                  </Text>
+                  <Text fontSize={textFontSize}>{plan.wallet.type}:</Text>
+                  <Text fontSize={textFontSize}>{plan.wallet.address}</Text>
                 </VStack>
 
                 {plan.status !== "Completed" && plan.status !== "Canceled" ? (
@@ -354,7 +456,9 @@ const Plans = () => {
           }
         });
     });
-    return filtered;
+    return filtered.sort(
+      (a, b) => new Date(b.dateOfPurchase) - new Date(a.dateOfPurchase)
+    );
   }, [users]);
 
   return (

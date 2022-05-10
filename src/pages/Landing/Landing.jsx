@@ -62,7 +62,6 @@ function Landing() {
         justifyContent={"center"}
       >
         <Home />
-        <Parallaxes />
         <Plans />
         <AboutUs />
       </Container>
@@ -323,8 +322,8 @@ function Plans() {
       h={"fit-content"}
       paddingBottom={"200px"}
       paddingTop={"5vh"}
-      overflowX={"clip"}
     >
+      <Parallaxes />
       <Heading
         alignSelf={"start"}
         fontSize={useBreakpointValue({ base: "xl", sm: "2xl", md: "4xl" })}
@@ -338,23 +337,23 @@ function Plans() {
 
       <Box
         position={"absolute"}
-        top={"0vh"}
-        left={"-10vw"}
+        top={"-10vh"}
+        left={"-15vw"}
         h={useBreakpointValue({ base: "300px", md: "100vh" })}
         w={useBreakpointValue({ base: "250px", md: "50vw" })}
-        bgGradient={"radial-gradient(#6A68FF, 5%, transparent, transparent)"}
-        opacity={0.3}
+        bgGradient={"radial-gradient(#6A68FF, 20%, transparent, transparent)"}
+        opacity={0.2}
         zIndex={-1}
       />
 
       <Box
         position={"absolute"}
-        top={"10vh"}
-        right={"0px"}
+        bottom={"0vh"}
+        right={"-15vw"}
         h={useBreakpointValue({ base: "300px", md: "100vh" })}
         w={useBreakpointValue({ base: "250px", md: "50vw" })}
-        bgGradient={"radial-gradient(#EAFF68, 5%, transparent, transparent)"}
-        opacity={0.3}
+        bgGradient={"radial-gradient(#EAFF68, 20%, transparent, transparent)"}
+        opacity={0.2}
         zIndex={-1}
       />
 
@@ -382,6 +381,8 @@ function Plans() {
           secondColor={"#062518"}
           thirdColor={"#1D1D1D"}
           borderColor={"#1F553E"}
+          shadowLeft={-10}
+          shadowColor={"#1B4433"}
           days={plans[0].days}
           minDeposit={plans[0].levels[0]}
           maxDeposit={plans[0].levels[plans[0].levels.length - 1]}
@@ -409,6 +410,8 @@ function Plans() {
           secondColor={"#1A0524"}
           thirdColor={"#1D1D1D"}
           borderColor={"#5B2F71"}
+          shadowLeft={0}
+          shadowColor={"#48225C"}
           days={plans[1].days}
           minDeposit={plans[1].levels[0]}
           maxDeposit={plans[1].levels[plans[1].levels.length - 1]}
@@ -436,6 +439,8 @@ function Plans() {
           secondColor={"#251E06"}
           thirdColor={"#1D1D1D"}
           borderColor={"#64521B"}
+          shadowLeft={10}
+          shadowColor={"#534718"}
           days={plans[2].days}
           minDeposit={plans[2].levels[0]}
           maxDeposit={plans[2].levels[plans[2].levels.length - 1]}
@@ -533,16 +538,17 @@ function AboutUs() {
       h={"auto"}
       minH={"100vh"}
       paddingTop={useBreakpointValue({ base: "50px", md: "100px" })}
-      paddingBottom={useBreakpointValue({ base: "200px", md: "400px" })}
+      paddingBottom={useBreakpointValue({ base: "100px", md: "200px" })}
       alignItems={"center"}
     >
       <Flex
         flexDir={useBreakpointValue({ base: "column", md: "row" })}
         px={useBreakpointValue({ base: "20px", md: "30px" })}
+        marginBottom={useBreakpointValue({ base: "50px", md: "100px" })}
       >
-        <VStack flex={1} alignItems={"start"} spacing={8}>
-          <Heading>About us</Heading>
-          <Text textAlign={"justify"}>
+        <VStack flex={1} alignItems={"start"} spacing={4}>
+          <Heading fontFamily={"Manrope-ExtraBold"}>About us</Heading>
+          <Text color={"#aeaeae"} textAlign={"justify"}>
             Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
             sint. Velit officia consequat duis enim velit mollit. Exercitation
             veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
@@ -557,17 +563,29 @@ function AboutUs() {
           pos={"relative"}
           flex={1}
           justifyContent={"flex-end"}
-          paddingRight={useBreakpointValue({ base: "0px", md: "100px" })}
+          paddingRight={useBreakpointValue({
+            base: "0px",
+            sm: "0px",
+            md: "0px",
+            lg: "100px",
+          })}
         >
           <Box
+            alignSelf={"center"}
             pos={"relative"}
-            transform={`scale(${useBreakpointValue({ base: 0.6, md: 1 })})`}
+            h={"320px"}
+            transform={`scale(${useBreakpointValue({
+              base: 0.6,
+              sm: 0.6,
+              md: 0.8,
+              lg: 1,
+            })})`}
           >
             <img src={Logo} alt={"logo"} style={{ zIndex: -2 }} />
             <Secured
               pos={"absolute"}
               left={-60}
-              top={-20}
+              top={-40}
               width={100}
               height={100}
             />
@@ -588,9 +606,47 @@ function AboutUs() {
           </Box>
         </Flex>
       </Flex>
+      <Contacts />
     </Container>
   );
 }
+
+const Contacts = () => {
+  return (
+    <Flex
+      w={"100%"}
+      pos={"relative"}
+      flexDir={useBreakpointValue({ base: "column", md: "row" })}
+      px={useBreakpointValue({ base: "20px", md: "30px" })}
+    >
+      <VStack flex={1} alignItems={"start"} spacing={8}>
+        <Heading>About us</Heading>
+        <Text textAlign={"justify"}>
+          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
+          sint. Velit officia consequat duis enim velit mollit. Exercitation
+          veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
+          ullamco est sit aliqua dolor do amet sint. Velit officia consequat
+          duis enim velit mollit. Exercitation veniam consequat sunt nostrud
+          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do
+          amet sint. Velit officia consequat duis enim velit mollit.
+          Exercitation veniam consequat sunt nostrud amet.
+        </Text>
+      </VStack>
+      <Flex
+        flexDir={"column"}
+        pos={"relative"}
+        flex={1}
+        justifyContent={"flex-start"}
+        alignItems={"center"}
+      >
+        <Heading>Contacts</Heading>
+        <Text>Tel: 352353523523</Text>
+        <Text>Instagram: 352353523523</Text>
+        <Text>Email: sagegamegoe</Text>
+      </Flex>
+    </Flex>
+  );
+};
 
 function PrimaryActionButton() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -710,26 +766,19 @@ function ScrollDown() {
 
 const Parallaxes = () => {
   const zIndex = useBreakpointValue({ base: -1, sm: 10, md: 10 });
-  const [topOfPlans, setTopOfPlans] = useState(0);
-  const [heightOfPlans, setHeightOfPlans] = useState("100vh");
-
-  useEffect(() => {
-    setTopOfPlans(document.getElementById("Plans").offsetTop - 25);
-    setHeightOfPlans(document.getElementById("Plans").offsetHeight);
-  }, [document]);
 
   return (
-    <>
+    <Flex h={"full"}>
       <Parallax
         style={{
           position: "absolute",
-          left: "-50px",
-          top: topOfPlans,
-          width: "200px",
-          height: heightOfPlans,
+          left: "-120px",
+          top: 0,
+          width: "250px",
+          height: "100vh",
           zIndex,
         }}
-        bgImageStyle={{ height: "200px", width: "300px", top: "350px" }}
+        bgImageStyle={{ height: "250px", width: "300px", top: "380px" }}
         strength={200}
         bgImage={Axe}
       >
@@ -738,18 +787,18 @@ const Parallaxes = () => {
       <Parallax
         style={{
           position: "absolute",
-          right: "5vw",
-          top: topOfPlans,
+          right: "-5vw",
+          bottom: 0,
           width: "200px",
-          height: heightOfPlans,
+          height: "100vh",
           zIndex,
         }}
         bgImageStyle={{
           height: "200px",
           width: "500px",
-          top: useBreakpointValue({
-            base: `${heightOfPlans - 300}px`,
-            md: "550px",
+          bottom: useBreakpointValue({
+            base: "10vh",
+            md: "15vh",
           }),
         }}
         strength={100}
@@ -760,20 +809,20 @@ const Parallaxes = () => {
       <Parallax
         style={{
           position: "absolute",
-          right: "-50px",
-          top: topOfPlans,
-          width: "150px",
-          height: heightOfPlans,
-          zIndex,
+          right: "-100px",
+          top: 0,
+          width: "200px",
+          height: "100vh",
+          zIndex: -1,
         }}
-        bgImageStyle={{ height: "200px", width: "200px", top: "50px" }}
+        bgImageStyle={{ height: "200px", width: "200px", top: "10vh" }}
         strength={300}
         bgImage={Money}
       >
         <div style={{ height: "100px" }} />
       </Parallax>
       >
-    </>
+    </Flex>
   );
 };
 

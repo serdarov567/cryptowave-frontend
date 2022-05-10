@@ -21,7 +21,6 @@ import GradientButton from "src/components/GradientButton";
 import AlertPopUp from "src/components/AlertPopUp";
 import PlanItem from "src/components/PlanItem";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
-import dateToString from "src/utils/dateToString";
 
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -57,23 +56,27 @@ function Dashboard() {
   }, [loading]);
 
   const renderUserPlans = useMemo(() => {
-    return plans.map((plan, index) => {
-      return (
-        <PlanItem
-          uniqueKey={plan._id}
-          title={plan.title}
-          number={plan.number}
-          dateOfPurchase={plan.dateOfPurchase}
-          dateOfExpiration={plan.dateOfExpiration}
-          deposit={plan.deposit}
-          percentage={plan.percentage}
-          earned={earnings[index]}
-          reward={plan.reward}
-          walletType={plan.wallet.type}
-          status={plan.status}
-        />
-      );
-    });
+    return plans
+      .filter(
+        (plan) => plan.status !== "Canceled" && plan.status !== "Completed"
+      )
+      .map((plan, index) => {
+        return (
+          <PlanItem
+            uniqueKey={plan._id}
+            title={plan.title}
+            number={plan.number}
+            dateOfPurchase={plan.dateOfPurchase}
+            dateOfExpiration={plan.dateOfExpiration}
+            deposit={plan.deposit}
+            percentage={plan.percentage}
+            earned={earnings[index]}
+            reward={plan.reward}
+            walletType={plan.wallet.type}
+            status={plan.status}
+          />
+        );
+      });
   }, [plans, earnings]);
 
   return (
@@ -207,6 +210,17 @@ function Dashboard() {
                 >
                   {balance}$
                 </Heading>
+                <OutlinedButton
+                  color={"#FFF"}
+                  angle={"150deg"}
+                  firstColor={colors.background[200]}
+                  secondColor={colors.background[900]}
+                  onClick={() => {
+                    navigate("/dashboard/withdraw");
+                  }}
+                >
+                  Withdraw
+                </OutlinedButton>
               </VStack>
             </Flex>
           </Flex>

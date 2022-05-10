@@ -104,7 +104,11 @@ function PlanItem(props) {
               <Heading fontFamily={"Manrope-Bold"} fontSize={headerFontSize}>
                 {props.title}
               </Heading>
-              <Text fontSize={textFontSize} color={"#d4d4d4"}>
+              <Text
+                key={props.uniqueKey}
+                fontSize={textFontSize}
+                color={"#d4d4d4"}
+              >
                 {props.number !== -1
                   ? `#${props.number}`
                   : "Pending approval..."}
@@ -140,7 +144,11 @@ function PlanItem(props) {
                 >
                   Finishes on
                 </Text>
-                <Text fontSize={titleFontSize} fontFamily={"Manrope-Bold"}>
+                <Text
+                  key={props.uniqueKey}
+                  fontSize={titleFontSize}
+                  fontFamily={"Manrope-Bold"}
+                >
                   {dateToString(props.dateOfExpiration).length > 0
                     ? dateToString(props.dateOfExpiration)
                     : "pending..."}
@@ -213,9 +221,11 @@ function PlanItem(props) {
           bgColor={"background.700"}
         >
           {props.status === "Active" && (
-            <VStack>
-              <Heading fontSize={timerFontSize}>Time left</Heading>
-              <Heading fontSize={timerFontSize}>
+            <VStack key={props.uniqueKey}>
+              <Heading key={props.uniqueKey} fontSize={timerFontSize}>
+                Time left
+              </Heading>
+              <Heading key={props.uniqueKey} fontSize={timerFontSize}>
                 {days > 0 && days > 9 ? days : `0${days}`}d:
                 {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
                 {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m

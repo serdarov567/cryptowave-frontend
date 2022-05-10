@@ -13,6 +13,7 @@ export default function TextButton(props) {
           : "#959595",
         transition: "200ms all",
         cursor: "pointer",
+        userSelect: 'none',
       }}
       href={props.href}
       onMouseEnter={() => {
@@ -21,6 +22,7 @@ export default function TextButton(props) {
       onMouseLeave={() => {
         setHover(false);
       }}
+      onClick={props.onClick}
     >
       {props.children}
     </a>

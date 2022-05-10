@@ -215,20 +215,27 @@ function PlanItem(props) {
         >
           {props.status !== "Pending..." ? (
             <>
-              <Detail
-                key={props.uniqueKey}
-                title={`Earned`}
-                titleFontSize={earnedTitleFontSize}
-                bodyFontSize={headerFontSize}
-                flexDir={earnedFlexDir}
-                bodyMarginTop={earnedBodyMarginTop}
-              >
-                <span style={styles.blueText}>
-                  {minutes > 0 ? props.earned : props.reward}
-                </span>
-                $
-              </Detail>
-              {minutes > 0 || props.status !== "Completed" ? (
+              {props.status !== "Canceled" && (
+                <Detail
+                  key={props.uniqueKey}
+                  title={`Earned`}
+                  titleFontSize={earnedTitleFontSize}
+                  bodyFontSize={headerFontSize}
+                  flexDir={earnedFlexDir}
+                  bodyMarginTop={earnedBodyMarginTop}
+                >
+                  <span style={styles.blueText}>
+                    {minutes > 0
+                      ? props.status === "Completed"
+                        ? props.reward + "$"
+                        : props.earned + "$"
+                      : props.reward + "$"}
+                  </span>
+                </Detail>
+              )}
+              {minutes > 0 &&
+              props.status !== "Completed" &&
+              props.status !== "Canceled" ? (
                 <Heading key={props.uniqueKey} fontSize={titleFontSize}>
                   Time left: {days > 0 && days > 9 ? days : `0${days}`}d:
                   {hours > 0 && hours > 9 ? hours : `0${hours}`}h:

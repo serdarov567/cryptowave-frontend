@@ -6,10 +6,11 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Sign from "src/pages/Sign";
 import Dashboard from "src/pages/Dashboard/Dashboard";
 import Wallets from "src/pages/Wallets";
-import PlanHistory from "src/pages/PlanHistory";
+import PlanHistory from "src/pages/Dashboard/PlanHistory";
 import Admin from "src/pages/Admin";
 import NotFound from "src/pages/NotFound";
 import TermsAndConditions from "./pages/TermsAndCondiitons";
+import Withdraw from "./pages/Dashboard/Withdraw";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/sign/:type" element={<Sign />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/dashboard/planhistory" element={<PlanHistory />} />
+        <Route path="/dashboard/withdraw" element={<Withdraw />} />
         <Route path="/wallets" element={<Wallets />} />
         <Route path="/admin" element={<Admin />} />
         <Route path={"/termsandconditions"} element={<TermsAndConditions />} />

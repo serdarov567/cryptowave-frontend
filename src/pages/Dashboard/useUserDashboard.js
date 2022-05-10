@@ -19,7 +19,7 @@ const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
 const useCountdown = (targetDate) => {
-  const countDownDate = new Date(targetDate).getTime();
+  let countDownDate = new Date(targetDate).getTime();
   const [update, setUpdate] = useState(false);
 
   const [countDown, setCountDown] = useState(
@@ -27,8 +27,8 @@ const useCountdown = (targetDate) => {
   );
 
   useEffect(() => {
+    setCountDown(countDownDate - new Date().getTime());
     const interval = setInterval(() => {
-      setCountDown(countDownDate - new Date().getTime());
       setUpdate(!update);
     }, MINUTE);
 

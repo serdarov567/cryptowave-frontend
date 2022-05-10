@@ -25,6 +25,8 @@ import PopUp from "src/components/PopUp";
 import LoadingIndicator from "src/components/LoadingIndicator";
 import OutlinedButton from "src/components/OutlinedButton";
 import { addWallet, deleteWallets, updateWallet } from "src/utils/network";
+import Tilde from "src/assets/vectors/Tilde";
+import TextButton from "src/components/TextButton";
 
 const Wallets = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -39,7 +41,7 @@ const Wallets = () => {
   const newWallet = {
     _id: -1,
     title: "",
-    type: "Binance",
+    type: "BTC",
     address: "",
   };
 
@@ -52,7 +54,12 @@ const Wallets = () => {
   }, [loading]);
 
   const fontSize = useBreakpointValue({ base: "10px", sm: "12px", md: "18px" });
-  const columns = useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 3, xl: 4 });
+  const buttonFontSize = useBreakpointValue({
+    base: "10px",
+    sm: "10px",
+    md: "16px",
+  });
+  const columns = useBreakpointValue({ base: 1, sm: 1, md: 2, lg: 3 });
 
   const renderWallets = useMemo(() => {
     return wallets.map((walletDetail) => (
@@ -61,39 +68,81 @@ const Wallets = () => {
           pos={"absolute"}
           w={"full"}
           h={"full"}
-          bg={"none"}
-          borderRadius={"10px"}
+          bg={"linear-gradient(110deg, #1D1D1D, 40%, #082542, #1D1D1D)"}
+          borderColor={"#5E5E5E"}
+          borderWidth={"1px"}
+          borderRadius={"15px"}
           zIndex={-1}
-          backdropFilter={"blur(2px) invert(20%)"}
         />
-        <VStack
-          key={walletDetail._id}
-          alignItems={"start"}
-          paddingY={"20px"}
-          paddingLeft={'30px'}
-          paddingRight={"60px"}
-          w={'340px'}
-        >
-          <Text fontSize={fontSize}>Title: {walletDetail.title}</Text>
-          <Text fontSize={fontSize}>Type: {walletDetail.type}</Text>
-          <Text fontSize={fontSize}>Address: {walletDetail.address}</Text>
-          <OutlinedButton
-            color={"white"}
-            alignSelf={'end'}
-            marginRight={'200px'}
-            fontSize={fontSize}
-            onClick={() => {
-              setCurrentWallet({
-                _id: walletDetail._id,
-                title: walletDetail.title,
-                type: walletDetail.type,
-                address: walletDetail.address,
-              });
-              onOpen();
-            }}
+        <VStack key={walletDetail._id} alignItems={"start"} w={"full"}>
+          <Flex
+            w={"100%"}
+            h={"40px"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            borderTopLeftRadius={"15px"}
+            borderTopRightRadius={"15px"}
+            bgColor={"#FFF"}
+            px={"30px"}
           >
-            Edit
-          </OutlinedButton>
+            <Tilde fill={"#4F60FF"} fill-opacity={"1.0"} />
+            <Text
+              fontFamily={"Manrope-Bold"}
+              color={"#3C3C3C"}
+              fontSize={fontSize}
+            >
+              {walletDetail.title}
+            </Text>
+          </Flex>
+
+          <Flex
+            w={"100%"}
+            h={"60px"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
+            px={"30px"}
+          >
+            <Text fontSize={fontSize}>Type:</Text>
+            <Text fontSize={fontSize}>{walletDetail.type}</Text>
+          </Flex>
+
+          <Flex
+            w={"100%"}
+            h={"40px"}
+            justifyContent={"space-between"}
+            alignItems={"flex-start"}
+            px={"30px"}
+          >
+            <Text marginRight={"30px"} fontSize={fontSize}>
+              Address:
+            </Text>
+            <Text fontSize={fontSize}>{walletDetail.address}</Text>
+          </Flex>
+
+          <Flex
+            w={"100%"}
+            h={"40px"}
+            justifyContent={"flex-end"}
+            alignItems={"center"}
+            px={"30px"}
+            paddingBottom={"20px"}
+          >
+            <TextButton
+              color={"white"}
+              fontSize={buttonFontSize}
+              onClick={() => {
+                setCurrentWallet({
+                  _id: walletDetail._id,
+                  title: walletDetail.title,
+                  type: walletDetail.type,
+                  address: walletDetail.address,
+                });
+                onOpen();
+              }}
+            >
+              Edit
+            </TextButton>
+          </Flex>
         </VStack>
       </GridItem>
     ));
@@ -189,7 +238,12 @@ const Wallets = () => {
         {walletsLoading ? (
           <LoadingIndicator title={"Loading wallets..."} />
         ) : wallets.length > 0 ? (
-          <SimpleGrid columns={columns} columnGap={"20px"} rowGap={4} justifyContent={'center'}>
+          <SimpleGrid
+            columns={columns}
+            columnGap={4}
+            rowGap={8}
+            justifyContent={"center"}
+          >
             {renderWallets}
           </SimpleGrid>
         ) : (

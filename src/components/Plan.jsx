@@ -18,7 +18,7 @@ const Plan = (props) => {
     md: "20px",
     lg: "40px",
     xl: "50px",
-  })
+  });
 
   return (
     <Box
@@ -38,6 +38,7 @@ const Plan = (props) => {
       borderWidth={"1px"}
       marginBottom={props.marginBottom}
       marginTop={props.marginTop}
+      boxShadow={`${props.shadowLeft}px 10px 0px 0px ${props.shadowColor}`}
     >
       <Flex
         flexDir={"column"}
@@ -141,7 +142,7 @@ const Plan = (props) => {
               <span style={styles.blueText}>{props.minEarn}</span>$
             </Text>
 
-            <Timeline width={timelineWidth}/>
+            <Timeline width={timelineWidth} />
 
             <Text fontSize={detailFontSize}>
               <span style={styles.blueText}>{props.maxEarn}</span>$

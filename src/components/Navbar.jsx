@@ -89,6 +89,8 @@ const Navbar = (props) => {
                   )
                 }
                 variant={"ghost"}
+                _hover={{}}
+                _focus={{}}
                 aria-label={"Toggle Navigation"}
               />
             </Flex>
@@ -264,7 +266,7 @@ const MobileNav = () => {
   const navigate = useNavigate();
   return (
     <Stack
-      bg={useColorModeValue("white", "gray.800")}
+      bg={useColorModeValue("background.200", "background.200")}
       p={4}
       display={{ md: "none" }}
     >
@@ -300,10 +302,7 @@ const MobileNavItem = ({ label, children, href, onClick }) => {
         }}
         onClick={onClick}
       >
-        <Text
-          fontWeight={600}
-          color={useColorModeValue("gray.600", "gray.200")}
-        >
+        <Text fontWeight={500} color={useColorModeValue("#FFF", "#FFF")}>
           {label}
         </Text>
         {children && (
@@ -323,7 +322,7 @@ const MobileNavItem = ({ label, children, href, onClick }) => {
           pl={4}
           borderLeft={1}
           borderStyle={"solid"}
-          borderColor={useColorModeValue("gray.200", "gray.700")}
+          borderColor={useColorModeValue("#FFF", "#FFF")}
           align={"start"}
         >
           {children &&
