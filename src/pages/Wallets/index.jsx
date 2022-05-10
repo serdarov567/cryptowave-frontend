@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useLayoutEffect, useMemo, useState } from "react";
 import {
   Box,
   Container,
@@ -47,7 +47,7 @@ const Wallets = () => {
 
   const [currentWallet, setCurrentWallet] = useState(newWallet);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (!loading) {
       if (!isSignedIn) navigate("/#home", { replace: true });
     }

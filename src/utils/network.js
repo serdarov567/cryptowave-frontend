@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.1.102:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.1.21:1919/" });
 
 const signUp = (email, username, password) => {
   return axiosInstance.post(
@@ -160,6 +160,14 @@ const getAllUsers = (token) => {
   );
 };
 
+const getWithdrawHistoryOfUser = (email, token) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.get(
+    `api/withdraws/${email}`
+    //{ timeout: 20000 }
+  );
+};
+
 export {
   signUp,
   verify,
@@ -177,4 +185,5 @@ export {
   signAdmin,
   checkAdmin,
   getAllUsers,
+  getWithdrawHistoryOfUser,
 };

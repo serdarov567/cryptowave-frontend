@@ -13,6 +13,9 @@ import {
   FormControl,
   FormLabel,
   Select,
+  toast,
+  Input,
+  FormErrorMessage,
 } from "@chakra-ui/react";
 import Tilde from "src/assets/vectors/Tilde";
 import GradientButton from "src/components/GradientButton";
@@ -606,7 +609,7 @@ function AboutUs() {
           </Box>
         </Flex>
       </Flex>
-      <Contacts />
+      {/* <Contacts /> */}
     </Container>
   );
 }
@@ -619,31 +622,35 @@ const Contacts = () => {
       flexDir={useBreakpointValue({ base: "column", md: "row" })}
       px={useBreakpointValue({ base: "20px", md: "30px" })}
     >
-      <VStack flex={1} alignItems={"start"} spacing={8}>
-        <Heading>About us</Heading>
-        <Text textAlign={"justify"}>
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-          sint. Velit officia consequat duis enim velit mollit. Exercitation
-          veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-          ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-          duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-          amet sint. Velit officia consequat duis enim velit mollit.
-          Exercitation veniam consequat sunt nostrud amet.
-        </Text>
-      </VStack>
-      <Flex
-        flexDir={"column"}
-        pos={"relative"}
-        flex={1}
-        justifyContent={"flex-start"}
-        alignItems={"center"}
+      <Box
+        style={{
+          border: "3px solid transparent",
+        }}
+        background={`linear-gradient(${colors.background[900]}, ${colors.background[900]}) padding-box, linear-gradient(110deg, #404040, ${colors.background[900]}) border-box`}
+        borderRadius={"10px"}
+        px={useBreakpointValue({ base: "20px", md: "50px" })}
+        py={useBreakpointValue({ base: "20px", md: "50px" })}
+        textAlign={"start"}
       >
-        <Heading>Contacts</Heading>
-        <Text>Tel: 352353523523</Text>
-        <Text>Instagram: 352353523523</Text>
-        <Text>Email: sagegamegoe</Text>
-      </Flex>
+        <VStack spacing={8}>
+          <Heading fontSize={"30px"}>Contact Us</Heading>
+          <FormControl>
+            <FormLabel
+              variant={"primary"}
+              fontSize={useBreakpointValue({ base: "12px", md: "18px" })}
+            >
+              Email
+            </FormLabel>
+            <Input
+              variant={"primary"}
+              height={"50px"}
+              placeholder="example@email.com"
+              onChange={(event) => {}}
+            />
+            <FormErrorMessage>Not a valid email.</FormErrorMessage>
+          </FormControl>
+        </VStack>
+      </Box>
     </Flex>
   );
 };
