@@ -8,7 +8,6 @@ import {
   Text,
   useBreakpointValue,
   VStack,
-  useDisclosure,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import LogIn from "src/assets/vectors/LogIn";
@@ -25,8 +24,6 @@ import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
   const navigate = useNavigate();
-
-  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 

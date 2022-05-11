@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useLayoutEffect, useState } from "react";
 import { checkToken } from "./network";
 
 const useIsSignedIn = () => {
@@ -25,7 +25,7 @@ const useIsSignedIn = () => {
     }
   };
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     verifyUser();
   }, []);
 

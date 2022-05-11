@@ -13,6 +13,7 @@ export default function OutlinedButton(props) {
     <Button
       fontSize={useBreakpointValue({ base: "14px", md: "mdb" })}
       fontWeight={500}
+      minH={"40px"}
       h={useBreakpointValue({ base: "33px", md: "38px" })}
       paddingInline={useBreakpointValue({ base: "15px", md: "20px" })}
       transitionDuration="500ms"

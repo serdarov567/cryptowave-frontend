@@ -88,7 +88,7 @@ const useUserDashboard = () => {
 
     const interval = setInterval(() => {
       setUpdate(!update);
-    }, SECOND);
+    }, MINUTE);
     return () => {
       clearInterval(interval);
     };

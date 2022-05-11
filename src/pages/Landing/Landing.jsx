@@ -13,10 +13,11 @@ import {
   FormControl,
   FormLabel,
   Select,
-  toast,
   Input,
   FormErrorMessage,
+  Textarea,
 } from "@chakra-ui/react";
+import validator from "validator";
 import Tilde from "src/assets/vectors/Tilde";
 import GradientButton from "src/components/GradientButton";
 import { colors } from "src/theme";
@@ -33,8 +34,20 @@ import PopUp from "src/components/PopUp";
 import { scrollHandler } from "src/utils/scrollHandler";
 import usePlans from "src/pages/Landing/usePlans";
 import useWallets from "src/pages/Wallets/useWallets";
-import { addPlan } from "src/utils/network";
+import { addPlan, sendToSupport } from "src/utils/network";
 import { useNavigate } from "react-router-dom";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler,
+} from "chart.js";
+import { Line } from "react-chartjs-2";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
 import Money from "src/assets/images/money.png";
@@ -46,14 +59,15 @@ import Trusted from "src/assets/vectors/Trusted";
 import TextButton from "src/components/TextButton";
 
 function Landing() {
+  const [isSignedIn, loading] = useIsSignedIn();
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
   scrollHandler(global.location.hash.slice(1), navbarHeight);
 
   return (
     <Box scrollBehavior="smooth">
       <Navbar>
-        <SecondaryActionButton />
-        <PrimaryActionButton />
+        <SecondaryActionButton isSignedIn={isSignedIn} loading={loading} />
+        <PrimaryActionButton isSignedIn={isSignedIn} loading={loading} />
       </Navbar>
       <Container
         pos={"relative"}
@@ -64,8 +78,8 @@ function Landing() {
         paddingX={"0px"}
         justifyContent={"center"}
       >
-        <Home />
-        <Plans />
+        <Home isSignedIn={isSignedIn} loading={loading} />
+        <Plans isSignedIn={isSignedIn} />
         <AboutUs />
       </Container>
       <Flex
@@ -90,9 +104,61 @@ function Landing() {
   );
 }
 
-function Home() {
-  const [isSignedIn, loading] = useIsSignedIn();
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+  Filler
+);
 
+const labels = ["January", "February", "March", "April"];
+
+const data = {
+  labels,
+  datasets: [
+    {
+      label: "USD",
+      data: [105340, 154375, 142425, 185250],
+      borderColor: "rgb(137, 255, 177)",
+      backgroundColor: "rgba(137, 255, 177, 0.3)",
+      pointBackgroundColor: "white",
+      fill: "origin",
+      tension: 0.2,
+    },
+  ],
+};
+
+// const options = {
+//   responsive: true,
+//   plugins: {
+//     title: {
+//       display: true,
+//       text: 'Total earnings per month in 2022',
+//     },
+//   },
+// };
+
+const options = {
+  maintainAspectRatio: true,
+  scales: {
+    y: {
+      ticks: {
+        display: false,
+      },
+    },
+    x: {
+      ticks: {
+        display: true,
+      },
+    },
+  },
+};
+
+function Home({ isSignedIn, loading }) {
   const [haloEffect, setHaloEffect] = useState(0);
   const haloBoxRef = useRef(null);
 
@@ -135,17 +201,20 @@ function Home() {
         zIndex={-1}
       />
       <Container
+        pos={"relative"}
         display={"flex"}
         flexDir={"column"}
         maxW={"container.xl"}
         h={"100vh"}
         justifyContent="center"
         paddingX={0}
-        paddingTop={useBreakpointValue({ base: "100px", md: "0px" })}
+        paddingTop={useBreakpointValue({ base: "100px", md: "-80px" })}
       >
         <Flex
+          h={"full"}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
+          alignContent={"center"}
           justifyContent={useBreakpointValue({
             base: "center",
             md: "space-between",
@@ -159,6 +228,7 @@ function Home() {
           })}
         >
           <Flex
+            flex={1}
             flexDir={"column"}
             alignSelf={"center"}
             px={useBreakpointValue({ base: "25px", md: "0px" })}
@@ -175,7 +245,7 @@ function Home() {
               marginTop={"20px"}
               marginBottom={"40px"}
               fontSize={useBreakpointValue({
-                base: "2xl",
+                base: "3xl",
                 sm: "4xl",
                 md: "45px",
                 lg: "60px",
@@ -187,7 +257,7 @@ function Home() {
               <span
                 style={{
                   fontSize: useBreakpointValue({
-                    base: "2xl",
+                    base: "3xl",
                     sm: "4xl",
                     md: "45px",
                     lg: "60px",
@@ -219,18 +289,26 @@ function Home() {
             </HStack>
           </Flex>
 
-          <Box
-            display={"flex"}
-            flexDir={"row"}
+          <Flex
+            flex={useBreakpointValue({ base: 2, sm: 1, md: 1 })}
+            flexDir={"column"}
             alignSelf={"center"}
-            minW={useBreakpointValue({ base: "50px", sm: "80px", md: "400px" })}
-            maxW={useBreakpointValue({
-              base: "200px",
-              sm: "350px",
-              md: "500px",
+            alignContent={"center"}
+            justifyContent={useBreakpointValue({
+              base: "flex-start",
+              md: "space-evenly",
             })}
-            height={"400px"}
-          />
+          >
+            <Heading
+              fontSize={useBreakpointValue({ base: "20px", md: "30px" })}
+              textAlign={"center"}
+              marginTop={"50px"}
+              marginBottom={"20px"}
+            >
+              Total earnings in 2022 per month
+            </Heading>
+            <Line data={data} options={options} />
+          </Flex>
         </Flex>
 
         <ScrollDown />
@@ -239,8 +317,7 @@ function Home() {
   );
 }
 
-function Plans() {
-  const [isSignedIn] = useIsSignedIn();
+function Plans({ isSignedIn }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -547,25 +624,36 @@ function AboutUs() {
       <Flex
         flexDir={useBreakpointValue({ base: "column", md: "row" })}
         px={useBreakpointValue({ base: "20px", md: "30px" })}
-        marginBottom={useBreakpointValue({ base: "50px", md: "100px" })}
+        marginBottom={useBreakpointValue({ base: "30px", md: "150px" })}
       >
         <VStack flex={1} alignItems={"start"} spacing={4}>
           <Heading fontFamily={"Manrope-ExtraBold"}>About us</Heading>
           <Text color={"#aeaeae"} textAlign={"justify"}>
-            Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet
-            sint. Velit officia consequat duis enim velit mollit. Exercitation
-            veniam consequat sunt nostrud amet. Amet minim mollit non deserunt
-            ullamco est sit aliqua dolor do amet sint. Velit officia consequat
-            duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-            amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-            amet sint. Velit officia consequat duis enim velit mollit.
-            Exercitation veniam consequat sunt nostrud amet.
+            Trading on the stock market, cryptocurrency exchanges attracts
+            investors and entrepreneurs enjoying high profits, as well as
+            ordinary citizens who are financially literate. Cryptowave Limited
+            has been operating on cryptocurrency exchanges since 2021, closing
+            hundreds of successful deals daily and allowing private individuals
+            with limited funds participate in this activity. Digital currencies
+            are liquid investment vehicles making it possible to profit off of
+            the fluctuations in prices and rates. Trading cryptocurrencies
+            requires expertise and significant knowledge, as well as the ability
+            to apply diversify risks, set up the investment portfolio, and
+            analyze the factors affecting the price of a financial instrument.
+            Alternatively, it is possible to place one’s funds under the
+            management of experienced traders to obtain passive income according
+            to a preestablished rate, without the need to get into the details
+            of security market regulations, investment portfolios, or associated
+            risks.
           </Text>
         </VStack>
         <Flex
           pos={"relative"}
           flex={1}
-          justifyContent={"flex-end"}
+          justifyContent={useBreakpointValue({
+            base: "center",
+            md: "flex-end",
+          })}
           paddingRight={useBreakpointValue({
             base: "0px",
             sm: "0px",
@@ -609,32 +697,82 @@ function AboutUs() {
           </Box>
         </Flex>
       </Flex>
-      {/* <Contacts /> */}
+      <Contacts />
     </Container>
   );
 }
 
 const Contacts = () => {
+  const email = localStorage.getItem("email");
+  const [sender, setSender] = useState(email !== null ? email : "");
+  const [content, setContent] = useState("");
+  const [error, setError] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  const handleSendSupport = async () => {
+    try {
+      if (validator.isEmail(sender) && content.length > 10) {
+        setLoading(true);
+        setError("");
+        const result = await sendToSupport(sender, content);
+
+        if (result.status === 200) {
+          setMessage("Sent successfully!");
+        }
+      }
+    } catch (err) {
+      if (err.response.status === 406) {
+        setError("Not acceptable inputs!");
+      } else if (err.response.status === 500) {
+        setError("Server error!");
+      } else {
+        setError("Network error!");
+      }
+      setLoading(false);
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    if (message.length > 0) {
+      setTimeout(() => {
+        setMessage("");
+      }, 2000);
+    }
+  }, [message]);
+
   return (
     <Flex
       w={"100%"}
       pos={"relative"}
       flexDir={useBreakpointValue({ base: "column", md: "row" })}
-      px={useBreakpointValue({ base: "20px", md: "30px" })}
+      px={useBreakpointValue({ base: "20px", sm: "50px", md: "30px" })}
+      justifyContent={"center"}
+      paddingBottom={useBreakpointValue({ base: "30px", md: "0px" })}
     >
       <Box
+        minWidth={useBreakpointValue({ base: "80%", md: "600px" })}
         style={{
           border: "3px solid transparent",
         }}
         background={`linear-gradient(${colors.background[900]}, ${colors.background[900]}) padding-box, linear-gradient(110deg, #404040, ${colors.background[900]}) border-box`}
         borderRadius={"10px"}
         px={useBreakpointValue({ base: "20px", md: "50px" })}
-        py={useBreakpointValue({ base: "20px", md: "50px" })}
+        py={useBreakpointValue({ base: "20px", md: "30px" })}
         textAlign={"start"}
       >
-        <VStack spacing={8}>
-          <Heading fontSize={"30px"}>Contact Us</Heading>
-          <FormControl>
+        <VStack spacing={4}>
+          <Heading
+            alignSelf={"flex-start"}
+            fontSize={useBreakpointValue({ base: "24px", md: "30px" })}
+          >
+            Contact Us
+          </Heading>
+          {error.length > 0 && <Text color={"red"}>{error}</Text>}
+          <FormControl
+            isInvalid={sender.length > 0 && !validator.isEmail(sender)}
+          >
             <FormLabel
               variant={"primary"}
               fontSize={useBreakpointValue({ base: "12px", md: "18px" })}
@@ -642,21 +780,54 @@ const Contacts = () => {
               Email
             </FormLabel>
             <Input
+              value={sender}
               variant={"primary"}
               height={"50px"}
               placeholder="example@email.com"
-              onChange={(event) => {}}
+              onChange={(event) => {
+                setSender(event.target.value);
+              }}
             />
             <FormErrorMessage>Not a valid email.</FormErrorMessage>
           </FormControl>
+
+          <FormControl isInvalid={content.length > 0 && content.length < 10}>
+            <FormLabel
+              variant={"primary"}
+              fontSize={useBreakpointValue({ base: "12px", md: "18px" })}
+            >
+              Message
+            </FormLabel>
+            <Textarea
+              value={content}
+              resize={"none"}
+              maxLength={300}
+              height={"80px"}
+              placeholder="Write here"
+              onChange={(event) => {
+                setContent(event.target.value);
+              }}
+            />
+            <FormErrorMessage>
+              Message must be longer than 10 characters.
+            </FormErrorMessage>
+          </FormControl>
+
+          <GradientButton
+            alignSelf={"flex-end"}
+            onClick={handleSendSupport}
+            loading={loading}
+          >
+            Send
+          </GradientButton>
+          {message.length > 0 && <Text color={"green"}>{message}</Text>}
         </VStack>
       </Box>
     </Flex>
   );
 };
 
-function PrimaryActionButton() {
-  const [isSignedIn, loading] = useIsSignedIn();
+function PrimaryActionButton({ isSignedIn, loading }) {
   return (
     <GradientButton
       leftIcon={isSignedIn && <DashboardIcon />}
@@ -670,8 +841,7 @@ function PrimaryActionButton() {
   );
 }
 
-function SecondaryActionButton() {
-  const [isSignedIn, loading] = useIsSignedIn();
+function SecondaryActionButton({ isSignedIn, loading }) {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
@@ -743,22 +913,22 @@ function WalletButton() {
 }
 
 function ScrollDown() {
+  const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
+
   return (
     <VStack
       position={"absolute"}
-      top={"85vh"}
+      top={"90vh"}
       width={"fit-content"}
       height={"50px"}
       display={"flex"}
       flexDirection={"column"}
       alignSelf={"center"}
-      marginLeft={`${(window.outerHeight - window.innerHeight) / 4}px`}
     >
       <Text
         cursor={"pointer"}
         onClick={() => {
-          let top = window.outerHeight;
-          window.scrollTo({ top, behavior: "smooth" });
+          scrollHandler("plans", navbarHeight);
         }}
         color={"#505070"}
       >

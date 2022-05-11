@@ -53,7 +53,7 @@ const Wallets = () => {
     }
   }, [loading]);
 
-  const fontSize = useBreakpointValue({ base: "10px", sm: "12px", md: "18px" });
+  const fontSize = useBreakpointValue({ base: "12px", sm: "12px", md: "18px" });
   const buttonFontSize = useBreakpointValue({
     base: "10px",
     sm: "10px",
@@ -212,7 +212,13 @@ const Wallets = () => {
   };
 
   return (
-    <Flex w={"100%"} h={"100%"} flexDir={"column"} alignItems={"center"}>
+    <Flex
+      w={"100%"}
+      minH={"100vh"}
+      paddingBottom={"50px"}
+      flexDir={"column"}
+      alignItems={"center"}
+    >
       <Navbar>
         <GradientButton
           onClick={() => {
@@ -231,7 +237,7 @@ const Wallets = () => {
         flexDir={"column"}
         justifyContent={"center"}
         alignItems={"center"}
-        marginTop={"140px"}
+        marginTop={useBreakpointValue({ base: "90px", md: "140px" })}
       >
         <Heading marginBottom={"50px"}>My Wallets</Heading>
 

@@ -23,7 +23,6 @@ import TextButton from "src/components/TextButton";
 import { colors } from "src/theme";
 import { forgot, signIn, signUp, verify } from "src/utils/network";
 import { useIsSignedIn } from "src/utils/user";
-import { Parallax, Background } from "react-parallax";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
 import Money from "src/assets/images/money.png";
@@ -83,7 +82,8 @@ export default function Sign() {
     <Flex
       pos={"relative"}
       flexDirection={"column"}
-      h={"100vh"}
+      minH={"100vh"}
+      w={"100vw"}
       overflow={"hidden"}
       alignItems={"center"}
       justifyContent={"space-evenly"}
@@ -91,15 +91,19 @@ export default function Sign() {
       paddingBottom={"30px"}
       px={useBreakpointValue({ base: "0px", md: "20px" })}
     >
-      <Flex position={"relative"} flexDir={"column"} maxW={"container.xl"}>
-        <Logo
-          marginTop={marginBetweenElements}
-          marginBottom={marginBetweenElements}
-          onClick={() => {
-            navigate("/", { replace: true });
-          }}
-        />
-
+      <Logo
+        marginTop={marginBetweenElements}
+        marginBottom={marginBetweenElements}
+        onClick={() => {
+          navigate("/", { replace: true });
+        }}
+      />
+      <Flex
+        position={"relative"}
+        flexDir={"column"}
+        maxW={useBreakpointValue({ base: 0, sm: 0, md: "container.xl" })}
+        minW={useBreakpointValue({ base: "100%", sm: "70%", md: 0 })}
+      >
         <SecuredBadge
           alignSelf={"center"}
           marginTop={useBreakpointValue({ base: "10px", md: "20px" })}
@@ -111,6 +115,7 @@ export default function Sign() {
             base: "32px",
             md: "40px",
           })}
+          px={"50px"}
           textAlign={"center"}
           color={"white"}
           marginTop={marginBetweenElements}
@@ -123,7 +128,7 @@ export default function Sign() {
 
         <Flex
           position={"relative"}
-          minW={useBreakpointValue({ base: "330px", md: "600px" })}
+          minW={useBreakpointValue({ base: "90%", md: "600px" })}
           h={"fit-content"}
           py={useBreakpointValue({ base: "25px", md: "40px" })}
           animation={"SlideFadeIn 1s forwards"}
@@ -135,7 +140,7 @@ export default function Sign() {
             }}
             pos={"absolute"}
             marginTop={useBreakpointValue({ base: "-15px", md: "-40px" })}
-            minW={useBreakpointValue({ base: "330px", md: "600px" })}
+            minW={useBreakpointValue({ base: "90%", md: "600px" })}
             h={"full"}
             opacity={0.7}
             borderRadius={useBreakpointValue({ base: "15px", md: "12px" })}
@@ -150,7 +155,7 @@ export default function Sign() {
               backdropFilter: "blur(3px)",
             }}
             pos={"absolute"}
-            minW={useBreakpointValue({ base: "330px", md: "600px" })}
+            minW={useBreakpointValue({ base: "90%", md: "600px" })}
             marginTop={useBreakpointValue({ base: "-15px", md: "-40px" })}
             h={"full"}
             borderRadius={useBreakpointValue({ base: "15px", md: "12px" })}
@@ -158,7 +163,8 @@ export default function Sign() {
             zIndex={-1}
           />
           <VStack
-            w={useBreakpointValue({ base: "70%", md: "500px" })}
+            pos={"relative"}
+            w={useBreakpointValue({ base: "75%", md: "500px" })}
             spacing={useBreakpointValue({ base: 3, md: 5 })}
           >
             <Heading
@@ -658,14 +664,7 @@ function Forgot(props) {
 
 const BackgroundItems = () => {
   return (
-    <Flex
-      display={useBreakpointValue({
-        base: "none",
-        sm: "none",
-        md: "none",
-        lg: "flex",
-      })}
-    >
+    <Flex display={"flex"}>
       <Box
         position={"absolute"}
         top={"10vh"}

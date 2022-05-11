@@ -23,17 +23,21 @@ import {
   Stack,
   SimpleGrid,
   GridItem,
+  Button,
 } from "@chakra-ui/react";
 import Eye from "src/assets/vectors/Eye";
 import GradientButton from "src/components/GradientButton";
 import {
   checkAdmin,
+  deleteSupport,
   getAllUsers,
+  getSupports,
   signAdmin,
   updatePlan,
 } from "src/utils/network";
 import { useNavigate } from "react-router-dom";
 import PlanItem from "src/pages/Admin/PlanItem";
+import dateToString from "src/utils/dateToString";
 
 const styles = {
   tab: {
@@ -98,7 +102,7 @@ const Admin = () => {
             <Plans />
           </TabPanel>
           <TabPanel>
-            <p>two!</p>
+            <Support />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -487,6 +491,91 @@ const Plans = () => {
         </RadioGroup>
       </HStack>
       {renderPlans}
+    </VStack>
+  );
+};
+
+const Support = () => {
+  const token = localStorage.getItem("admin-token");
+  const [supports, setSupports] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getSupports(token);
+      if (result.data !== null && result.data !== undefined) {
+        setSupports(result.data);
+      }
+    };
+
+    fetchData();
+
+    const interval = setInterval(() => {
+      setUpdate(!update);
+    }, MINUTE);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [update]);
+
+  const renderUsers = useMemo(() => {
+    return supports.map((support) => {
+      return (
+        <HStack
+          key={support._id}
+          w={"100%"}
+          py={"30px"}
+          px={"50px"}
+          marginBottom={"50px"}
+          fontFamily={"Manrope-Bold"}
+          alignItems={"start"}
+          bgColor={"background.200"}
+          borderRadius={"10px"}
+          spacing={12}
+        >
+          <Flex
+            flexDir={"column"}
+            fontSize={"20px"}
+            w={"100%"}
+            justifyContent={"space-evenly"}
+          >
+            <Flex
+              flexDir={"row"}
+              justifyContent={"space-between"}
+              marginBottom={"20px"}
+            >
+              <Text>Email: {support.email}</Text>
+              <Text>Date of issue: {dateToString(support.date)}</Text>
+            </Flex>
+
+            <Text>Message: {support.content}</Text>
+          </Flex>
+          <Button
+            alignSelf={"center"}
+            onClick={async () => {
+              try {
+                const result = await deleteSupport(token, [support._id]);
+
+                if (result.status === 200) {
+                  alert("Deleted");
+                  setUpdate(!update);
+                }
+              } catch (error) {
+                alert("Error");
+              }
+            }}
+          >
+            Delete
+          </Button>
+        </HStack>
+      );
+    });
+  }, [supports]);
+
+  return (
+    <VStack w={"full"} h={"full"}>
+      {renderUsers}
     </VStack>
   );
 };

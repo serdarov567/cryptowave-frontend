@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://137.184.224.35:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.1.102:1919/" });
 
 const signUp = (email, username, password) => {
   return axiosInstance.post(
@@ -168,6 +168,28 @@ const getWithdrawHistoryOfUser = (email, token) => {
   );
 };
 
+const sendToSupport = (email, content) => {
+  return axiosInstance.post("api/support", { email, content });
+};
+
+const getSupports = (token) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.get(
+    `api/support`
+    //{ timeout: 20000 }
+  );
+};
+
+const deleteSupport = (token, supportIds) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.delete("api/support", {
+    //timeout: 10000,
+    data: {
+      supportIds,
+    },
+  });
+};
+
 export {
   signUp,
   verify,
@@ -186,4 +208,7 @@ export {
   checkAdmin,
   getAllUsers,
   getWithdrawHistoryOfUser,
+  sendToSupport,
+  getSupports,
+  deleteSupport,
 };

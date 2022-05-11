@@ -39,6 +39,29 @@ const inputStyles = {
   },
 };
 
+const textAreaStyles = {
+  defaultProps: {
+    variant: "primary",
+  },
+  variants: {
+    primary: {
+      backgroundColor: "transparent",
+      height: "50px",
+      fontFamily: "Manrope",
+      fontSize: "15px",
+      color: "#FFF",
+      borderWidth: "1px",
+      borderColor: "#939393",
+      _focus: {
+        borderColor: "#A9A7FF",
+      },
+      _placeholder: {
+        color: "#939393",
+      },
+    },
+  },
+};
+
 const formLabelStyles = {
   defaultProps: {
     variant: "primary",
@@ -144,6 +167,9 @@ const theme = extendTheme({
     },
     Input: {
       ...inputStyles,
+    },
+    Textarea: {
+      ...textAreaStyles,
     },
     Select: {
       ...selectStyles,
