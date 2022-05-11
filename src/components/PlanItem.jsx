@@ -16,9 +16,9 @@ import { useCountdown } from "src/pages/Dashboard/useUserDashboard";
 import dateToString from "src/utils/dateToString";
 
 const SUPPORTED_WALLETS = {
-  BTC: "1CwE5wYeZEHNoLLf7Cv8fvVTtGEC7Ckx3d",
-  ETH: "0x2a011810c6bd88cd8736dbfdfae5a8e1a98f97a9",
-  USDTTRC20: "TVZL1ADycCrhL2RfqJXx4AjSbu8Uhnff2z",
+  BTC: "bc1q2t2dncstcv4stp9pezfygdjhz045tq8vdferjz",
+  ETH: "0xA94563d641EB4735aB0c9dd17BcCaBc02F03eDC0",
+  USDTTRC20: "TFQdTZhcrVgFzxVXBXnqPhGuCr3ibXujJh",
 };
 
 function PlanItem(props) {
