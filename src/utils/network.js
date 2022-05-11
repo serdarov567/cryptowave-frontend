@@ -6,7 +6,6 @@ const signUp = (email, username, password) => {
   return axiosInstance.post(
     "api/sign/up",
     { email, username, password }
-    //{ timeout: 20000 }
   );
 };
 
