@@ -268,7 +268,6 @@ const Users = () => {
           w={"100%"}
           py={"30px"}
           px={"50px"}
-          marginBottom={"50px"}
           fontFamily={"Manrope-Bold"}
           alignItems={"start"}
           bgColor={"background.200"}
@@ -329,7 +328,7 @@ const Users = () => {
   }, [users]);
 
   return (
-    <VStack w={"full"} h={"full"}>
+    <VStack w={"full"} h={"full"} spacing={"50px"}>
       {renderUsers}
     </VStack>
   );
