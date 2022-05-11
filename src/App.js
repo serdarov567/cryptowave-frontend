@@ -22,7 +22,7 @@ function App() {
         <Route path="/dashboard/planhistory" element={<PlanHistory />} />
         <Route path="/dashboard/withdraw" element={<Withdraw />} />
         <Route path="/wallets" element={<Wallets />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/bestadminever" element={<Admin />} />
         <Route path={"/termsandconditions"} element={<TermsAndConditions />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
