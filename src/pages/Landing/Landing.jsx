@@ -115,14 +115,20 @@ ChartJS.register(
   Filler
 );
 
-const labels = ["January", "February", "March", "April"];
+const labels = ["January", "February", "March", "April", "Today"];
 
 const data = {
   labels,
   datasets: [
     {
       label: "USD",
-      data: [105340, 154375, 142425, 185250],
+      data: [
+        105340,
+        154375,
+        142425,
+        185250,
+        105250 + new Date(Date.now()).getDay() * 5150,
+      ],
       borderColor: "rgb(137, 255, 177)",
       backgroundColor: "rgba(137, 255, 177, 0.3)",
       pointBackgroundColor: "white",
