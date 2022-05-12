@@ -35,7 +35,6 @@ import {
   signAdmin,
   updatePlan,
 } from "src/utils/network";
-import { useNavigate } from "react-router-dom";
 import PlanItem from "src/pages/Admin/PlanItem";
 import dateToString from "src/utils/dateToString";
 
@@ -338,6 +337,8 @@ const Withdraws = () => {
   const [users, setUsers] = useState([]);
   const [update, setUpdate] = useState(false);
 
+  const [selectedStatus, setSelectedStatus] = useState("Pending...");
+
   useEffect(() => {
     const token = localStorage.getItem("admin-token");
 
@@ -352,18 +353,54 @@ const Withdraws = () => {
 
     const interval = setInterval(() => {
       setUpdate(!update);
-    }, 5 * MINUTE);
+    }, MINUTE);
 
     return () => {
       clearInterval(interval);
     };
-  }, [update]);
+  }, [update, selectedStatus]);
+
+  const textFontSize = useBreakpointValue({ base: "12px", md: "14px" });
+
+  const renderPlans = useMemo(() => {
+    const filtered = users.map((user) => {
+      if (user.plans !== undefined)
+        return user.plans.map((plan) => {
+          if (plan.status === selectedStatus) {
+            return (
+              <></>
+            );
+          }
+        });
+    });
+    return filtered;
+  }, [users]);
 
   return (
-    <VStack w={"full"} h={"full"}>
-      {users.map((user) => {
-        return <Text>{user.email}</Text>;
-      })}
+    <VStack position={"relative"} w={"full"} h={"full"} px={"30px"}>
+      <HStack spacing={8} textAlign={"start"} w={"full"}>
+        <Heading marginBlock={"20px"}>Plans</Heading>
+
+        <Text>Filter by status:</Text>
+        <RadioGroup
+          value={selectedStatus}
+          onChange={(value) => {
+            setSelectedStatus(value);
+          }}
+        >
+          <Stack
+            color={"#FFF"}
+            fontFamily={"Manrope"}
+            direction="row"
+            spacing={4}
+          >
+            <Radio value="Canceled">Canceled</Radio>
+            <Radio value="Pending...">Pending</Radio>
+            <Radio value="Transferred">Transferred</Radio>
+          </Stack>
+        </RadioGroup>
+      </HStack>
+      {renderPlans}
     </VStack>
   );
 };

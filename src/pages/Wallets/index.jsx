@@ -27,6 +27,7 @@ import OutlinedButton from "src/components/OutlinedButton";
 import { addWallet, deleteWallets, updateWallet } from "src/utils/network";
 import Tilde from "src/assets/vectors/Tilde";
 import TextButton from "src/components/TextButton";
+import useLanguage from "src/languages/useLanguage";
 
 const Wallets = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -34,6 +35,7 @@ const Wallets = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { wallets, walletsLoading, refresh } = useWallets();
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const [error, setError] = useState("");
   const [popUpLoading, setPopUpLoading] = useState(false);
@@ -102,7 +104,7 @@ const Wallets = () => {
             alignItems={"center"}
             px={"30px"}
           >
-            <Text fontSize={fontSize}>Type:</Text>
+            <Text fontSize={fontSize}>{langKeys["typeWallet"]}:</Text>
             <Text fontSize={fontSize}>{walletDetail.type}</Text>
           </Flex>
 
@@ -114,7 +116,7 @@ const Wallets = () => {
             px={"30px"}
           >
             <Text marginRight={"30px"} fontSize={fontSize}>
-              Address:
+              {langKeys["addressWallet"]}:
             </Text>
             <Text fontSize={fontSize}>{walletDetail.address}</Text>
           </Flex>
@@ -140,7 +142,7 @@ const Wallets = () => {
                 onOpen();
               }}
             >
-              Edit
+              {langKeys["edit"]}
             </TextButton>
           </Flex>
         </VStack>
@@ -219,14 +221,18 @@ const Wallets = () => {
       flexDir={"column"}
       alignItems={"center"}
     >
-      <Navbar>
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      >
         <GradientButton
           onClick={() => {
             setCurrentWallet(newWallet);
             onOpen();
           }}
         >
-          Add Wallet
+          {langKeys["addWallet"]}
         </GradientButton>
       </Navbar>
 
@@ -239,7 +245,7 @@ const Wallets = () => {
         alignItems={"center"}
         marginTop={useBreakpointValue({ base: "90px", md: "140px" })}
       >
-        <Heading marginBottom={"50px"}>My Wallets</Heading>
+        <Heading marginBottom={"50px"}>{langKeys["myWallets"]}</Heading>
 
         {walletsLoading ? (
           <LoadingIndicator title={"Loading wallets..."} />
@@ -260,11 +266,11 @@ const Wallets = () => {
       <PopUp
         isOpen={isOpen}
         onClose={onClose}
-        title={"Add wallet"}
+        title={langKeys["addWallet"]}
         footerComponents={
           <HStack>
             <GradientButton onClick={saveButtonHandler} loading={popUpLoading}>
-              {currentWallet._id !== -1 ? "Save" : "Add"}
+              {currentWallet._id !== -1 ? langKeys['save'] : langKeys['add']}
             </GradientButton>
             {currentWallet._id !== -1 && (
               <OutlinedButton
@@ -272,7 +278,7 @@ const Wallets = () => {
                 onClick={deleteButtonHandler}
                 loading={popUpLoading}
               >
-                Delete
+                {langKeys['delete']}
               </OutlinedButton>
             )}
           </HStack>
@@ -281,7 +287,7 @@ const Wallets = () => {
         <VStack spacing={4}>
           {error.length > 0 && <Text color={"red.500"}>{error}</Text>}
           <FormControl>
-            <FormLabel>Supported wallets</FormLabel>
+            <FormLabel>{langKeys["supported"]}</FormLabel>
             <Select
               color={"white"}
               value={currentWallet.type}
@@ -298,7 +304,7 @@ const Wallets = () => {
             </Select>
           </FormControl>
           <FormControl>
-            <FormLabel>Title</FormLabel>
+            <FormLabel>{langKeys["titleWallet"]}</FormLabel>
             <Input
               placeholder="Title"
               value={currentWallet.title}
@@ -311,7 +317,7 @@ const Wallets = () => {
             />
           </FormControl>
           <FormControl>
-            <FormLabel>Address</FormLabel>
+            <FormLabel>{langKeys["addressWallet"]}</FormLabel>
             <Input
               placeholder="Address"
               value={currentWallet.address}

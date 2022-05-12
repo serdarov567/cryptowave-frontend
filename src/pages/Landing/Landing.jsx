@@ -46,17 +46,32 @@ import Stable from "src/assets/vectors/Stable";
 import Trusted from "src/assets/vectors/Trusted";
 import TextButton from "src/components/TextButton";
 import CountUp from "react-countup";
+import useLanguage from "src/languages/useLanguage";
 
 function Landing() {
   const [isSignedIn, loading] = useIsSignedIn();
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
   scrollHandler(global.location.hash.slice(1), navbarHeight);
 
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+
   return (
     <Box scrollBehavior="smooth">
-      <Navbar>
-        <SecondaryActionButton isSignedIn={isSignedIn} loading={loading} />
-        <PrimaryActionButton isSignedIn={isSignedIn} loading={loading} />
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      >
+        <SecondaryActionButton
+          isSignedIn={isSignedIn}
+          loading={loading}
+          langKeys={langKeys}
+        />
+        <PrimaryActionButton
+          isSignedIn={isSignedIn}
+          loading={loading}
+          langKeys={langKeys}
+        />
       </Navbar>
       <Container
         pos={"relative"}
@@ -67,10 +82,10 @@ function Landing() {
         paddingX={"0px"}
         justifyContent={"center"}
       >
-        <Home isSignedIn={isSignedIn} loading={loading} />
-        <Plans isSignedIn={isSignedIn} />
-        <AboutUs />
-        <Contacts />
+        <Home isSignedIn={isSignedIn} loading={loading} langKeys={langKeys} />
+        <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
+        <AboutUs langKeys={langKeys} />
+        <Contacts langKeys={langKeys} />
       </Container>
       <Flex
         pos={"absolute"}
@@ -87,14 +102,14 @@ function Landing() {
           href={"/termsandconditions"}
           fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
         >
-          Terms and conditions, Privacy policy
+          {langKeys['terms']}
         </TextButton>
       </Flex>
     </Box>
   );
 }
 
-function Home({ isSignedIn, loading }) {
+function Home({ isSignedIn, loading, langKeys }) {
   const [haloEffect, setHaloEffect] = useState(0);
   const haloBoxRef = useRef(null);
 
@@ -190,7 +205,7 @@ function Home({ isSignedIn, loading }) {
               fontFamily={"Manrope"}
               color={"#FFF"}
             >
-              Make the cash flow with{" "}
+              {langKeys["motto"]}{" "}
               <span
                 style={{
                   fontSize: useBreakpointValue({
@@ -220,29 +235,28 @@ function Home({ isSignedIn, loading }) {
                 href={isSignedIn ? "/dashboard" : "/sign/up"}
                 isLoading={loading}
               >
-                {isSignedIn ? "Dashboard" : "Sign Up"}
+                {isSignedIn ? langKeys["dashboard"] : langKeys["signUp"]}
               </GradientButton>
-              {isSignedIn && <WalletButton />}
+              {isSignedIn && <WalletButton langKeys={langKeys}/>}
             </HStack>
           </Flex>
 
-          <Statistics />
+          <Statistics langKeys={langKeys} />
         </Flex>
 
-        <ScrollDown />
+        <ScrollDown langKeys={langKeys} />
       </Container>
     </>
   );
 }
 
-const Statistics = () => {
+const Statistics = ({ langKeys }) => {
   const HOUR = 60 * 60000;
   const DAY = 24 * HOUR;
-  const since =
-    new Date(Date.now()).getTime() - new Date(2022, 0, 15).getTime();
+  const since = new Date(Date.now()).getTime() - new Date(2022, 1, 1).getTime();
   const runningDays = since / DAY;
-  const runningMonths = Math.floor(since / DAY / 30);
-  const runningDaysThisMonth = Math.floor(runningDays - runningMonths * 30);
+  // const runningMonths = Math.floor(since / DAY / 30);
+  // const runningDaysThisMonth = Math.floor(runningDays - runningMonths * 30);
   const users = Math.floor((Date.now() / DAY) * 0.72);
   const capitalization = 5200000 + runningDays * 342;
 
@@ -298,31 +312,37 @@ const Statistics = () => {
       })}
     >
       <VStack>
-        <Heading {...headerProps}>Running time</Heading>
+        <Heading {...headerProps}>{langKeys["running"]}</Heading>
         <Text {...bodyProps}>
-          <CountUp end={runningMonths} duration={3} /> months,{" "}
-          <CountUp end={runningDaysThisMonth} duration={2} /> days
+          <CountUp end={runningDays} duration={2} /> {langKeys["days"]}
         </Text>
       </VStack>
 
       <VStack>
-        <Heading {...headerProps}>Users</Heading>
+        <Heading {...headerProps}>{langKeys["investors"]}</Heading>
         <Text {...bodyProps}>
           <CountUp end={users} duration={2} />
         </Text>
       </VStack>
 
       <VStack>
-        <Heading {...headerProps}>Capitalization</Heading>
+        <Heading {...headerProps}>{langKeys["capital"]}</Heading>
         <Text {...bodyProps} color={"green.500"}>
-          <CountUp end={capitalization} duration={4} />$
+          <CountUp
+            end={capitalization}
+            duration={3}
+            formattingFn={(number) => {
+              return number.toLocaleString();
+            }}
+          />
+          $
         </Text>
       </VStack>
     </Flex>
   );
 };
 
-function Plans({ isSignedIn }) {
+function Plans({ isSignedIn, langKeys }) {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -417,7 +437,7 @@ function Plans({ isSignedIn }) {
         marginBottom={useBreakpointValue({ base: "20px", md: "40px" })}
         paddingLeft={"20px"}
       >
-        PLANS
+        {langKeys["plans"]}
       </Heading>
 
       <Box
@@ -461,6 +481,7 @@ function Plans({ isSignedIn }) {
         })}
       >
         <Plan
+          langKeys={langKeys}
           title={plans[0].title}
           accentColor={"#1D1D1D"}
           secondColor={"#062518"}
@@ -490,6 +511,7 @@ function Plans({ isSignedIn }) {
           }}
         />
         <Plan
+          langKeys={langKeys}
           title={plans[1].title}
           accentColor={"#1D1D1D"}
           secondColor={"#1A0524"}
@@ -519,7 +541,8 @@ function Plans({ isSignedIn }) {
           }}
         />
         <Plan
-          title={"Tsunami"}
+          langKeys={langKeys}
+          title={plans[2].title}
           accentColor={"#1D1D1D"}
           secondColor={"#251E06"}
           thirdColor={"#1D1D1D"}
@@ -613,7 +636,7 @@ function Plans({ isSignedIn }) {
   );
 }
 
-function AboutUs() {
+function AboutUs({langKeys}) {
   return (
     <Container
       pos={"relative"}
@@ -632,24 +655,9 @@ function AboutUs() {
         marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
       >
         <VStack flex={1} alignItems={"start"} spacing={4}>
-          <Heading fontFamily={"Manrope-ExtraBold"}>About us</Heading>
-          <Text color={"#aeaeae"} textAlign={"justify"}>
-            Trading on the stock market, cryptocurrency exchanges attracts
-            investors and entrepreneurs enjoying high profits, as well as
-            ordinary citizens who are financially literate. Cryptowave Limited
-            has been operating on cryptocurrency exchanges since January 2022,
-            closing hundreds of successful deals daily and allowing private
-            individuals with limited funds participate in this activity. Digital
-            currencies are liquid investment vehicles making it possible to
-            profit off of the fluctuations in prices and rates. Trading
-            cryptocurrencies requires expertise and significant knowledge, as
-            well as the ability to apply diversify risks, set up the investment
-            portfolio, and analyze the factors affecting the price of a
-            financial instrument. Alternatively, it is possible to place one’s
-            funds under the management of experienced traders to obtain passive
-            income according to a preestablished rate, without the need to get
-            into the details of security market regulations, investment
-            portfolios, or associated risks.
+          <Heading fontFamily={"Manrope-ExtraBold"}>{langKeys['aboutUs']}</Heading>
+          <Text color={"#aeaeae"} textAlign={"left"}>
+            {langKeys['aboutText']}
           </Text>
         </VStack>
         <Flex
@@ -706,7 +714,7 @@ function AboutUs() {
   );
 }
 
-const Contacts = () => {
+const Contacts = ({langKeys}) => {
   const email = localStorage.getItem("email");
   const [sender, setSender] = useState(email !== null ? email : "");
   const [content, setContent] = useState("");
@@ -774,7 +782,7 @@ const Contacts = () => {
             alignSelf={"flex-start"}
             fontSize={useBreakpointValue({ base: "24px", md: "30px" })}
           >
-            Contact Us
+            {langKeys['contactUs']}
           </Heading>
           {error.length > 0 && <Text color={"red"}>{error}</Text>}
           <FormControl
@@ -810,7 +818,7 @@ const Contacts = () => {
               resize={"none"}
               maxLength={300}
               height={"250px"}
-              placeholder="Write here"
+              placeholder={langKeys['write']}
               onChange={(event) => {
                 setContent(event.target.value);
               }}
@@ -825,7 +833,7 @@ const Contacts = () => {
             onClick={handleSendSupport}
             loading={loading}
           >
-            Send
+            {langKeys['send']}
           </GradientButton>
           {message.length > 0 && <Text color={"green"}>{message}</Text>}
         </VStack>
@@ -834,7 +842,7 @@ const Contacts = () => {
   );
 };
 
-function PrimaryActionButton({ isSignedIn, loading }) {
+function PrimaryActionButton({ isSignedIn, loading, langKeys }) {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
@@ -850,12 +858,12 @@ function PrimaryActionButton({ isSignedIn, loading }) {
       display={{ base: "none", md: "flex" }}
       isLoading={loading}
     >
-      {isSignedIn ? "Dashboard" : "Sign Up"}
+      {isSignedIn ? langKeys["dashboard"] : langKeys["signUp"]}
     </GradientButton>
   );
 }
 
-function SecondaryActionButton({ isSignedIn, loading }) {
+function SecondaryActionButton({ isSignedIn, loading, langKeys }) {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
@@ -894,13 +902,13 @@ function SecondaryActionButton({ isSignedIn, loading }) {
           {email}
         </Text>
       ) : (
-        "Sign In"
+        langKeys["signIn"]
       )}
     </OutlinedButton>
   );
 }
 
-function WalletButton() {
+function WalletButton({langKeys}) {
   const buttonFontSize = useBreakpointValue({ base: "sm", md: "mdb" });
   return (
     <OutlinedButton
@@ -922,12 +930,12 @@ function WalletButton() {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      My wallets
+      {langKeys['myWallets']}
     </OutlinedButton>
   );
 }
 
-function ScrollDown() {
+function ScrollDown({ langKeys }) {
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
 
   return (
@@ -947,7 +955,7 @@ function ScrollDown() {
         }}
         color={"#505070"}
       >
-        Scroll down
+        {langKeys["scroll"]}
       </Text>
       <Box style={{ animation: "updown 1.5s infinite forwards" }}>
         <Tilde />

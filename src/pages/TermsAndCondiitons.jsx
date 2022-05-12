@@ -9,11 +9,17 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import Navbar from "src/components/Navbar";
+import useLanguage from "src/languages/useLanguage";
 
 const TermsAndConditions = () => {
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
   return (
     <Box pos={"relative"} width={"100vw"} h={"100vh"}>
-      <Navbar />
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      />
       <Container maxW={"container.xl"}>
         <Flex
           flexDir={"column"}

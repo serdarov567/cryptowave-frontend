@@ -32,6 +32,8 @@ import useWallets from "../Wallets/useWallets";
 import GradientButton from "src/components/GradientButton";
 import LoadingIndicator from "src/components/LoadingIndicator";
 import { requestWithdraw } from "src/utils/network";
+import useLanguage from "src/languages/useLanguage";
+import dateToString from "src/utils/dateToString";
 
 const Withdraw = () => {
   const [isSignedIn, checking] = useIsSignedIn();
@@ -43,6 +45,8 @@ const Withdraw = () => {
       if (!isSignedIn) navigate("/#home", { replace: true });
     }
   }, [checking]);
+
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const { loading, withdraws, refresh } = useWithdraw();
   const { wallets, walletsLoading } = useWallets();
@@ -102,19 +106,23 @@ const Withdraw = () => {
 
   const renderWithdraws = useMemo(() => {
     return withdraws.map((withdraw) => {
+      const requireDate = dateToString(withdraw.dateOfRequire);
+      const transDate = dateToString(withdraw.dateOfTransaction);
       return (
         <Tr>
-          <Td>{withdraw.dateOfRequire}</Td>
-          <Td>
+          <Td borderColor={"background.200"}>
+            {requireDate.dateStr} {requireDate.hourStr}{" "}
+          </Td>
+          <Td borderColor={"background.200"}>
             {withdraw.dateOfTransaction
-              ? withdraw.dateOfTransaction
+              ? `${transDate.dateStr} ${transDate.hourStr}`
               : "Pending..."}
           </Td>
-          <Td>{withdraw.amount}$</Td>
-          <Td>
+          <Td borderColor={"background.200"}>{withdraw.amount}$</Td>
+          <Td borderColor={"background.200"}>
             {withdraw.wallet.type}: {withdraw.wallet.address}
           </Td>
-          <Td>{withdraw.status}</Td>
+          <Td borderColor={"background.200"}>{withdraw.status}</Td>
         </Tr>
       );
     });
@@ -122,7 +130,11 @@ const Withdraw = () => {
 
   return (
     <Box>
-      <Navbar></Navbar>
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      />
       <Container maxWidth={"container.xl"} paddingTop={"120px"}>
         <Flex flexDir={"column"}>
           <HStack pos={"relative"} spacing={6} align={"start"}>
@@ -203,13 +215,21 @@ const Withdraw = () => {
                 <Table fontSize={fontSize} color={"#FFF"} variant="simple">
                   <Thead>
                     <Tr>
-                      <Th fontSize={fontSize}>Date of Require</Th>
-                      <Th fontSize={fontSize}>Date of Transaction</Th>
-                      <Th fontSize={fontSize}>
+                      <Th borderColor={"background.200"} fontSize={fontSize}>
+                        Date of Require
+                      </Th>
+                      <Th borderColor={"background.200"} fontSize={fontSize}>
+                        Date of Transaction
+                      </Th>
+                      <Th borderColor={"background.200"} fontSize={fontSize}>
                         Amount
                       </Th>
-                      <Th fontSize={fontSize}>Wallet</Th>
-                      <Th fontSize={fontSize}>Status</Th>
+                      <Th borderColor={"background.200"} fontSize={fontSize}>
+                        Wallet
+                      </Th>
+                      <Th borderColor={"background.200"} fontSize={fontSize}>
+                        Status
+                      </Th>
                     </Tr>
                   </Thead>
                   <Tbody>{renderWithdraws}</Tbody>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Flex,
@@ -14,8 +14,14 @@ import {
   useBreakpointValue,
   useDisclosure,
   Container,
+  PopoverContent,
 } from "@chakra-ui/react";
-import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
+import {
+  HamburgerIcon,
+  CloseIcon,
+  ChevronDownIcon,
+  ChevronRightIcon,
+} from "@chakra-ui/icons";
 import Logo from "../assets/vectors/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFade, useHeight } from "src/hooks";
@@ -23,7 +29,7 @@ import { scrollHandler } from "src/utils/scrollHandler";
 
 const Navbar = (props) => {
   const { isOpen, onToggle } = useDisclosure();
-
+  const { currentLanguage, setLanguage, langKeys } = props;
   const navigate = useNavigate();
 
   const [isVisible, setShow, fadeProps] = useFade(false);
@@ -47,6 +53,8 @@ const Navbar = (props) => {
 
     return () => [window.removeEventListener("scroll", fadeBar)];
   }, []);
+
+  const fontSize = useBreakpointValue({ md: "12px", lg: "md" });
 
   return (
     <Box position={"fixed"} left={0} width={"100vw"} zIndex={100}>
@@ -118,7 +126,7 @@ const Navbar = (props) => {
               ml={10}
               justifyContent={"flex-start"}
             >
-              <DesktopNav />
+              <DesktopNav langKeys={langKeys} />
             </Flex>
           </Flex>
 
@@ -134,6 +142,49 @@ const Navbar = (props) => {
               direction={"row"}
               spacing={6}
             >
+              <Popover trigger={"hover"} placement={"bottom"}>
+                <PopoverTrigger>
+                  <Link
+                    fontSize={fontSize}
+                    fontFamily={"Manrope"}
+                    fontWeight={500}
+                    alignSelf={"center"}
+                    bgGradient={
+                      "-webkit-linear-gradient(110deg, blue.200, violet.200)"
+                    }
+                    bgClip={"text"}
+                    fill={"transparent"}
+                    _hover={{
+                      textDecoration: "none",
+                      color: "gray.400",
+                    }}
+                    _focus={{}}
+                  >
+                    {currentLanguage}
+                  </Link>
+                </PopoverTrigger>
+
+                <PopoverContent
+                  border={0}
+                  boxShadow={"xl"}
+                  bg={"background.200"}
+                  p={4}
+                  w={"fit-content"}
+                  rounded={"xl"}
+                >
+                  <Stack w={"fit-content"}>
+                    {["ENG", "RUS", "ESP", "DEU"].map((child) => (
+                      <DesktopSubNav
+                        key={child}
+                        label={child}
+                        onClick={() => {
+                          setLanguage(child);
+                        }}
+                      />
+                    ))}
+                  </Stack>
+                </PopoverContent>
+              </Popover>
               {props.children}
             </Stack>
           </Flex>
@@ -147,13 +198,12 @@ const Navbar = (props) => {
   );
 };
 
-const DesktopNav = () => {
+const DesktopNav = ({ langKeys }) => {
   const linkColor = useColorModeValue(
     "-webkit-linear-gradient(110deg, blue.200, violet.200)",
     "-webkit-linear-gradient(110deg, blue.200, violet.200)"
   );
   const linkHoverColor = useColorModeValue("gray.400", "white");
-  //const popoverContentBgColor = useColorModeValue("white", "white");
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -163,7 +213,7 @@ const DesktopNav = () => {
   return (
     <Stack
       direction={"row"}
-      spacing={useBreakpointValue({ md: "15px", lg: "50px" })}
+      spacing={useBreakpointValue({ md: "15px", lg: "30px" })}
       align="center"
     >
       {NAV_ITEMS.map((navItem, index) => (
@@ -176,97 +226,59 @@ const DesktopNav = () => {
             scrollHandler(navItem.href.slice(1), 90);
           }}
         >
-          <Popover trigger={"hover"} placement={"bottom-start"}>
-            <PopoverTrigger>
-              <Link
-                href={navItem.href ?? "#"}
-                fontSize={fontSize}
-                fontFamily={"Manrope"}
-                fontWeight={500}
-                bgGradient={linkColor}
-                bgClip={"text"}
-                fill={"transparent"}
-                _hover={{
-                  textDecoration: "none",
-                  color: linkHoverColor,
-                }}
-                _focus={{}}
-                onClick={() => {
-                  if (location.pathname !== "/") {
-                    navigate("/");
-                  }
-                }}
-              >
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-            {/* 
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={"xl"}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={"xl"}
-                minW={"sm"}
-              >
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )} */}
-          </Popover>
+          <Link
+            href={navItem.href ?? "#"}
+            fontSize={fontSize}
+            fontFamily={"Manrope"}
+            fontWeight={500}
+            bgGradient={linkColor}
+            bgClip={"text"}
+            fill={"transparent"}
+            _hover={{
+              textDecoration: "none",
+              color: linkHoverColor,
+            }}
+            _focus={{}}
+            onClick={() => {
+              if (location.pathname !== "/") {
+                navigate("/");
+              }
+            }}
+          >
+            {langKeys[navItem.label]}
+          </Link>
         </Box>
       ))}
     </Stack>
   );
 };
 
-// const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-//   return (
-//     <Link
-//       href={href}
-//       role={"group"}
-//       display={"block"}
-//       p={2}
-//       rounded={"md"}
-//       _hover={{ bg: useColorModeValue("accent.200", "accent.900") }}
-//     >
-//       <Stack direction={"row"} align={"center"}>
-//         <Box>
-//           <Text
-//             transition={"all .3s ease"}
-//             color={"black"}
-//             _groupHover={{ color: "white" }}
-//             fontWeight={500}
-//           >
-//             {label}
-//           </Text>
-//           <Text
-//             color={"black"}
-//             _groupHover={{ color: "white" }}
-//             fontSize={"sm"}
-//           >
-//             {subLabel}
-//           </Text>
-//         </Box>
-//         <Flex
-//           transition={"all .3s ease"}
-//           transform={"translateX(-10px)"}
-//           opacity={0}
-//           _groupHover={{ opacity: "100%", transform: "translateX(0)" }}
-//           justify={"flex-end"}
-//           align={"center"}
-//           flex={1}
-//         >
-//           <Icon color={"white"} w={5} h={5} as={ChevronRightIcon} />
-//         </Flex>
-//       </Stack>
-//     </Link>
-//   );
-// };
+const DesktopSubNav = ({ label, href, subLabel, onClick }: NavItem) => {
+  return (
+    <Link
+      href={href}
+      role={"group"}
+      display={"block"}
+      p={1}
+      rounded={"md"}
+      _hover={{ bg: useColorModeValue("accent.200", "accent.900") }}
+      onClick={onClick}
+    >
+      <Stack direction={"row"} align={"center"}>
+        <Box>
+          <Text
+            transition={"all .3s ease"}
+            color={"white"}
+            _groupHover={{ color: "white" }}
+            fontWeight={500}
+          >
+            {label}
+          </Text>
+        </Box>
+      </Stack>
+    </Link>
+  );
+};
 
 const MobileNav = () => {
   const navigate = useNavigate();
@@ -368,32 +380,21 @@ const NAV_ITEMS: Array<NavItem> = [
   //   // ],
   // },
   {
-    label: "Home",
+    label: "home",
     href: "#home",
   },
   {
-    label: "Plans",
+    label: "plans",
     href: "#plans",
   },
   {
-    label: "About us",
+    label: "aboutUs",
     href: "#aboutus",
   },
   {
-    label: "Contact Us",
+    label: "contactUs",
     href: "#contact",
   },
-  // {
-  //   label: "Language",
-  //   children: [
-  //     {
-  //       label: "ENG",
-  //     },
-  //     {
-  //       label: "RUS",
-  //     },
-  //   ],
-  // },
 ];
 
 export default Navbar;

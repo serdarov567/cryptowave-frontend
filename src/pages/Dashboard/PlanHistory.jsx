@@ -5,6 +5,7 @@ import PlanItem from "src/components/PlanItem";
 import { useIsSignedIn } from "src/utils/user";
 import { useNavigate } from "react-router-dom";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
+import useLanguage from "src/languages/useLanguage";
 
 const PlanHistory = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -16,6 +17,8 @@ const PlanHistory = () => {
     }
   }, [loading]);
 
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+
   const { plans, earnings } = useUserDashboard();
 
   const renderUserPlans = useMemo(() => {
@@ -26,6 +29,7 @@ const PlanHistory = () => {
       .map((plan, index) => {
         return (
           <PlanItem
+            langKeys={langKeys}
             uniqueKey={plan._id}
             title={plan.title}
             number={plan.number}
@@ -43,11 +47,15 @@ const PlanHistory = () => {
 
   return (
     <Box>
-      <Navbar></Navbar>
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      />
       <Container maxWidth={"container.xl"} paddingTop={"120px"}>
         <Flex flexDir={"column"}>
           <VStack w={"full"} paddingBottom={"100px"} spacing={5}>
-            <Heading marginBlock={"20px"}>Plan history</Heading>
+            <Heading marginBlock={"20px"}>{langKeys["planHistory"]}</Heading>
             {renderUserPlans}
           </VStack>
         </Flex>

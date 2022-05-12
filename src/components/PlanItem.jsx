@@ -23,6 +23,7 @@ const SUPPORTED_WALLETS = {
 };
 
 function PlanItem(props) {
+  const { langKeys } = props;
   const headerFontSize = useBreakpointValue({
     base: "22px",
     sm: "18px",
@@ -119,10 +120,10 @@ function PlanItem(props) {
                   color={"#d4d4d4"}
                   alignSelf={"start"}
                 >
-                  Purchased on
+                  {langKeys["purchased"]}
                 </Text>
                 <Text fontSize={titleFontSize} fontFamily={"Manrope-Bold"}>
-                  {dateToString(props.dateOfPurchase)}
+                  {dateToString(props.dateOfPurchase).dateStr}
                 </Text>
               </VStack>
               <Timeline
@@ -140,12 +141,12 @@ function PlanItem(props) {
                   color={"#d4d4d4"}
                   alignSelf={"start"}
                 >
-                  Finishes on
+                  {langKeys["finishes"]}
                 </Text>
                 <Text fontSize={titleFontSize} fontFamily={"Manrope-Bold"}>
                   {dateToString(props.dateOfExpiration).length > 0
-                    ? dateToString(props.dateOfExpiration)
-                    : "pending..."}
+                    ? dateToString(props.dateOfExpiration).dateStr
+                    : langKeys["pending"]}
                 </Text>
               </VStack>
             </HStack>
@@ -168,7 +169,7 @@ function PlanItem(props) {
             })}
           >
             <Detail
-              title="Deposit"
+              title={langKeys["deposit"]}
               titleFontSize={titleFontSize}
               bodyFontSize={headerFontSize}
             >
@@ -176,7 +177,7 @@ function PlanItem(props) {
               <span style={styles.sign}>$</span>
             </Detail>
             <Detail
-              title="Percentage"
+              title={langKeys["percentage"]}
               titleFontSize={titleFontSize}
               bodyFontSize={headerFontSize}
             >
@@ -218,7 +219,7 @@ function PlanItem(props) {
             <>
               {props.status !== "Canceled" && (
                 <Detail
-                  title={`Earned`}
+                  title={langKeys["earned"]}
                   key={props.uniqueKey + "1"}
                   titleFontSize={earnedTitleFontSize}
                   bodyFontSize={headerFontSize}
@@ -237,8 +238,9 @@ function PlanItem(props) {
               {minutes > 0 &&
               props.status !== "Completed" &&
               props.status !== "Canceled" ? (
-                <Heading key={props.uniqueKey + "2"} fontSize={titleFontSize}>
-                  Time left: {days > 0 && days > 9 ? days : `0${days}`}d:
+                <Heading maxW={'200px'} key={props.uniqueKey + "2"} fontSize={titleFontSize}>
+                  {langKeys["timeLeft"]}{" "}
+                  {days > 0 && days > 9 ? days : `0${days}`}d:
                   {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
                   {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
                 </Heading>

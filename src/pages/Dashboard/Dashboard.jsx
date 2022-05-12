@@ -20,10 +20,13 @@ import GradientButton from "src/components/GradientButton";
 import AlertPopUp from "src/components/AlertPopUp";
 import PlanItem from "src/components/PlanItem";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
+import useLanguage from "src/languages/useLanguage";
 
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
   const navigate = useNavigate();
+
+  const { currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
@@ -60,6 +63,7 @@ function Dashboard() {
       .map((plan, index) => {
         return (
           <PlanItem
+            langKeys={langKeys}
             uniqueKey={plan._id}
             title={plan.title}
             number={plan.number}
@@ -78,9 +82,13 @@ function Dashboard() {
 
   return (
     <Box>
-      <Navbar>
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
+      >
         <UserEmail />
-        <SignOutButton onClick={onToggleAlert} />
+        <SignOutButton onClick={onToggleAlert} langKeys={langKeys} />
       </Navbar>
       <Container maxWidth={"container.xl"} paddingTop={"120px"}>
         <Flex flexDir={"column"}>
@@ -117,7 +125,7 @@ function Dashboard() {
                 uniqueKey={"addPlan"}
                 isColorful={true}
                 icon={"filePlus"}
-                text="Add new plan"
+                text={langKeys["addPlan"]}
                 onClick={() => {
                   navigate("/#plans");
                 }}
@@ -126,7 +134,7 @@ function Dashboard() {
                 uniqueKey={"history"}
                 isColorful={false}
                 icon={"clock"}
-                text="Plan history"
+                text={langKeys["planHistory"]}
                 onClick={() => {
                   navigate("/dashboard/planhistory");
                 }}
@@ -135,7 +143,7 @@ function Dashboard() {
                 uniqueKey={"wallets"}
                 isColorful={false}
                 icon={"wallet"}
-                text="My wallets"
+                text={langKeys["myWallets"]}
                 onClick={() => {
                   navigate("/wallets");
                 }}
@@ -168,7 +176,9 @@ function Dashboard() {
               })}
             >
               <VStack>
-                <Heading fontSize={detailsFontSize}>Total earning</Heading>
+                <Heading fontSize={detailsFontSize}>
+                  {langKeys["earning"]}
+                </Heading>
                 <HStack display={"flex"} alignItems={"center"}>
                   <Heading
                     fontSize={detailsFontSize}
@@ -199,7 +209,9 @@ function Dashboard() {
               </VStack>
 
               <VStack spacing={"10px"}>
-                <Heading fontSize={detailsFontSize}>Balance</Heading>
+                <Heading fontSize={detailsFontSize}>
+                  {langKeys["balance"]}
+                </Heading>
                 <Heading
                   fontSize={detailsFontSize}
                   fontFamily={"Manrope-ExtraBold"}
@@ -216,7 +228,7 @@ function Dashboard() {
                     navigate("/dashboard/withdraw");
                   }}
                 >
-                  Withdraw
+                  {langKeys["withdraw"]}
                 </OutlinedButton>
               </VStack>
             </Flex>
@@ -238,7 +250,7 @@ function Dashboard() {
               paddingLeft={"20px"}
               marginBlock={"20px"}
             >
-              Active plans
+              {langKeys["activePlans"]}
             </Heading>
             {renderUserPlans}
           </VStack>
@@ -256,7 +268,7 @@ function Dashboard() {
                 navigate("/#home", { replace: true });
               }}
             >
-              Sign out
+              {langKeys["signOut"]}
             </GradientButton>
             <OutlinedButton color={"#FFF"} onClick={onToggleAlert}>
               Cancel
@@ -307,6 +319,7 @@ function UserEmail() {
 }
 
 const SignOutButton = (props) => {
+  const { langKeys } = props;
   const buttonIcon = useBreakpointValue({ md: <LogIn /> });
   return (
     <OutlinedButton
@@ -324,7 +337,7 @@ const SignOutButton = (props) => {
       alignItems={"center"}
       {...props}
     >
-      Sign Out
+      {langKeys["signOut"]}
     </OutlinedButton>
   );
 };

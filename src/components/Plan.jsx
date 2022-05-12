@@ -4,6 +4,7 @@ import Timeline from "src/assets/vectors/Timeline";
 import { styles } from "src/theme";
 
 const Plan = (props) => {
+  const { langKeys } = props;
   const detailFontSize = useBreakpointValue({
     base: "18px",
     sm: "20px",
@@ -61,7 +62,7 @@ const Plan = (props) => {
             marginBottom={"10px"}
             fontFamily={"Manrope-Bold"}
           >
-            {props.title}
+            {langKeys[props.title.toLowerCase()]}
           </Text>
 
           <Text
@@ -72,11 +73,11 @@ const Plan = (props) => {
             })}
             marginBottom={"4px"}
           >
-            Period: {props.days} days
+            {langKeys["period"]}: {props.days} {langKeys['days']}
           </Text>
         </Flex>
 
-        <Detail title={"Deposit"}>
+        <Detail title={langKeys["deposit"]}>
           <Flex
             flex={1}
             flexDir={"row"}
@@ -89,7 +90,7 @@ const Plan = (props) => {
                 <span style={styles.sign}>$</span>
               </Text>
               <Text fontSize={"14px"} marginTop={"-10px"} color={"#474747"}>
-                min
+                {langKeys['min']}
               </Text>
             </Flex>
 
@@ -112,7 +113,7 @@ const Plan = (props) => {
                 <span style={styles.sign}>$</span>
               </Text>
               <Text fontSize={"14px"} marginTop={"-10px"} color={"#474747"}>
-                max
+                {langKeys['max']}
               </Text>
             </Flex>
           </Flex>
@@ -120,7 +121,7 @@ const Plan = (props) => {
 
         <Seperator />
 
-        <Detail title={"Percentage"} justifyContent={"flex-start"}>
+        <Detail title={langKeys["percentage"]} justifyContent={"flex-start"}>
           <Flex flex={1}>
             <Text fontSize={detailFontSize}>
               {props.minPercentage}-{props.maxPercentage}
@@ -131,7 +132,7 @@ const Plan = (props) => {
 
         <Seperator />
 
-        <Detail title={"Earn"}>
+        <Detail title={langKeys["earn"]}>
           <Flex
             flex={1}
             flexDir={"row"}
@@ -175,7 +176,7 @@ const Plan = (props) => {
           })}
           onClick={props.onClick}
         >
-          Purchase
+          {langKeys['purchase']}
         </Button>
       </Flex>
     </Box>
