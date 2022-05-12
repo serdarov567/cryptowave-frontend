@@ -36,18 +36,6 @@ import usePlans from "src/pages/Landing/usePlans";
 import useWallets from "src/pages/Wallets/useWallets";
 import { addPlan, sendToSupport } from "src/utils/network";
 import { useNavigate } from "react-router-dom";
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler,
-} from "chart.js";
-import { Line } from "react-chartjs-2";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
 import Money from "src/assets/images/money.png";
@@ -57,6 +45,7 @@ import { Parallax } from "react-parallax";
 import Stable from "src/assets/vectors/Stable";
 import Trusted from "src/assets/vectors/Trusted";
 import TextButton from "src/components/TextButton";
+import CountUp from "react-countup";
 
 function Landing() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -81,6 +70,7 @@ function Landing() {
         <Home isSignedIn={isSignedIn} loading={loading} />
         <Plans isSignedIn={isSignedIn} />
         <AboutUs />
+        <Contacts />
       </Container>
       <Flex
         pos={"absolute"}
@@ -103,66 +93,6 @@ function Landing() {
     </Box>
   );
 }
-
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-  Filler
-);
-
-const labels = ["January", "February", "March", "April", "Today"];
-
-const data = {
-  labels,
-  datasets: [
-    {
-      label: "USD",
-      data: [
-        105340,
-        154375,
-        142425,
-        185250,
-        105250 + new Date(Date.now()).getDay() * 5150,
-      ],
-      borderColor: "rgb(137, 255, 177)",
-      backgroundColor: "rgba(137, 255, 177, 0.3)",
-      pointBackgroundColor: "white",
-      fill: "origin",
-      tension: 0.2,
-    },
-  ],
-};
-
-// const options = {
-//   responsive: true,
-//   plugins: {
-//     title: {
-//       display: true,
-//       text: 'Total earnings per month in 2022',
-//     },
-//   },
-// };
-
-const options = {
-  maintainAspectRatio: true,
-  scales: {
-    y: {
-      ticks: {
-        display: false,
-      },
-    },
-    x: {
-      ticks: {
-        display: true,
-      },
-    },
-  },
-};
 
 function Home({ isSignedIn, loading }) {
   const [haloEffect, setHaloEffect] = useState(0);
@@ -201,7 +131,7 @@ function Home({ isSignedIn, loading }) {
         position={"absolute"}
         left={0}
         top={0}
-        h={"100vh"}
+        minH={"100vh"}
         w={"100%"}
         overflowX={"hidden"}
         zIndex={-1}
@@ -211,13 +141,14 @@ function Home({ isSignedIn, loading }) {
         display={"flex"}
         flexDir={"column"}
         maxW={"container.xl"}
-        h={"100vh"}
+        minH={"100vh"}
         justifyContent="center"
         paddingX={0}
         paddingTop={useBreakpointValue({ base: "100px", md: "-80px" })}
       >
         <Flex
-          h={"full"}
+          pos={"relative"}
+          minH={"100vh"}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
           alignContent={"center"}
@@ -234,7 +165,8 @@ function Home({ isSignedIn, loading }) {
           })}
         >
           <Flex
-            flex={1}
+            pos={"relative"}
+            flex={5}
             flexDir={"column"}
             alignSelf={"center"}
             px={useBreakpointValue({ base: "25px", md: "0px" })}
@@ -295,26 +227,7 @@ function Home({ isSignedIn, loading }) {
             </HStack>
           </Flex>
 
-          <Flex
-            flex={useBreakpointValue({ base: 2, sm: 1, md: 1 })}
-            flexDir={"column"}
-            alignSelf={"center"}
-            alignContent={"center"}
-            justifyContent={useBreakpointValue({
-              base: "flex-start",
-              md: "space-evenly",
-            })}
-          >
-            <Heading
-              fontSize={useBreakpointValue({ base: "20px", md: "30px" })}
-              textAlign={"center"}
-              marginTop={"50px"}
-              marginBottom={"20px"}
-            >
-              Total earnings in 2022 per month
-            </Heading>
-            <Line data={data} options={options} />
-          </Flex>
+          <Statistics />
         </Flex>
 
         <ScrollDown />
@@ -322,6 +235,94 @@ function Home({ isSignedIn, loading }) {
     </>
   );
 }
+
+const Statistics = () => {
+  const HOUR = 60 * 60000;
+  const DAY = 24 * HOUR;
+  const since =
+    new Date(Date.now()).getTime() - new Date(2021, 1, 23).getTime();
+  const runningDays = since / DAY;
+  const runningMonths = Math.floor(since / DAY / 30);
+  const runningDaysThisMonth = Math.floor(runningDays - runningMonths * 30);
+  const users = Math.round((Date.now() / DAY) * 0.092);
+  const capitalization = 5200000 + runningDays * 342;
+
+  const headerFontSize = useBreakpointValue({
+    base: "20px",
+    md: "30px",
+    lg: "28px",
+  });
+  const headerProps = {
+    fontSize: headerFontSize,
+    textAlign: "center",
+    fontFamily: "Manrope-ExtraBold",
+    marginTop: useBreakpointValue({
+      base: "20px",
+      sm: "0px",
+      md: "20px",
+      lg: "0px",
+    }),
+    marginBottom: "0px",
+  };
+
+  const bodyFontSize = useBreakpointValue({ base: "14px", md: "20px" });
+
+  const bodyProps = {
+    fontSize: bodyFontSize,
+    fontFamily: "Manrope-Bold",
+  };
+
+  return (
+    <Flex
+      flex={6}
+      w={"full"}
+      h={"fit-content"}
+      flexDir={useBreakpointValue({
+        base: "column",
+        sm: "row",
+        md: "column",
+        lg: "row",
+      })}
+      alignSelf={useBreakpointValue({
+        base: "flex-start",
+        sm: "center",
+        md: "center",
+      })}
+      alignContent={useBreakpointValue({
+        base: "flex-start",
+        sm: "space-evenly",
+        md: "flex-start",
+      })}
+      justifyContent={useBreakpointValue({
+        base: "center",
+        sm: "space-evenly",
+        md: "space-evenly",
+      })}
+    >
+      <VStack>
+        <Heading {...headerProps}>Running time</Heading>
+        <Text {...bodyProps}>
+          <CountUp end={runningMonths} duration={3} /> months,{" "}
+          <CountUp end={runningDaysThisMonth} duration={2} /> days
+        </Text>
+      </VStack>
+
+      <VStack>
+        <Heading {...headerProps}>Users</Heading>
+        <Text {...bodyProps}>
+          <CountUp end={users} duration={2} />
+        </Text>
+      </VStack>
+
+      <VStack>
+        <Heading {...headerProps}>Capitalization</Heading>
+        <Text {...bodyProps} color={"green.500"}>
+          <CountUp end={capitalization} duration={4} />$
+        </Text>
+      </VStack>
+    </Flex>
+  );
+};
 
 function Plans({ isSignedIn }) {
   const navigate = useNavigate();
@@ -624,13 +625,13 @@ function AboutUs() {
       h={"auto"}
       minH={"100vh"}
       paddingTop={useBreakpointValue({ base: "50px", md: "100px" })}
-      paddingBottom={useBreakpointValue({ base: "100px", md: "200px" })}
+      paddingBottom={useBreakpointValue({ base: "30px", md: "50px" })}
       alignItems={"center"}
     >
       <Flex
         flexDir={useBreakpointValue({ base: "column", md: "row" })}
         px={useBreakpointValue({ base: "20px", md: "30px" })}
-        marginBottom={useBreakpointValue({ base: "30px", md: "150px" })}
+        marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
       >
         <VStack flex={1} alignItems={"start"} spacing={4}>
           <Heading fontFamily={"Manrope-ExtraBold"}>About us</Heading>
@@ -703,7 +704,6 @@ function AboutUs() {
           </Box>
         </Flex>
       </Flex>
-      <Contacts />
     </Container>
   );
 }
@@ -750,7 +750,9 @@ const Contacts = () => {
 
   return (
     <Flex
+      id={"Contact"}
       w={"100%"}
+      minH={"100vh"}
       pos={"relative"}
       flexDir={useBreakpointValue({ base: "column", md: "row" })}
       px={useBreakpointValue({ base: "20px", sm: "50px", md: "30px" })}
@@ -758,6 +760,7 @@ const Contacts = () => {
       paddingBottom={useBreakpointValue({ base: "30px", md: "0px" })}
     >
       <Box
+        h={"fit-content"}
         minWidth={useBreakpointValue({ base: "80%", md: "600px" })}
         style={{
           border: "3px solid transparent",
@@ -808,7 +811,7 @@ const Contacts = () => {
               value={content}
               resize={"none"}
               maxLength={300}
-              height={"80px"}
+              height={"250px"}
               placeholder="Write here"
               onChange={(event) => {
                 setContent(event.target.value);
@@ -834,8 +837,15 @@ const Contacts = () => {
 };
 
 function PrimaryActionButton({ isSignedIn, loading }) {
+  const buttonFontSize = useBreakpointValue({
+    base: "x-small",
+    sm: "sm",
+    md: "14px",
+    lg: "16px",
+  });
   return (
     <GradientButton
+    fontSize={buttonFontSize}
       leftIcon={isSignedIn && <DashboardIcon />}
       as={"a"}
       href={isSignedIn ? "/dashboard" : "/sign/up"}
@@ -851,7 +861,8 @@ function SecondaryActionButton({ isSignedIn, loading }) {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
-    md: "mdb",
+    md: "14px",
+    lg: "16px",
   });
   const buttonIcon = useBreakpointValue({ md: <LogIn /> });
   const email = localStorage.getItem("email");

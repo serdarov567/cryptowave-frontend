@@ -116,7 +116,7 @@ const Navbar = (props) => {
             <Flex
               display={{ base: "none", md: "flex" }}
               ml={10}
-              justifyContent={"flex-end"}
+              justifyContent={"flex-start"}
             >
               <DesktopNav />
             </Flex>
@@ -158,8 +158,14 @@ const DesktopNav = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const fontSize = useBreakpointValue({ md: "12px", lg: "md" });
+
   return (
-    <Stack direction={"row"} spacing={"50px"} align="center">
+    <Stack
+      direction={"row"}
+      spacing={useBreakpointValue({ md: "15px", lg: "50px" })}
+      align="center"
+    >
       {NAV_ITEMS.map((navItem, index) => (
         <Box
           key={navItem.label}
@@ -174,7 +180,7 @@ const DesktopNav = () => {
             <PopoverTrigger>
               <Link
                 href={navItem.href ?? "#"}
-                fontSize={"md"}
+                fontSize={fontSize}
                 fontFamily={"Manrope"}
                 fontWeight={500}
                 bgGradient={linkColor}
@@ -362,12 +368,20 @@ const NAV_ITEMS: Array<NavItem> = [
   //   // ],
   // },
   {
+    label: "Home",
+    href: "#home",
+  },
+  {
     label: "Plans",
     href: "#plans",
   },
   {
     label: "About us",
     href: "#aboutus",
+  },
+  {
+    label: "Contact Us",
+    href: "#contact",
   },
 ];
 

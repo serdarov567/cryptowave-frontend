@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import {
   Box,
   Flex,
@@ -7,6 +7,7 @@ import {
   Text,
   useBreakpointValue,
   VStack,
+  Tooltip,
 } from "@chakra-ui/react";
 import Timeline from "src/assets/vectors/Timeline";
 import OutlinedButton from "./OutlinedButton";
@@ -217,7 +218,6 @@ function PlanItem(props) {
             <>
               {props.status !== "Canceled" && (
                 <Detail
-                  key={props.uniqueKey}
                   title={`Earned`}
                   titleFontSize={earnedTitleFontSize}
                   bodyFontSize={headerFontSize}
@@ -236,7 +236,7 @@ function PlanItem(props) {
               {minutes > 0 &&
               props.status !== "Completed" &&
               props.status !== "Canceled" ? (
-                <Heading key={props.uniqueKey} fontSize={titleFontSize}>
+                <Heading fontSize={titleFontSize}>
                   Time left: {days > 0 && days > 9 ? days : `0${days}`}d:
                   {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
                   {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
@@ -247,10 +247,26 @@ function PlanItem(props) {
             </>
           ) : (
             <>
-              <Text key={props.uniqueKey} paddingX={"50px"} color={"gray.400"}>
+              <Text paddingX={"50px"} color={"gray.400"}>
                 Send {props.deposit}$ to {props.walletType} address{" "}
-                {SUPPORTED_WALLETS[props.walletType]} in order to activate your
-                plan. Then wait until we approve your payment.
+                <Tooltip label="Copy to clipboard!">
+                  <Text
+                    cursor={"pointer"}
+                    fontSize={"16px"}
+                    onClick={() => {
+                      navigator.clipboard.writeText(
+                        SUPPORTED_WALLETS[props.walletType]
+                      );
+                    }}
+                    _hover={{
+                      color: "blue.500",
+                    }}
+                  >
+                    {SUPPORTED_WALLETS[props.walletType]}
+                  </Text>
+                </Tooltip>{" "}
+                in order to activate your plan. Then wait until we approve your
+                payment.
               </Text>
             </>
           )}
