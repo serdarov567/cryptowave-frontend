@@ -113,7 +113,6 @@ const useUserDashboard = () => {
         } else {
           earning = plan.reward;
         }
-        console.log(earning);
       }
 
       earningsOfPlan[index] = earning;

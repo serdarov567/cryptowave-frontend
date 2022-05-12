@@ -26,7 +26,11 @@ const useWithdraw = () => {
     setLoading(false);
   }, [update]);
 
-  return { loading, withdraws };
+  const refresh = () => {
+    setUpdate(!update);
+  }
+
+  return { loading, withdraws, refresh };
 };
 
 export default useWithdraw;

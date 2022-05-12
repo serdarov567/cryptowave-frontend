@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://137.184.224.35:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://localhost:1919/" });
 
 const signUp = (email, username, password) => {
   return axiosInstance.post(
@@ -131,7 +131,7 @@ const updatePlan = (email, token, { _id, status }) => {
 const getBalance = (email, token) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.get(
-    `api/user/balance/${email}`
+    `api/users/balance/${email}`
     //{ timeout: 10000 }
   );
 };
@@ -155,8 +155,25 @@ const checkAdmin = (token) => {
 const getAllUsers = (token) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.get(
-    "api/user/all"
+    "api/users/all"
     //{ timeout: 20000 }
+  );
+};
+
+const requestWithdraw = (
+  email,
+  token,
+  { amount, wallet }
+) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.post(
+    "api/withdraws",
+    {
+      email,
+      amount,
+      wallet,
+    }
+    //{ timeout: 10000 }
   );
 };
 
@@ -211,4 +228,5 @@ export {
   sendToSupport,
   getSupports,
   deleteSupport,
+  requestWithdraw
 };

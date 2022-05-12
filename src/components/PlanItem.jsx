@@ -219,6 +219,7 @@ function PlanItem(props) {
               {props.status !== "Canceled" && (
                 <Detail
                   title={`Earned`}
+                  key={props.uniqueKey + "1"}
                   titleFontSize={earnedTitleFontSize}
                   bodyFontSize={headerFontSize}
                   flexDir={earnedFlexDir}
@@ -236,7 +237,7 @@ function PlanItem(props) {
               {minutes > 0 &&
               props.status !== "Completed" &&
               props.status !== "Canceled" ? (
-                <Heading fontSize={titleFontSize}>
+                <Heading key={props.uniqueKey + "2"} fontSize={titleFontSize}>
                   Time left: {days > 0 && days > 9 ? days : `0${days}`}d:
                   {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
                   {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
@@ -247,7 +248,11 @@ function PlanItem(props) {
             </>
           ) : (
             <>
-              <Text paddingX={"50px"} color={"gray.400"}>
+              <Text
+                key={props.uniqueKey + "3"}
+                paddingX={"50px"}
+                color={"gray.400"}
+              >
                 Send {props.deposit}$ to {props.walletType} address{" "}
                 <Tooltip label="Copy to clipboard!">
                   <Text

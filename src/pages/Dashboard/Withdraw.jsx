@@ -10,7 +10,14 @@ import {
   HStack,
   Input,
   Select,
+  Table,
+  TableContainer,
+  Tbody,
+  Td,
   Text,
+  Th,
+  Thead,
+  Tr,
   useBreakpointValue,
   VStack,
 } from "@chakra-ui/react";
@@ -18,11 +25,13 @@ import Navbar from "src/components/Navbar";
 import useWithdraw from "./useWithdraw";
 import Tilde from "src/assets/vectors/Tilde";
 import TextButton from "src/components/TextButton";
-import { useIsSignedIn } from "src/utils/user";
+import { getCredits, useIsSignedIn } from "src/utils/user";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 import { useNavigate } from "react-router-dom";
 import useWallets from "../Wallets/useWallets";
 import GradientButton from "src/components/GradientButton";
+import LoadingIndicator from "src/components/LoadingIndicator";
+import { requestWithdraw } from "src/utils/network";
 
 const Withdraw = () => {
   const [isSignedIn, checking] = useIsSignedIn();
@@ -35,12 +44,12 @@ const Withdraw = () => {
     }
   }, [checking]);
 
-  const { loading, withdraws } = useWithdraw();
+  const { loading, withdraws, refresh } = useWithdraw();
   const { wallets, walletsLoading } = useWallets();
   const { balance } = useUserDashboard();
+  const [buttonLoading, setButtonLoading] = useState(false);
 
   const initialWithdraw = {
-    dateOfRequire: "",
     dateOfTransaction: "",
     email: localStorage.getItem("email"),
     amount: 0,
@@ -61,85 +70,52 @@ const Withdraw = () => {
     md: "16px",
   });
 
+  const sendWithdrawRequest = async () => {
+    if (
+      newWithdraw.email.length > 0 &&
+      newWithdraw.amount >= 50 &&
+      newWithdraw.wallet !== undefined
+    ) {
+      setButtonLoading(true);
+      try {
+        const { email, token } = getCredits();
+        const result = await requestWithdraw(email, token, newWithdraw);
+
+        if (result.status === 200) {
+          alert("Requested!");
+          refresh();
+        }
+      } catch (error) {
+        if (error.response.status === 403) {
+          alert("You don't have permission!");
+        } else if (error.response.status === 406) {
+          alert("Please, fill the required fields!");
+        } else {
+          alert("Network error!");
+        }
+      }
+    } else {
+      alert("Please, fill the required fields!");
+    }
+    setButtonLoading(false);
+  };
+
   const renderWithdraws = useMemo(() => {
     return withdraws.map((withdraw) => {
       return (
-        <Box w={"full"} h={"fit-content"} py={"20px"}>
-          <Box
-            pos={"absolute"}
-            w={"full"}
-            h={"full"}
-            bg={"linear-gradient(110deg, #1D1D1D, 40%, #082542, #1D1D1D)"}
-            borderColor={"#5E5E5E"}
-            borderWidth={"1px"}
-            borderRadius={"15px"}
-            zIndex={-1}
-          />
-          <VStack key={withdraw._id} alignItems={"start"} w={"full"}>
-            <Flex
-              w={"100%"}
-              h={"40px"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              borderTopLeftRadius={"15px"}
-              borderTopRightRadius={"15px"}
-              bgColor={"#FFF"}
-              px={"30px"}
-            >
-              <Tilde fill={"#4F60FF"} fill-opacity={"1.0"} />
-              <Text
-                fontFamily={"Manrope-Bold"}
-                color={"#3C3C3C"}
-                fontSize={fontSize}
-              >
-                {withdraw.dateOfTransaction
-                  ? withdraw.dateOfTransaction
-                  : "Pending..."}
-              </Text>
-            </Flex>
-
-            <Flex
-              w={"100%"}
-              h={"60px"}
-              justifyContent={"space-between"}
-              alignItems={"center"}
-              px={"30px"}
-            >
-              <Text fontSize={fontSize}>Date of require:</Text>
-              <Text fontSize={fontSize}>{withdraw.dateOfRequire}</Text>
-            </Flex>
-
-            <Flex
-              w={"100%"}
-              h={"40px"}
-              justifyContent={"space-between"}
-              alignItems={"flex-start"}
-              px={"30px"}
-            >
-              <Text marginRight={"30px"} fontSize={fontSize}>
-                Amount:
-              </Text>
-              <Text fontSize={fontSize}>{withdraw.amount}$</Text>
-            </Flex>
-
-            <Flex
-              w={"100%"}
-              h={"40px"}
-              justifyContent={"flex-end"}
-              alignItems={"center"}
-              px={"30px"}
-              paddingBottom={"20px"}
-            >
-              <TextButton
-                color={"white"}
-                fontSize={buttonFontSize}
-                onClick={() => {}}
-              >
-                Edit
-              </TextButton>
-            </Flex>
-          </VStack>
-        </Box>
+        <Tr>
+          <Td>{withdraw.dateOfRequire}</Td>
+          <Td>
+            {withdraw.dateOfTransaction
+              ? withdraw.dateOfTransaction
+              : "Pending..."}
+          </Td>
+          <Td>{withdraw.amount}$</Td>
+          <Td>
+            {withdraw.wallet.type}: {withdraw.wallet.address}
+          </Td>
+          <Td>{withdraw.status}</Td>
+        </Tr>
       );
     });
   }, [withdraws]);
@@ -181,7 +157,11 @@ const Withdraw = () => {
                 </Select>
               )}
             </FormControl>
-            <FormControl isInvalid={newWithdraw.amount < 50}>
+            <FormControl
+              isInvalid={
+                newWithdraw.amount.length > 0 && newWithdraw.amount < 50
+              }
+            >
               <FormLabel>Amount</FormLabel>
               <Input
                 type={"number"}
@@ -202,23 +182,42 @@ const Withdraw = () => {
           </HStack>
 
           <GradientButton
+            loading={buttonLoading}
             marginTop={"20px"}
             minW={"100px"}
             alignSelf={"end"}
             disabled={
               newWithdraw.amount < 50 || balance - newWithdraw.amount < 0
             }
-            onClick={async () => {
-
-            }}
+            onClick={sendWithdrawRequest}
           >
             Withdraw
           </GradientButton>
 
           <VStack w={"full"} paddingBottom={"100px"} spacing={5}>
             <Heading marginBlock={"20px"}>Transaction history</Heading>
-            <Text>No transactions.</Text>
-            {renderWithdraws}
+            {loading ? (
+              <LoadingIndicator title={"Loading wallets..."} />
+            ) : withdraws.length > 0 ? (
+              <TableContainer>
+                <Table fontSize={fontSize} color={"#FFF"} variant="simple">
+                  <Thead>
+                    <Tr>
+                      <Th fontSize={fontSize}>Date of Require</Th>
+                      <Th fontSize={fontSize}>Date of Transaction</Th>
+                      <Th fontSize={fontSize}>
+                        Amount
+                      </Th>
+                      <Th fontSize={fontSize}>Wallet</Th>
+                      <Th fontSize={fontSize}>Status</Th>
+                    </Tr>
+                  </Thead>
+                  <Tbody>{renderWithdraws}</Tbody>
+                </Table>
+              </TableContainer>
+            ) : (
+              <Text>No transactions</Text>
+            )}
           </VStack>
         </Flex>
       </Container>

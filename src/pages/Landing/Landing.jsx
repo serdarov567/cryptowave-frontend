@@ -147,8 +147,8 @@ function Home({ isSignedIn, loading }) {
         paddingTop={useBreakpointValue({ base: "100px", md: "-80px" })}
       >
         <Flex
-          pos={"relative"}
-          minH={"100vh"}
+          minH={"90vh"}
+          paddingBottom={useBreakpointValue({ base: "150px", md: "40px" })}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
           alignContent={"center"}
@@ -165,7 +165,6 @@ function Home({ isSignedIn, loading }) {
           })}
         >
           <Flex
-            pos={"relative"}
             flex={5}
             flexDir={"column"}
             alignSelf={"center"}
@@ -240,11 +239,11 @@ const Statistics = () => {
   const HOUR = 60 * 60000;
   const DAY = 24 * HOUR;
   const since =
-    new Date(Date.now()).getTime() - new Date(2021, 1, 23).getTime();
+    new Date(Date.now()).getTime() - new Date(2022, 0, 15).getTime();
   const runningDays = since / DAY;
   const runningMonths = Math.floor(since / DAY / 30);
   const runningDaysThisMonth = Math.floor(runningDays - runningMonths * 30);
-  const users = Math.round((Date.now() / DAY) * 0.092);
+  const users = Math.floor((Date.now() / DAY) * 0.72);
   const capitalization = 5200000 + runningDays * 342;
 
   const headerFontSize = useBreakpointValue({
@@ -276,7 +275,6 @@ const Statistics = () => {
     <Flex
       flex={6}
       w={"full"}
-      h={"fit-content"}
       flexDir={useBreakpointValue({
         base: "column",
         sm: "row",
@@ -639,19 +637,19 @@ function AboutUs() {
             Trading on the stock market, cryptocurrency exchanges attracts
             investors and entrepreneurs enjoying high profits, as well as
             ordinary citizens who are financially literate. Cryptowave Limited
-            has been operating on cryptocurrency exchanges since 2021, closing
-            hundreds of successful deals daily and allowing private individuals
-            with limited funds participate in this activity. Digital currencies
-            are liquid investment vehicles making it possible to profit off of
-            the fluctuations in prices and rates. Trading cryptocurrencies
-            requires expertise and significant knowledge, as well as the ability
-            to apply diversify risks, set up the investment portfolio, and
-            analyze the factors affecting the price of a financial instrument.
-            Alternatively, it is possible to place one’s funds under the
-            management of experienced traders to obtain passive income according
-            to a preestablished rate, without the need to get into the details
-            of security market regulations, investment portfolios, or associated
-            risks.
+            has been operating on cryptocurrency exchanges since January 2022,
+            closing hundreds of successful deals daily and allowing private
+            individuals with limited funds participate in this activity. Digital
+            currencies are liquid investment vehicles making it possible to
+            profit off of the fluctuations in prices and rates. Trading
+            cryptocurrencies requires expertise and significant knowledge, as
+            well as the ability to apply diversify risks, set up the investment
+            portfolio, and analyze the factors affecting the price of a
+            financial instrument. Alternatively, it is possible to place one’s
+            funds under the management of experienced traders to obtain passive
+            income according to a preestablished rate, without the need to get
+            into the details of security market regulations, investment
+            portfolios, or associated risks.
           </Text>
         </VStack>
         <Flex
@@ -845,7 +843,7 @@ function PrimaryActionButton({ isSignedIn, loading }) {
   });
   return (
     <GradientButton
-    fontSize={buttonFontSize}
+      fontSize={buttonFontSize}
       leftIcon={isSignedIn && <DashboardIcon />}
       as={"a"}
       href={isSignedIn ? "/dashboard" : "/sign/up"}
