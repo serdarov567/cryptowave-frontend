@@ -54,6 +54,8 @@ function PlanItem(props) {
   const earnedFlexDir = useBreakpointValue({ base: "row", sm: "column" });
   const earnedBodyMarginTop = useBreakpointValue({ base: "0px" });
 
+  const addressTextSize = useBreakpointValue({ base: "12px", md: "16px" });
+
   let { days, hours, minutes } = useCountdown(props.dateOfExpiration);
 
   return (
@@ -260,12 +262,13 @@ function PlanItem(props) {
                 key={props.uniqueKey + "3"}
                 paddingX={"50px"}
                 color={"gray.400"}
+                fontSize={addressTextSize}
               >
                 Send {props.deposit}$ to {props.walletType} address{" "}
                 <Tooltip label="Copy to clipboard!">
                   <Text
                     cursor={"pointer"}
-                    fontSize={"16px"}
+                    fontSize={addressTextSize}
                     onClick={() => {
                       navigator.clipboard.writeText(
                         SUPPORTED_WALLETS[props.walletType]

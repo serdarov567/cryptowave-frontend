@@ -22,6 +22,7 @@ import AlertPopUp from "src/components/AlertPopUp";
 import PlanItem from "src/components/PlanItem";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 import useLanguage from "src/languages/useLanguage";
+import TextButton from "src/components/TextButton";
 
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -46,6 +47,8 @@ function Dashboard() {
     referals,
     setReferalsRead,
   } = useUserDashboard();
+
+  const [totalBonus, setTotalBonus] = useState(0);
 
   useEffect(() => {
     referals.forEach((referal) => {
@@ -74,6 +77,13 @@ function Dashboard() {
       }
     });
     setReferalsRead(referals);
+    let total = 0;
+
+    for (const referal of referals) {
+      total += referal.isCompleted ? referal.amount : 0;
+    }
+
+    setTotalBonus(total);
   }, [referals]);
 
   const detailsFontSize = useBreakpointValue({
@@ -136,54 +146,119 @@ function Dashboard() {
             })}
             width={"full"}
           >
-            <HStack
-              flex={1}
-              justifyContent={useBreakpointValue({
-                base: "center",
-                sm: "center",
-                md: "center",
-                lg: "flex-start",
-              })}
-              spacing={useBreakpointValue({
-                base: "10px",
-                sm: "20px",
-                md: "30px",
-              })}
-              px={useBreakpointValue({
-                sm: "10px",
-                md: "40px",
-                lg: "40px",
-                xl: "0px",
-              })}
-            >
-              <BoardButton
-                uniqueKey={"addPlan"}
-                isColorful={true}
-                icon={"filePlus"}
-                text={langKeys["addPlan"]}
-                onClick={() => {
-                  navigate("/#plans");
-                }}
-              />
-              <BoardButton
-                uniqueKey={"history"}
-                isColorful={false}
-                icon={"clock"}
-                text={langKeys["planHistory"]}
-                onClick={() => {
-                  navigate("/dashboard/planhistory");
-                }}
-              />
-              <BoardButton
-                uniqueKey={"wallets"}
-                isColorful={false}
-                icon={"wallet"}
-                text={langKeys["myWallets"]}
-                onClick={() => {
-                  navigate("/wallets");
-                }}
-              />
-            </HStack>
+            <VStack spacing={6}>
+              <Flex
+                w={useBreakpointValue({ base: "fit-center", md: "full" })}
+                flexDir={useBreakpointValue({ base: "column", md: "row" })}
+                justify={useBreakpointValue({
+                  base: "center",
+                  md: "space-around",
+                })}
+              >
+                <VStack spacing={0} align={"start"}>
+                  <Text
+                    fontSize={useBreakpointValue({ base: "8px", md: "14px" })}
+                    color={"#666666"}
+                  >
+                    Username
+                  </Text>
+                  <Heading
+                    fontSize={useBreakpointValue({ base: "12px", md: "16px" })}
+                  >
+                    {localStorage.getItem("username")}
+                  </Heading>
+                </VStack>
+                <VStack spacing={0} align={"start"}>
+                  <Text
+                    fontSize={useBreakpointValue({ base: "8px", md: "14px" })}
+                    color={"#666666"}
+                  >
+                    Email
+                  </Text>
+                  <Heading
+                    fontSize={useBreakpointValue({ base: "12px", md: "16px" })}
+                  >
+                    {localStorage.getItem("email")}
+                  </Heading>
+                </VStack>
+                <TextButton
+                  alignSelf={useBreakpointValue({ base: "start", md: "end" })}
+                  fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
+                  bgColor={"#343434"}
+                  paddingX={"10px"}
+                  paddingY={"3px"}
+                  borderRadius={"4px"}
+                  onClick={() => {
+                    let link =
+                      "https://cryptowaveclub.com/sign/up/#" +
+                      localStorage.getItem("username");
+
+                    if (navigator.clipboard !== undefined) {
+                      navigator.clipboard.writeText(link);
+                    }
+                    toast({
+                      title: "Copied!",
+                      status: "info",
+                      position: "top-left",
+                      size: "sm",
+                      duration: 1000,
+                      isClosable: true,
+                    });
+                  }}
+                >
+                  Copy referal link
+                </TextButton>
+              </Flex>
+              <HStack
+                flex={1}
+                justifyContent={useBreakpointValue({
+                  base: "center",
+                  sm: "center",
+                  md: "center",
+                  lg: "flex-start",
+                })}
+                spacing={useBreakpointValue({
+                  base: "10px",
+                  sm: "20px",
+                  md: "30px",
+                })}
+                px={useBreakpointValue({
+                  sm: "10px",
+                  md: "40px",
+                  lg: "40px",
+                  xl: "0px",
+                })}
+              >
+                <BoardButton
+                  uniqueKey={"addPlan"}
+                  isColorful={true}
+                  icon={"filePlus"}
+                  text={langKeys["addPlan"]}
+                  onClick={() => {
+                    navigate("/#plans");
+                  }}
+                />
+                <BoardButton
+                  uniqueKey={"history"}
+                  isColorful={false}
+                  icon={"clock"}
+                  text={langKeys["planHistory"]}
+                  onClick={() => {
+                    navigate("/dashboard/planhistory");
+                  }}
+                />
+                <BoardButton
+                  uniqueKey={"wallets"}
+                  isColorful={false}
+                  icon={"wallet"}
+                  text={langKeys["myWallets"]}
+                  onClick={() => {
+                    navigate("/wallets");
+                  }}
+                />
+              </HStack>
+            </VStack>
+
             <Flex
               flexDir={"row"}
               display={"flex"}
@@ -241,6 +316,13 @@ function Dashboard() {
                     $
                   </OutlinedButton>
                 </HStack>
+                <Heading
+                  fontSize={detailsFontSize}
+                  fontFamily={"Manrope-ExtraBold"}
+                  color={"green.500"}
+                >
+                  Referal: +{totalBonus}$
+                </Heading>
               </VStack>
 
               <VStack spacing={"10px"}>

@@ -15,6 +15,10 @@ export default function TextButton(props) {
         cursor: "pointer",
         userSelect: "none",
         alignSelf: props.alignSelf,
+        backgroundColor: props.bgColor,
+        paddingInline: props.paddingX,
+        paddingBlock: props.paddingY,
+        borderRadius: props.borderRadius,
       }}
       href={props.href}
       onMouseEnter={() => {

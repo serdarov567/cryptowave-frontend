@@ -357,6 +357,8 @@ function Plans({ isSignedIn, langKeys }) {
 
   const [isReferred, setIsReferred] = useState(false);
 
+  const [calculation, setCalculation] = useState(0);
+
   const fetchReferals = async () => {
     try {
       const referalsResult = await getReferalsOfUser(
@@ -446,6 +448,13 @@ function Plans({ isSignedIn, langKeys }) {
       <option value={level}>{level}$</option>
     ));
   }, [selectedPlan]);
+
+  useEffect(() => {
+    let deposit =
+      (isReferred ? (0.1 * parseInt(purchased.deposit)) : 0) + parseInt(purchased.deposit);
+    let percentage = purchased.percentage / 100;
+    setCalculation(deposit * percentage + parseInt(purchased.deposit));
+  }, [isReferred, purchased]);
 
   return (
     <Container
@@ -660,13 +669,7 @@ function Plans({ isSignedIn, langKeys }) {
             {langKeys["reward"]}: {purchased.deposit}${" "}
             {isReferred && <span style={{ color: "green" }}>+10%</span>} +{" "}
             {purchased.percentage}% {langKeys["inside"]}{" "}
-            {plans[selectedPlan].days} {langKeys["days"]} ={" "}
-            {((isReferred ? 0.1 : 1) *
-              purchased.deposit *
-              purchased.percentage) /
-              100 +
-              purchased.deposit}
-            $
+            {plans[selectedPlan].days} {langKeys["days"]} = {calculation}$
           </Text>
         </VStack>
       </PopUp>

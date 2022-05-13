@@ -221,7 +221,7 @@ function SignUp(props) {
     if (
       validator.isEmail(email) &&
       username.length >= 4 &&
-      validator.isStrongPassword(password, passwordOptions)
+      validator.isStrongPassword(password, passwordOptions) && !validator.contains(username, " ")
     ) {
       setIsLoading(true);
       setError("");
@@ -281,7 +281,7 @@ function SignUp(props) {
       </FormControl>
 
       <FormControl
-        isInvalid={username.length < 4 && username.length > 0 && true}
+        isInvalid={(username.length < 4 && username.length > 0) || validator.contains(username, " ")}
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
           Username
@@ -295,7 +295,7 @@ function SignUp(props) {
           }}
         />
         <FormErrorMessage>
-          Username must be longer than 4 letters.
+          Username must be longer than 4 letters and must not contain spaces
         </FormErrorMessage>
       </FormControl>
 
