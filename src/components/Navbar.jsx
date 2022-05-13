@@ -15,13 +15,9 @@ import {
   useDisclosure,
   Container,
   PopoverContent,
+  ButtonGroup,
 } from "@chakra-ui/react";
-import {
-  HamburgerIcon,
-  CloseIcon,
-  ChevronDownIcon,
-  ChevronRightIcon,
-} from "@chakra-ui/icons";
+import { HamburgerIcon, CloseIcon, ChevronDownIcon } from "@chakra-ui/icons";
 import Logo from "../assets/vectors/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFade, useHeight } from "src/hooks";
@@ -54,10 +50,10 @@ const Navbar = (props) => {
     return () => [window.removeEventListener("scroll", fadeBar)];
   }, []);
 
-  const fontSize = useBreakpointValue({ md: "12px", lg: "md" });
+  const fontSize = useBreakpointValue({ base: "10px", md: "12px", lg: "md" });
 
   return (
-    <Box position={"fixed"} left={0} width={"100vw"} zIndex={100}>
+    <Box position={"fixed"} top={0} left={0} width={"100vw"} zIndex={100}>
       <Flex
         color={useColorModeValue("white", "white")}
         h={useBreakpointValue({ base: "60px", md: "120px" })}
@@ -76,7 +72,10 @@ const Navbar = (props) => {
           zIndex={-1}
         />
         <Container maxW={"container.xl"} display={"flex"} flexDir={"row"}>
-          <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
+          <Flex
+            flex={{ base: 1 }}
+            justify={{ base: "center", md: "space-between" }}
+          >
             {/* <Text
             textAlign={useBreakpointValue({ base: "center", md: "left" })}
             fontFamily={"heading"}
@@ -86,7 +85,7 @@ const Navbar = (props) => {
           >
             CryptoWave
           </Text> */}
-            <Flex ml={{ base: -2 }} display={{ base: "flex", md: "none" }}>
+            <Flex ml={{ base: -4 }} display={{ base: "flex", md: "none" }}>
               <IconButton
                 onClick={onToggle}
                 icon={
@@ -109,7 +108,8 @@ const Navbar = (props) => {
                 base: "flex-end",
                 md: "flex-start",
               })}
-              w={useBreakpointValue({ base: "50px", md: "50px" })}
+              minW={useBreakpointValue({ base: "0px", md: "50px" })}
+              maxW={useBreakpointValue({ base: "120px", md: "500px" })}
             >
               <Logo
                 onClick={() => {
@@ -122,46 +122,52 @@ const Navbar = (props) => {
             </Flex>
 
             <Flex
+              flex={3}
               display={{ base: "none", md: "flex" }}
               ml={10}
-              justifyContent={"flex-start"}
+              justifyContent={"center"}
             >
               <DesktopNav langKeys={langKeys} />
             </Flex>
-          </Flex>
 
-          <Flex
-            flex={1}
-            flexDir={"row"}
-            justifyContent={"flex-end"}
-            alignItems={"center"}
-          >
             <Stack
-              flex={{ base: 1, md: 0 }}
+              flexDir={"row"}
+              flex={{ base: 1, md: 2 }}
               justify={"flex-end"}
               direction={"row"}
               spacing={6}
             >
               <Popover trigger={"hover"} placement={"bottom"}>
                 <PopoverTrigger>
-                  <Link
-                    fontSize={fontSize}
-                    fontFamily={"Manrope"}
-                    fontWeight={500}
-                    alignSelf={"center"}
-                    bgGradient={
-                      "-webkit-linear-gradient(110deg, blue.200, violet.200)"
-                    }
-                    bgClip={"text"}
-                    fill={"transparent"}
-                    _hover={{
-                      textDecoration: "none",
-                      color: "gray.400",
-                    }}
-                    _focus={{}}
-                  >
-                    {currentLanguage}
-                  </Link>
+                  <ButtonGroup spacing={0}>
+                    <Link
+                      paddingLeft={2}
+                      fontSize={fontSize}
+                      fontFamily={"Manrope"}
+                      fontWeight={500}
+                      alignSelf={"center"}
+                      bgGradient={
+                        "-webkit-linear-gradient(110deg, blue.200, violet.200)"
+                      }
+                      bgClip={"text"}
+                      fill={"transparent"}
+                      _hover={{
+                        textDecoration: "none",
+                        color: "gray.400",
+                      }}
+                      _focus={{}}
+                    >
+                      <img
+                        height={"25px"}
+                        width={"25px"}
+                        src={`https://countryflagsapi.com/svg/${
+                          currentLanguage === "ENG" ? "GBR" : currentLanguage
+                        }`}
+                        alt={currentLanguage}
+                      />
+                    </Link>
+                    <ChevronDownIcon alignSelf={"center"} />
+                  </ButtonGroup>
                 </PopoverTrigger>
 
                 <PopoverContent
@@ -192,7 +198,7 @@ const Navbar = (props) => {
       </Flex>
 
       <Collapse in={isOpen} animateOpacity>
-        <MobileNav />
+        <MobileNav langKeys={langKeys} />
       </Collapse>
     </Box>
   );
@@ -211,10 +217,11 @@ const DesktopNav = ({ langKeys }) => {
   const fontSize = useBreakpointValue({ md: "12px", lg: "md" });
 
   return (
-    <Stack
-      direction={"row"}
-      spacing={useBreakpointValue({ md: "15px", lg: "30px" })}
-      align="center"
+    <Flex
+      flex={1}
+      flexDir={"row"}
+      justifyContent="space-evenly"
+      alignItems={"center"}
     >
       {NAV_ITEMS.map((navItem, index) => (
         <Box
@@ -249,11 +256,14 @@ const DesktopNav = ({ langKeys }) => {
           </Link>
         </Box>
       ))}
-    </Stack>
+    </Flex>
   );
 };
 
 const DesktopSubNav = ({ label, href, subLabel, onClick }: NavItem) => {
+  const link = `https://countryflagsapi.com/svg/${
+    label === "ENG" ? "GBR" : label
+  }`;
   return (
     <Link
       href={href}
@@ -266,21 +276,22 @@ const DesktopSubNav = ({ label, href, subLabel, onClick }: NavItem) => {
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <Text
+          <img height={"25px"} width={"25px"} src={link} alt={label} />
+          {/* <Text
             transition={"all .3s ease"}
             color={"white"}
             _groupHover={{ color: "white" }}
             fontWeight={500}
           >
             {label}
-          </Text>
+          </Text> */}
         </Box>
       </Stack>
     </Link>
   );
 };
 
-const MobileNav = () => {
+const MobileNav = ({ langKeys }) => {
   const navigate = useNavigate();
   return (
     <Stack
@@ -292,6 +303,7 @@ const MobileNav = () => {
         <MobileNavItem
           key={navItem.label}
           {...navItem}
+          label={langKeys[navItem.label]}
           onClick={() => {
             navigate("/" + navItem.href, {
               replace: global.location.pathname === "/",

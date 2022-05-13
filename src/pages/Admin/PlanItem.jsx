@@ -124,7 +124,7 @@ function PlanItem(props) {
                   Purchased on
                 </Text>
                 <Text fontSize={titleFontSize} fontFamily={"Manrope-Bold"}>
-                  {dateToString(props.dateOfPurchase)}
+                  {dateToString(props.dateOfPurchase).dateStr}
                 </Text>
               </VStack>
               <Timeline
@@ -149,8 +149,8 @@ function PlanItem(props) {
                   fontSize={titleFontSize}
                   fontFamily={"Manrope-Bold"}
                 >
-                  {dateToString(props.dateOfExpiration).length > 0
-                    ? dateToString(props.dateOfExpiration)
+                  {dateToString(props.dateOfExpiration).dateStr.length > 0
+                    ? dateToString(props.dateOfExpiration).dateStr
                     : "pending..."}
                 </Text>
               </VStack>

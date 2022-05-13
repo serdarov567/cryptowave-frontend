@@ -13,7 +13,8 @@ export default function TextButton(props) {
           : "#959595",
         transition: "200ms all",
         cursor: "pointer",
-        userSelect: 'none',
+        userSelect: "none",
+        alignSelf: props.alignSelf,
       }}
       href={props.href}
       onMouseEnter={() => {

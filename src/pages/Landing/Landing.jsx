@@ -82,7 +82,12 @@ function Landing() {
         paddingX={"0px"}
         justifyContent={"center"}
       >
-        <Home isSignedIn={isSignedIn} loading={loading} langKeys={langKeys} />
+        <Home
+          isSignedIn={isSignedIn}
+          loading={loading}
+          langKeys={langKeys}
+          currentLanguage={currentLanguage}
+        />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
         <AboutUs langKeys={langKeys} />
         <Contacts langKeys={langKeys} />
@@ -102,14 +107,14 @@ function Landing() {
           href={"/termsandconditions"}
           fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
         >
-          {langKeys['terms']}
+          {langKeys["terms"]}
         </TextButton>
       </Flex>
     </Box>
   );
 }
 
-function Home({ isSignedIn, loading, langKeys }) {
+function Home({ isSignedIn, loading, langKeys, currentLanguage }) {
   const [haloEffect, setHaloEffect] = useState(0);
   const haloBoxRef = useRef(null);
 
@@ -237,11 +242,11 @@ function Home({ isSignedIn, loading, langKeys }) {
               >
                 {isSignedIn ? langKeys["dashboard"] : langKeys["signUp"]}
               </GradientButton>
-              {isSignedIn && <WalletButton langKeys={langKeys}/>}
+              {isSignedIn && <WalletButton langKeys={langKeys} />}
             </HStack>
           </Flex>
 
-          <Statistics langKeys={langKeys} />
+          <Statistics langKeys={langKeys} currentLanguage={currentLanguage} />
         </Flex>
 
         <ScrollDown langKeys={langKeys} />
@@ -250,7 +255,7 @@ function Home({ isSignedIn, loading, langKeys }) {
   );
 }
 
-const Statistics = ({ langKeys }) => {
+const Statistics = ({ langKeys, currentLanguage }) => {
   const HOUR = 60 * 60000;
   const DAY = 24 * HOUR;
   const since = new Date(Date.now()).getTime() - new Date(2022, 1, 1).getTime();
@@ -273,7 +278,7 @@ const Statistics = ({ langKeys }) => {
       base: "20px",
       sm: "0px",
       md: "20px",
-      lg: "0px",
+      lg: currentLanguage === "RUS" ? "20px" : "0px",
     }),
     marginBottom: "0px",
   };
@@ -293,7 +298,7 @@ const Statistics = ({ langKeys }) => {
         base: "column",
         sm: "row",
         md: "column",
-        lg: "row",
+        lg: currentLanguage === "RUS" ? "column" : "row",
       })}
       alignSelf={useBreakpointValue({
         base: "flex-start",
@@ -570,11 +575,11 @@ function Plans({ isSignedIn, langKeys }) {
       <PopUp
         isOpen={isOpen}
         onClose={onClose}
-        title={"Purchase a plan"}
+        title={langKeys["purchasePlan"]}
         footerComponents={
           <HStack>
             <GradientButton onClick={purchasePlan} loading={loading}>
-              Purchase
+              {langKeys["purchase"]}
             </GradientButton>
           </HStack>
         }
@@ -582,7 +587,7 @@ function Plans({ isSignedIn, langKeys }) {
         <VStack spacing={4}>
           {error.length > 0 && <Text color={"red.500"}>{error}</Text>}
           <FormControl>
-            <FormLabel>Your wallets</FormLabel>
+            <FormLabel>{langKeys["yourWallets"]}</FormLabel>
             <Select
               color={"white"}
               value={wallets.findIndex(
@@ -607,7 +612,7 @@ function Plans({ isSignedIn, langKeys }) {
             </Select>
           </FormControl>
           <FormControl>
-            <FormLabel>Your deposit</FormLabel>
+            <FormLabel>{langKeys["deposit"]}</FormLabel>
             <Select
               color={"white"}
               value={purchased.deposit}
@@ -627,8 +632,9 @@ function Plans({ isSignedIn, langKeys }) {
             </Select>
           </FormControl>
           <Text>
-            Reward: {purchased.deposit}$ + {purchased.percentage}% in{" "}
-            {plans[selectedPlan].days} days = {purchased.reward}$
+            {langKeys["reward"]}: {purchased.deposit}$ + {purchased.percentage}%{" "}
+            {langKeys["inside"]} {plans[selectedPlan].days} {langKeys["days"]} ={" "}
+            {purchased.reward}$
           </Text>
         </VStack>
       </PopUp>
@@ -636,7 +642,7 @@ function Plans({ isSignedIn, langKeys }) {
   );
 }
 
-function AboutUs({langKeys}) {
+function AboutUs({ langKeys }) {
   return (
     <Container
       pos={"relative"}
@@ -655,9 +661,11 @@ function AboutUs({langKeys}) {
         marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
       >
         <VStack flex={1} alignItems={"start"} spacing={4}>
-          <Heading fontFamily={"Manrope-ExtraBold"}>{langKeys['aboutUs']}</Heading>
+          <Heading fontFamily={"Manrope-ExtraBold"}>
+            {langKeys["aboutUs"]}
+          </Heading>
           <Text color={"#aeaeae"} textAlign={"left"}>
-            {langKeys['aboutText']}
+            {langKeys["aboutText"]}
           </Text>
         </VStack>
         <Flex
@@ -714,7 +722,7 @@ function AboutUs({langKeys}) {
   );
 }
 
-const Contacts = ({langKeys}) => {
+const Contacts = ({ langKeys }) => {
   const email = localStorage.getItem("email");
   const [sender, setSender] = useState(email !== null ? email : "");
   const [content, setContent] = useState("");
@@ -782,7 +790,7 @@ const Contacts = ({langKeys}) => {
             alignSelf={"flex-start"}
             fontSize={useBreakpointValue({ base: "24px", md: "30px" })}
           >
-            {langKeys['contactUs']}
+            {langKeys["contactUs"]}
           </Heading>
           {error.length > 0 && <Text color={"red"}>{error}</Text>}
           <FormControl
@@ -818,7 +826,7 @@ const Contacts = ({langKeys}) => {
               resize={"none"}
               maxLength={300}
               height={"250px"}
-              placeholder={langKeys['write']}
+              placeholder={langKeys["write"]}
               onChange={(event) => {
                 setContent(event.target.value);
               }}
@@ -833,7 +841,7 @@ const Contacts = ({langKeys}) => {
             onClick={handleSendSupport}
             loading={loading}
           >
-            {langKeys['send']}
+            {langKeys["send"]}
           </GradientButton>
           {message.length > 0 && <Text color={"green"}>{message}</Text>}
         </VStack>
@@ -908,7 +916,7 @@ function SecondaryActionButton({ isSignedIn, loading, langKeys }) {
   );
 }
 
-function WalletButton({langKeys}) {
+function WalletButton({ langKeys }) {
   const buttonFontSize = useBreakpointValue({ base: "sm", md: "mdb" });
   return (
     <OutlinedButton
@@ -930,7 +938,7 @@ function WalletButton({langKeys}) {
       justifyContent={"center"}
       alignItems={"center"}
     >
-      {langKeys['myWallets']}
+      {langKeys["myWallets"]}
     </OutlinedButton>
   );
 }

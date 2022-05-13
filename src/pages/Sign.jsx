@@ -1,5 +1,6 @@
 import {
   Box,
+  Container,
   Flex,
   FormControl,
   FormErrorMessage,
@@ -16,7 +17,6 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import validator from "validator";
 import Eye from "src/assets/vectors/Eye";
-import Logo from "src/assets/vectors/Logo";
 import GradientButton from "src/components/GradientButton";
 import SecuredBadge from "src/components/SecuredBadge";
 import TextButton from "src/components/TextButton";
@@ -26,6 +26,8 @@ import { useIsSignedIn } from "src/utils/user";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
 import Money from "src/assets/images/money.png";
+import Navbar from "src/components/Navbar";
+import useLanguage from "src/languages/useLanguage";
 
 const passwordOptions = {
   minLength: 8,
@@ -45,33 +47,35 @@ export default function Sign() {
     }
   }, [loading]);
 
+  const { langKeys, currentLanguage, setLanguage } = useLanguage();
+
   const { type } = useParams();
 
   let header, sectionName, form;
 
   switch (type) {
     case "in": {
-      header = "Welcome back!";
-      sectionName = "Sign in";
-      form = <SignIn />;
+      header = langKeys["welcomeBack"];
+      sectionName = langKeys["signIn"];
+      form = <SignIn langKeys={langKeys} />;
       break;
     }
     case "forgot": {
-      header = "Password recovery";
-      sectionName = "We will send a verification code to your email";
-      form = <Forgot />;
+      header = langKeys["passwordRecovery"];
+      sectionName = langKeys["weWillSend"];
+      form = <Forgot langKeys={langKeys} />;
       break;
     }
     case "verify": {
       header = "Verification";
       sectionName = "Enter the verification code";
-      form = <Verify />;
+      form = <Verify langKeys={langKeys} />;
       break;
     }
     default: {
-      header = "Welcome to CryptoWave";
-      sectionName = "Sign up";
-      form = <SignUp />;
+      header = langKeys["welcome"];
+      sectionName = langKeys["signUp"];
+      form = <SignUp langKeys={langKeys} />;
       break;
     }
   }
@@ -79,7 +83,7 @@ export default function Sign() {
   const marginBetweenElements = useBreakpointValue({ base: "10px", md: "0px" });
 
   return (
-    <Flex
+    <Box
       pos={"relative"}
       flexDirection={"column"}
       minH={"100vh"}
@@ -91,20 +95,21 @@ export default function Sign() {
       paddingBottom={"30px"}
       px={useBreakpointValue({ base: "0px", md: "20px" })}
     >
-      <Logo
-        marginTop={marginBetweenElements}
-        marginBottom={marginBetweenElements}
-        onClick={() => {
-          navigate("/", { replace: true });
-        }}
+      <Navbar
+        currentLanguage={currentLanguage}
+        setLanguage={setLanguage}
+        langKeys={langKeys}
       />
-      <Flex
+      <Container
         position={"relative"}
         flexDir={"column"}
+        mt={"100px"}
+        align={"center"}
         maxW={useBreakpointValue({ base: 0, sm: 0, md: "container.xl" })}
         minW={useBreakpointValue({ base: "100%", sm: "70%", md: 0 })}
       >
         <SecuredBadge
+          w={"fit-content"}
           alignSelf={"center"}
           marginTop={useBreakpointValue({ base: "10px", md: "20px" })}
           marginBottom={useBreakpointValue({ base: "10px", md: "10px" })}
@@ -112,7 +117,7 @@ export default function Sign() {
 
         <Heading
           fontSize={useBreakpointValue({
-            base: "32px",
+            base: "30px",
             md: "40px",
           })}
           px={"50px"}
@@ -123,9 +128,7 @@ export default function Sign() {
         >
           {header}
         </Heading>
-
         <BackgroundItems />
-
         <Flex
           position={"relative"}
           minW={useBreakpointValue({ base: "90%", md: "600px" })}
@@ -178,12 +181,13 @@ export default function Sign() {
             {form}
           </VStack>
         </Flex>
-      </Flex>
-    </Flex>
+      </Container>
+    </Box>
   );
 }
 
 function SignUp(props) {
+  const { langKeys } = props;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
@@ -278,13 +282,13 @@ function SignUp(props) {
         }
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
-          Password
+          {langKeys["password"]}
         </FormLabel>
         <InputGroup>
           <Input
             variant={"primary"}
             height={inputHeight}
-            placeholder="Password"
+            placeholder={langKeys["password"]}
             type={show ? "text" : "password"}
             onChange={(event) => {
               setPassword(event.target.value);
@@ -316,22 +320,22 @@ function SignUp(props) {
       >
         <VStack alignItems={"start"}>
           <Text fontSize={useBreakpointValue({ base: "12px", md: "14px" })}>
-            Already have an account? then{" "}
+            {langKeys["signInText"]}{" "}
             <TextButton
               accentColor={"#6B68FF"}
               href={"/sign/in"}
               fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
             >
-              Sign in!
+              {langKeys["signIn"]}
             </TextButton>
           </Text>
           <Text fontSize={useBreakpointValue({ base: "12px", md: "14px" })}>
-            By clicking the sign up button you agree with our{" "}
+            {langKeys["clickTerms"]}{" "}
             <TextButton
               href={"/termsandconditions"}
               fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
             >
-              Terms and conditions, Privacy policy
+              {langKeys["terms"]}
             </TextButton>
           </Text>
         </VStack>
@@ -343,7 +347,7 @@ function SignUp(props) {
           height={inputHeight}
           marginTop={useBreakpointValue({ base: "10px", md: "0" })}
         >
-          Sign up
+          {langKeys['signUp']}
         </GradientButton>
       </Flex>
     </>
@@ -351,6 +355,7 @@ function SignUp(props) {
 }
 
 function SignIn(props) {
+  const { langKeys } = props;
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -428,6 +433,7 @@ function SignIn(props) {
         <FormErrorMessage>Not a valid email.</FormErrorMessage>
       </FormControl>
       <FormControl
+        textAlign={"left"}
         isInvalid={
           password.length > 0 &&
           !validator.isStrongPassword(password, {
@@ -440,13 +446,13 @@ function SignIn(props) {
         }
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
-          Password
+          {langKeys["password"]}
         </FormLabel>
         <InputGroup>
           <Input
             variant={"primary"}
             height={inputHeight}
-            placeholder="Password"
+            placeholder={langKeys["password"]}
             type={show ? "text" : "password"}
             onChange={(event) => {
               setPassword(event.target.value);
@@ -468,7 +474,7 @@ function SignIn(props) {
         <FormErrorMessage>Not a valid password</FormErrorMessage>
 
         <TextButton href={"/sign/forgot"} fontSize={fontSize}>
-          Forgot password
+          {langKeys["forgot"]}
         </TextButton>
       </FormControl>
       <Flex
@@ -479,13 +485,13 @@ function SignIn(props) {
       >
         <VStack>
           <Text fontSize={useBreakpointValue({ base: "12px", md: "16px" })}>
-            Don't have an account? then{" "}
+            {langKeys["accountText"]}{" "}
             <TextButton
               href={"/sign/up"}
               accentColor={"#6B68FF"}
               fontSize={useBreakpointValue({ base: "12px", md: "16px" })}
             >
-              Sign up!
+              {langKeys["signUp"]}
             </TextButton>
           </Text>
         </VStack>
@@ -499,7 +505,7 @@ function SignIn(props) {
           height={inputHeight}
           marginTop={useBreakpointValue({ base: "10px", md: "0" })}
         >
-          Sign in
+          {langKeys["signIn"]}
         </GradientButton>
       </Flex>
     </>
@@ -664,23 +670,23 @@ function Forgot(props) {
 
 const BackgroundItems = () => {
   return (
-    <Flex display={"flex"}>
+    <Container pos={"relative"} w={"container.xl"} display={"flex"}>
       <Box
         position={"absolute"}
-        top={"10vh"}
-        left={"-20vw"}
-        h={useBreakpointValue({ base: "300px", md: "170vh" })}
-        w={useBreakpointValue({ base: "250px", md: "170vh" })}
+        top={useBreakpointValue({ base: "-20vh", md: "-50vh" })}
+        left={useBreakpointValue({ base: "15vw", md: "-10vw" })}
+        h={useBreakpointValue({ base: "500px", md: "170vh" })}
+        w={useBreakpointValue({ base: "500px", md: "170vh" })}
         bgGradient={"radial-gradient(#6A68FF, 5%, transparent, transparent)"}
         opacity={0.3}
         zIndex={-4}
       />
       <Box
         position={"absolute"}
-        top={"0px"}
-        right={"0px"}
-        h={useBreakpointValue({ base: "300px", md: "100vh" })}
-        w={useBreakpointValue({ base: "250px", md: "50vw" })}
+        top={useBreakpointValue({ base: "0vh", md: "-5vh" })}
+        right={useBreakpointValue({ base: "20vw", md: "10vw" })}
+        h={useBreakpointValue({ base: "600px", md: "100vh" })}
+        w={useBreakpointValue({ base: "600px", md: "100vh" })}
         bgGradient={"radial-gradient(#EAFF68, 5%, transparent, transparent)"}
         opacity={0.3}
         zIndex={-4}
@@ -690,9 +696,9 @@ const BackgroundItems = () => {
         alt={"axe"}
         style={{
           position: "absolute",
-          height: "250px",
+          height: useBreakpointValue({ base: "150px", md: "250px" }),
           transform: "scaleX(-1)",
-          left: "-200px",
+          left: useBreakpointValue({ base: "-80px", md: "-200px" }),
         }}
       />
       <img
@@ -700,10 +706,11 @@ const BackgroundItems = () => {
         alt={"eth"}
         style={{
           position: "absolute",
-          height: "200px",
+          height: useBreakpointValue({ base: "100px", md: "150px" }),
           transform: "scaleX(-1)",
-          bottom: "-100px",
-          left: "-100px",
+          bottom: useBreakpointValue({ base: "-400px", md: "-500px" }),
+          left: useBreakpointValue({ base: "-30px", md: "-100px" }),
+          zIndex: useBreakpointValue({ base: -1, md: 10 }),
         }}
       />
       <img
@@ -711,12 +718,12 @@ const BackgroundItems = () => {
         alt={"money"}
         style={{
           position: "absolute",
-          height: "300px",
-          bottom: "160px",
-          right: "-200px",
+          height: useBreakpointValue({ base: "150px", md: "200px" }),
+          left: useBreakpointValue({ base: "350px", md: "500px" }),
+          top: useBreakpointValue({ base: "80px", md: "100px" }),
         }}
       />
       >
-    </Flex>
+    </Container>
   );
 };

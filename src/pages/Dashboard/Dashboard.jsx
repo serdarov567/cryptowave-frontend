@@ -259,7 +259,7 @@ function Dashboard() {
 
       <AlertPopUp
         isOpen={isOpenAlert}
-        title={"Are you sure?"}
+        title={langKeys["areYouSure"]}
         footerComponents={
           <HStack>
             <GradientButton
@@ -271,12 +271,12 @@ function Dashboard() {
               {langKeys["signOut"]}
             </GradientButton>
             <OutlinedButton color={"#FFF"} onClick={onToggleAlert}>
-              Cancel
+              {langKeys["cancel"]}
             </OutlinedButton>
           </HStack>
         }
       >
-        <Text>Do you really want to sign out from your account?</Text>
+        <Text>{langKeys["doYouReallySignOut"]}</Text>
       </AlertPopUp>
     </Box>
   );

@@ -110,7 +110,7 @@ function PlanItem(props) {
               <Text fontSize={textFontSize} color={"#d4d4d4"}>
                 {props.number !== -1
                   ? `#${props.number}`
-                  : "Pending approval..."}
+                  : langKeys["approval"]}
               </Text>
             </HStack>
             <HStack spacing={4}>
@@ -144,7 +144,7 @@ function PlanItem(props) {
                   {langKeys["finishes"]}
                 </Text>
                 <Text fontSize={titleFontSize} fontFamily={"Manrope-Bold"}>
-                  {dateToString(props.dateOfExpiration).length > 0
+                  {dateToString(props.dateOfExpiration).dateStr.length > 0
                     ? dateToString(props.dateOfExpiration).dateStr
                     : langKeys["pending"]}
                 </Text>
@@ -238,7 +238,13 @@ function PlanItem(props) {
               {minutes > 0 &&
               props.status !== "Completed" &&
               props.status !== "Canceled" ? (
-                <Heading maxW={'200px'} key={props.uniqueKey + "2"} fontSize={titleFontSize}>
+                <Heading
+                  maxW={"200px"}
+                  key={props.uniqueKey + "2"}
+                  fontSize={titleFontSize}
+                  textAlign={"center"}
+                  marginBlock={"15px"}
+                >
                   {langKeys["timeLeft"]}{" "}
                   {days > 0 && days > 9 ? days : `0${days}`}d:
                   {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
