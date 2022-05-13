@@ -23,9 +23,7 @@ import {
 } from "@chakra-ui/react";
 import Navbar from "src/components/Navbar";
 import useWithdraw from "./useWithdraw";
-import Tilde from "src/assets/vectors/Tilde";
-import TextButton from "src/components/TextButton";
-import { getCredits, useIsSignedIn } from "src/utils/user";
+import { useIsSignedIn } from "src/utils/user";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 import { useNavigate } from "react-router-dom";
 import useWallets from "../Wallets/useWallets";
@@ -46,7 +44,7 @@ const Withdraw = () => {
     }
   }, [checking]);
 
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const { loading, withdraws, refresh } = useWithdraw();
   const { wallets, walletsLoading } = useWallets();
@@ -82,7 +80,8 @@ const Withdraw = () => {
     ) {
       setButtonLoading(true);
       try {
-        const { email, token } = getCredits();
+        const email = localStorage.getItem("email");
+        const token = localStorage.getItem("token");
         const result = await requestWithdraw(email, token, newWithdraw);
 
         if (result.status === 200) {
@@ -131,6 +130,7 @@ const Withdraw = () => {
   return (
     <Box>
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}

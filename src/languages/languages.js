@@ -300,7 +300,7 @@ Personal information includes such items as:
 
   timeLeft: "Time left:",
 
-  addWallet: "addWallet",
+  addWallet: "Add Wallet",
 
   add: "Add",
 
@@ -606,7 +606,7 @@ const rus = {
 
   finishes: "Заканчивается",
 
-  pending: "ожидании...",
+  pending: "ожидается...",
 
   canceled: "Отменено",
 

@@ -17,7 +17,7 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
-import { getCredits, useIsSignedIn } from "src/utils/user";
+import { useIsSignedIn } from "src/utils/user";
 import Navbar from "src/components/Navbar";
 import useWallets from "src/pages/Wallets/useWallets";
 import GradientButton from "src/components/GradientButton";
@@ -35,10 +35,13 @@ const Wallets = () => {
 
   const { isOpen, onOpen, onClose } = useDisclosure();
   const { wallets, walletsLoading, refresh } = useWallets();
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const [error, setError] = useState("");
   const [popUpLoading, setPopUpLoading] = useState(false);
+
+  const email = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
 
   const newWallet = {
     _id: -1,
@@ -159,7 +162,6 @@ const Wallets = () => {
       currentWallet.type.length > 0
     ) {
       try {
-        const { email, token } = getCredits();
         let result;
         if (currentWallet._id === -1) {
           result = await addWallet(email, token, currentWallet);
@@ -192,7 +194,8 @@ const Wallets = () => {
     setError("");
     if (currentWallet._id.length !== -1) {
       try {
-        const { email, token } = getCredits();
+        const email = localStorage.getItem("email");
+        const token = localStorage.getItem("token");
         const result = await deleteWallets(email, token, [currentWallet._id]);
         if (result.status === 200) {
           refresh();
@@ -222,6 +225,7 @@ const Wallets = () => {
       alignItems={"center"}
     >
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}
@@ -270,7 +274,7 @@ const Wallets = () => {
         footerComponents={
           <HStack>
             <GradientButton onClick={saveButtonHandler} loading={popUpLoading}>
-              {currentWallet._id !== -1 ? langKeys['save'] : langKeys['add']}
+              {currentWallet._id !== -1 ? langKeys["save"] : langKeys["add"]}
             </GradientButton>
             {currentWallet._id !== -1 && (
               <OutlinedButton
@@ -278,7 +282,7 @@ const Wallets = () => {
                 onClick={deleteButtonHandler}
                 loading={popUpLoading}
               >
-                {langKeys['delete']}
+                {langKeys["delete"]}
               </OutlinedButton>
             )}
           </HStack>

@@ -17,7 +17,7 @@ const PlanHistory = () => {
     }
   }, [loading]);
 
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const { plans, earnings } = useUserDashboard();
 
@@ -48,6 +48,7 @@ const PlanHistory = () => {
   return (
     <Box>
       <Navbar
+      CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}

@@ -11,10 +11,11 @@ import Navbar from "src/components/Navbar";
 import useLanguage from "src/languages/useLanguage";
 
 const TermsAndConditions = () => {
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
   return (
     <Box pos={"relative"} width={"100vw"} h={"100vh"}>
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}

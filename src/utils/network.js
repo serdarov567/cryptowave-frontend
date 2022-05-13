@@ -1,11 +1,11 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.1.102:1919/" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.31.165:1919/" });
 
-const signUp = (email, username, password) => {
+const signUp = (email, username, password, referredUser) => {
   return axiosInstance.post(
     "api/sign/up",
-    { email, username, password }
+    { email, username, password, referredUser }
     //{ timeout: 20000 }
   );
 };
@@ -27,7 +27,15 @@ const signIn = (email, password) => {
 };
 
 const forgot = (email) => {
-  return axiosInstance.post("api/sign/forgot", { email }, { timeout: 3000 });
+  return axiosInstance.post("api/sign/forgot", { email });
+};
+
+const changePassword = (email, oldPassword, newPassword) => {
+  return axiosInstance.post(
+    "api/sign/change",
+    { email, oldPassword, newPassword }
+    // { timeout: 3000 }
+  );
 };
 
 const checkToken = (email, token) => {
@@ -160,11 +168,7 @@ const getAllUsers = (token) => {
   );
 };
 
-const requestWithdraw = (
-  email,
-  token,
-  { amount, wallet }
-) => {
+const requestWithdraw = (email, token, { amount, wallet }) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.post(
     "api/withdraws",
@@ -207,11 +211,29 @@ const deleteSupport = (token, supportIds) => {
   });
 };
 
+const getReferalsOfUser = (email, token) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.get(
+    `api/referals/user/${email}`
+    //{ timeout: 20000 }
+  );
+};
+
+const readReferals = (email, token, ids) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.put(
+    "api/referals/read",
+    { email, ids }
+    //{ timeout: 10000 }
+  );
+};
+
 export {
   signUp,
   verify,
   signIn,
   forgot,
+  changePassword,
   checkToken,
   getWallets,
   addWallet,
@@ -228,5 +250,7 @@ export {
   sendToSupport,
   getSupports,
   deleteSupport,
-  requestWithdraw
+  requestWithdraw,
+  getReferalsOfUser,
+  readReferals,
 };

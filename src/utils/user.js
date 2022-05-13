@@ -14,6 +14,8 @@ const useIsSignedIn = () => {
     try {
       const result = await checkToken(email, token);
       if (result.status === 200) {
+        if (localStorage.getItem("username") === null)
+          localStorage.setItem("username", result.data);
         setIsSignedIn(true);
       } else {
         setIsSignedIn(false);
@@ -36,11 +38,4 @@ const signOut = () => {
   localStorage.clear();
 };
 
-const getCredits = () => {
-  return {
-    email: localStorage.getItem("email"),
-    token: localStorage.getItem("token"),
-  };
-};
-
-export { useIsSignedIn, signOut, getCredits };
+export { useIsSignedIn, signOut };

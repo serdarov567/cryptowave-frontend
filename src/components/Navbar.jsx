@@ -22,10 +22,22 @@ import Logo from "../assets/vectors/Logo";
 import { useLocation, useNavigate } from "react-router-dom";
 import { useFade, useHeight } from "src/hooks";
 import { scrollHandler } from "src/utils/scrollHandler";
+import EngFlag from "src/assets/vectors/EngFlag";
+import DeuFlag from "src/assets/vectors/DeuFlag";
+import RusFlag from "src/assets/vectors/RusFlag";
+import EspFlag from "src/assets/vectors/EspFlag";
 
 const Navbar = (props) => {
   const { isOpen, onToggle } = useDisclosure();
-  const { currentLanguage, setLanguage, langKeys } = props;
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = props;
+
+  const countries = [
+    { icon: EngFlag, label: "ENG" },
+    { icon: RusFlag, label: "RUS" },
+    { icon: EspFlag, label: "ESP" },
+    { icon: DeuFlag, label: "DEU" },
+  ];
+
   const navigate = useNavigate();
 
   const [isVisible, setShow, fadeProps] = useFade(false);
@@ -157,14 +169,7 @@ const Navbar = (props) => {
                       }}
                       _focus={{}}
                     >
-                      <img
-                        height={"25px"}
-                        width={"25px"}
-                        src={`https://countryflagsapi.com/svg/${
-                          currentLanguage === "ENG" ? "GBR" : currentLanguage
-                        }`}
-                        alt={currentLanguage}
-                      />
+                      {CurrentFlag}
                     </Link>
                     <ChevronDownIcon alignSelf={"center"} />
                   </ButtonGroup>
@@ -179,12 +184,12 @@ const Navbar = (props) => {
                   rounded={"xl"}
                 >
                   <Stack w={"fit-content"}>
-                    {["ENG", "RUS", "ESP", "DEU"].map((child) => (
+                    {countries.map((lang) => (
                       <DesktopSubNav
-                        key={child}
-                        label={child}
+                        key={lang.label}
+                        LangIcon={lang.icon}
                         onClick={() => {
-                          setLanguage(child);
+                          setLanguage(lang.label);
                         }}
                       />
                     ))}
@@ -260,10 +265,7 @@ const DesktopNav = ({ langKeys }) => {
   );
 };
 
-const DesktopSubNav = ({ label, href, subLabel, onClick }: NavItem) => {
-  const link = `https://countryflagsapi.com/svg/${
-    label === "ENG" ? "GBR" : label
-  }`;
+const DesktopSubNav = ({ LangIcon, href, subLabel, onClick }: NavItem) => {
   return (
     <Link
       href={href}
@@ -276,7 +278,7 @@ const DesktopSubNav = ({ label, href, subLabel, onClick }: NavItem) => {
     >
       <Stack direction={"row"} align={"center"}>
         <Box>
-          <img height={"25px"} width={"25px"} src={link} alt={label} />
+          {<LangIcon size={"20px"} />}
           {/* <Text
             transition={"all .3s ease"}
             color={"white"}

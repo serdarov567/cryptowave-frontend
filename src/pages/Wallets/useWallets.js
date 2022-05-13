@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { getWallets } from "src/utils/network";
-import { getCredits } from "src/utils/user";
 
 interface Wallet {
   title: String;
@@ -12,7 +11,8 @@ const useWallets = () => {
   const [walletsLoading, setWalletsLoading] = useState(true);
   const [wallets, setWallets] = useState([]);
   const [update, setUpdate] = useState(false);
-  const { email, token } = getCredits();
+  const email = localStorage.getItem("email");
+  const token = localStorage.getItem("token");
 
   useEffect(() => {
     const fetchWallets = async () => {

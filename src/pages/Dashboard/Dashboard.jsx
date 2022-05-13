@@ -7,6 +7,7 @@ import {
   HStack,
   Text,
   useBreakpointValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
@@ -26,11 +27,13 @@ function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
   const navigate = useNavigate();
 
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
   const [isOpenAlert, setIsOpenAlert] = useState(false);
 
   const onToggleAlert = () => setIsOpenAlert(!isOpenAlert);
+
+  const toast = useToast();
 
   const {
     plans,
@@ -40,7 +43,38 @@ function Dashboard() {
     balance,
     earnings,
     refreshEarnings,
+    referals,
+    setReferalsRead,
   } = useUserDashboard();
+
+  useEffect(() => {
+    referals.forEach((referal) => {
+      if (referal.isCompleted && !referal.isRead) {
+        if (referal.from === localStorage.getItem("username")) {
+          toast({
+            title: "Referal program",
+            description: "You received 10% bonus to your first deposit.",
+            status: "success",
+            position: "top-left",
+            size: "lg",
+            duration: null,
+            isClosable: true,
+          });
+        } else {
+          toast({
+            title: "Referal program",
+            description: `You received 10% of ${referal.from}'s purchase to your balance.`,
+            status: "success",
+            position: "top-left",
+            size: "lg",
+            duration: null,
+            isClosable: true,
+          });
+        }
+      }
+    });
+    setReferalsRead(referals);
+  }, [referals]);
 
   const detailsFontSize = useBreakpointValue({
     base: "16px",
@@ -83,6 +117,7 @@ function Dashboard() {
   return (
     <Box>
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}

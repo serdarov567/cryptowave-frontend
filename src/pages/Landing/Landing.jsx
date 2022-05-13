@@ -22,7 +22,7 @@ import Tilde from "src/assets/vectors/Tilde";
 import GradientButton from "src/components/GradientButton";
 import { colors } from "src/theme";
 import SecuredBadge from "src/components/SecuredBadge";
-import { getCredits, useIsSignedIn } from "src/utils/user";
+import { useIsSignedIn } from "src/utils/user";
 import DashboardIcon from "src/assets/vectors/DashboardIcon";
 import OutlinedButton from "src/components/OutlinedButton";
 import LogIn from "src/assets/vectors/LogIn";
@@ -34,7 +34,7 @@ import PopUp from "src/components/PopUp";
 import { scrollHandler } from "src/utils/scrollHandler";
 import usePlans from "src/pages/Landing/usePlans";
 import useWallets from "src/pages/Wallets/useWallets";
-import { addPlan, sendToSupport } from "src/utils/network";
+import { addPlan, getReferalsOfUser, sendToSupport } from "src/utils/network";
 import { useNavigate } from "react-router-dom";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
@@ -53,11 +53,12 @@ function Landing() {
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
   scrollHandler(global.location.hash.slice(1), navbarHeight);
 
-  const { currentLanguage, setLanguage, langKeys } = useLanguage();
+  const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
   return (
     <Box scrollBehavior="smooth">
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}
@@ -354,6 +355,29 @@ function Plans({ isSignedIn, langKeys }) {
   const { plans } = usePlans();
   const { wallets } = useWallets();
 
+  const [isReferred, setIsReferred] = useState(false);
+
+  const fetchReferals = async () => {
+    try {
+      const referalsResult = await getReferalsOfUser(
+        localStorage.getItem("email"),
+        localStorage.getItem("token")
+      );
+
+      if (referalsResult !== undefined) {
+        setIsReferred(
+          referalsResult.data[0].from === localStorage.getItem("username")
+        );
+      }
+    } catch (error) {
+      setError("Network error!");
+    }
+  };
+
+  useEffect(() => {
+    fetchReferals();
+  }, []);
+
   const [selectedPlan, setSelectedPlan] = useState(0);
 
   const [error, setError] = useState("");
@@ -396,7 +420,8 @@ function Plans({ isSignedIn, langKeys }) {
     if (purchased.wallet !== -1) {
       setError("");
       setLoading(true);
-      const { email, token } = getCredits();
+      const email = localStorage.getItem("email");
+      const token = localStorage.getItem("token");
       try {
         const result = await addPlan(email, token, purchased);
         if (result.status === 200) {
@@ -632,9 +657,16 @@ function Plans({ isSignedIn, langKeys }) {
             </Select>
           </FormControl>
           <Text>
-            {langKeys["reward"]}: {purchased.deposit}$ + {purchased.percentage}%{" "}
-            {langKeys["inside"]} {plans[selectedPlan].days} {langKeys["days"]} ={" "}
-            {purchased.reward}$
+            {langKeys["reward"]}: {purchased.deposit}${" "}
+            {isReferred && <span style={{ color: "green" }}>+10%</span>} +{" "}
+            {purchased.percentage}% {langKeys["inside"]}{" "}
+            {plans[selectedPlan].days} {langKeys["days"]} ={" "}
+            {((isReferred ? 0.1 : 1) *
+              purchased.deposit *
+              purchased.percentage) /
+              100 +
+              purchased.deposit}
+            $
           </Text>
         </VStack>
       </PopUp>

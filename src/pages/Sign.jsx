@@ -21,7 +21,13 @@ import GradientButton from "src/components/GradientButton";
 import SecuredBadge from "src/components/SecuredBadge";
 import TextButton from "src/components/TextButton";
 import { colors } from "src/theme";
-import { forgot, signIn, signUp, verify } from "src/utils/network";
+import {
+  changePassword,
+  forgot,
+  signIn,
+  signUp,
+  verify,
+} from "src/utils/network";
 import { useIsSignedIn } from "src/utils/user";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
@@ -47,7 +53,7 @@ export default function Sign() {
     }
   }, [loading]);
 
-  const { langKeys, currentLanguage, setLanguage } = useLanguage();
+  const { CurrentFlag, langKeys, currentLanguage, setLanguage } = useLanguage();
 
   const { type } = useParams();
 
@@ -70,6 +76,12 @@ export default function Sign() {
       header = "Verification";
       sectionName = "Enter the verification code";
       form = <Verify langKeys={langKeys} />;
+      break;
+    }
+    case "change": {
+      header = "Change password";
+      sectionName = "Enter verifiaction code and your new password";
+      form = <NewPassword langKeys={langKeys} />;
       break;
     }
     default: {
@@ -96,6 +108,7 @@ export default function Sign() {
       px={useBreakpointValue({ base: "0px", md: "20px" })}
     >
       <Navbar
+        CurrentFlag={CurrentFlag}
         currentLanguage={currentLanguage}
         setLanguage={setLanguage}
         langKeys={langKeys}
@@ -213,7 +226,12 @@ function SignUp(props) {
       setIsLoading(true);
       setError("");
       try {
-        const result = await signUp(email, username, password);
+        let referredUser;
+        if (global.location.hash !== undefined) {
+          referredUser = global.location.hash.substring(1);
+        }
+
+        const result = await signUp(email, username, password, referredUser);
         if (result.data !== "exists") {
           setError("");
           localStorage.setItem("email", email);
@@ -239,7 +257,13 @@ function SignUp(props) {
   };
 
   return (
-    <>
+    <form
+      style={{ width: "100%" }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSignUp(email, username, password);
+      }}
+    >
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
         <FormLabel variant={"primary"} fontSize={fontSize}>
@@ -341,16 +365,19 @@ function SignUp(props) {
         </VStack>
 
         <GradientButton
+          type={"submit"}
           isLoading={isLoading}
-          onClick={() => handleSignUp(email, username, password)}
+          onClick={() => {
+            handleSignUp(email, username, password);
+          }}
           fontSize={fontSize}
           height={inputHeight}
           marginTop={useBreakpointValue({ base: "10px", md: "0" })}
         >
-          {langKeys['signUp']}
+          {langKeys["signUp"]}
         </GradientButton>
       </Flex>
-    </>
+    </form>
   );
 }
 
@@ -416,7 +443,13 @@ function SignIn(props) {
   };
 
   return (
-    <>
+    <form
+      style={{ width: "100%" }}
+      onSubmit={(e) => {
+        e.preventDefault();
+        handleSignIn(email, password);
+      }}
+    >
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
       <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
         <FormLabel variant={"primary"} fontSize={fontSize}>
@@ -497,6 +530,7 @@ function SignIn(props) {
         </VStack>
 
         <GradientButton
+          type={"submit"}
           isLoading={isLoading}
           onClick={() => {
             handleSignIn(email, password);
@@ -508,7 +542,7 @@ function SignIn(props) {
           {langKeys["signIn"]}
         </GradientButton>
       </Flex>
-    </>
+    </form>
   );
 }
 
@@ -563,33 +597,42 @@ function Verify(props) {
 
   return (
     <Flex flexDirection={"column"} w={"full"}>
-      {error.length > 0 && <Text color={"red"}>{error}</Text>}
-      <FormControl isInvalid={code.length > 0 && code.length < 4}>
-        <FormLabel variant={"primary"} fontSize={fontSize}>
-          Verification code
-        </FormLabel>
-        <Input
-          variant={"primary"}
-          height={inputHeight}
-          placeholder="1919"
-          onChange={(event) => {
-            setCode(event.target.value);
-          }}
-        />
-        <FormErrorMessage>Code must be 4 digits</FormErrorMessage>
-      </FormControl>
-
-      <GradientButton
-        isLoading={isLoading}
-        height={inputHeight}
-        onClick={() => {
+      <form
+        style={{ width: "100%" }}
+        onSubmit={(e) => {
+          e.preventDefault();
           handleVerify(code);
         }}
-        fontSize={fontSize}
-        marginTop={"20px"}
       >
-        Verify
-      </GradientButton>
+        {error.length > 0 && <Text color={"red"}>{error}</Text>}
+        <FormControl isInvalid={code.length > 0 && code.length < 4}>
+          <FormLabel variant={"primary"} fontSize={fontSize}>
+            Verification code
+          </FormLabel>
+          <Input
+            variant={"primary"}
+            height={inputHeight}
+            placeholder="1919"
+            onChange={(event) => {
+              setCode(event.target.value);
+            }}
+          />
+          <FormErrorMessage>Code must be 4 digits</FormErrorMessage>
+        </FormControl>
+
+        <GradientButton
+          type={"submit"}
+          isLoading={isLoading}
+          height={inputHeight}
+          onClick={() => {
+            handleVerify(code);
+          }}
+          fontSize={fontSize}
+          marginTop={"20px"}
+        >
+          Verify
+        </GradientButton>
+      </form>
     </Flex>
   );
 }
@@ -599,10 +642,6 @@ function Forgot(props) {
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-
-  if (localStorage.getItem("email") !== null) {
-    navigate(-1);
-  }
 
   const fontSize = useBreakpointValue({ base: "16px", md: "18px" });
   const inputHeight = useBreakpointValue({ base: "42px", md: "50px" });
@@ -616,11 +655,105 @@ function Forgot(props) {
         if (result.status === 200) {
           setError("");
           localStorage.setItem("email", email);
-          navigate("/sign/verify");
+          navigate("/sign/change");
         }
         setIsLoading(false);
       } catch (error) {
-        if (error.response.status === 404) {
+        if (error.response !== undefined) {
+          if (error.response.status === 404) {
+            setError("User does not exist!");
+          } else if (error.response.status === 406) {
+            setError("Not acceptable inputs!");
+          } else if (error.response.status === 500) {
+            setError("Server error!");
+          } else {
+            setError("Network error!");
+          }
+        }
+        setIsLoading(false);
+        console.error(error);
+      }
+    } else {
+      setError("Fill the fields as required!");
+    }
+  };
+
+  return (
+    <Flex flexDirection={"column"} w={"full"}>
+      <form
+        style={{ width: "100%" }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleForgot(email);
+        }}
+      >
+        {error.length > 0 && <Text color={"red"}>{error}</Text>}
+        <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
+          <FormLabel variant={"primary"} fontSize={fontSize}>
+            Email
+          </FormLabel>
+          <Input
+            variant={"primary"}
+            height={inputHeight}
+            placeholder="example@email.com"
+            onChange={(event) => {
+              setEmail(event.target.value);
+            }}
+          />
+          <FormErrorMessage>Not a valid email.</FormErrorMessage>
+        </FormControl>
+        <GradientButton
+          type={"submit"}
+          isLoading={isLoading}
+          onClick={() => {
+            handleForgot(email);
+          }}
+          height={inputHeight}
+          marginTop={"20px"}
+        >
+          Send the code
+        </GradientButton>
+      </form>
+    </Flex>
+  );
+}
+
+const NewPassword = (props) => {
+  const navigate = useNavigate();
+  const email = localStorage.getItem("email");
+  const [code, setCode] = useState("");
+  const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  if (localStorage.getItem("email") === null) {
+    navigate(-1);
+  }
+
+  const fontSize = useBreakpointValue({ base: "16px", md: "18px" });
+  const inputHeight = useBreakpointValue({ base: "42px", md: "50px" });
+
+  const handleNewPassword = async (email, password) => {
+    if (
+      code.length === 12 &&
+      validator.isEmail(email) &&
+      validator.isStrongPassword(password, passwordOptions)
+    ) {
+      setIsLoading(true);
+      setError("");
+      try {
+        const result = await changePassword(email, code, password);
+        if (result.status === 200) {
+          setError("");
+          localStorage.setItem("email", email);
+          localStorage.setItem("token", result.data);
+          navigate("/#home", { replace: true });
+        }
+        setIsLoading(false);
+      } catch (error) {
+        if (error.response.status === 403) {
+          setError("Invalid code!");
+        } else if (error.response.status === 404) {
           setError("User does not exist!");
         } else if (error.response.status === 406) {
           setError("Not acceptable inputs!");
@@ -639,34 +772,64 @@ function Forgot(props) {
 
   return (
     <Flex flexDirection={"column"} w={"full"}>
-      {error.length > 0 && <Text color={"red"}>{error}</Text>}
-      <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
-        <FormLabel variant={"primary"} fontSize={fontSize}>
-          Email
-        </FormLabel>
-        <Input
-          variant={"primary"}
-          height={inputHeight}
-          placeholder="example@email.com"
-          onChange={(event) => {
-            setEmail(event.target.value);
-          }}
-        />
-        <FormErrorMessage>Not a valid email.</FormErrorMessage>
-      </FormControl>
-      <GradientButton
-        isLoading={isLoading}
-        onClick={() => {
-          handleForgot(email);
+      <form
+        style={{ width: "100%" }}
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleNewPassword(email, password);
         }}
-        height={inputHeight}
-        marginTop={"20px"}
       >
-        Send the code
-      </GradientButton>
+        {error.length > 0 && <Text color={"red"}>{error}</Text>}
+        <FormControl>
+          <FormLabel variant={"primary"} fontSize={fontSize}>
+            Code from email
+          </FormLabel>
+          <Input
+            variant={"primary"}
+            height={inputHeight}
+            placeholder="code"
+            onChange={(event) => {
+              setCode(event.target.value);
+            }}
+          />
+        </FormControl>
+        <FormControl
+          isInvalid={
+            password.length > 0 &&
+            !validator.isStrongPassword(password, passwordOptions)
+          }
+        >
+          <FormLabel variant={"primary"} fontSize={fontSize}>
+            New password
+          </FormLabel>
+          <Input
+            variant={"primary"}
+            height={inputHeight}
+            placeholder="example@email.com"
+            onChange={(event) => {
+              setPassword(event.target.value);
+            }}
+          />
+          <FormErrorMessage>
+            Password at least must include 1 symbol, 1 uppercase letter, 1
+            numeral, 1 lowercase letter and must be longer that 8 characters.
+          </FormErrorMessage>
+        </FormControl>
+        <GradientButton
+          type={"submit"}
+          isLoading={isLoading}
+          onClick={() => {
+            handleNewPassword(email, password);
+          }}
+          height={inputHeight}
+          marginTop={"20px"}
+        >
+          Change password
+        </GradientButton>
+      </form>
     </Flex>
   );
-}
+};
 
 const BackgroundItems = () => {
   return (
