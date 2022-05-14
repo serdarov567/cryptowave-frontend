@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import {
   getPlans,
   getBalance,
-  getReferalsOfUser,
-  readReferals,
+  getReferralsOfUser,
+  readReferrals,
 } from "src/utils/network";
 
 const SECOND = 1000;
@@ -45,7 +45,7 @@ const getReturnValues = (countDown) => {
 
 const useUserDashboard = () => {
   const [plans, setPlans] = useState([]);
-  const [referals, setReferals] = useState([]);
+  const [referrals, setreferrals] = useState([]);
   const [balance, setBalance] = useState(0);
   const [earnings, setEarnings] = useState();
   const [networkError, setError] = useState("");
@@ -54,8 +54,8 @@ const useUserDashboard = () => {
   const [updateTimer, setUpdateTimer] = useState(false);
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
-  const [isReferalsRead, setReferalsRead] = useState([]);
-  const [updateReferals, setUpdateReferals] = useState(false);
+  const [isReferralsRead, setreferralsRead] = useState([]);
+  const [updateReferrals, setupdateReferrals] = useState(false);
 
   const fetchUserPlans = async () => {
     try {
@@ -80,12 +80,12 @@ const useUserDashboard = () => {
     setLoading(false);
   };
 
-  const fetchReferals = async () => {
+  const fetchreferrals = async () => {
     try {
-      const referalsResult = await getReferalsOfUser(email, token);
+      const referralsResult = await getReferralsOfUser(email, token);
 
-      if (referalsResult !== undefined) {
-        setReferals(referalsResult.data);
+      if (referralsResult !== undefined) {
+        setreferrals(referralsResult.data);
       }
     } catch (error) {
       setError("Network error!");
@@ -93,28 +93,28 @@ const useUserDashboard = () => {
   };
 
   const readAll = async (ids) => {
-    await readReferals(email, token, ids);
+    await readReferrals(email, token, ids);
   };
 
   useEffect(() => {
-    if (isReferalsRead.length > 0) {
+    if (isReferralsRead.length > 0) {
       //read all
       let ids = [];
 
-      for (const referal of isReferalsRead) {
-        ids.push(referal._id);
+      for (const referral of isReferralsRead) {
+        ids.push(referral._id);
       }
 
       readAll(ids);
 
-      setReferalsRead([]);
-      setUpdateReferals(true);
+      setreferralsRead([]);
+      setupdateReferrals(true);
     }
-  }, [isReferalsRead]);
+  }, [isReferralsRead]);
 
   useEffect(() => {
-    fetchReferals();
-  }, [updateReferals]);
+    fetchreferrals();
+  }, [updateReferrals]);
 
   useEffect(() => {
     fetchUserPlans();
@@ -173,7 +173,7 @@ const useUserDashboard = () => {
 
   return {
     plans,
-    referals,
+    referrals,
     networkError,
     networkLoading,
     refresh,
@@ -181,7 +181,7 @@ const useUserDashboard = () => {
     earnings,
     useCountdown,
     refreshEarnings,
-    setReferalsRead,
+    setreferralsRead,
   };
 };
 

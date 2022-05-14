@@ -402,6 +402,10 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "#plans",
   },
   {
+    label: "referralProgram",
+    href: "#referral",
+  },
+  {
     label: "aboutUs",
     href: "#aboutus",
   },

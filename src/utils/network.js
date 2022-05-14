@@ -211,7 +211,7 @@ const deleteSupport = (token, supportIds) => {
   });
 };
 
-const getReferalsOfUser = (email, token) => {
+const getReferralsOfUser = (email, token) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.get(
     `api/referals/user/${email}`
@@ -219,7 +219,7 @@ const getReferalsOfUser = (email, token) => {
   );
 };
 
-const readReferals = (email, token, ids) => {
+const readReferrals = (email, token, ids) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.put(
     "api/referals/read",
@@ -227,6 +227,10 @@ const readReferals = (email, token, ids) => {
     //{ timeout: 10000 }
   );
 };
+
+const getUsersCount = () => {
+  return axiosInstance.get("api/users/count");
+}
 
 export {
   signUp,
@@ -251,6 +255,7 @@ export {
   getSupports,
   deleteSupport,
   requestWithdraw,
-  getReferalsOfUser,
-  readReferals,
+  getReferralsOfUser,
+  readReferrals,
+  getUsersCount
 };

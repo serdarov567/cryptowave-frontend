@@ -72,6 +72,17 @@ const eng = {
 
   send: "send",
 
+  referralProgram: "Referral program",
+
+  referralProgramContent: `
+  The project started on February 1st.
+  
+  in 3 months of work, they reached $5M+ and are still gaining momentum. 2K+ investors are cooperating.
+  
+  after 3 months of hard work, we launch a referral program with a goal of scale. the referral program gives 10% of the amount invested by the attracted investor. and a bonus of 10% of the invested amount to the investor himself.
+  
+  the project is easy to understand. there is no extra information. there is only what an investor who wants to earn money needs to know`,
+
   terms: "Terms and Conditions. Privacy policy.",
 
   termsAndConditionsHeader: "Terms and Conditions",
@@ -392,6 +403,16 @@ const rus = {
   write: "Напишите здесь",
 
   send: "Отправить",
+
+  referralProgram: "Реферальная программа",
+
+  referralProgramContent: `проект стартовал 1 февраля.
+
+  за 3 месяца работы вышли на $5М+ и все еще набирают обороты 2К+ инвесторов сотрудничают. 
+  
+  после 3 месяцев упорной работы запускаем реферал программу с целью масштаба. реферал программа дает 10% от суммы которую вложил привлеченный инвестор. и бонус 10% от вложенной суммы самому инвестору.
+  
+  проект прост в понимании. нет никакой лишней информации. есть только то что нужно знать инвестору кто хочет зарабатывать`,
 
   terms: "Условия и положения. Политика конфиденциальности.",
 
@@ -715,6 +736,18 @@ const esp = {
 
   send: "enviar",
 
+  referralProgram: "Programa de referencia",
+
+  referralProgramContent: `información básica:
+
+  El proyecto comenzó el 1 de febrero.
+  
+  en 3 meses de trabajo, alcanzaron los $5M+ y siguen ganando impulso. Más de 2K inversores están cooperando.
+  
+  después de 3 meses de arduo trabajo, lanzamos un programa de referencia con un objetivo de escala. el programa de referencia otorga el 10% de la cantidad invertida por el inversor atraído. y una bonificación del 10% del importe invertido al propio inversor.
+  
+  el proyecto es fácil de entender. no hay información adicional. solo hay lo que un inversor que quiere ganar dinero necesita saber`,
+
   terms: "Términos y condiciones. Política de privacidad.",
 
   termsAndConditionsHeader: "Términos y condiciones",
@@ -1036,6 +1069,18 @@ const deu = {
   write: "Hier schreiben",
 
   send: "Schicken",
+
+  referralProgram: "Empfehlungsprogramm",
+
+  referralProgramContent: `Grundinformation:
+
+  Das Projekt startete am 1. Februar.
+  
+  in 3 Monaten Arbeit erreichten sie über 5 Mio. USD und gewinnen immer noch an Dynamik. Mehr als 2.000 Investoren kooperieren.
+  
+  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm mit dem Ziel der Skalierung. Das Empfehlungsprogramm gibt 10 % des vom geworbenen Investor investierten Betrags. und einen Bonus von 10 % des investierten Betrags an den Anleger selbst.
+  
+  Das Projekt ist leicht verständlich. Es gibt keine zusätzlichen Informationen. Es gibt nur das, was ein Investor wissen muss, der Geld verdienen will`,
 
   terms: "Geschäftsbedingungen. Datenschutz-Bestimmungen.",
 

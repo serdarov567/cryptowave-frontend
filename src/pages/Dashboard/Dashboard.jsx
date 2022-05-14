@@ -51,39 +51,42 @@ function Dashboard() {
   const [totalBonus, setTotalBonus] = useState(0);
 
   useEffect(() => {
-    referals.forEach((referal) => {
-      if (referal.isCompleted && !referal.isRead) {
-        if (referal.from === localStorage.getItem("username")) {
-          toast({
-            title: "Referal program",
-            description: "You received 10% bonus to your first deposit.",
-            status: "success",
-            position: "top-left",
-            size: "lg",
-            duration: null,
-            isClosable: true,
-          });
-        } else {
-          toast({
-            title: "Referal program",
-            description: `You received 10% of ${referal.from}'s purchase to your balance.`,
-            status: "success",
-            position: "top-left",
-            size: "lg",
-            duration: null,
-            isClosable: true,
-          });
+    if (referals !== undefined) {
+      referals.forEach((referal) => {
+        if (referal.isCompleted && !referal.isRead) {
+          if (referal.from === localStorage.getItem("username")) {
+            toast({
+              title: "Referal program",
+              description: "You received 10% bonus to your first deposit.",
+              status: "success",
+              position: "top-left",
+              size: "lg",
+              duration: null,
+              isClosable: true,
+            });
+          } else {
+            toast({
+              title: "Referal program",
+              description: `You received 10% of ${referal.from}'s purchase to your balance.`,
+              status: "success",
+              position: "top-left",
+              size: "lg",
+              duration: null,
+              isClosable: true,
+            });
+          }
         }
+      });
+      setReferalsRead(referals);
+
+      let total = 0;
+
+      for (const referal of referals) {
+        total += referal.isCompleted ? referal.amount : 0;
       }
-    });
-    setReferalsRead(referals);
-    let total = 0;
 
-    for (const referal of referals) {
-      total += referal.isCompleted ? referal.amount : 0;
+      setTotalBonus(total);
     }
-
-    setTotalBonus(total);
   }, [referals]);
 
   const detailsFontSize = useBreakpointValue({
@@ -91,6 +94,13 @@ function Dashboard() {
     sm: "28px",
     md: "35px",
     lg: "30px",
+  });
+
+  const textFontSize = useBreakpointValue({
+    base: "x-small",
+    sm: "sm",
+    md: "14px",
+    lg: "16px",
   });
 
   useEffect(() => {
@@ -132,10 +142,27 @@ function Dashboard() {
         setLanguage={setLanguage}
         langKeys={langKeys}
       >
-        <UserEmail />
+        <Text
+          maxW={useBreakpointValue({ base: "50px", md: "100px" })}
+          fontSize={textFontSize}
+          fontFamily={"Manrope"}
+          fontWeight={200}
+          h={"20px"}
+          bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
+          bgClip={"text"}
+          fill={"transparent"}
+          alignSelf={"center"}
+          overflowWrap={"anywhere"}
+          textOverflow={"ellipsis"}
+        >
+          {localStorage.getItem("username")}
+        </Text>
         <SignOutButton onClick={onToggleAlert} langKeys={langKeys} />
       </Navbar>
-      <Container maxWidth={"container.xl"} paddingTop={"120px"}>
+      <Container
+        maxWidth={"container.xl"}
+        paddingTop={useBreakpointValue({ base: "80px", md: "120px" })}
+      >
         <Flex flexDir={"column"}>
           <Flex
             flexDir={useBreakpointValue({
@@ -148,42 +175,47 @@ function Dashboard() {
           >
             <VStack spacing={6}>
               <Flex
-                w={useBreakpointValue({ base: "fit-center", md: "full" })}
+                w={useBreakpointValue({ base: "full", md: "full" })}
+                px={"40px"}
                 flexDir={useBreakpointValue({ base: "column", md: "row" })}
                 justify={useBreakpointValue({
-                  base: "center",
+                  base: "flex-start",
                   md: "space-around",
                 })}
               >
-                <VStack spacing={0} align={"start"}>
+                <VStack spacing={0} align={"start"} marginBottom={"20px"}>
                   <Text
-                    fontSize={useBreakpointValue({ base: "8px", md: "14px" })}
+                    fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
                     color={"#666666"}
                   >
                     Username
                   </Text>
                   <Heading
-                    fontSize={useBreakpointValue({ base: "12px", md: "16px" })}
+                    fontSize={useBreakpointValue({ base: "14px", md: "16px" })}
                   >
                     {localStorage.getItem("username")}
                   </Heading>
                 </VStack>
-                <VStack spacing={0} align={"start"}>
+                <VStack spacing={0} align={"start"} marginBottom={"20px"}>
                   <Text
-                    fontSize={useBreakpointValue({ base: "8px", md: "14px" })}
+                    fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
                     color={"#666666"}
                   >
                     Email
                   </Text>
                   <Heading
-                    fontSize={useBreakpointValue({ base: "12px", md: "16px" })}
+                    color={"#A4ADFF"}
+                    fontSize={useBreakpointValue({ base: "14px", md: "16px" })}
                   >
                     {localStorage.getItem("email")}
                   </Heading>
                 </VStack>
                 <TextButton
-                  alignSelf={useBreakpointValue({ base: "start", md: "end" })}
-                  fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
+                  alignSelf={useBreakpointValue({
+                    base: "start",
+                    md: "center",
+                  })}
+                  fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
                   bgColor={"#343434"}
                   paddingX={"10px"}
                   paddingY={"3px"}
@@ -299,9 +331,9 @@ function Dashboard() {
                       ? earnings.length > 0
                         ? earnings.reduce((a, b) => a + b)
                         : 0
-                      : 0}
+                      : 0}$
                   </Heading>
-                  <OutlinedButton
+                  {/* <OutlinedButton
                     fontSize={detailsFontSize}
                     fontWeight={700}
                     fontFamily={"Manrope"}
@@ -314,15 +346,17 @@ function Dashboard() {
                     secondColor={colors.background[900]}
                   >
                     $
-                  </OutlinedButton>
+                  </OutlinedButton> */}
                 </HStack>
-                <Heading
-                  fontSize={detailsFontSize}
-                  fontFamily={"Manrope-ExtraBold"}
-                  color={"green.500"}
-                >
-                  Referal: +{totalBonus}$
-                </Heading>
+                {totalBonus && (
+                  <Heading
+                    fontSize={detailsFontSize}
+                    fontFamily={"Manrope-ExtraBold"}
+                    color={"green.500"}
+                  >
+                    Referal: +{totalBonus}$
+                  </Heading>
+                )}
               </VStack>
 
               <VStack spacing={"10px"}>
@@ -396,42 +430,6 @@ function Dashboard() {
         <Text>{langKeys["doYouReallySignOut"]}</Text>
       </AlertPopUp>
     </Box>
-  );
-}
-
-function UserEmail() {
-  const buttonFontSize = useBreakpointValue({
-    base: "x-small",
-    sm: "sm",
-    md: "mdb",
-  });
-  const email = localStorage.getItem("email");
-  return (
-    <OutlinedButton
-      display={useBreakpointValue({ base: "none", md: "flex" })}
-      fontWeight={500}
-      fontFamily={"Manrope"}
-      backgroundColor={"background.600"}
-      py={"5px"}
-      color={"white"}
-      angle={"0deg"}
-      firstColor={colors.background[200]}
-      secondColor={colors.background[900]}
-      alignSelf={"start"}
-      justifyContent={"center"}
-      alignItems={"center"}
-    >
-      <Text
-        fontSize={buttonFontSize}
-        fontFamily={"Manrope"}
-        fontWeight={200}
-        bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
-        bgClip={"text"}
-        fill={"transparent"}
-      >
-        {email}
-      </Text>
-    </OutlinedButton>
   );
 }
 

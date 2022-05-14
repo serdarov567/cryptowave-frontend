@@ -34,7 +34,7 @@ import PopUp from "src/components/PopUp";
 import { scrollHandler } from "src/utils/scrollHandler";
 import usePlans from "src/pages/Landing/usePlans";
 import useWallets from "src/pages/Wallets/useWallets";
-import { addPlan, getReferalsOfUser, sendToSupport } from "src/utils/network";
+import { addPlan, getReferralsOfUser, sendToSupport } from "src/utils/network";
 import { useNavigate } from "react-router-dom";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
@@ -45,13 +45,21 @@ import { Parallax } from "react-parallax";
 import Stable from "src/assets/vectors/Stable";
 import Trusted from "src/assets/vectors/Trusted";
 import TextButton from "src/components/TextButton";
-import CountUp from "react-countup";
 import useLanguage from "src/languages/useLanguage";
+import Statistics from "./Statistics";
+import Bonus from "src/assets/vectors/Bonus";
 
-function Landing() {
+const Landing = () => {
   const [isSignedIn, loading] = useIsSignedIn();
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
   scrollHandler(global.location.hash.slice(1), navbarHeight);
+
+  const textFontSize = useBreakpointValue({
+    base: "x-small",
+    sm: "sm",
+    md: "14px",
+    lg: "16px",
+  });
 
   const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
@@ -63,11 +71,21 @@ function Landing() {
         setLanguage={setLanguage}
         langKeys={langKeys}
       >
-        <SecondaryActionButton
-          isSignedIn={isSignedIn}
-          loading={loading}
-          langKeys={langKeys}
-        />
+        <Text
+          maxW={useBreakpointValue({ base: "50px", md: "100px" })}
+          fontSize={textFontSize}
+          fontFamily={"Manrope"}
+          fontWeight={200}
+          h={"20px"}
+          bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
+          bgClip={"text"}
+          fill={"transparent"}
+          alignSelf={"center"}
+          overflowWrap={"anywhere"}
+          textOverflow={"ellipsis"}
+        >
+          {localStorage.getItem("username")}
+        </Text>
         <PrimaryActionButton
           isSignedIn={isSignedIn}
           loading={loading}
@@ -90,6 +108,7 @@ function Landing() {
           currentLanguage={currentLanguage}
         />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
+        <Referral langKeys={langKeys} />
         <AboutUs langKeys={langKeys} />
         <Contacts langKeys={langKeys} />
       </Container>
@@ -113,9 +132,9 @@ function Landing() {
       </Flex>
     </Box>
   );
-}
+};
 
-function Home({ isSignedIn, loading, langKeys, currentLanguage }) {
+const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
   const [haloEffect, setHaloEffect] = useState(0);
   const haloBoxRef = useRef(null);
 
@@ -168,7 +187,8 @@ function Home({ isSignedIn, loading, langKeys, currentLanguage }) {
         paddingTop={useBreakpointValue({ base: "100px", md: "-80px" })}
       >
         <Flex
-          minH={"90vh"}
+          pos={"relative"}
+          minH={"50vh"}
           paddingBottom={useBreakpointValue({ base: "150px", md: "40px" })}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
@@ -203,7 +223,7 @@ function Home({ isSignedIn, loading, langKeys, currentLanguage }) {
               marginTop={"20px"}
               marginBottom={"40px"}
               fontSize={useBreakpointValue({
-                base: "3xl",
+                base: "2xl",
                 sm: "4xl",
                 md: "45px",
                 lg: "60px",
@@ -254,101 +274,9 @@ function Home({ isSignedIn, loading, langKeys, currentLanguage }) {
       </Container>
     </>
   );
-}
-
-const Statistics = ({ langKeys, currentLanguage }) => {
-  const HOUR = 60 * 60000;
-  const DAY = 24 * HOUR;
-  const since = new Date(Date.now()).getTime() - new Date(2022, 1, 1).getTime();
-  const runningDays = since / DAY;
-  // const runningMonths = Math.floor(since / DAY / 30);
-  // const runningDaysThisMonth = Math.floor(runningDays - runningMonths * 30);
-  const users = Math.floor((Date.now() / DAY) * 0.72);
-  const capitalization = 5200000 + runningDays * 342;
-
-  const headerFontSize = useBreakpointValue({
-    base: "20px",
-    md: "30px",
-    lg: "28px",
-  });
-  const headerProps = {
-    fontSize: headerFontSize,
-    textAlign: "center",
-    fontFamily: "Manrope-ExtraBold",
-    marginTop: useBreakpointValue({
-      base: "20px",
-      sm: "0px",
-      md: "20px",
-      lg: currentLanguage === "RUS" ? "20px" : "0px",
-    }),
-    marginBottom: "0px",
-  };
-
-  const bodyFontSize = useBreakpointValue({ base: "14px", md: "20px" });
-
-  const bodyProps = {
-    fontSize: bodyFontSize,
-    fontFamily: "Manrope-Bold",
-  };
-
-  return (
-    <Flex
-      flex={6}
-      w={"full"}
-      flexDir={useBreakpointValue({
-        base: "column",
-        sm: "row",
-        md: "column",
-        lg: currentLanguage === "RUS" ? "column" : "row",
-      })}
-      alignSelf={useBreakpointValue({
-        base: "flex-start",
-        sm: "center",
-        md: "center",
-      })}
-      alignContent={useBreakpointValue({
-        base: "flex-start",
-        sm: "space-evenly",
-        md: "flex-start",
-      })}
-      justifyContent={useBreakpointValue({
-        base: "center",
-        sm: "space-evenly",
-        md: "space-evenly",
-      })}
-    >
-      <VStack>
-        <Heading {...headerProps}>{langKeys["running"]}</Heading>
-        <Text {...bodyProps}>
-          <CountUp end={runningDays} duration={2} /> {langKeys["days"]}
-        </Text>
-      </VStack>
-
-      <VStack>
-        <Heading {...headerProps}>{langKeys["investors"]}</Heading>
-        <Text {...bodyProps}>
-          <CountUp end={users} duration={2} />
-        </Text>
-      </VStack>
-
-      <VStack>
-        <Heading {...headerProps}>{langKeys["capital"]}</Heading>
-        <Text {...bodyProps} color={"green.500"}>
-          <CountUp
-            end={capitalization}
-            duration={3}
-            formattingFn={(number) => {
-              return number.toLocaleString();
-            }}
-          />
-          $
-        </Text>
-      </VStack>
-    </Flex>
-  );
 };
 
-function Plans({ isSignedIn, langKeys }) {
+const Plans = ({ isSignedIn, langKeys }) => {
   const navigate = useNavigate();
   const { isOpen, onOpen, onClose } = useDisclosure();
 
@@ -359,16 +287,16 @@ function Plans({ isSignedIn, langKeys }) {
 
   const [calculation, setCalculation] = useState(0);
 
-  const fetchReferals = async () => {
+  const fetchreferrals = async () => {
     try {
-      const referalsResult = await getReferalsOfUser(
+      const referralsResult = await getReferralsOfUser(
         localStorage.getItem("email"),
         localStorage.getItem("token")
       );
 
-      if (referalsResult !== undefined) {
+      if (referralsResult !== undefined) {
         setIsReferred(
-          referalsResult.data[0].from === localStorage.getItem("username")
+          referralsResult.data[0].from === localStorage.getItem("username")
         );
       }
     } catch (error) {
@@ -377,7 +305,7 @@ function Plans({ isSignedIn, langKeys }) {
   };
 
   useEffect(() => {
-    fetchReferals();
+    fetchreferrals();
   }, []);
 
   const [selectedPlan, setSelectedPlan] = useState(0);
@@ -451,7 +379,8 @@ function Plans({ isSignedIn, langKeys }) {
 
   useEffect(() => {
     let deposit =
-      (isReferred ? (0.1 * parseInt(purchased.deposit)) : 0) + parseInt(purchased.deposit);
+      (isReferred ? 0.1 * parseInt(purchased.deposit) : 0) +
+      parseInt(purchased.deposit);
     let percentage = purchased.percentage / 100;
     setCalculation(deposit * percentage + parseInt(purchased.deposit));
   }, [isReferred, purchased]);
@@ -675,9 +604,54 @@ function Plans({ isSignedIn, langKeys }) {
       </PopUp>
     </Container>
   );
-}
+};
 
-function AboutUs({ langKeys }) {
+const Referral = ({ langKeys }) => {
+  return (
+    <Container
+      pos={"relative"}
+      flexDir={"column"}
+      id={"Referral"}
+      maxW={"container.xl"}
+      h={"auto"}
+      paddingTop={useBreakpointValue({ base: "50px", md: "100px" })}
+      paddingBottom={useBreakpointValue({ base: "30px", md: "50px" })}
+      alignItems={"center"}
+    >
+      <Flex
+        flexDir={useBreakpointValue({ base: "column", md: "row" })}
+        px={useBreakpointValue({ base: "20px", md: "30px" })}
+        marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
+        justifyContent={"center"}
+      >
+        <Flex
+          pos={"relative"}
+          flex={1}
+          justifyContent={"center"}
+          alignItems={"center"}
+          paddingRight={useBreakpointValue({
+            base: "0px",
+            sm: "0px",
+            md: "0px",
+            lg: "100px",
+          })}
+        >
+          <Bonus />
+        </Flex>
+        <VStack flex={1} alignItems={"start"} spacing={4}>
+          <Heading w={"full"} fontFamily={"Manrope-ExtraBold"}>
+            {langKeys["referralProgram"]}
+          </Heading>
+          <Text color={"#aeaeae"} textAlign={"left"}>
+            {langKeys["referralProgramContent"]}
+          </Text>
+        </VStack>
+      </Flex>
+    </Container>
+  );
+};
+
+const AboutUs = ({ langKeys }) => {
   return (
     <Container
       pos={"relative"}
@@ -755,7 +729,7 @@ function AboutUs({ langKeys }) {
       </Flex>
     </Container>
   );
-}
+};
 
 const Contacts = ({ langKeys }) => {
   const email = localStorage.getItem("email");
@@ -860,7 +834,7 @@ const Contacts = ({ langKeys }) => {
               value={content}
               resize={"none"}
               maxLength={300}
-              height={"250px"}
+              height={useBreakpointValue({ base: "150px", md: "250px" })}
               placeholder={langKeys["write"]}
               onChange={(event) => {
                 setContent(event.target.value);
@@ -885,7 +859,7 @@ const Contacts = ({ langKeys }) => {
   );
 };
 
-function PrimaryActionButton({ isSignedIn, loading, langKeys }) {
+const PrimaryActionButton = ({ isSignedIn, loading, langKeys }) => {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
@@ -904,9 +878,9 @@ function PrimaryActionButton({ isSignedIn, loading, langKeys }) {
       {isSignedIn ? langKeys["dashboard"] : langKeys["signUp"]}
     </GradientButton>
   );
-}
+};
 
-function SecondaryActionButton({ isSignedIn, loading, langKeys }) {
+const SecondaryActionButton = ({ isSignedIn, loading, langKeys }) => {
   const buttonFontSize = useBreakpointValue({
     base: "x-small",
     sm: "sm",
@@ -949,9 +923,9 @@ function SecondaryActionButton({ isSignedIn, loading, langKeys }) {
       )}
     </OutlinedButton>
   );
-}
+};
 
-function WalletButton({ langKeys }) {
+const WalletButton = ({ langKeys }) => {
   const buttonFontSize = useBreakpointValue({ base: "sm", md: "mdb" });
   return (
     <OutlinedButton
@@ -976,9 +950,9 @@ function WalletButton({ langKeys }) {
       {langKeys["myWallets"]}
     </OutlinedButton>
   );
-}
+};
 
-function ScrollDown({ langKeys }) {
+const ScrollDown = ({ langKeys }) => {
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
 
   return (
@@ -1005,7 +979,7 @@ function ScrollDown({ langKeys }) {
       </Box>
     </VStack>
   );
-}
+};
 
 const Parallaxes = () => {
   const zIndex = useBreakpointValue({ base: -1, sm: 10, md: 10 });

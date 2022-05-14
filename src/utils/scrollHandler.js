@@ -10,6 +10,10 @@ const scrollHandler = (section, navbarHeight) => {
       sectionName = "Plans";
       break;
     }
+    case "referral": {
+      sectionName = "Referral";
+      break;
+    }
     case "contact": {
       sectionName = "Contact";
       break;

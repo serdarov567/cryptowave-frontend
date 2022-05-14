@@ -582,7 +582,7 @@ const Support = () => {
               marginBottom={"20px"}
             >
               <Text>Email: {support.email}</Text>
-              <Text>Date of issue: {dateToString(support.date)}</Text>
+              <Text>Date of issue: {dateToString(support.date).dateStr}</Text>
             </Flex>
 
             <Text>Message: {support.content}</Text>
