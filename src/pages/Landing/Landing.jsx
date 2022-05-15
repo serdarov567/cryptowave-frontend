@@ -808,6 +808,7 @@ const Contacts = ({ isSignedIn, langKeys }) => {
         );
 
         if (result.status === 200) {
+          setFeedback("");
           toast({
             title: "Sent!",
             status: "success",
@@ -981,14 +982,14 @@ const Contacts = ({ isSignedIn, langKeys }) => {
               borderRadius: "24px",
             },
           }}
-          h={useBreakpointValue({ base: "300px", md: "75%" })}
+          h={useBreakpointValue({ base: "300px", md: "400px" })}
           w={"100%"}
           alignItems={"center"}
         >
           {reviews.length > 0 ? renderReviews() : "No Reviews available"}
         </Box>
         {isSignedIn && (
-          <Box>
+          <Box marginTop={"20px"}>
             <FormControl>
               <HStack>
                 <Input
