@@ -338,7 +338,9 @@ const rus = {
 
   aboutUs: " О нас",
 
-  leaveAFeedback: "Связаться",
+  contactUs: "Связаться",
+
+  leaveAFeedback: "Оставить отзыв",
 
   signIn: "Войти",
 
@@ -404,6 +406,8 @@ const rus = {
   write: "Напишите здесь",
 
   send: "Отправить",
+
+  feedbacks: "Отзывы",
 
   referralProgram: "Реферальная программа",
 
@@ -667,7 +671,9 @@ const esp = {
 
   aboutUs: "Sobre nosotros",
 
-  leaveAFeedback: " Contacta con nosotros",
+  contactUs: "Contacta con nosotros",
+
+  leaveAFeedback: "Deja un comentario",
 
   signIn: "Iniciar sesión",
 
@@ -733,6 +739,8 @@ const esp = {
   write: "Escriba aqui",
 
   send: "enviar",
+
+  feedbacks: "Comentarios",
 
   referralProgram: "Programa de referencia",
 
@@ -994,7 +1002,9 @@ const deu = {
 
   aboutUs: " Über uns",
 
-  leaveAFeedback: "Kontakt",
+  contactUs: "Kontakt",
+
+  leaveAFeedback: "Hinterlassen Sie ein Feedback",
 
   signIn: "Betreten",
 
@@ -1060,6 +1070,8 @@ const deu = {
   write: "Hier schreiben",
 
   send: "Schicken",
+
+  feedbacks: "Rückmeldungen",
 
   referralProgram: "Empfehlungsprogramm",
 

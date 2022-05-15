@@ -765,7 +765,7 @@ const Contacts = ({ isSignedIn, langKeys }) => {
 
       const newReviews = result.data.filter((review) => review.isVisible);
 
-      setReviews(newReviews);
+      setReviews(newReviews.reverse());
     };
 
     fetchData();
