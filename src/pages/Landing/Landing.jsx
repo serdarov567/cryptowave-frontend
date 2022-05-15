@@ -16,6 +16,7 @@ import {
   Input,
   FormErrorMessage,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import validator from "validator";
 import Tilde from "src/assets/vectors/Tilde";
@@ -34,7 +35,13 @@ import PopUp from "src/components/PopUp";
 import { scrollHandler } from "src/utils/scrollHandler";
 import usePlans from "src/pages/Landing/usePlans";
 import useWallets from "src/pages/Wallets/useWallets";
-import { addPlan, getReferralsOfUser, sendToSupport } from "src/utils/network";
+import {
+  addPlan,
+  getReferralsOfUser,
+  getReviews,
+  sendFeedback,
+  sendToSupport,
+} from "src/utils/network";
 import { useNavigate } from "react-router-dom";
 import Axe from "src/assets/images/axe.png";
 import Eth from "src/assets/images/eth.png";
@@ -63,6 +70,8 @@ const Landing = () => {
 
   const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
 
+  const maxWidthOfText = useBreakpointValue({ base: "50px", md: "100px" });
+
   return (
     <Box scrollBehavior="smooth">
       <Navbar
@@ -71,21 +80,29 @@ const Landing = () => {
         setLanguage={setLanguage}
         langKeys={langKeys}
       >
-        <Text
-          maxW={useBreakpointValue({ base: "50px", md: "100px" })}
-          fontSize={textFontSize}
-          fontFamily={"Manrope"}
-          fontWeight={200}
-          h={"20px"}
-          bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
-          bgClip={"text"}
-          fill={"transparent"}
-          alignSelf={"center"}
-          overflowWrap={"anywhere"}
-          textOverflow={"ellipsis"}
-        >
-          {localStorage.getItem("username")}
-        </Text>
+        {isSignedIn ? (
+          <Text
+            maxW={maxWidthOfText}
+            fontSize={textFontSize}
+            fontFamily={"Manrope"}
+            fontWeight={200}
+            bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
+            bgClip={"text"}
+            fill={"transparent"}
+            alignSelf={"center"}
+            overflowWrap={"anywhere"}
+            textOverflow={"ellipsis"}
+          >
+            {localStorage.getItem("username")}
+          </Text>
+        ) : (
+          <SecondaryActionButton
+            isSignedIn={isSignedIn}
+            loading={loading}
+            langKeys={langKeys}
+          />
+        )}
+
         <PrimaryActionButton
           isSignedIn={isSignedIn}
           loading={loading}
@@ -110,7 +127,7 @@ const Landing = () => {
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
         <Referral langKeys={langKeys} />
         <AboutUs langKeys={langKeys} />
-        <Contacts langKeys={langKeys} />
+        <Contacts isSignedIn={isSignedIn} langKeys={langKeys} />
       </Container>
       <Flex
         pos={"absolute"}
@@ -731,13 +748,28 @@ const AboutUs = ({ langKeys }) => {
   );
 };
 
-const Contacts = ({ langKeys }) => {
+const Contacts = ({ isSignedIn, langKeys }) => {
   const email = localStorage.getItem("email");
   const [sender, setSender] = useState(email !== null ? email : "");
+  const [feedback, setFeedback] = useState("");
   const [content, setContent] = useState("");
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  const [reviews, setReviews] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getReviews();
+
+      const newReviews = result.data.filter((review) => review.isVisible);
+
+      setReviews(newReviews);
+    };
+
+    fetchData();
+  }, []);
 
   const handleSendSupport = async () => {
     try {
@@ -763,6 +795,53 @@ const Contacts = ({ langKeys }) => {
     }
   };
 
+  const toast = useToast();
+
+  const handleSendFeedback = async () => {
+    try {
+      if (feedback.length > 0) {
+        const result = await sendFeedback(
+          localStorage.getItem("token"),
+          localStorage.getItem("email"),
+          localStorage.getItem("username"),
+          feedback
+        );
+
+        if (result.status === 200) {
+          toast({
+            title: "Sent!",
+            status: "success",
+            position: "top-left",
+            size: "sm",
+            duration: 1000,
+            isClosable: true,
+          });
+        }
+      } else {
+        toast({
+          title: "Please write something!",
+          status: "error",
+          position: "top-left",
+          size: "sm",
+          duration: 1000,
+          isClosable: true,
+        });
+      }
+    } catch (err) {
+      if (err.response !== undefined) {
+        toast({
+          title: "Network error!",
+          status: "error",
+          position: "top-left",
+          size: "sm",
+          duration: 1000,
+          isClosable: true,
+        });
+      }
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
     if (message.length > 0) {
       setTimeout(() => {
@@ -771,20 +850,43 @@ const Contacts = ({ langKeys }) => {
     }
   }, [message]);
 
+  const renderReviews = () => {
+    return reviews.map((review) => (
+      <Box
+        py={"10px"}
+        px={"20px"}
+        borderRadius={"10px"}
+        bgGradient={"linear-gradient(110deg, #282828, #242435)"}
+        w={"95%"}
+        h={"fit-content"}
+        bgColor={"#000"}
+        marginBlock={"10px"}
+      >
+        <Text>{review.username}</Text>
+        <Text>{review.content}</Text>
+      </Box>
+    ));
+  };
+
   return (
     <Flex
       id={"Contact"}
-      w={"100%"}
-      minH={"100vh"}
-      pos={"relative"}
+      maxW={useBreakpointValue({ md: "container.xl" })}
+      w={useBreakpointValue({ base: "80%" })}
+      alignSelf={"center"}
+      h={"fit-content"}
       flexDir={useBreakpointValue({ base: "column", md: "row" })}
-      px={useBreakpointValue({ base: "20px", sm: "50px", md: "30px" })}
       justifyContent={"center"}
-      paddingBottom={useBreakpointValue({ base: "30px", md: "0px" })}
+      paddingBottom={useBreakpointValue({ base: "140px", md: "200px" })}
     >
       <Box
+        flex={1}
+        pos={"relative"}
         h={"fit-content"}
-        minWidth={useBreakpointValue({ base: "80%", md: "600px" })}
+        minW={useBreakpointValue({ base: "100%", md: "40%" })}
+        marginInline={useBreakpointValue({ md: "40px" })}
+        marginBottom={useBreakpointValue({ base: "40px" })}
+        justifyContent={"center"}
         style={{
           border: "3px solid transparent",
         }}
@@ -792,7 +894,6 @@ const Contacts = ({ langKeys }) => {
         borderRadius={"10px"}
         px={useBreakpointValue({ base: "20px", md: "50px" })}
         py={useBreakpointValue({ base: "20px", md: "30px" })}
-        textAlign={"start"}
       >
         <VStack spacing={4}>
           <Heading
@@ -855,6 +956,62 @@ const Contacts = ({ langKeys }) => {
           {message.length > 0 && <Text color={"green"}>{message}</Text>}
         </VStack>
       </Box>
+
+      <Flex
+        color={"#FFF"}
+        flex={1}
+        pos={"relative"}
+        minW={useBreakpointValue({ base: "80%", md: "40%" })}
+        alignItems={"center"}
+        justifyContent={"flex-start"}
+        flexDir={"column"}
+      >
+        <Heading marginBottom={"20px"}>{langKeys["feedbacks"]}</Heading>
+        <Box
+          overflowY="scroll"
+          css={{
+            "&::-webkit-scrollbar": {
+              width: "4px",
+            },
+            "&::-webkit-scrollbar-track": {
+              width: "6px",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#fff",
+              borderRadius: "24px",
+            },
+          }}
+          h={useBreakpointValue({ base: "300px", md: "75%" })}
+          w={"100%"}
+          alignItems={"center"}
+        >
+          {reviews.length > 0 ? renderReviews() : "No Reviews available"}
+        </Box>
+        {isSignedIn && (
+          <Box>
+            <FormControl>
+              <HStack>
+                <Input
+                  value={feedback}
+                  variant={"primary"}
+                  height={"50px"}
+                  placeholder="Leave us a feedback"
+                  onChange={(event) => {
+                    setFeedback(event.target.value);
+                  }}
+                />
+                <GradientButton
+                  alignSelf={"center"}
+                  onClick={handleSendFeedback}
+                  loading={loading}
+                >
+                  {langKeys["send"]}
+                </GradientButton>
+              </HStack>
+            </FormControl>
+          </Box>
+        )}
+      </Flex>
     </Flex>
   );
 };

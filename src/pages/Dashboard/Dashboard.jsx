@@ -331,7 +331,8 @@ function Dashboard() {
                       ? earnings.length > 0
                         ? earnings.reduce((a, b) => a + b)
                         : 0
-                      : 0}$
+                      : 0}
+                    $
                   </Heading>
                   {/* <OutlinedButton
                     fontSize={detailsFontSize}
@@ -348,15 +349,13 @@ function Dashboard() {
                     $
                   </OutlinedButton> */}
                 </HStack>
-                {totalBonus && (
-                  <Heading
-                    fontSize={detailsFontSize}
-                    fontFamily={"Manrope-ExtraBold"}
-                    color={"green.500"}
-                  >
-                    Referal: +{totalBonus}$
-                  </Heading>
-                )}
+                <Heading
+                  fontSize={detailsFontSize}
+                  fontFamily={"Manrope-ExtraBold"}
+                  color={"green.500"}
+                >
+                  Referal: +{totalBonus}$
+                </Heading>
               </VStack>
 
               <VStack spacing={"10px"}>

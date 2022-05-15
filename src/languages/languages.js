@@ -5,7 +5,9 @@ const eng = {
 
   aboutUs: " About us",
 
-  contactUs: " Contact us",
+  contactUs: "Contact us",
+
+  leaveAFeedback: "Leave a feedback",
 
   signIn: "Sign in",
 
@@ -72,16 +74,15 @@ const eng = {
 
   send: "send",
 
+  feedbacks: "Feedbacks",
+
   referralProgram: "Referral program",
 
   referralProgramContent: `
-  The project started on February 1st.
-  
-  in 3 months of work, they reached $5M+ and are still gaining momentum. 2K+ investors are cooperating.
-  
-  after 3 months of hard work, we launch a referral program with a goal of scale. the referral program gives 10% of the amount invested by the attracted investor. and a bonus of 10% of the invested amount to the investor himself.
-  
-  the project is easy to understand. there is no extra information. there is only what an investor who wants to earn money needs to know`,
+  The project launched on February 1.
+  In 3 months of work, we have reached $5M+ and are still gaining profit 2K+  and more investors are cooperating with us.
+  After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 10% of the amount invested by the attracted investor and bonus of 10% of the invested amount to the investor himself.
+  The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
 
   terms: "Terms and Conditions. Privacy policy.",
 
@@ -337,7 +338,7 @@ const rus = {
 
   aboutUs: " О нас",
 
-  contactUs: "Связаться",
+  leaveAFeedback: "Связаться",
 
   signIn: "Войти",
 
@@ -406,13 +407,10 @@ const rus = {
 
   referralProgram: "Реферальная программа",
 
-  referralProgramContent: `проект стартовал 1 февраля.
-
-  за 3 месяца работы вышли на $5М+ и все еще набирают обороты 2К+ инвесторов сотрудничают. 
-  
-  после 3 месяцев упорной работы запускаем реферал программу с целью масштаба. реферал программа дает 10% от суммы которую вложил привлеченный инвестор. и бонус 10% от вложенной суммы самому инвестору.
-  
-  проект прост в понимании. нет никакой лишней информации. есть только то что нужно знать инвестору кто хочет зарабатывать`,
+  referralProgramContent: `Проект стартовал 1 февраля.
+  За 3 месяца работы мы достигли $ 5 млн+ и все еще получаем прибыль в 2 тыс.+, и все больше инвесторов сотрудничают с нами.
+  После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 10% от суммы, вложенной привлеченным инвестором, и бонус в размере 10% от вложенной суммы самому инвестору.
+  Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
 
   terms: "Условия и положения. Политика конфиденциальности.",
 
@@ -669,7 +667,7 @@ const esp = {
 
   aboutUs: "Sobre nosotros",
 
-  contactUs: " Contacta con nosotros",
+  leaveAFeedback: " Contacta con nosotros",
 
   signIn: "Iniciar sesión",
 
@@ -738,17 +736,10 @@ const esp = {
 
   referralProgram: "Programa de referencia",
 
-  referralProgramContent: `información básica:
-
-  El proyecto comenzó el 1 de febrero.
-  
-  en 3 meses de trabajo, alcanzaron los $5M+ y siguen ganando impulso. Más de 2K inversores están cooperando.
-  
-  después de 3 meses de arduo trabajo, lanzamos un programa de referencia con un objetivo de escala. el programa de referencia otorga el 10% de la cantidad invertida por el inversor atraído. y una bonificación del 10% del importe invertido al propio inversor.
-  
-  el proyecto es fácil de entender. no hay información adicional. solo hay lo que un inversor que quiere ganar dinero necesita saber`,
-
-  terms: "Términos y condiciones. Política de privacidad.",
+  referralProgramContent: `El proyecto se lanzó el 1 de febrero.
+En 3 meses de trabajo, hemos alcanzado $5M+ y todavía estamos obteniendo ganancias 2K+ y más inversores están cooperando con nosotros.
+Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el propósito de escalar. El programa de referencia otorga el 10% de la cantidad invertida por el inversor atraído y una bonificación del 10% de la cantidad invertida al propio inversor.
+El proyecto no es complicado y fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
 
   termsAndConditionsHeader: "Términos y condiciones",
 
@@ -1003,7 +994,7 @@ const deu = {
 
   aboutUs: " Über uns",
 
-  contactUs: "Kontakt",
+  leaveAFeedback: "Kontakt",
 
   signIn: "Betreten",
 
@@ -1072,17 +1063,10 @@ const deu = {
 
   referralProgram: "Empfehlungsprogramm",
 
-  referralProgramContent: `Grundinformation:
-
-  Das Projekt startete am 1. Februar.
-  
-  in 3 Monaten Arbeit erreichten sie über 5 Mio. USD und gewinnen immer noch an Dynamik. Mehr als 2.000 Investoren kooperieren.
-  
-  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm mit dem Ziel der Skalierung. Das Empfehlungsprogramm gibt 10 % des vom geworbenen Investor investierten Betrags. und einen Bonus von 10 % des investierten Betrags an den Anleger selbst.
-  
-  Das Projekt ist leicht verständlich. Es gibt keine zusätzlichen Informationen. Es gibt nur das, was ein Investor wissen muss, der Geld verdienen will`,
-
-  terms: "Geschäftsbedingungen. Datenschutz-Bestimmungen.",
+  referralProgramContent: `Das Projekt startete am 1. Februar.
+  In 3 Monaten Arbeit haben wir $ 5M + erreicht und gewinnen immer noch Gewinn 2K + und mehr Investoren kooperieren mit uns.
+  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm zum Zwecke der Skalierung. Das Empfehlungsprogramm gibt 10% des vom angezogenen Investor investierten Betrags und einen Bonus von 10% des investierten Betrags an den Investor selbst.
+  Das Projekt ist nicht kompliziert und leicht zu verstehen. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen möchte.'`,
 
   termsAndConditionsHeader: "Geschäftsbedingungen",
 

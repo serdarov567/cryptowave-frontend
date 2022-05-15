@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.31.165:1919/" });
+const axiosInstance = axios.create({ baseURL: "https://cryptowaveclub.com/" });
 
 const signUp = (email, username, password, referredUser) => {
   return axiosInstance.post(
@@ -230,7 +230,42 @@ const readReferrals = (email, token, ids) => {
 
 const getUsersCount = () => {
   return axiosInstance.get("api/users/count");
-}
+};
+
+const getReviews = (token, _id, status) => {
+  return axiosInstance.get("api/reviews");
+};
+
+const sendFeedback = (token, email, username, content) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.post(
+    "api/reviews",
+    { email, username, content }
+    //{ timeout: 10000 }
+  );
+};
+
+const deleteFeedback = (token, _id) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.delete(
+    "api/reviews",
+    {
+      data: {
+        _id,
+      },
+    }
+    //{ timeout: 10000 }
+  );
+};
+
+const visibleFeedback = (token, _id, isVisible) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.put(
+    "api/reviews",
+    { _id, isVisible }
+    //{ timeout: 10000 }
+  );
+};
 
 export {
   signUp,
@@ -257,5 +292,9 @@ export {
   requestWithdraw,
   getReferralsOfUser,
   readReferrals,
-  getUsersCount
+  getUsersCount,
+  getReviews,
+  sendFeedback,
+  deleteFeedback,
+  visibleFeedback
 };

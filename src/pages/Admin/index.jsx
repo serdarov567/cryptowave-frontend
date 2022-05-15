@@ -29,11 +29,14 @@ import Eye from "src/assets/vectors/Eye";
 import GradientButton from "src/components/GradientButton";
 import {
   checkAdmin,
+  deleteFeedback,
   deleteSupport,
   getAllUsers,
+  getReviews,
   getSupports,
   signAdmin,
   updatePlan,
+  visibleFeedback,
 } from "src/utils/network";
 import PlanItem from "src/pages/Admin/PlanItem";
 import dateToString from "src/utils/dateToString";
@@ -89,6 +92,7 @@ const Admin = () => {
           <Tab {...styles.tab}>Withdraw requests</Tab>
           <Tab {...styles.tab}>Plans</Tab>
           <Tab {...styles.tab}>Support</Tab>
+          <Tab {...styles.tab}>Reviews</Tab>
         </TabList>
         <TabPanels>
           <TabPanel>
@@ -102,6 +106,9 @@ const Admin = () => {
           </TabPanel>
           <TabPanel>
             <Support />
+          </TabPanel>
+          <TabPanel>
+            <Reviews />
           </TabPanel>
         </TabPanels>
       </Tabs>
@@ -367,9 +374,7 @@ const Withdraws = () => {
       if (user.plans !== undefined)
         return user.plans.map((plan) => {
           if (plan.status === selectedStatus) {
-            return (
-              <></>
-            );
+            return <></>;
           }
         });
     });
@@ -587,6 +592,7 @@ const Support = () => {
 
             <Text>Message: {support.content}</Text>
           </Flex>
+
           <Button
             alignSelf={"center"}
             onClick={async () => {
@@ -611,6 +617,112 @@ const Support = () => {
 
   return (
     <VStack w={"full"} h={"full"}>
+      {renderUsers}
+    </VStack>
+  );
+};
+
+const Reviews = () => {
+  const token = localStorage.getItem("admin-token");
+  const [supports, setSupports] = useState([]);
+  const [update, setUpdate] = useState(false);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await getReviews(token);
+      if (result.data !== null && result.data !== undefined) {
+        setSupports(result.data);
+      }
+    };
+
+    fetchData();
+
+    const interval = setInterval(() => {
+      setUpdate(!update);
+    }, MINUTE);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [update]);
+
+  const renderUsers = useMemo(() => {
+    return supports.map((support) => {
+      return (
+        <HStack
+          key={support._id}
+          w={"100%"}
+          py={"30px"}
+          px={"50px"}
+          fontFamily={"Manrope-Bold"}
+          alignItems={"start"}
+          bgColor={"background.200"}
+          borderRadius={"10px"}
+          spacing={12}
+        >
+          <Flex
+            flexDir={"column"}
+            fontSize={"20px"}
+            w={"100%"}
+            justifyContent={"space-evenly"}
+          >
+            <Flex
+              flexDir={"row"}
+              justifyContent={"space-between"}
+              marginBottom={"20px"}
+            >
+              <Text>Username: {support.username}</Text>
+            </Flex>
+
+            <Text>Message: {support.content}</Text>
+          </Flex>
+
+          <Button
+            alignSelf={"center"}
+            onClick={async () => {
+              try {
+                const result = await visibleFeedback(
+                  token,
+                  support._id,
+                  !support.isVisible
+                );
+
+                if (result.status === 200) {
+                  alert("Updated");
+                  setUpdate(!update);
+                }
+              } catch (error) {
+                alert("Error");
+              }
+            }}
+          >
+            {support.isVisible ? "Make it invisible" : "Make it visible"}
+          </Button>
+
+          <Button
+            alignSelf={"center"}
+            onClick={async () => {
+              try {
+                const result = await deleteFeedback(token, support._id);
+
+                if (result.status === 200) {
+                  alert("Deleted");
+                  setUpdate(!update);
+                }
+              } catch (error) {
+                alert("Error");
+              }
+            }}
+          >
+            Delete
+          </Button>
+        </HStack>
+      );
+    });
+  }, [supports]);
+
+  return (
+    <VStack w={"full"} h={"full"} spacing={"20px"}>
       {renderUsers}
     </VStack>
   );
