@@ -78,8 +78,7 @@ const eng = {
 
   referralProgram: "Referral program",
 
-  referralProgramContent: `
-  The project launched on February 1.
+  referralProgramContent: `Project "Cryptowave" launched on February 1.
   In 3 months of work, we have reached $5M+ and are still gaining profit 2K+  and more investors are cooperating with us.
   After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 10% of the amount invested by the attracted investor and bonus of 10% of the invested amount to the investor himself.
   The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
@@ -425,7 +424,7 @@ const rus = {
 
   referralProgram: "Реферальная программа",
 
-  referralProgramContent: `Проект стартовал 1 февраля.
+  referralProgramContent: `Проект "Cryptowave" стартовал 1 февраля.
   За 3 месяца работы мы достигли $ 5 млн+ и все еще получаем прибыль в 2 тыс.+, и все больше инвесторов сотрудничают с нами.
   После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 10% от суммы, вложенной привлеченным инвестором, и бонус в размере 10% от вложенной суммы самому инвестору.
   Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
@@ -772,7 +771,7 @@ const esp = {
 
   referralProgram: "Programa de referencia",
 
-  referralProgramContent: `El proyecto se lanzó el 1 de febrero.
+  referralProgramContent: `Proyecto "Cryptowave" se lanzó el 1 de febrero.
 En 3 meses de trabajo, hemos alcanzado $5M+ y todavía estamos obteniendo ganancias 2K+ y más inversores están cooperando con nosotros.
 Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el propósito de escalar. El programa de referencia otorga el 10% de la cantidad invertida por el inversor atraído y una bonificación del 10% de la cantidad invertida al propio inversor.
 El proyecto no es complicado y fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
@@ -1115,7 +1114,7 @@ const deu = {
 
   referralProgram: "Empfehlungsprogramm",
 
-  referralProgramContent: `Das Projekt startete am 1. Februar.
+  referralProgramContent: `Projekt "Cryptowave" startete am 1. Februar.
   In 3 Monaten Arbeit haben wir $ 5M + erreicht und gewinnen immer noch Gewinn 2K + und mehr Investoren kooperieren mit uns.
   Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm zum Zwecke der Skalierung. Das Empfehlungsprogramm gibt 10% des vom angezogenen Investor investierten Betrags und einen Bonus von 10% des investierten Betrags an den Investor selbst.
   Das Projekt ist nicht kompliziert und leicht zu verstehen. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen möchte.'`,
