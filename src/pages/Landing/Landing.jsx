@@ -55,6 +55,8 @@ import TextButton from "src/components/TextButton";
 import useLanguage from "src/languages/useLanguage";
 import Statistics from "./Statistics";
 import Bonus from "src/assets/vectors/Bonus";
+import AtSymbol from "src/assets/images/atSymbol.png";
+import Telegram from "src/assets/vectors/Telegram";
 
 const Landing = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -894,15 +896,24 @@ const Contacts = ({ isSignedIn, langKeys }) => {
         background={`linear-gradient(${colors.background[900]}, ${colors.background[900]}) padding-box, linear-gradient(110deg, #404040, ${colors.background[900]}) border-box`}
         borderRadius={"10px"}
         px={useBreakpointValue({ base: "20px", md: "50px" })}
-        py={useBreakpointValue({ base: "20px", md: "30px" })}
+        paddingTop={useBreakpointValue({ base: "20px", md: "30px" })}
       >
         <VStack spacing={4}>
-          <Heading
-            alignSelf={"flex-start"}
-            fontSize={useBreakpointValue({ base: "24px", md: "30px" })}
-          >
-            {langKeys["contactUs"]}
-          </Heading>
+          <Flex w={"full"} justify={"space-between"}>
+            <Heading
+              alignSelf={"flex-start"}
+              fontSize={useBreakpointValue({ base: "24px", md: "30px" })}
+            >
+              {langKeys["contactUs"]}
+            </Heading>
+            <a
+              href={"https://t.me/cryptowaveclub"}
+              target={"_blank"}
+              rel="noreferrer"
+            >
+              <Telegram />
+            </a>
+          </Flex>
           {error.length > 0 && <Text color={"red"}>{error}</Text>}
           <FormControl
             isInvalid={sender.length > 0 && !validator.isEmail(sender)}
@@ -911,7 +922,7 @@ const Contacts = ({ isSignedIn, langKeys }) => {
               variant={"primary"}
               fontSize={useBreakpointValue({ base: "12px", md: "18px" })}
             >
-              Email
+              {langKeys["mail"]}
             </FormLabel>
             <Input
               value={sender}
@@ -922,7 +933,7 @@ const Contacts = ({ isSignedIn, langKeys }) => {
                 setSender(event.target.value);
               }}
             />
-            <FormErrorMessage>Not a valid email.</FormErrorMessage>
+            <FormErrorMessage>{langKeys["incorrectMail"]}</FormErrorMessage>
           </FormControl>
 
           <FormControl isInvalid={content.length > 0 && content.length < 10}>
@@ -930,7 +941,7 @@ const Contacts = ({ isSignedIn, langKeys }) => {
               variant={"primary"}
               fontSize={useBreakpointValue({ base: "12px", md: "18px" })}
             >
-              Message
+              {langKeys["message"]}
             </FormLabel>
             <Textarea
               value={content}
@@ -943,17 +954,27 @@ const Contacts = ({ isSignedIn, langKeys }) => {
               }}
             />
             <FormErrorMessage>
-              Message must be longer than 10 characters.
+              {langKeys["messageRequirements"]}
             </FormErrorMessage>
           </FormControl>
 
-          <GradientButton
-            alignSelf={"flex-end"}
-            onClick={handleSendSupport}
-            loading={loading}
-          >
-            {langKeys["send"]}
-          </GradientButton>
+          <Flex w={"full"} flexDir={"row"} justifyContent={"space-between"}>
+            <img
+              style={{
+                width: useBreakpointValue({ base: "80px", md: "150px" }),
+              }}
+              src={AtSymbol}
+              alt={"at"}
+            />
+            <GradientButton
+              alignSelf={"center"}
+              onClick={handleSendSupport}
+              loading={loading}
+            >
+              {langKeys["send"]}
+            </GradientButton>
+          </Flex>
+
           {message.length > 0 && <Text color={"green"}>{message}</Text>}
         </VStack>
       </Box>

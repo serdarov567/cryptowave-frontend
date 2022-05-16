@@ -147,7 +147,6 @@ function Dashboard() {
           fontSize={textFontSize}
           fontFamily={"Manrope"}
           fontWeight={200}
-          h={"20px"}
           bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
           bgClip={"text"}
           fill={"transparent"}
@@ -354,7 +353,7 @@ function Dashboard() {
                   fontFamily={"Manrope-ExtraBold"}
                   color={"green.500"}
                 >
-                  Referal: +{totalBonus}$
+                  {langKeys["referralBonus"]} +{totalBonus}$
                 </Heading>
               </VStack>
 

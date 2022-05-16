@@ -43,6 +43,8 @@ const passwordOptions = {
   minSymbols: 1,
 };
 
+const marginBetween = "10px";
+
 export default function Sign() {
   const [isSignedIn, loading] = useIsSignedIn();
   const navigate = useNavigate();
@@ -74,13 +76,13 @@ export default function Sign() {
     }
     case "verify": {
       header = "Verification";
-      sectionName = "Enter the verification code";
+      sectionName = langKeys["enterVerification"];
       form = <Verify langKeys={langKeys} />;
       break;
     }
     case "change": {
       header = "Change password";
-      sectionName = "Enter verifiaction code and your new password";
+      sectionName = langKeys["enterVerificationAndNewPassword"];
       form = <NewPassword langKeys={langKeys} />;
       break;
     }
@@ -221,7 +223,8 @@ function SignUp(props) {
     if (
       validator.isEmail(email) &&
       username.length >= 4 &&
-      validator.isStrongPassword(password, passwordOptions) && !validator.contains(username, " ")
+      validator.isStrongPassword(password, passwordOptions) &&
+      !validator.contains(username, " ")
     ) {
       setIsLoading(true);
       setError("");
@@ -237,22 +240,22 @@ function SignUp(props) {
           localStorage.setItem("email", email);
           navigate("/sign/verify");
         } else if (result.data === "exists") {
-          setError("User already exists!");
+          setError(langKeys["errorUserAlreadyExists"]);
         }
         setIsLoading(false);
       } catch (err) {
         if (err.response.status === 406) {
-          setError("Not acceptable inputs!");
+          setError(langKeys["errorNotAcceptable"]);
         } else if (err.response.status === 500) {
-          setError("Server error!");
+          setError(langKeys["errorServer"]);
         } else {
-          setError("Network error!");
+          setError(langKeys["errorNetwork"]);
         }
         setIsLoading(false);
         console.error(err);
       }
     } else {
-      setError("Fill the fields as required!");
+      setError(langKeys["fillTheRequested"]);
     }
   };
 
@@ -265,9 +268,12 @@ function SignUp(props) {
       }}
     >
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
-      <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
-        <FormLabel variant={"primary"} fontSize={fontSize}>
-          Email
+      <FormControl
+        isInvalid={email.length > 0 && !validator.isEmail(email)}
+        marginBottom={marginBetween}
+      >
+        <FormLabel variant={"primary"} fontSize={fontSize} >
+          {langKeys["mail"]}
         </FormLabel>
         <Input
           variant={"primary"}
@@ -277,11 +283,15 @@ function SignUp(props) {
             setEmail(event.target.value);
           }}
         />
-        <FormErrorMessage>Not a valid email.</FormErrorMessage>
+        <FormErrorMessage>{langKeys["incorrectMail"]}</FormErrorMessage>
       </FormControl>
 
       <FormControl
-        isInvalid={(username.length < 4 && username.length > 0) || validator.contains(username, " ")}
+        isInvalid={
+          (username.length < 4 && username.length > 0) ||
+          validator.contains(username, " ")
+        }
+        marginBottom={marginBetween}
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
           Username
@@ -294,9 +304,7 @@ function SignUp(props) {
             setUsername(event.target.value);
           }}
         />
-        <FormErrorMessage>
-          Username must be longer than 4 letters and must not contain spaces
-        </FormErrorMessage>
+        <FormErrorMessage>{langKeys["usernameRequirements"]}</FormErrorMessage>
       </FormControl>
 
       <FormControl
@@ -304,6 +312,7 @@ function SignUp(props) {
           password.length > 0 &&
           !validator.isStrongPassword(password, passwordOptions)
         }
+        marginBottom={marginBetween}
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
           {langKeys["password"]}
@@ -331,10 +340,7 @@ function SignUp(props) {
           </InputRightElement>
         </InputGroup>
 
-        <FormErrorMessage>
-          Password at least must include 1 symbol, 1 uppercase letter, 1
-          numeral, 1 lowercase letter and must be longer that 8 characters.
-        </FormErrorMessage>
+        <FormErrorMessage>{langKeys["passwordRequirements"]}</FormErrorMessage>
       </FormControl>
       <Flex
         w={"full"}
@@ -342,7 +348,7 @@ function SignUp(props) {
         alignItems={"center"}
         flexDirection={flexDirection}
       >
-        <VStack alignItems={"start"}>
+        <VStack textAlign={"left"} alignItems={"start"}>
           <Text fontSize={useBreakpointValue({ base: "12px", md: "14px" })}>
             {langKeys["signInText"]}{" "}
             <TextButton
@@ -373,6 +379,7 @@ function SignUp(props) {
           fontSize={fontSize}
           height={inputHeight}
           marginTop={useBreakpointValue({ base: "10px", md: "0" })}
+          minW={langKeys["signUp"] === "Зарегистрироваться" && "200px"}
         >
           {langKeys["signUp"]}
         </GradientButton>
@@ -422,15 +429,15 @@ function SignIn(props) {
       } catch (err) {
         if (err.response !== undefined) {
           if (err.response.status === 403) {
-            setError("Email or password is wrong!");
+            setError(langKeys["errorEmailPasswordWrong"]);
           } else if (err.response.status === 404) {
-            setError("User does not exist!");
+            setError(langKeys["userNotExists"]);
           } else if (err.response.status === 406) {
-            setError("Not acceptable inputs!");
+            setError(langKeys["errorNotAcceptable"]);
           } else if (err.response.status === 500) {
-            setError("Server error!");
+            setError(langKeys["errorServer"]);
           } else {
-            setError("Network error!");
+            setError(langKeys["errorNetwork"]);
           }
         }
 
@@ -438,7 +445,7 @@ function SignIn(props) {
         console.error(err);
       }
     } else {
-      setError("Fill the fields as required!");
+      setError(langKeys["fillTheRequested"]);
     }
   };
 
@@ -451,9 +458,9 @@ function SignIn(props) {
       }}
     >
       {error.length > 0 && <Text color={"red"}>{error}</Text>}
-      <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
+      <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)} marginBottom={marginBetween}>
         <FormLabel variant={"primary"} fontSize={fontSize}>
-          Email
+          {langKeys["mail"]}
         </FormLabel>
         <Input
           variant={"primary"}
@@ -463,7 +470,7 @@ function SignIn(props) {
             setEmail(event.target.value);
           }}
         />
-        <FormErrorMessage>Not a valid email.</FormErrorMessage>
+        <FormErrorMessage>{langKeys["incorrectMail"]}</FormErrorMessage>
       </FormControl>
       <FormControl
         textAlign={"left"}
@@ -477,6 +484,7 @@ function SignIn(props) {
             minSymbols: 1,
           })
         }
+        marginBottom={marginBetween}
       >
         <FormLabel variant={"primary"} fontSize={fontSize}>
           {langKeys["password"]}
@@ -504,7 +512,7 @@ function SignIn(props) {
           </InputRightElement>
         </InputGroup>
 
-        <FormErrorMessage>Not a valid password</FormErrorMessage>
+        <FormErrorMessage>{langKeys["incorrectPassword"]}</FormErrorMessage>
 
         <TextButton href={"/sign/forgot"} fontSize={fontSize}>
           {langKeys["forgot"]}
@@ -575,23 +583,23 @@ function Verify(props) {
         setIsLoading(false);
       } catch (err) {
         if (err.response.status === 403) {
-          setError("Invalid code! We sent a new code to your email!");
+          setError(props.langKeys["invalidCodeWeSentNew"]);
         } else if (err.response.status === 404) {
-          setError("Account has not been registered!");
+          setError(props.langKeys["accountNotRegistered"]);
           localStorage.removeItem("email");
         } else if (err.response.status === 406) {
-          setError("Not acceptable!");
+          setError(props.langKeys["errorNotAcceptable"]);
         } else if (err.response.status === 408) {
-          setError("Too many attempts, please try again after a while!");
+          setError(props.langKeys["tooManyAttempts"]);
         } else if (err.response.status === 500) {
-          setError("Server error!");
+          setError(props.langKeys["errorServer"]);
         } else {
-          setError("Network error!");
+          setError(props.langKeys["errorNetwork"]);
         }
         setIsLoading(false);
       }
     } else {
-      setError("Please, write the code!");
+      setError(props.langKeys["pleaseWriteCode"]);
     }
   };
 
@@ -617,7 +625,9 @@ function Verify(props) {
               setCode(event.target.value);
             }}
           />
-          <FormErrorMessage>Code must be 4 digits</FormErrorMessage>
+          <FormErrorMessage>
+            {props.langKeys["codeRequirements"]}
+          </FormErrorMessage>
         </FormControl>
 
         <GradientButton
@@ -630,7 +640,7 @@ function Verify(props) {
           fontSize={fontSize}
           marginTop={"20px"}
         >
-          Verify
+          {props.langKeys["verify"]}
         </GradientButton>
       </form>
     </Flex>
@@ -661,20 +671,20 @@ function Forgot(props) {
       } catch (error) {
         if (error.response !== undefined) {
           if (error.response.status === 404) {
-            setError("User does not exist!");
+            setError(props.langKeys["userNotExists"]);
           } else if (error.response.status === 406) {
-            setError("Not acceptable inputs!");
+            setError(props.langKeys["errorNotAcceptable"]);
           } else if (error.response.status === 500) {
-            setError("Server error!");
+            setError(props.langKeys["errorServer"]);
           } else {
-            setError("Network error!");
+            setError(props.langKeys["errorNetwork"]);
           }
         }
         setIsLoading(false);
         console.error(error);
       }
     } else {
-      setError("Fill the fields as required!");
+      setError(props.langKeys["fillTheRequested"]);
     }
   };
 
@@ -690,7 +700,7 @@ function Forgot(props) {
         {error.length > 0 && <Text color={"red"}>{error}</Text>}
         <FormControl isInvalid={email.length > 0 && !validator.isEmail(email)}>
           <FormLabel variant={"primary"} fontSize={fontSize}>
-            Email
+            {props.langKeys["mail"]}
           </FormLabel>
           <Input
             variant={"primary"}
@@ -700,7 +710,7 @@ function Forgot(props) {
               setEmail(event.target.value);
             }}
           />
-          <FormErrorMessage>Not a valid email.</FormErrorMessage>
+          <FormErrorMessage>{props.langKeys["incorrectMail"]}</FormErrorMessage>
         </FormControl>
         <GradientButton
           type={"submit"}
@@ -711,7 +721,7 @@ function Forgot(props) {
           height={inputHeight}
           marginTop={"20px"}
         >
-          Send the code
+          {props.langKeys["sendTheCode"]}
         </GradientButton>
       </form>
     </Flex>
@@ -752,21 +762,21 @@ const NewPassword = (props) => {
         setIsLoading(false);
       } catch (error) {
         if (error.response.status === 403) {
-          setError("Invalid code!");
+          setError(props.langKeys["invalidCode"]);
         } else if (error.response.status === 404) {
-          setError("User does not exist!");
+          setError(props.langKeys["userNotExists"]);
         } else if (error.response.status === 406) {
-          setError("Not acceptable inputs!");
+          setError(props.langKeys["errorNotAcceptable"]);
         } else if (error.response.status === 500) {
-          setError("Server error!");
+          setError(props.langKeys["errorServer"]);
         } else {
-          setError("Network error!");
+          setError(props.langKeys["errorNetwork"]);
         }
         setIsLoading(false);
         console.error(error);
       }
     } else {
-      setError("Fill the fields as required!");
+      setError(props.langKeys["fillTheRequested"]);
     }
   };
 
@@ -782,7 +792,7 @@ const NewPassword = (props) => {
         {error.length > 0 && <Text color={"red"}>{error}</Text>}
         <FormControl>
           <FormLabel variant={"primary"} fontSize={fontSize}>
-            Code from email
+            {props.langKeys["codeFromEmail"]}
           </FormLabel>
           <Input
             variant={"primary"}
@@ -800,7 +810,7 @@ const NewPassword = (props) => {
           }
         >
           <FormLabel variant={"primary"} fontSize={fontSize}>
-            New password
+            {props.langKeys["newPassword"]}
           </FormLabel>
           <Input
             variant={"primary"}
@@ -811,8 +821,7 @@ const NewPassword = (props) => {
             }}
           />
           <FormErrorMessage>
-            Password at least must include 1 symbol, 1 uppercase letter, 1
-            numeral, 1 lowercase letter and must be longer that 8 characters.
+            {props.langKeys["passwordRequirements"]}
           </FormErrorMessage>
         </FormControl>
         <GradientButton
@@ -824,7 +833,7 @@ const NewPassword = (props) => {
           height={inputHeight}
           marginTop={"20px"}
         >
-          Change password
+          {props.langKeys["changePassword"]}
         </GradientButton>
       </form>
     </Flex>

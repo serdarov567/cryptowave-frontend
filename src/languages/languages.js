@@ -83,7 +83,7 @@ const eng = {
   After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 10% of the amount invested by the attracted investor and bonus of 10% of the invested amount to the investor himself.
   The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
 
-  terms: "Terms and Conditions. Privacy policy.",
+  terms: "Terms and Conditions | Privacy policy.",
 
   termsAndConditionsHeader: "Terms and Conditions",
 
@@ -258,7 +258,9 @@ Personal information includes such items as:
 
   welcomeBack: "Welcome back!",
 
-  password: "password",
+  password: "Password",
+
+  newPassword: "New password",
 
   forgot: "Forgot password",
 
@@ -333,15 +335,62 @@ Personal information includes such items as:
 
   message: "Your Message",
 
+  messageRequirements: "Message must be longer than 10 characters.",
+
   mail: "Email",
 
   incorrectMail: "Not a valid email.",
+
+  incorrectPassword: "Not a valid password",
+
+  invalidCodeWeSentNew: "Invalid code! We sent a new code to your email!",
+
+  invalidCode: "Invalid code!",
+
+  codeFromEmail: "Code from email",
+
+  tooManyAttempts: "Too many attempts, please try again after a while!",
+
+  pleaseWriteCode: "Please, write the code!",
+
+  codeRequirements: "Code must be 4 digits",
+
+  accountNotRegistered: "Account has not been registered!",
 
   referralBonus: "Referral:",
 
   emptyWallet: "You don't have a wallet.",
 
+  errorEmailPasswordWrong: "Email or password is wrong!",
 
+  errorUserAlreadyExists: "User already exists!",
+
+  errorNotAcceptable: "Not acceptable inputs!",
+
+  userNotExists: "User does not exist!",
+
+  errorServer: "Server error!",
+
+  errorNetwork: "Network error!",
+
+  fillTheRequested: "Fill the fields as required!",
+
+  enterVerification: "Enter the verification code",
+
+  usernameRequirements:
+    "Username must be longer than 4 letters and must not contain spaces",
+
+  passwordRequirements: `Password at least must include 1 symbol, 1 uppercase letter, 1
+  numeral, 1 lowercase letter and must be longer that 8 characters.`,
+
+  enterVerificationAndNewPassword:
+    "Enter verifiaction code and your new password",
+
+  verify: "Verify",
+
+  sendTheCode: "Send the code",
+
+  changePassword: "Change password",
 };
 
 const rus = {
@@ -429,7 +478,7 @@ const rus = {
   После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 10% от суммы, вложенной привлеченным инвестором, и бонус в размере 10% от вложенной суммы самому инвестору.
   Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
 
-  terms: "Условия и положения. Политика конфиденциальности.",
+  terms: "Условия и положения | Политика конфиденциальности.",
 
   termsAndConditionsHeader: "Условия и положения",
 
@@ -604,7 +653,9 @@ const rus = {
 
   welcomeBack: "С возвращением!",
 
-  password: "пароль",
+  password: "Пароль",
+
+  newPassword: "Новый пароль",
 
   forgot: "Забыли пароль",
 
@@ -677,15 +728,62 @@ const rus = {
 
   message: "Ваше сообщение",
 
+  messageRequirements: "Сообщение должно быть длиннее 10 символов.",
+
   mail: "Почта",
 
   incorrectMail: "Недействительный адрес электронной почты.",
+
+  incorrectPassword: "Недействительный пароль",
+
+  invalidCodeWeSentNew: "Неверный код! Мы отправили новый код на вашу почту!",
+
+  invalidCode: "Неверный код!",
+
+  codeFromEmail: "Код из электронной почты",
+
+  tooManyAttempts:
+    "Слишком много попыток, повторите попытку через некоторое время!",
+
+  pleaseWriteCode: "Пожалуйста, напишите код!",
+
+  codeRequirements: "Код должен состоять из 4 цифр",
+
+  accountNotRegistered: "Аккаунт не зарегистрирован!",
 
   referralBonus: "Рефераль:",
 
   emptyWallet: "У вас нет кошелька",
 
+  errorEmailPasswordWrong: "Э-почта или пароль неверны!",
 
+  errorUserAlreadyExists: "Пользователь уже существует!",
+
+  errorNotAcceptable: "Недопустимый!",
+
+  userNotExists: "Пользователь не существует!",
+
+  errorServer: "Ошибка сервера!",
+
+  errorNetwork: "Сетевая ошибка!",
+
+  fillTheRequested: "Заполните поля по мере необходимости!",
+
+  enterVerification: "Введите код подтверждения",
+
+  usernameRequirements:
+    "Имя пользователя должно быть длиннее 4 букв и не должно содержать пробелов",
+
+  passwordRequirements: `Пароль должен содержать как минимум 1 символ, 1 заглавную букву, 1
+    цифра, 1 строчная буква и должно быть длиннее 8 символов.`,
+
+  enterVerificationAndNewPassword: "Введите проверочный код и новый пароль",
+
+  verify: "Проверять",
+
+  sendTheCode: "Отправить код",
+
+  changePassword: "Сменить пароль",
 };
 
 const chn = {
@@ -777,6 +875,8 @@ Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el 
 El proyecto no es complicado y fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
 
   termsAndConditionsHeader: "Términos y condiciones",
+
+  terms: "Términos y condiciones | Política de privacidad.",
 
   termsAndConditions: `Reglas generales
   
@@ -949,7 +1049,9 @@ La información personal incluye elementos tales como:
 
   welcomeBack: "¡Bienvenido de nuevo!",
 
-  password: "clave",
+  password: "Clave",
+
+  newPassword: "Nueva contraseña",
 
   forgot: "Se te olvidó tu contraseña",
 
@@ -1025,13 +1127,65 @@ La información personal incluye elementos tales como:
 
   message: "Tu mensaje",
 
+  messageRequirements: "El mensaje debe tener más de 10 caracteres.",
+
   mail: "Email",
 
   incorrectMail: "No es un correo válido.",
 
+  incorrectPassword: "No es una contraseña válida",
+
+  invalidCodeWeSentNew:
+    "¡Codigo invalido! ¡Enviamos un nuevo código a tu correo electrónico!",
+
+  invalidCode: "¡Codigo invalido!",
+
+  codeFromEmail: "Código del correo electrónico",
+
+  tooManyAttempts:
+    "Demasiados intentos, inténtalo de nuevo después de un tiempo.",
+
+  pleaseWriteCode: "¡Por favor, escribe el código!",
+
+  codeRequirements: "El código debe tener 4 dígitos",
+
+  accountNotRegistered: "¡La cuenta no ha sido registrada!",
+
   referralBonus: "Refferal:",
 
   emptyWallet: "No tienes billetera.",
+
+  errorEmailPasswordWrong:
+    "¡El correo electrónico o la contraseña son incorrectos!",
+
+  errorUserAlreadyExists: "El usuario ya existe!",
+
+  errorNotAcceptable: "Entradas no aceptables!",
+
+  userNotExists: "El usuario no existe!",
+
+  errorServer: "¡Error del Servidor!",
+
+  errorNetwork: "¡Error de red!",
+
+  fillTheRequested: "¡Complete los campos según sea necesario!",
+
+  enterVerification: "Introduzca el código de verificación",
+
+  usernameRequirements:
+    "El nombre de usuario debe tener más de 4 letras y no debe contener espacios",
+
+  passwordRequirements: `La contraseña debe incluir al menos 1 símbolo, 1 letra mayúscula, 1
+    numeral, 1 letra minúscula y debe tener más de 8 caracteres.`,
+
+  enterVerificationAndNewPassword:
+    "Ingrese el código de verificación y su nueva contraseña",
+
+  verify: "Verificar",
+
+  sendTheCode: "Envía el código",
+
+  changePassword: "Cambia la contraseña",
 };
 
 const deu = {
@@ -1120,6 +1274,8 @@ const deu = {
   Das Projekt ist nicht kompliziert und leicht zu verstehen. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen möchte.'`,
 
   termsAndConditionsHeader: "Geschäftsbedingungen",
+
+  terms: "Geschäftsbedingungen | Datenschutz-Bestimmungen.",
 
   termsAndConditions: `Allgemeine Regeln
   
@@ -1294,6 +1450,8 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   password: "Passwort",
 
+  newPassword: "Neues Kennwort",
+
   forgot: "Passwort vergessen",
 
   accountText: "Sie haben kein Konto? gemäß",
@@ -1317,7 +1475,7 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   activePlans: "Aktive Plänes",
 
-  planHistory: "Planen Sie die Geschichte",
+  planHistory: "Geschichte",
 
   earning: "Gesamteinkommen",
 
@@ -1366,13 +1524,64 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   message: "Ihre Nachricht.",
 
+  messageRequirements: "Die Nachricht muss länger als 10 Zeichen sein.",
+
   mail: "Email",
 
   incorrectMail: "Keine gültige email.",
 
+  incorrectPassword: "Kein gültiges Passwort",
+
+  invalidCodeWeSentNew:
+    "Ungültiger Code! Wir haben einen neuen Code an Ihre E-Mail gesendet!",
+
+  invalidCode: "Ungültiger Code!",
+
+  codeFromEmail: "Code aus E-Mail",
+
+  tooManyAttempts:
+    "Zu viele Versuche, bitte versuchen Sie es nach einer Weile erneut!",
+
+  pleaseWriteCode: "Bitte schreiben Sie den Code!",
+
+  codeRequirements: "Der Code muss 4-stellig sein",
+
+  accountNotRegistered: "Konto wurde nicht registriert!",
+
   referralBonus: "Referral:",
 
   emptyWallet: "Du hast kein Portemonnaie.",
+
+  errorEmailPasswordWrong: "E-Mail oder Passwort ist falsch!",
+
+  errorUserAlreadyExists: "Benutzer existiert bereits!",
+
+  errorNotAcceptable: "Nicht akzeptable Eingaben!",
+
+  userNotExists: "Benutzer existiert nicht!",
+
+  errorServer: "Serverfehler!",
+
+  errorNetwork: "Netzwerkfehler!",
+
+  fillTheRequested: "Füllen Sie die Felder nach Bedarf aus!",
+
+  enterVerification: "Gib den Bestätigungscode ein",
+
+  usernameRequirements:
+    "Der Benutzername muss länger als 4 Buchstaben sein und darf keine Leerzeichen enthalten",
+
+  passwordRequirements: `Das Passwort muss mindestens 1 Symbol, 1 Großbuchstaben, 1 enthalten
+    Ziffer, 1 Kleinbuchstabe und muss länger als 8 Zeichen sein.`,
+
+  enterVerificationAndNewPassword:
+    "Geben Sie den Bestätigungscode und Ihr neues Passwort ein",
+
+  verify: "Verifizieren",
+
+  sendTheCode: "Senden Sie den Code",
+
+  changePassword: "Ändere das Passwort",
 };
 
 export { eng, rus, chn, esp, deu };
