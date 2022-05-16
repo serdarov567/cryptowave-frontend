@@ -19,6 +19,7 @@ import {
   Thead,
   Tr,
   useBreakpointValue,
+  useToast,
   VStack,
 } from "@chakra-ui/react";
 import Navbar from "src/components/Navbar";
@@ -72,7 +73,10 @@ const Withdraw = () => {
     md: "16px",
   });
 
+  const toast = useToast();
+
   const sendWithdrawRequest = async () => {
+    let errorMessage = "";
     if (
       newWithdraw.email.length > 0 &&
       newWithdraw.amount >= 50 &&
@@ -85,21 +89,37 @@ const Withdraw = () => {
         const result = await requestWithdraw(email, token, newWithdraw);
 
         if (result.status === 200) {
-          alert("Requested!");
+          toast({
+            title: "Requested!",
+            status: "success",
+            position: "top-left",
+            size: "sm",
+            duration: 1000,
+            isClosable: true,
+          });
           refresh();
         }
       } catch (error) {
         if (error.response.status === 403) {
-          alert("You don't have permission!");
+          errorMessage = "You don't have permission!";
         } else if (error.response.status === 406) {
-          alert("Please, fill the required fields!");
+          errorMessage = "Fill the requested fields!";
         } else {
-          alert("Network error!");
+          errorMessage = "Network error!";
         }
       }
     } else {
-      alert("Please, fill the required fields!");
+      errorMessage = "Please, fill the required fields!";
     }
+    if (errorMessage.length > 0)
+      toast({
+        title: errorMessage,
+        status: "error",
+        position: "top-left",
+        size: "sm",
+        duration: 3000,
+        isClosable: true,
+      });
     setButtonLoading(false);
   };
 

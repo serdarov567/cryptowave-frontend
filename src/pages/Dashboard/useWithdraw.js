@@ -15,7 +15,7 @@ const useWithdraw = () => {
         const result = await getWithdrawHistoryOfUser(email, token);
 
         if (result.data !== undefined) {
-          setWithdraws(result.data);
+          setWithdraws(result.data.reverse());
         }
       } catch (error) {
         //console.log(error);

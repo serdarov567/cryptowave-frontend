@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "https://cryptowaveclub.com/" });
+const axiosInstance = axios.create({ baseURL: "http://192.168.1.102:1919/" });
 
 const signUp = (email, username, password, referredUser) => {
   return axiosInstance.post(
@@ -181,6 +181,14 @@ const requestWithdraw = (email, token, { amount, wallet }) => {
   );
 };
 
+const getAllWithdraw = (token) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.get(
+    `api/withdraws/all`
+    //{ timeout: 20000 }
+  );
+};
+
 const getWithdrawHistoryOfUser = (email, token) => {
   axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
   return axiosInstance.get(
@@ -188,6 +196,15 @@ const getWithdrawHistoryOfUser = (email, token) => {
     //{ timeout: 20000 }
   );
 };
+
+const updateWithdraw = (email, token, _id, status, amount) => {
+  axiosInstance.defaults.headers["Authorization"] = `Bearer ${token}`;
+  return axiosInstance.put(
+    "api/withdraws",
+    { email, _id, status, amount }
+    //{ timeout: 10000 }
+  );
+}
 
 const sendToSupport = (email, content) => {
   return axiosInstance.post("api/support", { email, content });
@@ -285,7 +302,9 @@ export {
   signAdmin,
   checkAdmin,
   getAllUsers,
+  getAllWithdraw,
   getWithdrawHistoryOfUser,
+  updateWithdraw,
   sendToSupport,
   getSupports,
   deleteSupport,
@@ -296,5 +315,5 @@ export {
   getReviews,
   sendFeedback,
   deleteFeedback,
-  visibleFeedback
+  visibleFeedback,
 };

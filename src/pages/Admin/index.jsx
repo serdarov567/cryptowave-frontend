@@ -32,10 +32,13 @@ import {
   deleteFeedback,
   deleteSupport,
   getAllUsers,
+  getAllWithdraw,
   getReviews,
   getSupports,
+  getWithdrawHistoryOfUser,
   signAdmin,
   updatePlan,
+  updateWithdraw,
   visibleFeedback,
 } from "src/utils/network";
 import PlanItem from "src/pages/Admin/PlanItem";
@@ -341,7 +344,7 @@ const Users = () => {
 };
 
 const Withdraws = () => {
-  const [users, setUsers] = useState([]);
+  const [withdraws, setWithdraws] = useState([]);
   const [update, setUpdate] = useState(false);
 
   const [selectedStatus, setSelectedStatus] = useState("Pending...");
@@ -350,9 +353,9 @@ const Withdraws = () => {
     const token = localStorage.getItem("admin-token");
 
     const fetchData = async () => {
-      const result = await getAllUsers(token);
+      const result = await getAllWithdraw(token);
       if (result.data !== null && result.data !== undefined) {
-        setUsers(result.data);
+        setWithdraws(result.data);
       }
     };
 
@@ -369,22 +372,84 @@ const Withdraws = () => {
 
   const textFontSize = useBreakpointValue({ base: "12px", md: "14px" });
 
-  const renderPlans = useMemo(() => {
-    const filtered = users.map((user) => {
-      if (user.plans !== undefined)
-        return user.plans.map((plan) => {
-          if (plan.status === selectedStatus) {
-            return <></>;
-          }
-        });
+  const renderWithdraws = useMemo(() => {
+    const filtered = withdraws.map((withdraw) => {
+      if (withdraw.status === selectedStatus) {
+        return (
+          <VStack
+            key={withdraw._id}
+            w={"100%"}
+            py={"30px"}
+            px={"50px"}
+            fontFamily={"Manrope-Bold"}
+            alignItems={"start"}
+            bgColor={"background.200"}
+            borderRadius={"10px"}
+          >
+            <Flex w={"full"} justifyContent={"space-between"}>
+              <Text>Email: {withdraw.email}</Text>
+              <Text>Amount: {withdraw.amount}$</Text>
+            </Flex>
+            <Flex w={"full"} justifyContent={"space-between"}>
+              <Text>
+                Date of require: {dateToString(withdraw.dateOfRequire).dateStr}
+              </Text>
+              <Text>
+                Date of transaction:{" "}
+                {withdraw.dateOfTransaction
+                  ? dateToString(withdraw.dateOfTransaction).dateStr
+                  : withdraw.status}
+              </Text>
+            </Flex>
+            <Flex w={"full"} justifyContent={"space-between"}>
+              <Text>
+                Wallet:{withdraw.wallet.type} - {withdraw.wallet.address}
+              </Text>
+              <Text>Status: {withdraw.status}</Text>
+            </Flex>
+            {withdraw.status === "Pending..." && (
+              <Select
+                maxW={"150px"}
+                value={withdraw.status}
+                onChange={async (event) => {
+                  try {
+                    const newWithdraw = {
+                      ...withdraw,
+                      status: event.target.value,
+                    };
+                    const result = await updateWithdraw(
+                      withdraw.email,
+                      localStorage.getItem("admin-token"),
+                      newWithdraw._id,
+                      newWithdraw.status,
+                      newWithdraw.amount
+                    );
+                    if (result.status === 200) {
+                      alert("Updated");
+                      setUpdate(!update);
+                    }
+                  } catch (error) {
+                    alert("Network error!");
+                  }
+                }}
+              >
+                <option value={"Canceled"}>Canceled</option>
+                <option value={"Pending..."}>Pending...</option>
+                <option value={"Transferred"}>Transferred</option>
+              </Select>
+            )}
+          </VStack>
+        );
+      }
     });
+
     return filtered;
-  }, [users]);
+  }, [withdraws]);
 
   return (
     <VStack position={"relative"} w={"full"} h={"full"} px={"30px"}>
       <HStack spacing={8} textAlign={"start"} w={"full"}>
-        <Heading marginBlock={"20px"}>Plans</Heading>
+        <Heading marginBlock={"20px"}>Withdraw requests</Heading>
 
         <Text>Filter by status:</Text>
         <RadioGroup
@@ -405,7 +470,7 @@ const Withdraws = () => {
           </Stack>
         </RadioGroup>
       </HStack>
-      {renderPlans}
+      {renderWithdraws}
     </VStack>
   );
 };

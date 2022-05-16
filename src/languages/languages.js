@@ -329,6 +329,20 @@ Personal information includes such items as:
   save: "Save",
 
   delete: "Delete",
+
+  addingWallet: "Please add a wallet",
+
+  message: "Your Message",
+
+  mail: "Email",
+
+  incorrectMail: "Not a valid email.",
+
+  referralBonus: "Referral:",
+
+  emptyWallet: "You don't have a wallet.",
+
+
 };
 
 const rus = {
@@ -659,6 +673,20 @@ const rus = {
   save: "Сохранять",
 
   delete: "Удалить",
+
+  addingWallet: "Пожалуйста, добавьте кошелек",
+
+  message: "Ваше сообщение",
+
+  mail: "Почта",
+
+  incorrectMail: "Недействительный адрес электронной почты.",
+
+  referralBonus: "Рефераль:",
+
+  emptyWallet: "У вас нет кошелька",
+
+
 };
 
 const chn = {
@@ -993,6 +1021,18 @@ La información personal incluye elementos tales como:
   save: "Guardar",
 
   delete: "Borrar",
+
+  addingWallet: "Por favor, agregue una billetera",
+
+  message: "Tu mensaje",
+
+  mail: "Email",
+
+  incorrectMail: "No es un correo válido.",
+
+  referralBonus: "Refferal:",
+
+  emptyWallet: "No tienes billetera.",
 };
 
 const deu = {
@@ -1322,6 +1362,18 @@ Personenbezogene Daten umfassen solche Elemente wie:
   save: "Halten",
 
   delete: "Löschen",
+
+  addingWallet: "Bitte fügen Sie eine Brieftasche hinzu.",
+
+  message: "Ihre Nachricht.",
+
+  mail: "Email",
+
+  incorrectMail: "Keine gültige email.",
+
+  referralBonus: "Referral:",
+
+  emptyWallet: "Du hast kein Portemonnaie.",
 };
 
 export { eng, rus, chn, esp, deu };
