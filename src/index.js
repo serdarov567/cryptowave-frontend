@@ -5,11 +5,6 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { ChakraProvider } from "@chakra-ui/react";
 import { theme } from "./theme";
-import OneSignal from "react-onesignal";
-
-OneSignal.init({
-  appId: "580b6e9c-4b5e-4181-b66d-b5b199f81b70",
-});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

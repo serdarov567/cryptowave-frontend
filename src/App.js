@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Landing from "src/pages/Landing/Landing";
 import "src/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
@@ -10,9 +10,14 @@ import Admin from "src/pages/Admin";
 import NotFound from "src/pages/NotFound";
 import TermsAndConditions from "./pages/TermsAndCondiitons";
 import Withdraw from "./pages/Dashboard/Withdraw";
-
+import OneSignal from "react-onesignal";
 
 function App() {
+  useEffect(() => {
+    OneSignal.init({
+      appId: "580b6e9c-4b5e-4181-b66d-b5b199f81b70",
+    });
+  }, []);
 
   return (
     <BrowserRouter>
