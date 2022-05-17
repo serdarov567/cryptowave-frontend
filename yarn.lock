@@ -7946,11 +7946,6 @@ react-on-screen@^2.1.1:
     prop-types "^15.6.0"
     shallowequal "^1.0.2"
 
-react-onesignal@^2.0.3:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/react-onesignal/-/react-onesignal-2.0.3.tgz#3c4cd656f811c3502f40b61854fbbfb86bbf499c"
-  integrity sha512-zX27Hig31g7wypEaJSzgSIjO/DsxqPqTaJA1/l1T0qmbRTyabL/FslWjjnPQDvQQHtix+KNw8q4pQ5BzGPXEig==
-
 react-parallax@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/react-parallax/-/react-parallax-3.3.0.tgz#79f7a33451e7a419d0052f795c5d3655aa1e20b4"
