@@ -10,60 +10,45 @@ import Admin from "src/pages/Admin";
 import NotFound from "src/pages/NotFound";
 import TermsAndConditions from "./pages/TermsAndCondiitons";
 import Withdraw from "./pages/Dashboard/Withdraw";
-import OneSignal from "react-onesignal";
 
 function App() {
-
   window.OneSignal = window.OneSignal || [];
   const OneSignal = window.OneSignal;
 
-  
-
   useEffect(() => {
-    OneSignal.push(()=> {
+    OneSignal.push(() => {
       OneSignal.init(
         {
           appId: "580b6e9c-4b5e-4181-b66d-b5b199f81b70",
           promptOptions: {
             slidedown: {
               enabled: true,
-              actionMessage: "We'd like to show you notifications for the latest news and updates about the following categories.",
-              acceptButtonText: "OMG YEEEEESS!",
-              cancelButtonText: "NAHHH",
+              actionMessage:
+                "We'd like to show you notifications for the latest news and updates about out website.",
+              acceptButtonText: "Agree!",
+              cancelButtonText: "No, thanks!",
               categories: {
-                  tags: [
-                      {
-                          tag: "react",
-                          label: "ReactJS",
-                      },
-                      {
-                        tag: "angular",
-                        label: "Angular",
-                      },
-                      {
-                        tag: "vue",
-                        label: "VueJS",
-                      },
-                      {
-                        tag: "js",
-                        label: "JavaScript",
-                      }
-                  ]
-              }     
-            } 
+                tags: [
+                  {
+                    tag: "news",
+                    label: "News and updates",
+                  },
+                ],
+              },
+            },
           },
           welcomeNotification: {
-            "title": "One Signal",
-            "message": "Thanks for subscribing!",
-          } 
+            title: "Cryptowave",
+            message: "Thank you for subscribing!",
+          },
         },
-          //Automatically subscribe to the new_app_version tag
-          OneSignal.sendTag("new_app_version", "new_app_version", tagsSent => {
-            // Callback called when tag has finished sending
-            console.log('new_app_version TAG SENT', tagsSent);
-          })
-        );
-      });
+        //Automatically subscribe to the new_app_version tag
+        OneSignal.sendTag("new_app_version", "new_app_version", (tagsSent) => {
+          // Callback called when tag has finished sending
+          console.log("new_app_version TAG SENT", tagsSent);
+        })
+      );
+    });
   }, []);
 
   return (
