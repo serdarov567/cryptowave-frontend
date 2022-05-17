@@ -8,6 +8,8 @@ import { theme } from "./theme";
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
+import { getMessaging, getToken, onMessage } from "firebase/messaging";
+import { toast } from "react-toastify";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -26,6 +28,16 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
+const messaging = getMessaging(app);
+getToken(messaging, {
+  vapidKey:
+    "BJVnUY8icJDTZ_B42odm6f3o4NA83HgUEm8eiYsekPrWR3hiBshuSO4nuxupfhLsWLHBu3Kn3bxq39lSuHsPEL8",
+});
+
+onMessage(messaging, (payload) => {
+  console.log(payload);
+  toast(`${payload.notification.title}: ${payload.notification.body}`);
+});
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(

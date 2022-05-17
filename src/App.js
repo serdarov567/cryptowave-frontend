@@ -10,11 +10,24 @@ import Admin from "src/pages/Admin";
 import NotFound from "src/pages/NotFound";
 import TermsAndConditions from "./pages/TermsAndCondiitons";
 import Withdraw from "./pages/Dashboard/Withdraw";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-
   return (
     <BrowserRouter>
+      <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
       <Routes>
         <Route path="/" element={<Landing />} />
         <Route path="/sign/:type" element={<Sign />} />

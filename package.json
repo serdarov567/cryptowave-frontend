@@ -21,6 +21,7 @@
     "react-parallax": "^3.3.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
+    "react-toastify": "^9.0.1",
     "three": "0.119.0",
     "validator": "^13.7.0",
     "vanta": "^0.5.22",
