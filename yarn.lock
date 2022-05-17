@@ -7946,15 +7946,15 @@ react-on-screen@^2.1.1:
     prop-types "^15.6.0"
     shallowequal "^1.0.2"
 
+react-onesignal@^2.0.3:
+  version "2.0.3"
+  resolved "https://registry.yarnpkg.com/react-onesignal/-/react-onesignal-2.0.3.tgz#3c4cd656f811c3502f40b61854fbbfb86bbf499c"
+  integrity sha512-zX27Hig31g7wypEaJSzgSIjO/DsxqPqTaJA1/l1T0qmbRTyabL/FslWjjnPQDvQQHtix+KNw8q4pQ5BzGPXEig==
+
 react-parallax@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/react-parallax/-/react-parallax-3.3.0.tgz#79f7a33451e7a419d0052f795c5d3655aa1e20b4"
   integrity sha512-gI7YdblxdbhZ1ISqaWzIqlPSuQLX76QFbzWKmeA0hCprjephVdVD35gCN+Fu8v0p3cfw+DFTN/PE+jYgcCOLUw==
-
-react-push-notification@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-push-notification/-/react-push-notification-1.3.0.tgz#082e3af568a1d27ec33c437434c60edba83112bc"
-  integrity sha512-hyYKZqwtNOgRP74fAafVIivEr99vUtH0nDgcWkPKd302BhMuUMr5wuuEX236bSbCoM4nxlOge1m0CKIEtWBqLA==
 
 react-refresh@^0.11.0:
   version "0.11.0"
