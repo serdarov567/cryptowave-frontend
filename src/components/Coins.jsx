@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useMemo } from "react";
-import { Container, Flex, Text } from "@chakra-ui/react";
+import { Container, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
@@ -63,11 +63,18 @@ const Coins = () => {
     };
   }, [update]);
 
+  const coinTextFontSize = useBreakpointValue({
+    base: "15px",
+    sm: "16px",
+    md: "20px",
+  });
+
   const renderCryptos = useMemo(() => {
     return cryptos.map((crypto) => (
       <SwiperSlide>
         <Text
-          userSelect={'none'}
+          fontSize={coinTextFontSize}
+          userSelect={"none"}
           cursor={"pointer"}
           fontFamily={"Manrope-ExtraBold"}
         >
@@ -79,14 +86,22 @@ const Coins = () => {
 
   SwiperCore.use([Autoplay]);
 
+  const slidesPerView = useBreakpointValue({
+    base: 2,
+    sm: 3,
+    md: 4,
+    lg: 5,
+    xl: 6,
+  });
+
   return (
     <Container
       style={{ height: "50px", width: "100vw", overflow: "auto" }}
       maxWidth={"container.xl"}
     >
       <Swiper
-        spaceBetween={5}
-        slidesPerView={5}
+        spaceBetween={8}
+        slidesPerView={slidesPerView}
         centeredSlides={true}
         autoplay={{
           delay: 100,
@@ -95,7 +110,6 @@ const Coins = () => {
         speed={4000}
         loop={true}
         freeMode={true}
-        _freeModeNoMomentumRelease={false}
       >
         {renderCryptos}
       </Swiper>

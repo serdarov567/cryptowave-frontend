@@ -258,32 +258,43 @@ function PlanItem(props) {
             </>
           ) : (
             <>
-              <Text
-                key={props.uniqueKey + "3"}
-                paddingX={"50px"}
-                color={"gray.400"}
-                fontSize={addressTextSize}
-              >
-                Send {props.deposit}$ to {props.walletType} address{" "}
-                <Tooltip label="Copy to clipboard!">
-                  <Text
-                    cursor={"pointer"}
-                    fontSize={addressTextSize}
-                    onClick={() => {
-                      navigator.clipboard.writeText(
-                        SUPPORTED_WALLETS[props.walletType]
-                      );
-                    }}
-                    _hover={{
-                      color: "blue.500",
-                    }}
-                  >
-                    {SUPPORTED_WALLETS[props.walletType]}
-                  </Text>
-                </Tooltip>{" "}
-                in order to activate your plan. Then wait until we approve your
-                payment.
-              </Text>
+              {props.walletType !== "USD" ? (
+                <Text
+                  key={props.uniqueKey + "3"}
+                  paddingX={"50px"}
+                  color={"gray.400"}
+                  fontSize={addressTextSize}
+                >
+                  Send {props.deposit}$ to {props.walletType} address{" "}
+                  <Tooltip label="Copy to clipboard!">
+                    <Text
+                      cursor={"pointer"}
+                      fontSize={addressTextSize}
+                      onClick={() => {
+                        navigator.clipboard.writeText(
+                          SUPPORTED_WALLETS[props.walletType]
+                        );
+                      }}
+                      _hover={{
+                        color: "blue.500",
+                      }}
+                    >
+                      {SUPPORTED_WALLETS[props.walletType]}
+                    </Text>
+                  </Tooltip>{" "}
+                  in order to activate your plan. Then wait until we approve
+                  your payment.
+                </Text>
+              ) : (
+                <Text
+                  key={props.uniqueKey + "4"}
+                  paddingX={"50px"}
+                  color={"gray.400"}
+                  fontSize={addressTextSize}
+                >
+                  Please, wait until we approve your payment.
+                </Text>
+              )}
             </>
           )}
         </Flex>

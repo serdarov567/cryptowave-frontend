@@ -60,6 +60,7 @@ import AtSymbol from "src/assets/images/atSymbol.png";
 import Telegram from "src/assets/vectors/Telegram";
 import Wave from "src/assets/vectors/Wave";
 import Coins from "src/components/Coins";
+import useUserDashboard from "../Dashboard/useUserDashboard";
 
 const Landing = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -372,6 +373,8 @@ const Plans = ({ isSignedIn, langKeys }) => {
     period: 0,
   });
 
+  const { balance } = useUserDashboard();
+
   const handlePurchaseButton = (index) => {
     if (isSignedIn) {
       setError("");
@@ -599,13 +602,20 @@ const Plans = ({ isSignedIn, langKeys }) => {
             <FormLabel>{langKeys["yourWallets"]}</FormLabel>
             <Select
               color={"white"}
-              value={wallets.findIndex(
-                (wallet) => wallet.title === purchased.wallet.title
-              )}
+              value={
+                purchased.wallet.title !== "Balance"
+                  ? wallets.findIndex(
+                      (wallet) => wallet.title === purchased.wallet.title
+                    )
+                  : "balance"
+              }
               onChange={(event) => {
                 setPurchased({
                   ...purchased,
-                  wallet: wallets[event.target.value],
+                  wallet:
+                    event.target.value !== "balance"
+                      ? wallets[event.target.value]
+                      : { title: "Balance", type: "USD", address: "Balance" },
                 });
               }}
             >
@@ -616,8 +626,15 @@ const Plans = ({ isSignedIn, langKeys }) => {
                   </option>
                 ))
               ) : (
-                <option value={-1}>{langKeys["pleaseAddWallet"]}</option>
+                <option disabled={true} value={-1}>
+                  {langKeys["pleaseAddWallet"]}
+                </option>
               )}
+              <option disabled={balance < purchased.deposit} value={"balance"}>
+                {balance >= purchased.deposit
+                  ? `${langKeys["balance"]}: ${balance}$`
+                  : langKeys["noBalance"]}
+              </option>
             </Select>
           </FormControl>
           <FormControl>

@@ -91,7 +91,7 @@ const eng = {
   After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 10% of the amount invested by the attracted investor and bonus of 10% of the invested amount to the investor himself.
   The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
 
-  terms: "Terms and Conditions | Privacy policy.",
+  terms: "Terms and Conditions | Privacy policy",
 
   termsAndConditionsHeader: "Terms and Conditions",
 
@@ -299,6 +299,8 @@ Personal information includes such items as:
   earning: "Total earning",
 
   balance: "Balance",
+
+  noBalance: "You don't have enough balance",
 
   withdraw: "Withdraw",
 
@@ -510,7 +512,7 @@ const rus = {
   После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 10% от суммы, вложенной привлеченным инвестором, и бонус в размере 10% от вложенной суммы самому инвестору.
   Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
 
-  terms: "Условия и положения | Политика конфиденциальности.",
+  terms: "Условия и положения | Политика конфиденциальности",
 
   termsAndConditionsHeader: "Условия и положения",
 
@@ -716,6 +718,8 @@ const rus = {
   earning: "Общий доход",
 
   balance: "Баланс",
+
+  noBalance: "У вас недостаточно баланса",
 
   withdraw: "Вывод",
 
@@ -932,7 +936,7 @@ El proyecto no es complicado y fácil de entender. Solo hay lo que un inversor n
 
   termsAndConditionsHeader: "Términos y condiciones",
 
-  terms: "Términos y condiciones | Política de privacidad.",
+  terms: "Términos y condiciones | Política de privacidad",
 
   termsAndConditions: `Reglas generales
   
@@ -1139,6 +1143,8 @@ La información personal incluye elementos tales como:
   earning: "Ganancia total",
 
   balance: "Equilibrio",
+
+  noBalance: "No tienes saldo suficiente",
 
   withdraw: "Retirar",
 
@@ -1355,7 +1361,7 @@ const deu = {
 
   termsAndConditionsHeader: "Geschäftsbedingungen",
 
-  terms: "Geschäftsbedingungen | Datenschutz-Bestimmungen.",
+  terms: "Geschäftsbedingungen | Datenschutz-Bestimmungen",
 
   termsAndConditions: `Allgemeine Regeln
   
@@ -1560,6 +1566,8 @@ Personenbezogene Daten umfassen solche Elemente wie:
   earning: "Gesamteinkommen",
 
   balance: "Balance",
+
+  noBalance: "Sie haben nicht genug Gleichgewicht",
 
   withdraw: "Fazit",
 
