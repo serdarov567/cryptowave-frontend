@@ -119,6 +119,7 @@ const Landing = () => {
         display={"flex"}
         flexDir={"column"}
         overflowX={"hidden"}
+        overflowY={"hidden"}
         maxWidth={"100vw"}
         paddingX={"0px"}
         justifyContent={"center"}
@@ -128,6 +129,28 @@ const Landing = () => {
           loading={loading}
           langKeys={langKeys}
           currentLanguage={currentLanguage}
+        />
+        <Wave
+          width={"110vw"}
+          style={{
+            position: "absolute",
+            left: useBreakpointValue({ base: "0", "2xl": "50vw" }),
+            top: `calc(100vh - ${useBreakpointValue({
+              base: "120px",
+              sm: "160px",
+            })})`,
+            zIndex: -1,
+            transform: `scaleX(${useBreakpointValue({
+              base: "-1",
+              sm: "1",
+              lg: "1",
+              xl: "1",
+              "2xl": "2",
+            })}) scaleY(${useBreakpointValue({
+              base: "0.5",
+              sm: "1",
+            })})`,
+          }}
         />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
         <Coins langKeys={langKeys} />
@@ -295,14 +318,6 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
 
         <ScrollDown langKeys={langKeys} />
       </Container>
-      <Wave
-        style={{
-          position: "absolute",
-          left: 0,
-          top: "calc(100vh - 159px)",
-          transform: `scaleX(${Math.round(window.outerWidth / 1512)})`,
-        }}
-      />
     </>
   );
 };

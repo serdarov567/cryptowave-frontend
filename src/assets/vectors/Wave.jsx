@@ -1,12 +1,12 @@
 import React from "react";
 
-const Wave = ({ style }) => {
+const Wave = ({ style, width }) => {
   return (
     <svg
       style={style}
-      width={window.outerWidth}
+      width={width}
       height="160"
-      viewBox="0 0 1512 166"
+      viewBox={`0 0 ${width} 166`}
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
