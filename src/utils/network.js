@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const axiosInstance = axios.create({ baseURL: "http://192.168.31.165:1919/" });
+const axiosInstance = axios.create({ baseURL: "https://cryptowaveclub.com/" });
 
 const signUp = (email, username, password, referredUser) => {
   return axiosInstance.post(
