@@ -23,6 +23,7 @@ import PlanItem from "src/components/PlanItem";
 import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 import useLanguage from "src/languages/useLanguage";
 import TextButton from "src/components/TextButton";
+import LoadingIndicator from "src/components/LoadingIndicator";
 
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -326,12 +327,17 @@ function Dashboard() {
                     fontFamily={"Manrope-ExtraBold"}
                     color={"blue.450"}
                   >
-                    {earnings !== undefined
-                      ? earnings.length > 0
-                        ? earnings.reduce((a, b) => a + b)
-                        : 0
-                      : 0}
-                    $
+                    {networkLoading ? (
+                      <LoadingIndicator size={"25px"} />
+                    ) : earnings !== undefined ? (
+                      earnings.length > 0 ? (
+                        earnings.reduce((a, b) => a + b) + "$"
+                      ) : (
+                        0 + "$"
+                      )
+                    ) : (
+                      0 + "$"
+                    )}
                   </Heading>
                   {/* <OutlinedButton
                     fontSize={detailsFontSize}
@@ -366,7 +372,11 @@ function Dashboard() {
                   fontFamily={"Manrope-ExtraBold"}
                   color={"blue.450"}
                 >
-                  {balance}$
+                  {networkLoading ? (
+                    <LoadingIndicator size={"25px"} />
+                  ) : (
+                    balance + "$"
+                  )}
                 </Heading>
                 <OutlinedButton
                   color={"#FFF"}
@@ -401,7 +411,13 @@ function Dashboard() {
             >
               {langKeys["activePlans"]}
             </Heading>
-            {renderUserPlans}
+            {networkLoading ? (
+              <LoadingIndicator title={langKeys["loading"]} />
+            ) : plans.length > 0 ? (
+              renderUserPlans
+            ) : (
+              <Text>{langKeys["noPlans"]}</Text>
+            )}
           </VStack>
         </Flex>
       </Container>

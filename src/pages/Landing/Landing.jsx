@@ -58,6 +58,8 @@ import Statistics from "./Statistics";
 import Bonus from "src/assets/vectors/Bonus";
 import AtSymbol from "src/assets/images/atSymbol.png";
 import Telegram from "src/assets/vectors/Telegram";
+import Wave from "src/assets/vectors/Wave";
+import Coins from "src/components/Coins";
 
 const Landing = () => {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -128,6 +130,7 @@ const Landing = () => {
           currentLanguage={currentLanguage}
         />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
+        <Coins langKeys={langKeys} />
         <Referral langKeys={langKeys} />
         <AboutUs langKeys={langKeys} />
         <Contacts isSignedIn={isSignedIn} langKeys={langKeys} />
@@ -292,6 +295,14 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
 
         <ScrollDown langKeys={langKeys} />
       </Container>
+      <Wave
+        style={{
+          position: "absolute",
+          left: 0,
+          top: "calc(100vh - 159px)",
+          transform: `scaleX(${Math.round(window.outerWidth / 1512)})`,
+        }}
+      />
     </>
   );
 };
@@ -381,13 +392,13 @@ const Plans = ({ isSignedIn, langKeys }) => {
         if (error.response.status === 403) {
           setError("You don't have permission!");
         } else if (error.response.status === 406) {
-          setError("Please, fill the required fields!");
+          setError(langKeys["fillTheRequested"]);
         } else {
-          setError("Network error!");
+          setError(langKeys["errorNetwork"]);
         }
       }
     } else {
-      setError("Please add a wallet!");
+      setError(langKeys["pleaseAddWallet"]);
     }
   };
 
@@ -590,7 +601,7 @@ const Plans = ({ isSignedIn, langKeys }) => {
                   </option>
                 ))
               ) : (
-                <option value={-1}>Please add a wallet</option>
+                <option value={-1}>{langKeys["pleaseAddWallet"]}</option>
               )}
             </Select>
           </FormControl>
@@ -1144,6 +1155,7 @@ const ScrollDown = ({ langKeys }) => {
       display={"flex"}
       flexDirection={"column"}
       alignSelf={"center"}
+      zIndex={1}
     >
       <Text
         cursor={"pointer"}
@@ -1212,8 +1224,8 @@ const Parallaxes = () => {
           height: "100vh",
           zIndex: -1,
         }}
-        bgImageStyle={{ height: "200px", width: "200px", top: "10vh" }}
-        strength={300}
+        bgImageStyle={{ height: "200px", width: "200px", top: "20vh" }}
+        strength={200}
         bgImage={Money}
       >
         <div style={{ height: "100px" }} />

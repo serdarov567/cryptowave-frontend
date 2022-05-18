@@ -159,7 +159,7 @@ const Withdraw = () => {
         <Flex flexDir={"column"}>
           <HStack pos={"relative"} spacing={6} align={"start"}>
             <FormControl>
-              <FormLabel>Your wallets</FormLabel>
+              <FormLabel>{langKeys["yourWallets"]}</FormLabel>
               {!walletsLoading && (
                 <Select
                   color={"white"}
@@ -184,7 +184,7 @@ const Withdraw = () => {
                       </option>
                     ))
                   ) : (
-                    <option value={-1}>Please add a wallet</option>
+                    <option value={-1}>{langKeys["pleaseAddWallet"]}</option>
                   )}
                 </Select>
               )}
@@ -194,7 +194,7 @@ const Withdraw = () => {
                 newWithdraw.amount.length > 0 && newWithdraw.amount < 50
               }
             >
-              <FormLabel>Amount</FormLabel>
+              <FormLabel>{langKeys["amount"]}</FormLabel>
               <Input
                 type={"number"}
                 variant={"primary"}
@@ -208,7 +208,7 @@ const Withdraw = () => {
                 }}
               />
               <FormErrorMessage>
-                Amount must be greater than 50$
+                {langKeys["amountMustBeGreater"]}
               </FormErrorMessage>
             </FormControl>
           </HStack>
@@ -223,11 +223,13 @@ const Withdraw = () => {
             }
             onClick={sendWithdrawRequest}
           >
-            Withdraw
+            {langKeys["withdraw"]}
           </GradientButton>
 
           <VStack w={"full"} paddingBottom={"100px"} spacing={5}>
-            <Heading marginBlock={"20px"}>Transaction history</Heading>
+            <Heading marginBlock={"20px"}>
+              {langKeys["transactionHistory"]}
+            </Heading>
             {loading ? (
               <LoadingIndicator title={"Loading wallets..."} />
             ) : withdraws.length > 0 ? (
@@ -236,19 +238,19 @@ const Withdraw = () => {
                   <Thead>
                     <Tr>
                       <Th borderColor={"background.200"} fontSize={fontSize}>
-                        Date of Require
+                        {langKeys["dateOfRequire"]}
                       </Th>
                       <Th borderColor={"background.200"} fontSize={fontSize}>
-                        Date of Transaction
+                        {langKeys["dateOfTransaction"]}
                       </Th>
                       <Th borderColor={"background.200"} fontSize={fontSize}>
-                        Amount
+                        {langKeys["amount"]}
                       </Th>
                       <Th borderColor={"background.200"} fontSize={fontSize}>
-                        Wallet
+                        {langKeys["wallet"]}
                       </Th>
                       <Th borderColor={"background.200"} fontSize={fontSize}>
-                        Status
+                        {langKeys["status"]}
                       </Th>
                     </Tr>
                   </Thead>
@@ -256,7 +258,7 @@ const Withdraw = () => {
                 </Table>
               </TableContainer>
             ) : (
-              <Text>No transactions</Text>
+              <Text>{langKeys["noTransactions"]}</Text>
             )}
           </VStack>
         </Flex>

@@ -252,7 +252,7 @@ const Wallets = () => {
         <Heading marginBottom={"50px"}>{langKeys["myWallets"]}</Heading>
 
         {walletsLoading ? (
-          <LoadingIndicator title={"Loading wallets..."} />
+          <LoadingIndicator title={langKeys['loading']} />
         ) : wallets.length > 0 ? (
           <SimpleGrid
             columns={columns}
@@ -263,7 +263,7 @@ const Wallets = () => {
             {renderWallets}
           </SimpleGrid>
         ) : (
-          <Text>You don't have a wallet</Text>
+          <Text>{langKeys['noWallets']}</Text>
         )}
       </Container>
 

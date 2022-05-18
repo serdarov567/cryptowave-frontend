@@ -59,6 +59,14 @@ const eng = {
 
   yourWallets: "Your wallets",
 
+  loading: "Loading...",
+
+  noPlans: "You don't have any plans",
+
+  noTransactions: "No transactions",
+
+  noWallets: "You don't have a wallet",
+
   reward: "Reward",
 
   inside: "in",
@@ -294,6 +302,14 @@ Personal information includes such items as:
 
   withdraw: "Withdraw",
 
+  dateOfRequire: "Date of Require",
+
+  dateOfTransaction: "Date of Transaction",
+
+  wallet: "Wallet",
+
+  status: "Status",
+
   approval: "pending approval",
 
   purchased: "Purchased on",
@@ -353,6 +369,8 @@ Personal information includes such items as:
 
   pleaseWriteCode: "Please, write the code!",
 
+  pleaseAddWallet: "Please add a wallet",
+
   codeRequirements: "Code must be 4 digits",
 
   accountNotRegistered: "Account has not been registered!",
@@ -374,6 +392,12 @@ Personal information includes such items as:
   errorNetwork: "Network error!",
 
   fillTheRequested: "Fill the fields as required!",
+
+  amountMustBeGreater: "Amount must be greater than 50$",
+
+  amount: "Amount",
+
+  transactionHistory: "Transaction history",
 
   enterVerification: "Enter the verification code",
 
@@ -453,6 +477,14 @@ const rus = {
   purchasePlan: "Купить план",
 
   yourWallets: "Ваши кошельки",
+
+  loading: "Загрузка...",
+
+  noPlans: "У вас нет планов",
+
+  noTransactions: "Нет транзакций",
+
+  noWallets: "У вас нет кошелька",
 
   reward: "Награда",
 
@@ -687,6 +719,14 @@ const rus = {
 
   withdraw: "Вывод",
 
+  dateOfRequire: "Дата запроса",
+
+  dateOfTransaction: "Дата транзакции",
+
+  wallet: "Кошелек",
+
+  status: "Статус",
+
   approval: "в ожидании утверждения",
 
   purchased: "Куплено",
@@ -747,6 +787,8 @@ const rus = {
 
   pleaseWriteCode: "Пожалуйста, напишите код!",
 
+  pleaseAddWallet: "Пожалуйста, добавьте кошелек",
+
   codeRequirements: "Код должен состоять из 4 цифр",
 
   accountNotRegistered: "Аккаунт не зарегистрирован!",
@@ -768,6 +810,12 @@ const rus = {
   errorNetwork: "Сетевая ошибка!",
 
   fillTheRequested: "Заполните поля по мере необходимости!",
+
+  amountMustBeGreater: "Сумма должна быть больше 50$",
+
+  amount: "Сумма",
+
+  transactionHistory: "История транзакций",
 
   enterVerification: "Введите код подтверждения",
 
@@ -849,6 +897,14 @@ const esp = {
   purchasePlan: "Comprar un plan",
 
   yourWallets: "Sus billeteras",
+
+  loading: "Cargando...",
+
+  noPlans: "No tienes planes",
+
+  noTransactions: "Sin transacciones",
+
+  noWallets: "No tienes billetera",
 
   reward: "Premio",
 
@@ -1086,6 +1142,14 @@ La información personal incluye elementos tales como:
 
   withdraw: "Retirar",
 
+  dateOfRequire: "Fecha de Requerimiento",
+
+  dateOfTransaction: "Fecha de transacción",
+
+  wallet: "Cartera",
+
+  status: "Estado",
+
   approval: "aprobación pendiente",
 
   purchased: "Comprado en",
@@ -1147,6 +1211,8 @@ La información personal incluye elementos tales como:
 
   pleaseWriteCode: "¡Por favor, escribe el código!",
 
+  pleaseAddWallet: "Por favor agregue una billetera",
+
   codeRequirements: "El código debe tener 4 dígitos",
 
   accountNotRegistered: "¡La cuenta no ha sido registrada!",
@@ -1169,6 +1235,12 @@ La información personal incluye elementos tales como:
   errorNetwork: "¡Error de red!",
 
   fillTheRequested: "¡Complete los campos según sea necesario!",
+
+  amountMustBeGreater: "La cantidad debe ser mayor a 50$",
+
+  amount: "Cantidad de dinero",
+
+  transactionHistory: "Historial de transacciones",
 
   enterVerification: "Introduzca el código de verificación",
 
@@ -1248,6 +1320,14 @@ const deu = {
   purchasePlan: "Kaufen Sie einen Plan",
 
   yourWallets: "Ihre Brieftaschen",
+
+  loading: "Wird geladen...",
+
+  noPlans: "Du hast keine Pläne",
+
+  noTransactions: "Keine Transaktionen",
+
+  noWallets: "Du hast kein Portemonnaie",
 
   reward: "Belohnen",
 
@@ -1483,6 +1563,14 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   withdraw: "Fazit",
 
+  dateOfRequire: "Datum der Anforderung",
+
+  dateOfTransaction: "Datum der Transaktion",
+
+  wallet: "Brieftasche",
+
+  status: "Status",
+
   approval: "Genehmigung ausstehend",
 
   purchased: "Gekauft am",
@@ -1544,6 +1632,8 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   pleaseWriteCode: "Bitte schreiben Sie den Code!",
 
+  pleaseAddWallet: "Bitte fügen Sie eine Brieftasche hinzu",
+
   codeRequirements: "Der Code muss 4-stellig sein",
 
   accountNotRegistered: "Konto wurde nicht registriert!",
@@ -1565,6 +1655,12 @@ Personenbezogene Daten umfassen solche Elemente wie:
   errorNetwork: "Netzwerkfehler!",
 
   fillTheRequested: "Füllen Sie die Felder nach Bedarf aus!",
+
+  amountMustBeGreater: "Der Betrag muss größer als 50$ sein",
+
+  amount: "Geldbetrag",
+
+  transactionHistory: "Verlauf der Transaktionen",
 
   enterVerification: "Gib den Bestätigungscode ein",
 

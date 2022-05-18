@@ -15,8 +15,8 @@ const LoadingIndicator = (props) => {
         speed="0.65s"
         emptyColor="background.200"
         color="violet.500"
-        h={"50px"}
-        w={"50px"}
+        h={props.size? props.size : "50px"}
+        w={props.size? props.size : "50px"}
       />
       <Text fontSize={'sm'} marginTop={'10px'}>{props.title}</Text>
     </Box>

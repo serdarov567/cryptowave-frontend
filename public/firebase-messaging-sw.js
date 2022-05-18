@@ -15,8 +15,6 @@ const firebaseConfig = {
   measurementId: "G-L1V9FTCS9G",
 };
 
-alert('HELLOWOW')
-
 firebase.initializeApp(firebaseConfig);
 
 // Retrieve firebase messaging
