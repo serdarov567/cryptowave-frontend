@@ -1,26 +1,47 @@
-import React, { useEffect, useState, useMemo } from "react";
-import { Container, Flex, Text, useBreakpointValue } from "@chakra-ui/react";
+import React, { useEffect, useState, useMemo, memo } from "react";
+import {
+  Box,
+  Container,
+  Flex,
+  Text,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import axios from "axios";
 import { Swiper, SwiperSlide } from "swiper/react";
 import SwiperCore, { Autoplay } from "swiper";
 import "swiper/css";
+import btc from "react-crypto-icons/lib/assets/btc.svg";
+import eth from "react-crypto-icons/lib/assets/eth.svg";
+import ltc from "react-crypto-icons/lib/assets/ltc.svg";
+import xrp from "react-crypto-icons/lib/assets/xrp.svg";
+import ada from "react-crypto-icons/lib/assets/ada.svg";
+import dot from "react-crypto-icons/lib/assets/dot.svg";
+import sushi from "react-crypto-icons/lib/assets/sushi.svg";
+import etc from "react-crypto-icons/lib/assets/etc.svg";
+import trx from "react-crypto-icons/lib/assets/trx.svg";
+import bnb from "react-crypto-icons/lib/assets/bnb.svg";
+import bch from "react-crypto-icons/lib/assets/bch.svg";
+import avax from "react-crypto-icons/lib/assets/avax.svg";
+import dash from "react-crypto-icons/lib/assets/dash.svg";
+import cro from "react-crypto-icons/lib/assets/cro.svg";
+import doge from "react-crypto-icons/lib/assets/doge.svg";
 
 const initial = [
-  { name: "BTC", id: "bitcoin", price: "" },
-  { name: "ETH", id: "ethereum", price: "" },
-  { name: "LTC", id: "binance-peg-litecoin", price: "" },
-  { name: "XRP", id: "heco-peg-xrp", price: "" },
-  { name: "ADA", id: "binance-peg-cardano", price: "" },
-  { name: "DOT", id: "polkadot", price: "" },
-  { name: "SUSHI", id: "sushi", price: "" },
-  { name: "ETC", id: "ethereum-classic", price: "" },
-  { name: "TRX", id: "tron", price: "" },
-  { name: "BNB", id: "heco-peg-bnb", price: "" },
-  { name: "BCH", id: "binance-peg-bitcoin-cash", price: "" },
-  { name: "AVAX", id: "binance-peg-avalanche", price: "" },
-  { name: "DASH", id: "dash", price: "" },
-  { name: "CRO", id: "crypto-com-chain", price: "" },
-  { name: "DOGE", id: "binance-peg-dogecoin", price: "" },
+  { name: "BTC", id: "bitcoin", price: "", icon: btc },
+  { name: "ETH", id: "ethereum", price: "", icon: eth },
+  { name: "LTC", id: "binance-peg-litecoin", price: "", icon: ltc },
+  { name: "XRP", id: "heco-peg-xrp", price: "", icon: xrp },
+  { name: "ADA", id: "binance-peg-cardano", price: "", icon: ada },
+  { name: "DOT", id: "polkadot", price: "", icon: dot },
+  { name: "SUSHI", id: "sushi", price: "", icon: sushi },
+  { name: "ETC", id: "ethereum-classic", price: "", icon: etc },
+  { name: "TRX", id: "tron", price: "", icon: trx },
+  { name: "BNB", id: "heco-peg-bnb", price: "", icon: bnb },
+  { name: "BCH", id: "binance-peg-bitcoin-cash", price: "", icon: bch },
+  { name: "AVAX", id: "binance-peg-avalanche", price: "", icon: avax },
+  { name: "DASH", id: "dash", price: "", icon: dash },
+  { name: "CRO", id: "crypto-com-chain", price: "", icon: cro },
+  { name: "DOGE", id: "binance-peg-dogecoin", price: "", icon: doge },
 ];
 
 const Coins = () => {
@@ -72,49 +93,49 @@ const Coins = () => {
   const renderCryptos = useMemo(() => {
     return cryptos.map((crypto) => (
       <SwiperSlide>
-        <Text
-          fontSize={coinTextFontSize}
-          userSelect={"none"}
-          cursor={"pointer"}
-          fontFamily={"Manrope-ExtraBold"}
-        >
-          {crypto.name}: {crypto.price}$
-        </Text>
+        <Flex flexDir={"row"} justifyContent={"center"}>
+          <img src={crypto.icon} alt={"icon"} width={"25px"} />
+          <Text
+            marginLeft={"10px"}
+            fontSize={coinTextFontSize}
+            userSelect={"none"}
+            cursor={"pointer"}
+            fontFamily={"Manrope-ExtraBold"}
+          >
+            {crypto.name}: {crypto.price}$
+          </Text>
+        </Flex>
       </SwiperSlide>
     ));
   }, [cryptos]);
 
   SwiperCore.use([Autoplay]);
 
-  const slidesPerView = useBreakpointValue({
-    base: 2,
-    sm: 3,
-    md: 4,
-    lg: 5,
-    xl: 6,
-  });
-
   return (
-    <Container
-      style={{ height: "50px", width: "100vw", overflow: "auto" }}
-      maxWidth={"container.xl"}
-    >
-      <Swiper
-        spaceBetween={8}
-        slidesPerView={slidesPerView}
-        centeredSlides={true}
-        autoplay={{
-          delay: 100,
-          disableOnInteraction: false,
-        }}
-        speed={4000}
-        loop={true}
-        freeMode={true}
+    <Box bgColor={"#2f3038"}>
+      <Container
+        style={{ paddingBlock: "20px", width: "100vw", overflow: "auto" }}
+        maxWidth={"1440px"}
       >
-        {renderCryptos}
-      </Swiper>
-    </Container>
+        <Swiper
+          spaceBetween={10}
+          slidesPerView={
+            window.outerWidth < 1440 ? Math.floor(window.outerWidth / 300) : 5
+          }
+          centeredSlides={true}
+          autoplay={{
+            delay: 100,
+            disableOnInteraction: false,
+          }}
+          speed={4000}
+          loop={true}
+          freeMode={true}
+        >
+          {renderCryptos}
+        </Swiper>
+      </Container>
+    </Box>
   );
 };
 
-export default Coins;
+export default memo(Coins);

@@ -417,6 +417,37 @@ Personal information includes such items as:
   sendTheCode: "Send the code",
 
   changePassword: "Change password",
+
+  howIt: "How it",
+
+  works: "works?",
+
+  step1Header: "Sign up to Cryptowave",
+
+  step1Content: "Registration is free. Sign up easily with your Email",
+
+  step2Header: "Make your Deposit",
+
+  step2Content:
+    "To get started with passive income, purchase one of our plans.",
+
+  step3Header: "Enjoy your profits",
+
+  step3Content: "After the period, you can withdraw your earnings!",
+
+  referralHeader: "Use our Referral program to earn unlimited extra money",
+
+  keyFeatures: "Key features",
+
+  feature1: "No own deposit required",
+
+  feature2: "Unlimited earnings",
+
+  feature3: "Instant on your Balance",
+
+  online: "Online",
+
+  paidToUsers: "Paid to users",
 };
 
 const rus = {
@@ -424,7 +455,7 @@ const rus = {
 
   plans: "Планы",
 
-  aboutUs: " О нас",
+  aboutUs: "О нас",
 
   contactUs: "Связаться",
 
@@ -836,6 +867,39 @@ const rus = {
   sendTheCode: "Отправить код",
 
   changePassword: "Сменить пароль",
+
+  howIt: "Как это",
+
+  works: "работает?",
+
+  step1Header: "Зарегистрируйтесь в Cryptowave",
+
+  step1Content:
+    "Регистрация бесплатна. Зарегистрируйтесь легко с помощью э-почты",
+
+  step2Header: "Внесите свой депозит",
+
+  step2Content:
+    "Чтобы начать получать пассивный доход, приобретите один из наших планов.",
+
+  step3Header: "Наслаждайтесь своей прибылью",
+
+  step3Content: "По истечении периода вы можете снять свой заработок!",
+
+  referralHeader:
+    "Используйте нашу реферальную программу, чтобы заработать неограниченные дополнительные деньги",
+
+  keyFeatures: "Ключевая особенность",
+
+  feature1: "Не требуется собственный депозит",
+
+  feature2: "Неограниченный заработок",
+
+  feature3: "Мгновенно на вашем балансе",
+
+  online: "В сети",
+
+  paidToUsers: "Выплачено пользователям",
 };
 
 const chn = {
@@ -1264,6 +1328,39 @@ La información personal incluye elementos tales como:
   sendTheCode: "Envía el código",
 
   changePassword: "Cambia la contraseña",
+
+  howIt: "¿Cómo",
+
+  works: "funciona?",
+
+  step1Header: "Regístrese en Cryptowave",
+
+  step1Content:
+    "El registro es gratuito. Regístrese fácilmente con su correo electrónico",
+
+  step2Header: "Haz tu Depósito",
+
+  step2Content:
+    "Para comenzar con los ingresos pasivos, compre uno de nuestros planes.",
+
+  step3Header: "Disfruta de tus ganancias",
+
+  step3Content: "¡Después del período, puede retirar sus ganancias!",
+
+  referralHeader:
+    "Use nuestro programa de referencia para ganar dinero extra ilimitado",
+
+  keyFeatures: "Características clave",
+
+  feature1: "No se requiere depósito propio",
+
+  feature2: "Ganancias ilimitadas",
+
+  feature3: "Instantáneo en su Saldo",
+
+  online: "En línea",
+
+  paidToUsers: "Pagado a los usuarios",
 };
 
 const deu = {
@@ -1686,6 +1783,39 @@ Personenbezogene Daten umfassen solche Elemente wie:
   sendTheCode: "Senden Sie den Code",
 
   changePassword: "Ändere das Passwort",
+
+  howIt: "Wie es",
+
+  works: "funktioniert?",
+
+  step1Header: "Melden Sie sich bei Cryptowave an",
+
+  step1Content:
+    "Die Registrierung ist kostenlos. Melden Sie sich einfach mit Ihrer E-Mail an",
+
+  step2Header: "Machen Sie Ihre Einzahlung",
+
+  step2Content:
+    "Kaufen Sie eines unserer Pläne, um mit passivem Einkommen zu beginnen.",
+
+  step3Header: "Genießen Sie Ihre Gewinne",
+
+  step3Content: "Nach Ablauf der Frist können Sie Ihre Einnahmen abheben!",
+
+  referralHeader:
+    "Nutzen Sie unser Empfehlungsprogramm, um unbegrenzt zusätzliches Geld zu verdienen",
+
+  keyFeatures: "Hauptmerkmale",
+
+  feature1: "Keine eigene Kaution erforderlich",
+
+  feature2: "Unbegrenzter Verdienst",
+
+  feature3: "Sofort auf Ihrem Guthaben",
+
+  online: "Online",
+
+  paidToUsers: "Bezahlt an Benutzer",
 };
 
 export { eng, rus, chn, esp, deu };

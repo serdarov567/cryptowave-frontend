@@ -1,5 +1,12 @@
-import React from 'react';
-import { Flex, Heading, Text, useBreakpointValue, VStack } from "@chakra-ui/react";
+import React from "react";
+import {
+  Flex,
+  Heading,
+  HStack,
+  Text,
+  useBreakpointValue,
+  VStack,
+} from "@chakra-ui/react";
 import useStatistics from "src/pages/Landing/useStatistics";
 import CountUp from "react-countup";
 
@@ -35,55 +42,61 @@ const Statistics = ({ langKeys, currentLanguage }) => {
     <Flex
       flex={6}
       w={"full"}
-      flexDir={useBreakpointValue({
-        base: "column",
-        sm: "row",
-        md: "column",
-        lg: currentLanguage === "RUS" ? "column" : "row",
-      })}
+      marginBlock={"20px"}
+      flexDir={"row"}
       alignSelf={useBreakpointValue({
         base: "flex-start",
         sm: "center",
         md: "center",
       })}
-      alignContent={useBreakpointValue({
-        base: "flex-start",
-        sm: "space-evenly",
-        md: "flex-start",
-      })}
-      justifyContent={useBreakpointValue({
-        base: "center",
-        sm: "space-evenly",
-        md: "space-evenly",
-      })}
+      alignContent={"center"}
+      justifyContent={"space-evenly"}
     >
-      <VStack>
-        <Heading {...headerProps}>{langKeys["running"]}</Heading>
-        <Text {...bodyProps}>
-          <CountUp end={runningDays} duration={2} /> {langKeys["days"]}
-        </Text>
-      </VStack>
+      <Flex flexDir={"column"} justify={"space-between"}>
+        <VStack marginBottom={"20px"}>
+          <Heading {...headerProps}>{langKeys["online"]}</Heading>
+          <Text {...bodyProps}>
+            <CountUp end={runningDays} duration={2} /> {langKeys["days"]}
+          </Text>
+        </VStack>
 
-      <VStack>
-        <Heading {...headerProps}>{langKeys["investors"]}</Heading>
-        <Text {...bodyProps}>
-          <CountUp end={users} duration={2} />
-        </Text>
-      </VStack>
+        <VStack>
+          <Heading {...headerProps}>{langKeys["capital"]}</Heading>
+          <Text {...bodyProps} color={"green.500"}>
+            <CountUp
+              end={capitalization}
+              duration={3}
+              formattingFn={(number) => {
+                return number.toLocaleString();
+              }}
+            />
+            $
+          </Text>
+        </VStack>
+      </Flex>
 
-      <VStack>
-        <Heading {...headerProps}>{langKeys["capital"]}</Heading>
-        <Text {...bodyProps} color={"green.500"}>
-          <CountUp
-            end={capitalization}
-            duration={3}
-            formattingFn={(number) => {
-              return number.toLocaleString();
-            }}
-          />
-          $
-        </Text>
-      </VStack>
+      <Flex flexDir={"column"} justify={"space-between"}>
+        <VStack marginBottom={"20px"}>
+          <Heading {...headerProps}>{langKeys["investors"]}</Heading>
+          <Text {...bodyProps}>
+            <CountUp end={users} duration={2} />
+          </Text>
+        </VStack>
+
+        <VStack>
+          <Heading {...headerProps}>{langKeys["paidToUsers"]}</Heading>
+          <Text {...bodyProps} color={"green.500"}>
+            <CountUp
+              end={capitalization / 2.39351241}
+              duration={2}
+              formattingFn={(number) => {
+                return number.toLocaleString();
+              }}
+            />
+            $
+          </Text>
+        </VStack>
+      </Flex>
     </Flex>
   );
 };

@@ -8438,6 +8438,10 @@ react-countup@^6.2.0:
   dependencies:
     countup.js "^2.1.0"
 
+react-crypto-icons@shed3/react-crypto-icons:
+  version "1.0.5"
+  resolved "https://codeload.github.com/shed3/react-crypto-icons/tar.gz/42d2900e5b8b4f122fac64a379c11f3f07eb3f78"
+
 react-dev-utils@^12.0.1:
   version "12.0.1"
   resolved "https://registry.npmjs.org/react-dev-utils/-/react-dev-utils-12.0.1.tgz"
