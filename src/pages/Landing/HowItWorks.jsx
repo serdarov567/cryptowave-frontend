@@ -14,6 +14,7 @@ import hiw3 from "src/assets/images/hiw3.png";
 const HowItWorks = ({ langKeys }) => {
   return (
     <Container
+      id={"HowItWorks"}
       pos={"relative"}
       display={"flex"}
       flexDir={"column"}

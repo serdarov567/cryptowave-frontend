@@ -24,6 +24,12 @@ import useUserDashboard from "src/pages/Dashboard/useUserDashboard";
 import useLanguage from "src/languages/useLanguage";
 import TextButton from "src/components/TextButton";
 import LoadingIndicator from "src/components/LoadingIndicator";
+import { updatePlan } from "src/utils/network";
+
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
 
 function Dashboard() {
   const [isSignedIn, loading] = useIsSignedIn();
@@ -50,6 +56,8 @@ function Dashboard() {
   } = useUserDashboard();
 
   const [totalBonus, setTotalBonus] = useState(0);
+
+  const [filtered, setFiltered] = useState([]);
 
   useEffect(() => {
     if (referrals !== undefined) {
@@ -99,6 +107,11 @@ function Dashboard() {
   }, [loading]);
 
   const renderUserPlans = useMemo(() => {
+    setFiltered(
+      plans.filter(
+        (plan) => plan.status !== "Canceled" && plan.status !== "Completed"
+      )
+    );
     return plans
       .filter(
         (plan) => plan.status !== "Canceled" && plan.status !== "Completed"
@@ -119,6 +132,20 @@ function Dashboard() {
             walletType={plan.wallet.type}
             status={plan.status}
             period={plan.period}
+            handleCancel={async () => {
+              if (
+                new Date(plan.dateOfExpiration).getTime() -
+                  (plan.period - 3) * DAY <
+                Date.now()
+              ) {
+                await updatePlan(
+                  localStorage.getItem("email"),
+                  localStorage.getItem("token"),
+                  { _id: plan._id, status: "Canceled" }
+                );
+                refresh();
+              }
+            }}
           />
         );
       });
@@ -402,7 +429,7 @@ function Dashboard() {
             </Heading>
             {networkLoading ? (
               <LoadingIndicator title={langKeys["loading"]} />
-            ) : plans.length > 0 ? (
+            ) : filtered.length > 0 ? (
               renderUserPlans
             ) : (
               <Text>{langKeys["noPlans"]}</Text>

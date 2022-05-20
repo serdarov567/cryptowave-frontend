@@ -88,7 +88,7 @@ const eng = {
 
   referralProgramContent: `Project "Cryptowave" launched on February 1.
   In 3 months of work, we have reached $5M+ and are still gaining profit 2K+  and more investors are cooperating with us.
-  After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 10% of the amount invested by the attracted investor and bonus of 10% of the invested amount to the investor himself.
+  After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 5% to Direct Referral, 2%  to the 2nd line Referral , 1% to the 3rd line Referral of the amount invested by the attracted investor.
   The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
 
   terms: "Terms and Conditions | Privacy policy",
@@ -418,6 +418,8 @@ Personal information includes such items as:
 
   changePassword: "Change password",
 
+  howItWorks: "How it works?",
+
   howIt: "How it",
 
   works: "works?",
@@ -455,6 +457,8 @@ Personal information includes such items as:
     "address",
     "in order to activate your plan. Then wait until we approve your payment.",
   ],
+
+  pleaseWaitTillWeApprove: "Please, wait until we approve your payment.",
 
   cancelLimit: "You can cancel after 72 hours after purchase",
 
@@ -549,9 +553,9 @@ const rus = {
 
   referralProgram: "Реферальная программа",
 
-  referralProgramContent: `Проект "Cryptowave" стартовал 1 февраля.
-  За 3 месяца работы мы достигли $ 5 млн+ и все еще получаем прибыль в 2 тыс.+, и все больше инвесторов сотрудничают с нами.
-  После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 10% от суммы, вложенной привлеченным инвестором, и бонус в размере 10% от вложенной суммы самому инвестору.
+  referralProgramContent: `Проект «Криптовейв» стартовал 1 февраля.
+  За 3 месяца работы мы достигли $5M+ и по-прежнему получаем прибыль 2K+ и с нами сотрудничает все больше инвесторов.
+  После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 5% Прямому Рефералу, 2% Рефералу 2-й линии, 1% Рефералу 3-й линии от суммы, вложенной привлеченным инвестором.
   Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
 
   terms: "Условия и положения | Политика конфиденциальности",
@@ -879,6 +883,8 @@ const rus = {
 
   changePassword: "Сменить пароль",
 
+  howItWorks: "Как это работает?",
+
   howIt: "Как это",
 
   works: "работает?",
@@ -918,6 +924,8 @@ const rus = {
     "на адрес",
     "чтобы активировать план. Затем подождите, пока мы одобрим ваш платеж.",
   ],
+
+  pleaseWaitTillWeApprove: "Пожалуйста, подождите, пока мы одобрим ваш платеж.",
 
   cancelLimit: "Вы можете отменить через 72 часа после покупки",
 
@@ -1015,10 +1023,10 @@ const esp = {
 
   referralProgram: "Programa de referencia",
 
-  referralProgramContent: `Proyecto "Cryptowave" se lanzó el 1 de febrero.
-En 3 meses de trabajo, hemos alcanzado $5M+ y todavía estamos obteniendo ganancias 2K+ y más inversores están cooperando con nosotros.
-Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el propósito de escalar. El programa de referencia otorga el 10% de la cantidad invertida por el inversor atraído y una bonificación del 10% de la cantidad invertida al propio inversor.
-El proyecto no es complicado y fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
+  referralProgramContent: `Proyecto "Cryptowave" lanzado el 1 de febrero.
+  En 3 meses de trabajo, hemos alcanzado los $5M+ y todavía estamos obteniendo ganancias de 2K+ y más inversionistas están cooperando con nosotros.
+  Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el propósito de escalar. El programa de referencia da 5% a la referencia directa, 2% a la referencia de 2ª línea, 1% a la referencia de 3ª línea de la cantidad invertida por el inversor atraído.
+  El Proyecto no es complicado y es fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
 
   termsAndConditionsHeader: "Términos y condiciones",
 
@@ -1351,6 +1359,8 @@ La información personal incluye elementos tales como:
 
   changePassword: "Cambia la contraseña",
 
+  howItWorks: "¿Cómo funciona?",
+
   howIt: "¿Cómo",
 
   works: "funciona?",
@@ -1390,6 +1400,8 @@ La información personal incluye elementos tales como:
     "",
     "para activar tu plan. Luego espere hasta que aprobemos su pago.",
   ],
+
+  pleaseWaitTillWeApprove: "Por favor, espere hasta que aprobemos su pago.",
 
   cancelLimit: "Puede cancelar después de 72 horas después de la compra",
 
@@ -1484,10 +1496,10 @@ const deu = {
 
   referralProgram: "Empfehlungsprogramm",
 
-  referralProgramContent: `Projekt "Cryptowave" startete am 1. Februar.
-  In 3 Monaten Arbeit haben wir $ 5M + erreicht und gewinnen immer noch Gewinn 2K + und mehr Investoren kooperieren mit uns.
-  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm zum Zwecke der Skalierung. Das Empfehlungsprogramm gibt 10% des vom angezogenen Investor investierten Betrags und einen Bonus von 10% des investierten Betrags an den Investor selbst.
-  Das Projekt ist nicht kompliziert und leicht zu verstehen. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen möchte.'`,
+  referralProgramContent: `Das Projekt „Cryptowave“ startete am 1. Februar.
+  In 3 Monaten Arbeit haben wir über 5 Mio. USD erreicht und erzielen immer noch Gewinne von über 2.000, und mehr Investoren arbeiten mit uns zusammen.
+  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm zum Zwecke der Skalierung. Das Empfehlungsprogramm gibt 5 % für die direkte Empfehlung, 2 % für die Empfehlung der zweiten Linie und 1 % für die Empfehlung der dritten Linie des vom geworbenen Investor investierten Betrags.
+  Das Projekt ist nicht kompliziert und leicht verständlich. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen will.'`,
 
   termsAndConditionsHeader: "Geschäftsbedingungen",
 
@@ -1817,6 +1829,8 @@ Personenbezogene Daten umfassen solche Elemente wie:
 
   changePassword: "Ändere das Passwort",
 
+  howItWorks: "Wie es funktioniert?",
+
   howIt: "Wie es",
 
   works: "funktioniert?",
@@ -1856,6 +1870,8 @@ Personenbezogene Daten umfassen solche Elemente wie:
     "Adresse",
     "um Ihren Plan zu aktivieren. Warten Sie dann, bis wir Ihre Zahlung genehmigen.",
   ],
+
+  pleaseWaitTillWeApprove: "Bitte warten Sie, bis wir Ihre Zahlung genehmigen.",
 
   cancelLimit: "Sie können nach 72 Stunden nach dem Kauf stornieren",
 

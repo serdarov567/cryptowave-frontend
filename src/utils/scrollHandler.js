@@ -18,6 +18,10 @@ const scrollHandler = (section, navbarHeight) => {
       sectionName = "Contact";
       break;
     }
+    case "howItWorks": {
+      sectionName = "HowItWorks";
+      break;
+    }
     default: {
       break;
     }

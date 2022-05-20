@@ -6,6 +6,7 @@ import {
   Text,
   Container,
   useBreakpointValue,
+  Icon,
 } from "@chakra-ui/react";
 import GradientButton from "src/components/GradientButton";
 import { colors } from "src/theme";
@@ -124,8 +125,8 @@ const Landing = () => {
         <Coins langKeys={langKeys} />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
         <AboutUs langKeys={langKeys} />
-        {/*place for supported wallets*/}
         <Contacts isSignedIn={isSignedIn} langKeys={langKeys} />
+        
       </Container>
       <Flex
         pos={"absolute"}

@@ -15,7 +15,7 @@ export default function GradientButton(props) {
       bgGradient={"-webkit-linear-gradient(110deg, blue.500, violet.500)"}
       _focus={{
         boxShadow: "none",
-        bgGradient: "linear-gradient(110deg, blue.200, violet.200)",
+        bgGradient: "linear-gradient(110deg, blue.500, violet.500)",
       }}
       _hover={{
         bgGradient: `linear-gradient(110deg, ${colors.blue[900]}, ${colors.violet[900]}) padding-box`,

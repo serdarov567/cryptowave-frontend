@@ -323,7 +323,7 @@ function PlanItem(props) {
                   color={"gray.400"}
                   fontSize={addressTextSize}
                 >
-                  Please, wait until we approve your payment.
+                  {langKeys['pleaseWaitTillWeApprove']}
                 </Text>
               )}
             </>
@@ -331,7 +331,7 @@ function PlanItem(props) {
         </Flex>
       </Flex>
 
-      {/* <Tooltip
+      <Tooltip
         label={langKeys['cancelLimit']}
         isDisabled={isThreeDaysPass}
         fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
@@ -349,9 +349,10 @@ function PlanItem(props) {
             }}
             _focus={{}}
             disabled={!isThreeDaysPass}
+            onClick={props.handleCancel}
           />
         </span>
-      </Tooltip> */}
+      </Tooltip>
     </Box>
   );
 }
