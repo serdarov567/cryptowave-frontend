@@ -448,6 +448,13 @@ Personal information includes such items as:
   online: "Online",
 
   paidToUsers: "Paid to users",
+
+  pendingText: [
+    "Send",
+    "to",
+    "address",
+    "in order to activate your plan. Then wait until we approve your payment.",
+  ],
 };
 
 const rus = {
@@ -900,6 +907,13 @@ const rus = {
   online: "В сети",
 
   paidToUsers: "Выплачено пользователям",
+
+  pendingText: [
+    "Отправьте",
+    "",
+    "на адрес",
+    "чтобы активировать план. Затем подождите, пока мы одобрим ваш платеж.",
+  ],
 };
 
 const chn = {
@@ -1361,6 +1375,13 @@ La información personal incluye elementos tales como:
   online: "En línea",
 
   paidToUsers: "Pagado a los usuarios",
+
+  pendingText: [
+    "Envía",
+    "a la dirección de",
+    "",
+    "para activar tu plan. Luego espere hasta que aprobemos su pago.",
+  ],
 };
 
 const deu = {
@@ -1816,6 +1837,13 @@ Personenbezogene Daten umfassen solche Elemente wie:
   online: "Online",
 
   paidToUsers: "Bezahlt an Benutzer",
+
+  pendingText: [
+    "Senden Sie",
+    "an die",
+    "Adresse",
+    "um Ihren Plan zu aktivieren. Warten Sie dann, bis wir Ihre Zahlung genehmigen.",
+  ],
 };
 
 export { eng, rus, chn, esp, deu };

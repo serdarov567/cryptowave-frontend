@@ -54,7 +54,7 @@ const useUserDashboard = () => {
   const [updateTimer, setUpdateTimer] = useState(false);
   const email = localStorage.getItem("email");
   const token = localStorage.getItem("token");
-  const [isReferralsRead, setreferralsRead] = useState([]);
+  const [isReferralsRead, setReferralsRead] = useState([]);
   const [updateReferrals, setupdateReferrals] = useState(false);
 
   const fetchUserPlans = async () => {
@@ -72,7 +72,7 @@ const useUserDashboard = () => {
       const balanceResult = await getBalance(email, token);
 
       if (balanceResult.status === 200) {
-        setBalance(parseInt(balanceResult.data));
+        setBalance(parseFloat(balanceResult.data).toFixed(2));
       }
     } catch (error) {
       setError("Network error!");
@@ -107,7 +107,7 @@ const useUserDashboard = () => {
 
       readAll(ids);
 
-      setreferralsRead([]);
+      setReferralsRead([]);
       setupdateReferrals(true);
     }
   }, [isReferralsRead]);
@@ -181,7 +181,7 @@ const useUserDashboard = () => {
     earnings,
     useCountdown,
     refreshEarnings,
-    setreferralsRead,
+    setReferralsRead,
   };
 };
 

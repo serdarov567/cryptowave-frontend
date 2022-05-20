@@ -18,14 +18,14 @@ function Clock(props) {
       <path
         d="M25 45.8333C36.5059 45.8333 45.8333 36.5059 45.8333 25C45.8333 13.4941 36.5059 4.16667 25 4.16667C13.494 4.16667 4.16663 13.4941 4.16663 25C4.16663 36.5059 13.494 45.8333 25 45.8333Z"
         stroke={props.color ? props.color : "#B2B2B2"}
-        stroke-width="2"
+        stroke-width={props.strokeWidth ? props.strokeWidth : "2"}
         stroke-linecap="round"
         stroke-linejoin="round"
       />
       <path
         d="M25 12.5V25L33.3333 29.1667"
         stroke={props.color ? props.color : "#B2B2B2"}
-        stroke-width="2"
+        stroke-width={props.strokeWidth ? props.strokeWidth : "2"}
         stroke-linecap="round"
         stroke-linejoin="round"
       />

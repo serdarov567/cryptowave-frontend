@@ -10,9 +10,9 @@ function BoardButton(props) {
 
   const [hover, setHover] = useState(false);
 
-  const width = useBreakpointValue({ base: "70px", sm: "100px", md: "150px" });
+  const width = useBreakpointValue({ base: "90px", sm: "100px", md: "150px" });
   const height = useBreakpointValue({
-    base: "100px",
+    base: "110px",
     sm: "150px",
     md: "200px",
   });

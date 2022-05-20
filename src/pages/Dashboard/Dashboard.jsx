@@ -45,50 +45,38 @@ function Dashboard() {
     balance,
     earnings,
     refreshEarnings,
-    referals,
-    setReferalsRead,
+    referrals,
+    setReferralsRead,
   } = useUserDashboard();
 
   const [totalBonus, setTotalBonus] = useState(0);
 
   useEffect(() => {
-    if (referals !== undefined) {
-      referals.forEach((referal) => {
-        if (referal.isCompleted && !referal.isRead) {
-          if (referal.from === localStorage.getItem("username")) {
-            toast({
-              title: "Referal program",
-              description: "You received 10% bonus to your first deposit.",
-              status: "success",
-              position: "top-left",
-              size: "lg",
-              duration: null,
-              isClosable: true,
-            });
-          } else {
-            toast({
-              title: "Referal program",
-              description: `You received 10% of ${referal.from}'s purchase to your balance.`,
-              status: "success",
-              position: "top-left",
-              size: "lg",
-              duration: null,
-              isClosable: true,
-            });
-          }
+    if (referrals !== undefined) {
+      referrals.forEach((referal) => {
+        if (!referal.isRead) {
+          toast({
+            title: "Referal program",
+            description: `You received ${referal.amount}$ from ${referal.from}'s purchase.`,
+            status: "success",
+            position: "top-left",
+            size: "lg",
+            duration: null,
+            isClosable: true,
+          });
         }
       });
-      setReferalsRead(referals);
+      setReferralsRead(referrals);
 
       let total = 0;
 
-      for (const referal of referals) {
-        total += referal.isCompleted ? referal.amount : 0;
+      for (const referal of referrals) {
+        total += referal.amount;
       }
 
       setTotalBonus(total);
     }
-  }, [referals]);
+  }, [referrals]);
 
   const detailsFontSize = useBreakpointValue({
     base: "16px",
@@ -130,6 +118,7 @@ function Dashboard() {
             reward={plan.reward}
             walletType={plan.wallet.type}
             status={plan.status}
+            period={plan.period}
           />
         );
       });
@@ -238,7 +227,7 @@ function Dashboard() {
                     });
                   }}
                 >
-                  Copy referal link
+                  Referral link
                 </TextButton>
               </Flex>
               <HStack

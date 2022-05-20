@@ -252,7 +252,7 @@ const Wallets = () => {
         <Heading marginBottom={"50px"}>{langKeys["myWallets"]}</Heading>
 
         {walletsLoading ? (
-          <LoadingIndicator title={langKeys['loading']} />
+          <LoadingIndicator title={langKeys["loading"]} />
         ) : wallets.length > 0 ? (
           <SimpleGrid
             columns={columns}
@@ -263,7 +263,7 @@ const Wallets = () => {
             {renderWallets}
           </SimpleGrid>
         ) : (
-          <Text>{langKeys['noWallets']}</Text>
+          <Text>{langKeys["noWallets"]}</Text>
         )}
       </Container>
 
@@ -305,6 +305,10 @@ const Wallets = () => {
               <option value={"BTC"}>BTC</option>
               <option value={"ETH"}>ETH</option>
               <option value={"USDTTRC20"}>USDT TRC20</option>
+              <option value={"BNB"}>BNB</option>
+              <option value={"DASH"}>DASH</option>
+              <option value={"LTC"}>LTC</option>
+              <option value={"TRX"}>TRX</option>
             </Select>
           </FormControl>
           <FormControl>

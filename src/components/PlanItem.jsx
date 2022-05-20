@@ -8,19 +8,28 @@ import {
   useBreakpointValue,
   VStack,
   Tooltip,
+  CloseButton,
 } from "@chakra-ui/react";
 import Timeline from "src/assets/vectors/Timeline";
-import OutlinedButton from "./OutlinedButton";
 import { colors, styles } from "src/theme";
-import DollarSign from "src/assets/vectors/DollarSign";
 import { useCountdown } from "src/pages/Dashboard/useUserDashboard";
 import dateToString from "src/utils/dateToString";
+import Clock from "src/assets/vectors/Clock";
 
 const SUPPORTED_WALLETS = {
   BTC: "bc1q2t2dncstcv4stp9pezfygdjhz045tq8vdferjz",
   ETH: "0xA94563d641EB4735aB0c9dd17BcCaBc02F03eDC0",
   USDTTRC20: "TFQdTZhcrVgFzxVXBXnqPhGuCr3ibXujJh",
+  BNB: "0xA94563d641EB4735aB0c9dd17BcCaBc02F03eDC0",
+  DASH: "XpVPSsn4m9XgKTaFp5UC4CwwpiVfQZyphA",
+  LTC: "ltc1qphdmtx3cqsk2jljzqz430xsrfx49emcn4yprrm",
+  TRX: "TFQdTZhcrVgFzxVXBXnqPhGuCr3ibXujJh",
 };
+
+const SECOND = 1000;
+const MINUTE = 60 * SECOND;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
 
 function PlanItem(props) {
   const { langKeys } = props;
@@ -56,11 +65,18 @@ function PlanItem(props) {
 
   const addressTextSize = useBreakpointValue({ base: "12px", md: "16px" });
 
+  const mobileMargin = useBreakpointValue({ base: "20px", sm: "0px" });
+
   let { days, hours, minutes } = useCountdown(props.dateOfExpiration);
+
+  const isThreeDaysPass =
+    new Date(props.dateOfExpiration).getTime() - (props.period - 3) * DAY <
+    Date.now();
 
   return (
     <Box
       key={props.uniqueKey}
+      pos={"relative"}
       bgColor={"#000"}
       minH={"150px"}
       w={useBreakpointValue({ base: "300px", sm: "350px", md: "full" })}
@@ -237,24 +253,38 @@ function PlanItem(props) {
                   </span>
                 </Detail>
               )}
-              {minutes > 0 &&
-              props.status !== "Completed" &&
-              props.status !== "Canceled" ? (
-                <Heading
-                  maxW={"200px"}
-                  key={props.uniqueKey + "2"}
-                  fontSize={titleFontSize}
-                  textAlign={"center"}
-                  marginBlock={"15px"}
-                >
-                  {langKeys["timeLeft"]}{" "}
-                  {days > 0 && days > 9 ? days : `0${days}`}d:
-                  {hours > 0 && hours > 9 ? hours : `0${hours}`}h:
-                  {minutes > 0 && minutes > 9 ? minutes : `0${minutes}`}m
-                </Heading>
-              ) : (
-                <Heading fontSize={titleFontSize}>{props.status}</Heading>
-              )}
+              <Box
+                border={"2px solid transparent"}
+                borderRadius={"5px"}
+                background={`linear-gradient(110deg, rgba(0,0,0,0.7), rgba(0,0,0,0.7)) padding-box, linear-gradient(110deg, ${colors.blue["500"]}, ${colors.violet["500"]}) border-box`}
+                boxShadow={"7px 6px 20px 0px #6B68FF50"}
+                px={"20px"}
+                py={"10px"}
+                marginTop={mobileMargin}
+              >
+                {minutes > 0 &&
+                props.status !== "Completed" &&
+                props.status !== "Canceled" ? (
+                  <HStack>
+                    <Clock size={"25px"} color={"white"} strokeWidth={4} />
+                    <Heading
+                      maxW={"200px"}
+                      key={props.uniqueKey + "2"}
+                      fontSize={titleFontSize}
+                      textAlign={"center"}
+                    >
+                      {days > 0 && days > 9 ? days : `0${days}`}d:
+                      {hours > 0 && hours > 9 ? hours : `0${hours}`}h
+                      {days <= 0 &&
+                        (minutes > 0 && minutes > 9
+                          ? `:${minutes}m`
+                          : `:0${minutes}m`)}
+                    </Heading>
+                  </HStack>
+                ) : (
+                  <Heading fontSize={titleFontSize}>{props.status}</Heading>
+                )}
+              </Box>
             </>
           ) : (
             <>
@@ -265,7 +295,9 @@ function PlanItem(props) {
                   color={"gray.400"}
                   fontSize={addressTextSize}
                 >
-                  Send {props.deposit}$ to {props.walletType} address{" "}
+                  {langKeys["pendingText"][0]} {props.deposit}${" "}
+                  {langKeys["pendingText"][1]} {props.walletType}{" "}
+                  {langKeys["pendingText"][2] + " "}
                   <Tooltip label="Copy to clipboard!">
                     <Text
                       cursor={"pointer"}
@@ -281,9 +313,8 @@ function PlanItem(props) {
                     >
                       {SUPPORTED_WALLETS[props.walletType]}
                     </Text>
-                  </Tooltip>{" "}
-                  in order to activate your plan. Then wait until we approve
-                  your payment.
+                  </Tooltip>
+                  {" " + langKeys["pendingText"][3]}
                 </Text>
               ) : (
                 <Text
@@ -299,6 +330,28 @@ function PlanItem(props) {
           )}
         </Flex>
       </Flex>
+
+      {/* <Tooltip
+        label={"You can cancel after 72 hours after purchase"}
+        isDisabled={isThreeDaysPass}
+        fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
+        w={"200px"}
+      >
+        <span style={{ position: "absolute", right: "40px", top: "10px" }}>
+          <CloseButton
+            pos={"absolute"}
+            width={"30px"}
+            height={"30px"}
+            bgColor={"gray.500"}
+            _hover={{
+              color: "white",
+              bgColor: "transparent",
+            }}
+            _focus={{}}
+            disabled={!isThreeDaysPass}
+          />
+        </span>
+      </Tooltip> */}
     </Box>
   );
 }
@@ -332,38 +385,6 @@ const Detail = (props) => {
         {props.children}
       </Heading>
     </Flex>
-  );
-};
-
-const ActionButton = (props) => {
-  return (
-    <OutlinedButton
-      leftIcon={<DollarSign />}
-      fontWeight={500}
-      fontFamily={"Manrope"}
-      fontSize={props.fontSize}
-      w={useBreakpointValue({ base: "80%", sm: "fit-content" })}
-      h={useBreakpointValue({
-        base: "40px",
-        sm: "30px",
-        md: "40px",
-        lg: "50px",
-      })}
-      color={"white"}
-      angle={"110deg"}
-      firstColor={colors.violet[500]}
-      secondColor={colors.blue[500]}
-      bgFirst={colors.violet[800]}
-      bgSecond={colors.blue[800]}
-      alignSelf={"center"}
-      justifyContent={"center"}
-      alignItems={"center"}
-      marginTop={useBreakpointValue({ base: "20px", sm: "0px" })}
-      marginBottom={useBreakpointValue({ base: "10px", sm: "0px" })}
-      {...props}
-    >
-      Withdraw
-    </OutlinedButton>
   );
 };
 
