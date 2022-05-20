@@ -455,6 +455,10 @@ Personal information includes such items as:
     "address",
     "in order to activate your plan. Then wait until we approve your payment.",
   ],
+
+  cancelLimit: "You can cancel after 72 hours after purchase",
+
+  referralToastMessage: ["You've received", "from", "s purchase."],
 };
 
 const rus = {
@@ -914,6 +918,10 @@ const rus = {
     "на адрес",
     "чтобы активировать план. Затем подождите, пока мы одобрим ваш платеж.",
   ],
+
+  cancelLimit: "Вы можете отменить через 72 часа после покупки",
+
+  referralToastMessage: ["Вы получили", "от покупки", "'a."],
 };
 
 const chn = {
@@ -1382,6 +1390,10 @@ La información personal incluye elementos tales como:
     "",
     "para activar tu plan. Luego espere hasta que aprobemos su pago.",
   ],
+
+  cancelLimit: "Puede cancelar después de 72 horas después de la compra",
+
+  referralToastMessage: ["Has recibido", "de la compra de", "."],
 };
 
 const deu = {
@@ -1844,6 +1856,10 @@ Personenbezogene Daten umfassen solche Elemente wie:
     "Adresse",
     "um Ihren Plan zu aktivieren. Warten Sie dann, bis wir Ihre Zahlung genehmigen.",
   ],
+
+  cancelLimit: "Sie können nach 72 Stunden nach dem Kauf stornieren",
+
+  referralToastMessage: ["Du hast", "von", "' kauf erhalten."],
 };
 
 export { eng, rus, chn, esp, deu };

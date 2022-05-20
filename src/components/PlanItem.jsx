@@ -332,7 +332,7 @@ function PlanItem(props) {
       </Flex>
 
       {/* <Tooltip
-        label={"You can cancel after 72 hours after purchase"}
+        label={langKeys['cancelLimit']}
         isDisabled={isThreeDaysPass}
         fontSize={useBreakpointValue({ base: "10px", md: "14px" })}
         w={"200px"}

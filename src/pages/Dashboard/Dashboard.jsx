@@ -56,8 +56,8 @@ function Dashboard() {
       referrals.forEach((referal) => {
         if (!referal.isRead) {
           toast({
-            title: "Referal program",
-            description: `You received ${referal.amount}$ from ${referal.from}'s purchase.`,
+            title: langKeys["referralProgram"],
+            description: `${langKeys["referralToastMessage"][0]} ${referal.amount}$ ${langKeys["referralToastMessage"][1]} ${referal.from}${langKeys["referralToastMessage"][2]}`,
             status: "success",
             position: "top-left",
             size: "lg",
