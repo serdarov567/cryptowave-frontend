@@ -72,11 +72,11 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
         h={"100vh"}
         justifyContent="center"
         paddingX={0}
-        paddingTop={useBreakpointValue({ base: "100px", md: "-80px" })}
       >
         <Flex
           pos={"relative"}
           minH={"50vh"}
+          h={"60vh"}
           paddingBottom={useBreakpointValue({ base: "150px", md: "40px" })}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
@@ -208,7 +208,7 @@ const ScrollDown = ({ langKeys }) => {
       <Text
         cursor={"pointer"}
         onClick={() => {
-          scrollHandler("plans", navbarHeight);
+          scrollHandler("howItWorks", navbarHeight);
         }}
         color={"#505070"}
       >

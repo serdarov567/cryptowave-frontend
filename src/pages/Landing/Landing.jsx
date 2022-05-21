@@ -25,25 +25,19 @@ import Referral from "./Referral";
 import AboutUs from "./AboutUs";
 import Contacts from "./Contacts";
 import HowItWorks from "./HowItWorks";
+import { useNavigate } from "react-router-dom";
 
 const Landing = () => {
   const [isSignedIn, loading] = useIsSignedIn();
   const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     scrollHandler(global.location.hash.slice(1), navbarHeight);
   }, []);
 
-  const textFontSize = useBreakpointValue({
-    base: "x-small",
-    sm: "sm",
-    md: "14px",
-    lg: "16px",
-  });
-
   const { CurrentFlag, currentLanguage, setLanguage, langKeys } = useLanguage();
-
-  const maxWidthOfText = useBreakpointValue({ base: "50px", md: "100px" });
 
   return (
     <Box scrollBehavior="smooth">
@@ -53,22 +47,7 @@ const Landing = () => {
         setLanguage={setLanguage}
         langKeys={langKeys}
       >
-        {isSignedIn ? (
-          <Text
-            maxW={maxWidthOfText}
-            fontSize={textFontSize}
-            fontFamily={"Manrope"}
-            fontWeight={200}
-            bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
-            bgClip={"text"}
-            fill={"transparent"}
-            alignSelf={"center"}
-            overflowWrap={"anywhere"}
-            textOverflow={"ellipsis"}
-          >
-            {localStorage.getItem("username")}
-          </Text>
-        ) : (
+        {!isSignedIn && (
           <SecondaryActionButton
             isSignedIn={isSignedIn}
             loading={loading}
@@ -121,12 +100,25 @@ const Landing = () => {
           }}
         />
         <HowItWorks langKeys={langKeys} />
-        <Referral langKeys={langKeys} />
+        <AboutUs langKeys={langKeys} />
         <Coins langKeys={langKeys} />
         <Plans isSignedIn={isSignedIn} langKeys={langKeys} />
-        <AboutUs langKeys={langKeys} />
-        <Contacts isSignedIn={isSignedIn} langKeys={langKeys} />
-        
+        <Referral langKeys={langKeys} />
+        {/*place for supported wallets*/}
+        <Contacts isSignedIn={isSignedIn} langKeys={langKeys} />{" "}
+        <GradientButton
+          display={{ base: "none", md: "flex" }}
+          pos={"fixed"}
+          bottom={"30px"}
+          right={"30px"}
+          zIndex={100000}
+          onClick={() => {
+            navigate("/faq");
+          }}
+        >
+          <Icon name={"QuestionOutlineIcon"} marginRight={"10px"} />
+          FAQ
+        </GradientButton>
       </Container>
       <Flex
         pos={"absolute"}

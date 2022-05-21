@@ -139,7 +139,6 @@ const Plans = ({ isSignedIn, langKeys }) => {
     <Box
       id={"Plans"}
       pos={"relative"}
-      maxW={"1440px"}
       w={window.outerWidth}
       h={"fit-content"}
       alignSelf={"center"}
@@ -163,9 +162,9 @@ const Plans = ({ isSignedIn, langKeys }) => {
         <Parallaxes />
         <Heading
           alignSelf={"start"}
-          fontSize={useBreakpointValue({ base: "xl", sm: "2xl", md: "4xl" })}
+          fontSize={"30px"}
           fontFamily={"Manrope"}
-          color={"#FFF"}
+          color={"#8FC9FF"}
           marginBottom={useBreakpointValue({ base: "20px", md: "40px" })}
           paddingLeft={"20px"}
         >
@@ -398,7 +397,7 @@ const Parallaxes = () => {
           left: "-120px",
           top: 0,
           width: "250px",
-          height: "100vh",
+          height: "120vh",
           zIndex,
         }}
         bgImageStyle={{ height: "250px", width: "300px", top: "380px" }}

@@ -7,7 +7,7 @@ export default function Tilde(props) {
       height="10"
       viewBox="0 0 26 10"
       fill="#A9A7FF"
-      fill-opacity="0.37"
+      fillOpacity="0.37"
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >

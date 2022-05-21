@@ -151,7 +151,8 @@ const Contacts = ({ isSignedIn, langKeys }) => {
       h={"fit-content"}
       flexDir={useBreakpointValue({ base: "column", md: "row" })}
       justifyContent={"center"}
-      paddingBottom={useBreakpointValue({ base: "140px", md: "200px" })}
+      paddingBottom={useBreakpointValue({ base: "140px", md: "150px" })}
+      marginTop={useBreakpointValue({ base: "50px", md: "100px" })}
     >
       <Box
         pos={"relative"}

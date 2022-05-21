@@ -24,8 +24,8 @@ const Flag = (props) => {
           y2="74.5"
           gradientUnits="userSpaceOnUse"
         >
-          <stop stop-color={gradient} />
-          <stop offset="1" stop-color={color} />
+          <stop stopColor={gradient} />
+          <stop offset="1" stopColor={color} />
         </linearGradient>
       </defs>
     </svg>

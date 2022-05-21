@@ -35,7 +35,7 @@ export default function Stable({
             height="100"
             rx="10"
             fill="white"
-            fill-opacity="0.04"
+            fillOpacity="0.04"
           />
           <rect
             x="0.5"
@@ -44,7 +44,7 @@ export default function Stable({
             height="99"
             rx="9.5"
             stroke="#474747"
-            stroke-opacity="0.73"
+            strokeOpacity="0.73"
           />
         </g>
         <path
@@ -54,16 +54,16 @@ export default function Stable({
         <path
           d="M72 25.9091L53 44.9091L43 34.9091L28 49.9091"
           stroke="#E268E5"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M60 25.9091H72V37.9091"
           stroke="#E268E5"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <defs>
           <filter
@@ -73,9 +73,9 @@ export default function Stable({
             width="140"
             height="140"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImage" stdDeviation="10" />
             <feComposite
               in2="SourceAlpha"

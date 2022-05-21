@@ -5,6 +5,7 @@ import Shield from "../assets/vectors/Shield";
 export default function SecuredBadge(props) {
   return (
     <HStack
+    pos={'relative'}
       backgroundColor={"background.500"}
       px={"10px"}
       py={"5px"}

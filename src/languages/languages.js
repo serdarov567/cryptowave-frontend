@@ -72,7 +72,7 @@ const eng = {
   inside: "in",
 
   aboutText:
-    "Cryptowave limited is the company which concludes the professional team of analysts which analyse and invest, actives of investors in the crypto exchanges. It is headquarters located in London, Great Britain. Trading on the stock market, cryptocurrency exchanges attracts investors and entrepreneurs enjoying high profits, as well as ordinary citizens who are financially literate. Cryptowave Limited has been operating on cryptocurrency exchanges since February 2022, closing hundreds of successful deals daily and allowing private individuals with limited funds participate in this activity. Digital currencies are liquid investment vehicles making it possible to profit off of the fluctuations in prices and rates. Trading cryptocurrencies requires expertise and significant knowledge, as well as the ability to apply diversify risks, set up the investment portfolio, and analyze the factors affecting the price of a financial instrument. Alternatively, it is possible to place one’s funds under the management of experienced traders to obtain passive income according to a preestablished rate, without the need to get into the details of security market regulations, investment portfolios, or associated risks.",
+    "We are a company that manages assets in a completely innovative way. We use the best solutions thanks to technology based on cryptocurrencies and decentralized finance, the latest tools, cryptocurrency exchanges and staking options. In our work, we use trading tools provided by Binance, Coinbase, 3Commas, FTX and decentralized exchanges such as UNISWAP or PancakeSwap. Our traders diversify your investments thanks to our vast experience, we are able to provide stable profits that we offer in our investment plans. Our team consists of competent people, the best in their fields, and the safety of your funds is our priority. After registering on our website, you get the opportunity to invest and get a completely passive income. We also offer a referral program that gives you the chance to earn extra money by inviting others to use our platform.",
 
   trusted: "Trusted",
 
@@ -86,10 +86,18 @@ const eng = {
 
   referralProgram: "Referral program",
 
-  referralProgramContent: `Project "Cryptowave" launched on February 1.
-  In 3 months of work, we have reached $5M+ and are still gaining profit 2K+  and more investors are cooperating with us.
-  After 3 months of hard work, we launch a referral program for the purpose of scale. The referral program gives 5% to Direct Referral, 2%  to the 2nd line Referral , 1% to the 3rd line Referral of the amount invested by the attracted investor.
-  The Project  is not complicated and easy to understand. There is only what an investor needs to know who wants to earn easy money.`,
+  directReferral: "Direct Referral",
+
+  seondLineReferral: "2nd Line Referral",
+
+  thirdLineReferral: "3rd line Referral",
+
+  referralHeaderSmall: "Start Making Money Today ",
+
+  referralHeaderBig: "Using our Referral Program",
+
+  referralContent:
+    "Each registered user of the Cryptowaveclub.com platform can earn money by recommending our site to others. No deposit is required to recommend our website and earn money. Each user can copy their referral link and share it. Earned commissions are immediately available in your account balance, from where you can immediately withdraw them to your wallet or reinvest as your new deposit.",
 
   terms: "Terms and Conditions | Privacy policy",
 
@@ -463,6 +471,106 @@ Personal information includes such items as:
   cancelLimit: "You can cancel after 72 hours after purchase",
 
   referralToastMessage: ["You've received", "from", "s purchase."],
+
+  features: "Features that Cryptowave gives to you",
+
+  featuresCancel: "Cancel Deposit at any Time",
+
+  featuresCancelText:
+    "Full control of your investments. You have the option of release your deposit at any time after paying the appropriate fee.",
+
+  featuresReInvest: "Reinvest Earned Funds",
+
+  featuresReInvestText:
+    "You can reinvest earnings directly from your account balance by creating a new deposit. You'll save time and avoid network fees.",
+
+  featuresReferral: "Referral Program.",
+
+  featuresReferralText:
+    "Earn money by recommending our online platform to others. Unlimited commission on every deposit made by your referrals.",
+
+  faq: "FAQ",
+
+  frequentlyAskedQuestions: "Frequentlty Asked Questions",
+
+  update: "Last update:",
+
+  generalText: "General",
+
+  questionOne: "What is the Cryptowave platform for?",
+
+  oneText:
+    "The Cryptowave platform is the easiest place where you can multiply your money without any specialist knowledge of the currency or cryptocurrency markets. Just choose one of the investment plans and make a deposit to start earning passively. One investment = constant, guaranteed income.",
+
+  questionTwo: "Is investing here safe?",
+
+  twoText:
+    "Of course yes. Cryptowave LTD is a registered, legally operating company in the UK. Our experts will take care of your deposit to ensure you get a profit without worrying about the way and course of the investment. If at any point you feel you wish to cancel, we also provide the option to release your deposit at any time and withdraw your funds.",
+
+  questionThree: "How are you able to give such high returns?",
+
+  threeText:
+    "Our team consists of people with great experience, using many ways to earn on the cryptocurrency market. Modern tools and developed investment diversification algorithms allow us to achieve results on the basis of which we have developed our investment plans. In addition, high financial reserves held by our company, as equity, ensure liquidity and continuity of financing subsequent transactions.",
+
+  questionFour: "Can I start without funds for the investment?",
+
+  fourText:
+    "Yes, it is possible. It requires you to work and be active, but you can achieve your financial goals with our Referral Program. All you have to do is start advertising our platform using your referral link to receive a commission on each deposit of the people you invite. This allows you to raise funds to make your own deposit or simply withdraw the profits from your commissions.",
+
+  investmentText: "Investment",
+
+  questionFive: "What is the minimum deposit value?",
+
+  fiveText:
+    "You can start your deposit with $250 in the Starter Plan. A minimum of $5000 is required to make a deposit for the Tsunami Plan. The system will convert the cryptocurrency rate in which you invest at the current exchange rate.",
+
+  questionSix: "Can I make more than one deposit?",
+
+  sixText:
+    "Yes, you can make unlimited deposits in any investment plan and in any cryptocurrency. Each deposit is treated separately and constitutes a separate Investment Plan.",
+
+  questionSeven:
+    "I made transfer to the address indicated, when I will see my deposit?",
+
+  sevenText:
+    "The deposit time may vary from 15 minutes to 1 hour or more. Our system requires 3 full confirmations from the blockchain network to register your deposit.",
+
+  questionEight: "Can I reinvest the earned funds?",
+
+  eightText: `Yes, of course you don't have to incur unnecessary transfer costs. All you have to do is go to the "Purchase a plan" section and select your account balance as the payment system. The system will take funds from your balance to make another / new deposit`,
+
+  withdrawalText: "Withdrawal",
+
+  questionNine: "What is the Minimum withdrawal Amount?",
+
+  nineText: "The Minimum withdrawal amount is $50 from earned balance.",
+
+  questionTen: "How long it will take to receive a withdrawal to my wallet?",
+
+  tenText: `For the highest security reasons, withdrawals are processed manually by our operators. Once verified, your payout will be processed within: "24 hours - for payouts of daily earnings and referral commissions"`,
+
+  questionEleven: "Can I withdraw my initial Deposit?",
+
+  elevenText:
+    "After completing the investment plan, your deposit will be returned to your account balance and you will be able to withdraw it free of charge.",
+
+  accountSecurityText: "Account and Security",
+
+  questionTwelve: "Can I register more than one account",
+
+  twelveText:
+    "Each person is asked to have only one registered account for their own use. You can create only one account from your email and you cannot create the already existing nicknames. Please do not register more account in your referral structure (Using referral link from your existing account). Charging commission from your own deposits using linked accounts is strictly prohibited.",
+
+  questionThirteen: "Is my data protected?",
+
+  thirteenText:
+    "Yes, the data you provide to us regarding your  email address, cryptocurrency wallets are 100% secured and will never be shared with third parties. All operations are only available to you and the Cryptowave LTD. We use a super secure server for data storage, protected against any type of attack. Cryptocurrency funds are kept on secure wallets that are completely impossible to access by third parties. Our team consists of qualified people who adhere to all security and confidentiality rules.",
+
+  questionFourteen: "How to keep my account secure?",
+
+  fourteenText: `Please follow our account security rules for users: \n * Set a strong password of at least 6 characters, including numbers, upper and lower case letters or/and special characters. \n * Never share your login and password with anyone! (Our support will never ask for it). \n * Set a different password than you use to access your E-Mail account.\n \nPlease Note: Our support or administration NEVER CONTACT with users personally via Telegram accounts or other messengers. The only possible contact ways are: E-Mail to: team@cryptowaveclub.com. Cryptowave LTD never ask for payments to external crypto wallets and never promote / recommend any other investment platforms, programs, bots and apps. If you have any doubts, always contact our support.`,
+
+  bannerText: "We work with following Cryptocurrencies",
 };
 
 const rus = {
@@ -539,7 +647,7 @@ const rus = {
   inside: "в",
 
   aboutText:
-    "Cryptowave limited — компания, объединяющая профессиональную команду аналитиков, которые анализируют и инвестируют активы инвесторов на криптобиржах. Штаб-квартира находится в Лондоне, Великобритания. Торговля на фондовом рынке, криптовалютных биржах привлекает инвесторов и предпринимателей, получающих высокую прибыль, а также простых финансово грамотных граждан. Cryptowave Limited работает на криптовалютных биржах с февраля 2022 года, ежедневно закрывая сотни успешных сделок и позволяя участвовать в этой деятельности частным лицам с ограниченными средствами. Цифровые валюты — это ликвидные инвестиционные инструменты, позволяющие получать прибыль от колебаний цен и курсов. Торговля криптовалютами требует опыта и значительных знаний, а также умения применять диверсификацию рисков, формировать инвестиционный портфель и анализировать факторы, влияющие на цену финансового инструмента. В качестве альтернативы можно передать свои средства в управление опытным трейдерам для получения пассивного дохода по заранее установленной ставке, без необходимости вникать в детали регулирования рынка ценных бумаг, инвестиционных портфелей или сопутствующих рисков.",
+    "Мы компания, которая управляет активами совершенно инновационным способом. Мы используем лучшие решения благодаря технологиям, основанным на криптовалютах и децентрализованном финансировании, новейшим инструментам, криптовалютным биржам и вариантам ставок. В своей работе мы используем торговые инструменты, предоставляемые Binance, Coinbase, 3Commas, FTX и децентрализованными биржами, такими как UNISWAP или PancakeSwap. Наши трейдеры диверсифицируют ваши инвестиции благодаря нашему огромному опыту, мы можем обеспечить стабильную прибыль, которую мы предлагаем в наших инвестиционных планах. Наша команда состоит из компетентных людей, лучших в своих областях, и безопасность ваших средств является нашим приоритетом. После регистрации на нашем сайте вы получаете возможность инвестировать и получать полностью пассивный доход. Мы также предлагаем реферальную программу, которая дает вам возможность заработать дополнительные деньги, приглашая других использовать нашу платформу.",
 
   trusted: "Доверенный",
 
@@ -553,10 +661,18 @@ const rus = {
 
   referralProgram: "Реферальная программа",
 
-  referralProgramContent: `Проект «Криптовейв» стартовал 1 февраля.
-  За 3 месяца работы мы достигли $5M+ и по-прежнему получаем прибыль 2K+ и с нами сотрудничает все больше инвесторов.
-  После 3 месяцев напряженной работы мы запускаем реферальную программу с целью масштабирования. Реферальная программа дает 5% Прямому Рефералу, 2% Рефералу 2-й линии, 1% Рефералу 3-й линии от суммы, вложенной привлеченным инвестором.
-  Проект не сложный и понятный. Есть только то, что нужно знать инвестору, который хочет заработать легкие деньги.`,
+  directReferral: "Прямой Реферал",
+
+  seondLineReferral: "Реферал 2-й линии",
+
+  thirdLineReferral: "Реферал 3-й линии",
+
+  referralHeaderSmall: "Начните зарабатывать сегодня ",
+
+  referralHeaderBig: "Использование нашей реферальной программы",
+
+  referralContent:
+    "Каждый зарегистрированный пользователь платформы Cryptowaveclub.com может зарабатывать, рекомендуя наш сайт другим. Депозит не требуется, чтобы рекомендовать наш сайт и зарабатывать деньги. Каждый пользователь может скопировать свою реферальную ссылку и поделиться ею. Заработанные комиссионные сразу же доступны на балансе вашего счета, откуда вы можете сразу же вывести их на свой кошелек или реинвестировать в качестве нового депозита.",
 
   terms: "Условия и положения | Политика конфиденциальности",
 
@@ -892,7 +1008,7 @@ const rus = {
   step1Header: "Зарегистрируйтесь в Cryptowave",
 
   step1Content:
-    "Регистрация бесплатна. Зарегистрируйтесь легко с помощью э-почты",
+    "Регистрация бесплатна. Зарегистрируйтесь легко с помощью почты",
 
   step2Header: "Внесите свой депозит",
 
@@ -930,6 +1046,109 @@ const rus = {
   cancelLimit: "Вы можете отменить через 72 часа после покупки",
 
   referralToastMessage: ["Вы получили", "от покупки", "'a."],
+
+  features: "Возможности, которые Cryptowave дает Вам",
+
+  featuresCancel: "Отменить депозит в любое время",
+
+  featuresCancelText:
+    "Полный контроль над вашими инвестициями. У вас есть возможность разблокировать депозит в любое время после уплаты соответствующей комиссии.",
+
+  featuresReInvest: "Реинвестируйте заработанные средства",
+
+  featuresReInvestText:
+    "Вы можете реинвестировать прибыль прямо с баланса своего счета, создав новый депозит. Вы сэкономите время и избежите сетевых сборов.",
+
+  featuresReferral: "Реферальная программа.",
+
+  featuresReferralText:
+    "Зарабатывайте деньги, рекомендуя нашу онлайн-платформу другим. Неограниченная комиссия за каждый депозит, сделанный вашими рефералами.",
+
+  faq: "FAQ",
+
+  frequentlyAskedQuestions: "Часто Задаваемые Вопросы",
+
+  update: "Последнее обновление:",
+
+  generalText: "Общий",
+
+  questionOne: "Для чего нужна платформа Cryptowave?",
+
+  oneText:
+    "Платформа Cryptowave — это самое простое место, где вы можете приумножить свои деньги без каких-либо специальных знаний о валютных или криптовалютных рынках. Просто выберите один из инвестиционных планов и внесите депозит, чтобы начать пассивно зарабатывать. Одна инвестиция = постоянный, гарантированный доход.",
+
+  questionTwo: "Безопасно ли здесь инвестировать?",
+
+  twoText:
+    "Да конечно. Cryptowave LTD — зарегистрированная, легально действующая компания в Великобритании. Наши специалисты позаботятся о вашем депозите, чтобы вы получали прибыль, не беспокоясь о способе и ходе инвестирования. Если в какой-то момент вы почувствуете, что хотите отменить, мы также предоставляем возможность разблокировать ваш депозит в любое время и вывести свои средства.",
+
+  questionThree: "Как вам удается давать такие высокие доходы?",
+
+  threeText:
+    "Наша команда состоит из людей с большим опытом, использующих множество способов заработка на рынке криптовалют. Современные инструменты и разработанные алгоритмы диверсификации инвестиций позволяют нам добиваться результатов, на основе которых мы разработали наши инвестиционные планы. Кроме того, высокие финансовые резервы нашей компании в виде собственного капитала обеспечивают ликвидность и непрерывность финансирования последующих сделок.",
+
+  questionFour: "Могу ли я начать без средств для инвестиций?",
+
+  fourText:
+    "Да, это возможно. Это требует от вас работы и активности, но вы можете достичь своих финансовых целей с помощью нашей реферальной программы. Все, что вам нужно сделать, это начать рекламировать нашу платформу, используя свою реферальную ссылку, чтобы получать комиссию с каждого депозита приглашенных вами людей. Это позволяет вам собирать средства для внесения собственного депозита или просто снимать прибыль от ваших комиссий.",
+
+  investmentText: "Инвестиции",
+
+  questionFive: "Какова минимальная сумма депозита?",
+
+  fiveText:
+    "Вы можете начать свой депозит с 250 долларов США в Стартовом плане. Минимум 5000 долларов США требуется для внесения депозита для плана Цунами. Система конвертирует курс криптовалюты, в которую вы инвестируете, по текущему курсу.",
+
+  questionSix: "Могу ли я сделать более одного депозита?",
+
+  sixText:
+    "Да, вы можете делать неограниченные депозиты в любом Инвестиционном Плане и в любой криптовалюте. Каждый депозит рассматривается отдельно и представляет собой отдельный Инвестиционный План.",
+
+  questionSeven:
+    "Я сделал перевод на указанный адрес, когда я увижу свой депозит?",
+
+  sevenText:
+    "Время депозита может варьироваться от 15 минут до 1 часа и более. Наша система требует 3 полных подтверждения от сети блокчейн для регистрации вашего депозита.",
+
+  questionEight: "Могу ли я реинвестировать заработанные средства?",
+
+  eightText:
+    "Да, конечно, вам не нужно нести ненужные трансферные расходы. Все, что вам нужно сделать, это перейти в раздел «Приобрести план» и выбрать баланс своего счета в качестве платежной системы. Система возьмет средства с вашего баланса для внесения еще одного/нового депозита",
+
+  withdrawalText: "Вывод",
+
+  questionNine: "Какова минимальная сумма вывода?",
+
+  nineText:
+    "Минимальная сумма вывода составляет 50 долларов США с заработанного баланса.",
+
+  questionTen: "Сколько времени займет вывод средств на мой кошелек?",
+
+  tenText:
+    "Из соображений максимальной безопасности снятие средств обрабатывается нашими операторами вручную. После проверки ваша выплата будет обработана в течение: «24 часов — для выплат ежедневного заработка и реферальных комиссий».",
+
+  questionEleven: "Могу ли я вывести свой первоначальный депозит?",
+
+  elevenText:
+    "После завершения инвестиционного плана ваш депозит будет возвращен на баланс вашего счета, и вы сможете вывести его бесплатно.",
+
+  accountSecurityText: "Учетная запись и безопасность",
+
+  questionTwelve: "Могу ли я зарегистрировать более одного аккаунта?",
+
+  twelveText:
+    "Каждому человеку предлагается иметь только одну зарегистрированную учетную запись для собственного использования. Вы можете создать только одну учетную запись из своей электронной почты, и вы не можете создавать уже существующие псевдонимы. Пожалуйста, не регистрируйте дополнительную учетную запись в своей реферальной структуре (используя реферальную ссылку из существующей учетной записи). Взимание комиссии с ваших собственных депозитов с использованием связанных счетов строго запрещено.",
+
+  questionThirteen: "Защищены ли мои данные?",
+
+  thirteenText:
+    "Да, данные, которые вы предоставляете нам относительно вашего адреса электронной почты, криптовалютных кошельков, защищены на 100% и никогда не будут переданы третьим лицам. Все операции доступны только вам и Cryptowave LTD. Мы используем сверхзащищенный сервер для хранения данных, защищенный от любого типа атак. Криптовалютные средства хранятся на защищенных кошельках, к которым совершенно невозможно получить доступ третьим лицам. Наша команда состоит из квалифицированных людей, которые придерживаются всех правил безопасности и конфиденциальности.",
+
+  questionFourteen: "Как обеспечить безопасность моей учетной записи?",
+
+  fourteenText: `Пожалуйста, соблюдайте правила безопасности нашей учетной записи для пользователей: \n * Установите надежный пароль длиной не менее 6 символов, включая цифры, прописные и строчные буквы и/или специальные символы. \n * Никогда и никому не сообщайте свой логин и пароль! (Наша поддержка никогда не попросит об этом). \n * Установите пароль, отличный от того, который вы используете для доступа к своей учетной записи электронной почты. \n Обратите внимание: Наша поддержка или администрация НИКОГДА не ОБЩАЮТСЯ с пользователями лично через аккаунты Telegram или другие мессенджеры. Единственные возможные способы связи: Электронная почта: team@cryptowaveclub.com. Cryptowave LTD никогда не запрашивает платежи на внешние криптокошельки и никогда не рекламирует/рекомендует какие-либо другие инвестиционные платформы, программы, боты и приложения. Если у вас есть какие-либо сомнения, всегда обращайтесь в нашу службу поддержки.`,
+
+  bannerText: "Мы работаем со следующими Криптовалютами",
 };
 
 const chn = {
@@ -1009,8 +1228,7 @@ const esp = {
   inside: "en",
 
   aboutText:
-    "Cryptowave Limited es la empresa que concluye el equipo profesional de analistas que analizan e invierten los activos de los inversores en los intercambios de cifrado. Su sede se encuentra en Londres, Gran Bretaña. Operando en el mercado de valores, los intercambios de criptomonedas atraen a inversores y empresarios que disfrutan de grandes ganancias, así como a ciudadanos comunes con conocimientos financieros. Cryptowave Limited ha estado operando en intercambios de criptomonedas desde Febrero de 2022, cerrando cientos de acuerdos exitosos diariamente y permitiendo que personas privadas con fondos limitados participen en esta actividad. Las monedas digitales son vehículos de inversión líquidos que permiten beneficiarse de las fluctuaciones de precios y tasas. El comercio de criptomonedas requiere experiencia y conocimiento significativo, así como la capacidad de aplicar riesgos diversificados, configurar la cartera de inversiones y analizar los factores que afectan el precio de un instrumento financiero. Alternativamente, es posible colocar los fondos de uno bajo la administración de comerciantes experimentados para obtener ingresos pasivos de acuerdo a una tasa preestablecida, sin necesidad de entrar en los detalles de las regulaciones del mercado de valores, carteras de inversión o riesgos asociados.",
-
+    "Somos una empresa que gestiona activos de forma totalmente innovadora. Utilizamos las mejores soluciones gracias a la tecnología basada en criptomonedas y finanzas descentralizadas, las últimas herramientas, intercambios de criptomonedas y opciones de participación. En nuestro trabajo, utilizamos herramientas comerciales proporcionadas por Binance, Coinbase, 3Commas, FTX e intercambios descentralizados como UNISWAP o PancakeSwap. Nuestros traders diversifican sus inversiones gracias a nuestra vasta experiencia, somos capaces de brindarle las ganancias estables que le ofrecemos en nuestros planes de inversión. Nuestro equipo está formado por personas competentes, los mejores en sus campos, y la seguridad de sus fondos es nuestra prioridad. Después de registrarse en nuestro sitio web, tiene la oportunidad de invertir y obtener un ingreso completamente pasivo. También ofrecemos un programa de referencia que le brinda la oportunidad de ganar dinero extra al invitar a otros a usar nuestra plataforma.",
   trusted: "De confianza",
 
   stable: "Estable",
@@ -1023,10 +1241,18 @@ const esp = {
 
   referralProgram: "Programa de referencia",
 
-  referralProgramContent: `Proyecto "Cryptowave" lanzado el 1 de febrero.
-  En 3 meses de trabajo, hemos alcanzado los $5M+ y todavía estamos obteniendo ganancias de 2K+ y más inversionistas están cooperando con nosotros.
-  Después de 3 meses de arduo trabajo, lanzamos un programa de referencia con el propósito de escalar. El programa de referencia da 5% a la referencia directa, 2% a la referencia de 2ª línea, 1% a la referencia de 3ª línea de la cantidad invertida por el inversor atraído.
-  El Proyecto no es complicado y es fácil de entender. Solo hay lo que un inversor necesita saber que quiere ganar dinero fácil.`,
+  directReferral: "referencia directa",
+
+  seondLineReferral: "remisión de segunda línea",
+
+  thirdLineReferral: "referencia de tercera línea",
+
+  referralHeaderSmall: "Comience a ganar dinero hoy",
+
+  referralHeaderBig: "Usando nuestro Programa de Referencia",
+
+  referralContent:
+    "Cada usuario registrado de la plataforma Cryptowaveclub.com puede ganar dinero recomendando nuestro sitio a otros. No se requiere depósito para recomendar nuestro sitio web y ganar dinero. Cada usuario puede copiar su enlace de referencia y compartirlo. Las comisiones ganadas están disponibles de inmediato en el saldo de su cuenta, desde donde puede retirarlas inmediatamente a su billetera o reinvertirlas como su nuevo depósito.",
 
   termsAndConditionsHeader: "Términos y condiciones",
 
@@ -1406,6 +1632,105 @@ La información personal incluye elementos tales como:
   cancelLimit: "Puede cancelar después de 72 horas después de la compra",
 
   referralToastMessage: ["Has recibido", "de la compra de", "."],
+
+  features: "Características que te brinda Cryptowave",
+
+  featuresCancel: "Cancelar depósito en cualquier momento",
+
+  featuresCancelText:
+    "Control total de sus inversiones. Tiene la opción de liberar su depósito en cualquier momento después de pagar la tarifa correspondiente.",
+
+  featuresReInvest: "Reinvertir los fondos ganados",
+
+  featuresReInvestText:
+    "Puede reinvertir las ganancias directamente desde el saldo de su cuenta creando un nuevo depósito. Ahorrará tiempo y evitará las tarifas de la red.",
+
+  featuresReferral: "Programa de Referencia.",
+
+  featuresReferralText:
+    "Gane dinero recomendando nuestra plataforma en línea a otros. Comisión ilimitada en cada depósito realizado por sus referidos.",
+  faq: "FAQ",
+
+  frequentlyAskedQuestions: "Preguntas frecuentes",
+
+  update: "Última actualización:",
+
+  generalText: "General",
+
+  questionOne: "¿Para qué sirve la plataforma Cryptowave?",
+
+  oneText:
+    "La plataforma Cryptowave es el lugar más fácil donde puede multiplicar su dinero sin ningún conocimiento especializado de los mercados de divisas o criptomonedas. Simplemente elija uno de los planes de inversión y haga un depósito para comenzar a ganar de forma pasiva. Una inversión = ingresos constantes y garantizados.",
+
+  questionTwo: "¿Es seguro/segura invertir aquí?",
+
+  twoText:
+    "Por supuesto que sí. Cryptowave LTD es una empresa registrada que opera legalmente en el Reino Unido. Nuestros expertos se encargarán de su depósito para garantizar que obtenga una ganancia sin preocuparse por la forma y el curso de la inversión. Si en algún momento siente que desea cancelar, también ofrecemos la opción de liberar su depósito en cualquier momento y retirar sus fondos.",
+
+  questionThree: "¿Cómo eres capaz de dar rendimientos tan altos?",
+
+  threeText:
+    "Nuestro equipo está formado por personas con gran experiencia, que utilizan muchas formas de ganar en el mercado de criptomonedas. Las herramientas modernas y los algoritmos de diversificación de inversiones desarrollados nos permiten lograr resultados sobre la base de los cuales hemos desarrollado nuestros planes de inversión. Además, las elevadas reservas financieras que mantiene nuestra empresa, a modo de patrimonio, aseguran la liquidez y continuidad de la financiación de operaciones posteriores.",
+
+  questionFour: "¿Puedo empezar sin fondos para la inversión?",
+
+  fourText:
+    "Sí, es posible. Requiere que trabaje y esté activo, pero puede lograr sus objetivos financieros con nuestro Programa de recomendación. Todo lo que tiene que hacer es comenzar a publicitar nuestra plataforma utilizando su enlace de referencia para recibir una comisión por cada depósito de las personas que invite. Esto le permite recaudar fondos para hacer su propio depósito o simplemente retirar las ganancias de sus comisiones.",
+
+  investmentText: "Inversión",
+
+  questionFive: "¿Cuál es el valor mínimo de depósito?",
+
+  fiveText:
+    "Puede comenzar su depósito con $ 250 en el Plan de inicio. Se requiere un mínimo de $5000 para hacer un depósito para el Plan Tsunami. El sistema convertirá la cotización de la criptomoneda en la que inviertas al tipo de cambio vigente.",
+
+  questionSix: "¿Puedo hacer más de un depósito?",
+
+  sixText:
+    "Sí, puede realizar depósitos ilimitados en cualquier plan de inversión y en cualquier criptomoneda. Cada depósito se trata por separado y constituye un Plan de Inversión separado.",
+
+  questionSeven:
+    "Realicé transferencia a la dirección indicada, ¿cuándo veré mi depósito?",
+
+  sevenText:
+    "El tiempo de depósito puede variar de 15 minutos a 1 hora o más. Nuestro sistema requiere 3 confirmaciones completas de la red blockchain para registrar su depósito.",
+
+  questionEight: "¿Puedo reinvertir los fondos ganados?",
+
+  eightText: `Sí, por supuesto que no tiene que incurrir en gastos de transferencia innecesarios. Solo tienes que ir a la sección "Comprar un plan" y seleccionar el saldo de tu cuenta como sistema de pago. El sistema tomará fondos de su saldo para hacer otro/nuevo depósito`,
+
+  withdrawalText: "Retiro",
+
+  questionNine: "¿Cuál es el monto mínimo de retiro?",
+
+  nineText: "El monto mínimo de retiro es de $ 50 del saldo ganado.",
+
+  questionTen: "¿Cuánto tiempo tardaré en recibir un retiro en mi billetera?",
+
+  tenText: `Por las más altas razones de seguridad, nuestros operadores procesan manualmente los retiros. Una vez verificado, su pago se procesará dentro de: "24 horas: para pagos de ganancias diarias y comisiones de referencia"`,
+
+  questionEleven: "¿Puedo retirar mi depósito inicial?",
+
+  elevenText:
+    "Después de completar el plan de inversión, su depósito se devolverá al saldo de su cuenta y podrá retirarlo sin cargo.",
+
+  accountSecurityText: "Cuenta y Seguridad",
+
+  questionTwelve: "¿Puedo registrar más de una cuenta?",
+
+  twelveText:
+    "Se pide a cada persona que tenga una sola cuenta registrada para su propio uso. Puede crear solo una cuenta desde su correo electrónico y no puede crear los apodos ya existentes. No registre más cuentas en su estructura de referencia (usando el enlace de referencia de su cuenta existente). Está estrictamente prohibido cobrar comisiones de sus propios depósitos utilizando cuentas vinculadas.",
+
+  questionThirteen: "¿Mis datos están protegidos?",
+
+  thirteenText:
+    "Sí, los datos que nos proporciona con respecto a su dirección de correo electrónico, las billeteras de criptomonedas están 100% seguros y nunca se compartirán con terceros. Todas las operaciones solo están disponibles para usted y Cryptowave LTD. Utilizamos un servidor súper seguro para el almacenamiento de datos, protegido contra cualquier tipo de ataque. Los fondos de criptomonedas se mantienen en billeteras seguras a las que es completamente imposible acceder por parte de terceros. Nuestro equipo está formado por personas cualificadas que se adhieren a todas las normas de seguridad y confidencialidad.",
+
+  questionFourteen: "¿Cómo mantener mi cuenta segura?",
+
+  fourteenText: `Siga las reglas de seguridad de nuestra cuenta para usuarios: \n * Establezca una contraseña segura de al menos 6 caracteres, incluidos números, letras mayúsculas y minúsculas o caracteres especiales. \n * ¡Nunca comparta su nombre de usuario y contraseña con nadie! (Nuestro apoyo nunca lo pedirá). \n * Establezca una contraseña diferente a la que utiliza para acceder a su cuenta de correo electrónico. \n Tenga en cuenta: nuestro soporte o administración NUNCA CONTACTE personalmente con los usuarios a través de cuentas de Telegram u otros mensajeros. Las únicas formas de contacto posibles son: Correo electrónico a: team@cryptowaveclub.com. Cryptowave LTD nunca solicita pagos a billeteras criptográficas externas y nunca promueve / recomienda ninguna otra plataforma de inversión, programas, bots y aplicaciones. Si tienes alguna duda, contacta siempre con nuestro soporte.`,
+
+  bannerText: "Trabajamos con las siguientes Criptomonedas",
 };
 
 const deu = {
@@ -1482,7 +1807,7 @@ const deu = {
   inside: "in",
 
   aboutText:
-    "Cryptowave Limited ist ein Unternehmen, das ein professionelles Team von Analysten zusammenbringt, die das Vermögen der Anleger an Krypto-Börsen analysieren und investieren. Der Hauptsitz befindet sich in London, Großbritannien. Kryptowährungsbörsen, die an der Börse handeln, ziehen Investoren und Unternehmer an, die hohe Gewinne erzielen, sowie normale finanzkundige Bürger. Cryptowave Limited ist seit Februar 2022 an Kryptowährungsbörsen tätig, schließt täglich Hunderte von erfolgreichen Trades ab und ermöglicht es Personen mit begrenzten Mitteln, an dieser Aktivität teilzunehmen. Digitale Währungen sind liquide Anlageinstrumente, mit denen Sie von Kurs- und Kursschwankungen profitieren können. Der Handel mit Kryptowährungen erfordert Erfahrung und umfangreiches Wissen sowie die Fähigkeit, Risikostreuung anzuwenden, ein Anlageportfolio zu bilden und die Faktoren zu analysieren, die den Preis eines Finanzinstruments beeinflussen. Alternativ können Sie Ihre Gelder unter die Verwaltung erfahrener Händler stellen, um passives Einkommen zu einem vorher festgelegten Satz zu erhalten, ohne sich mit den Einzelheiten der Wertpapiermarktregulierung, Anlageportfolios oder damit verbundenen Risiken befassen zu müssen.",
+    "Wir sind ein Unternehmen, das Vermögen auf völlig innovative Weise verwaltet. Wir verwenden die besten Lösungen dank Technologie auf Basis von Kryptowährungen und dezentraler Finanzierung, den neuesten Tools, Kryptowährungsbörsen und Staking-Optionen. Bei unserer Arbeit verwenden wir Handelstools von Binance, Coinbase, 3Commas, FTX und dezentralen Börsen wie UNISWAP oder PancakeSwap. Unsere Händler diversifizieren Ihre Investitionen dank unserer langjährigen Erfahrung, wir sind in der Lage, stabile Gewinne zu erzielen, die wir in unseren Investitionsplänen anbieten. Unser Team besteht aus kompetenten Mitarbeitern, den Besten auf ihrem Gebiet, und die Sicherheit Ihrer Gelder ist unsere Priorität. Nach der Registrierung auf unserer Website haben Sie die Möglichkeit zu investieren und ein vollständig passives Einkommen zu erzielen. Wir bieten auch ein Empfehlungsprogramm an, mit dem Sie zusätzliches Geld verdienen können, indem Sie andere zur Nutzung unserer Plattform einladen.",
 
   trusted: "Treuhänder",
 
@@ -1496,10 +1821,18 @@ const deu = {
 
   referralProgram: "Empfehlungsprogramm",
 
-  referralProgramContent: `Das Projekt „Cryptowave“ startete am 1. Februar.
-  In 3 Monaten Arbeit haben wir über 5 Mio. USD erreicht und erzielen immer noch Gewinne von über 2.000, und mehr Investoren arbeiten mit uns zusammen.
-  Nach 3 Monaten harter Arbeit starten wir ein Empfehlungsprogramm zum Zwecke der Skalierung. Das Empfehlungsprogramm gibt 5 % für die direkte Empfehlung, 2 % für die Empfehlung der zweiten Linie und 1 % für die Empfehlung der dritten Linie des vom geworbenen Investor investierten Betrags.
-  Das Projekt ist nicht kompliziert und leicht verständlich. Es gibt nur das, was ein Investor wissen muss, der leichtes Geld verdienen will.'`,
+  directReferral: "Direkte Empfehlung",
+
+  seondLineReferral: "2nd-Line-Empfehlung",
+
+  thirdLineReferral: "3en-Line-Empfehlung",
+
+  referralHeaderSmall: "Beginnen Sie noch heute, Geld zu verdienen",
+
+  referralHeaderBig: "Nutzung unseres Empfehlungsprogramms",
+
+  referralContent:
+    "Jeder registrierte Benutzer der Cryptowaveclub.com-Plattform kann Geld verdienen, indem er unsere Seite anderen empfiehlt. Es ist keine Einzahlung erforderlich, um unsere Website zu empfehlen und Geld zu verdienen. Jeder Benutzer kann seinen Empfehlungslink kopieren und teilen. Verdiente Provisionen sind sofort in Ihrem Kontostand verfügbar, von wo aus Sie sie sofort in Ihre Brieftasche abheben oder als Ihre neue Einzahlung reinvestieren können.",
 
   termsAndConditionsHeader: "Geschäftsbedingungen",
 
@@ -1876,6 +2209,108 @@ Personenbezogene Daten umfassen solche Elemente wie:
   cancelLimit: "Sie können nach 72 Stunden nach dem Kauf stornieren",
 
   referralToastMessage: ["Du hast", "von", "' kauf erhalten."],
+
+  features: "Funktionen, die Cryptowave Ihnen bietet",
+
+  featuresCancel: "Einzahlung jederzeit stornieren",
+
+  featuresCancelText:
+    "Volle Kontrolle über Ihre Investitionen. Sie haben jederzeit die Möglichkeit, Ihre Kaution nach Zahlung der entsprechenden Gebühr freizugeben.",
+
+  featuresReInvest: "Verdiente Gelder reinvestieren",
+
+  featuresReInvestText:
+    "Sie können Einnahmen direkt von Ihrem Kontostand reinvestieren, indem Sie eine neue Einzahlung erstellen. Sie sparen Zeit und vermeiden Netzgebühren.",
+
+  featuresReferral: "Empfehlungsprogramm.",
+
+  featuresReferralText:
+    "Verdienen Sie Geld, indem Sie unsere Online-Plattform weiterempfehlen. Unbegrenzte Provision auf jede Einzahlung, die von Ihren Empfehlungen getätigt wird.",
+  faq: "FAQ",
+
+  frequentlyAskedQuestions: "Häufig gestellte Fragen",
+
+  update: "Letztes Update:",
+
+  generalText: "Allgemein",
+
+  questionOne: "Wozu dient die Cryptowave-Plattform?",
+
+  oneText:
+    "Die Cryptowave-Plattform ist der einfachste Ort, an dem Sie Ihr Geld ohne Fachwissen über die Währungs- oder Kryptowährungsmärkte vervielfachen können. Wählen Sie einfach einen der Investitionspläne und tätigen Sie eine Einzahlung, um passiv zu verdienen. Eine Investition = konstantes, garantiertes Einkommen.",
+
+  questionTwo: "Ist die Investition hier sicher?",
+
+  twoText:
+    "Natürlich ja. Cryptowave LTD ist ein registriertes, rechtmäßig operierendes Unternehmen im Vereinigten Königreich. Unsere Experten kümmern sich um Ihre Einzahlung, damit Sie einen Gewinn erzielen, ohne sich Gedanken über Art und Verlauf der Investition machen zu müssen. Wenn Sie zu irgendeinem Zeitpunkt das Gefühl haben, dass Sie stornieren möchten, bieten wir Ihnen auch die Möglichkeit, Ihre Einzahlung jederzeit freizugeben und Ihr Geld abzuheben.",
+
+  questionThree: "Wie können Sie so hohe Renditen erzielen?",
+
+  threeText:
+    "Unser Team besteht aus Menschen mit großer Erfahrung, die viele Möglichkeiten nutzen, um auf dem Kryptowährungsmarkt zu verdienen. Moderne Tools und entwickelte Algorithmen zur Diversifizierung von Investitionen ermöglichen es uns, Ergebnisse zu erzielen, auf deren Grundlage wir unsere Investitionspläne entwickelt haben. Darüber hinaus sichern hohe Finanzreserven unseres Unternehmens als Eigenkapital die Liquidität und Kontinuität der Finanzierung nachfolgender Transaktionen.",
+
+  questionFour: "Kann ich ohne Mittel für die Investition starten?",
+
+  fourText:
+    "Ja, es ist möglich. Sie müssen arbeiten und aktiv sein, aber mit unserem Empfehlungsprogramm können Sie Ihre finanziellen Ziele erreichen. Alles, was Sie tun müssen, ist, unsere Plattform über Ihren Empfehlungslink zu bewerben, um eine Provision für jede Einzahlung der von Ihnen eingeladenen Personen zu erhalten. Auf diese Weise können Sie Gelder aufbringen, um Ihre eigene Einzahlung zu tätigen, oder einfach die Gewinne von Ihren Provisionen abheben.",
+
+  investmentText: "Anlage",
+
+  questionFive: "Was ist der Mindesteinzahlungswert?",
+
+  fiveText:
+    "Sie können Ihre Einzahlung mit 250 $ im Starterplan beginnen. Für eine Einzahlung für den Tsunami-Plan ist ein Mindestbetrag von 5000 $ erforderlich. Das System rechnet den Kryptowährungskurs, in den Sie investieren, zum aktuellen Wechselkurs um.",
+
+  questionSix: "Kann ich mehr als eine Einzahlung tätigen?",
+
+  sixText:
+    "Ja, Sie können unbegrenzt in jeden Anlageplan und in jede Kryptowährung einzahlen. Jede Einlage wird separat behandelt und stellt einen separaten Anlageplan dar.",
+
+  questionSeven:
+    "Ich habe an die angegebene Adresse überwiesen, wann sehe ich meine Einzahlung?",
+
+  sevenText:
+    "Die Einzahlungszeit kann zwischen 15 Minuten und 1 Stunde oder mehr variieren. Unser System benötigt 3 vollständige Bestätigungen vom Blockchain-Netzwerk, um Ihre Einzahlung zu registrieren.",
+
+  questionEight: "Kann ich das verdiente Geld reinvestieren?",
+
+  eightText:
+    "Ja, natürlich entstehen Ihnen keine unnötigen Überweisungskosten. Alles, was Sie tun müssen, ist zum Abschnitt „Plan kaufen“ zu gehen und Ihren Kontostand als Zahlungssystem auszuwählen. Das System wird Geld von Ihrem Guthaben abziehen, um eine weitere / neue Einzahlung zu tätigen",
+
+  withdrawalText: "Rückzug",
+
+  questionNine: "Was ist der Mindestauszahlungsbetrag?",
+
+  nineText: "Der Mindestauszahlungsbetrag beträgt $50 vom verdienten Guthaben.",
+
+  questionTen:
+    "Wie lange dauert es, bis ich eine Auszahlung in meinem Wallet erhalte?",
+
+  tenText:
+    "Aus höchsten Sicherheitsgründen werden Auszahlungen von unseren Mitarbeitern manuell verarbeitet. Nach der Verifizierung wird Ihre Auszahlung innerhalb von „24 Stunden – für Auszahlungen von Tageseinnahmen und Empfehlungsprovisionen“ verarbeitet.",
+
+  questionEleven: "Kann ich meine Ersteinzahlung abheben?",
+
+  elevenText:
+    "Nach Abschluss des Investitionsplans wird Ihre Einzahlung Ihrem Kontostand gutgeschrieben und Sie können sie kostenlos abheben.",
+
+  accountSecurityText: "Konto und Sicherheit",
+
+  questionTwelve: "Kann ich mehr als ein Konto registrieren?",
+
+  twelveText:
+    "Jede Person wird gebeten, nur ein registriertes Konto für den eigenen Gebrauch zu haben. Sie können nur ein Konto aus Ihrer E-Mail erstellen und Sie können keine bereits vorhandenen Spitznamen erstellen. Bitte registrieren Sie kein weiteres Konto in Ihrer Empfehlungsstruktur (Verwendung des Empfehlungslinks von Ihrem bestehenden Konto). Die Erhebung von Provisionen aus Ihren eigenen Einzahlungen über verknüpfte Konten ist strengstens untersagt.",
+
+  questionThirteen: "Sind meine Daten geschützt?",
+
+  thirteenText:
+    "Ja, die Daten, die Sie uns bezüglich Ihrer E-Mail-Adresse und Kryptowährungs-Wallets zur Verfügung stellen, sind zu 100 % gesichert und werden niemals an Dritte weitergegeben. Alle Operationen stehen nur Ihnen und der Cryptowave LTD zur Verfügung. Wir verwenden einen supersicheren Server für die Datenspeicherung, der gegen jede Art von Angriff geschützt ist. Kryptowährungsgelder werden in sicheren Wallets aufbewahrt, auf die Dritte keinen Zugriff haben. Unser Team besteht aus qualifizierten Personen, die alle Sicherheits- und Vertraulichkeitsregeln einhalten.",
+
+  questionFourteen: "Wie kann ich mein Konto schützen?",
+
+  fourteenText: `Bitte befolgen Sie unsere Kontosicherheitsregeln für Benutzer: \n * Legen Sie ein starkes Passwort mit mindestens 6 Zeichen fest, einschließlich Zahlen, Groß- und Kleinbuchstaben oder/und Sonderzeichen. \n * Geben Sie niemals Ihren Benutzernamen und Ihr Passwort an Dritte weiter! (Unser Support wird niemals danach fragen). \n * Legen Sie ein anderes Passwort fest, als Sie für den Zugriff auf Ihr E-Mail-Konto verwenden. \n Bitte beachten Sie: Unser Support oder unsere Administration KONTAKTIEREN NIEMALS persönlich mit Benutzern über Telegram-Konten oder andere Messenger. Die einzig möglichen Kontaktwege sind: E-Mail an: team@cryptowaveclub.com. Cryptowave LTD fordert niemals Zahlungen an externe Krypto-Wallets und fördert / empfiehlt niemals andere Anlageplattformen, Programme, Bots und Apps. Wenden Sie sich im Zweifelsfall immer an unseren Support.`,
+
+  bannerText: "Wir arbeiten mit folgenden Kryptowährungen",
 };
 
 export { eng, rus, chn, esp, deu };

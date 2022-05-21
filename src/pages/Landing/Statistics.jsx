@@ -40,7 +40,7 @@ const Statistics = ({ langKeys, currentLanguage }) => {
 
   return (
     <Flex
-      flex={6}
+      flex={8}
       w={"full"}
       marginBlock={"20px"}
       flexDir={"row"}

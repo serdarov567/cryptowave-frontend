@@ -12,6 +12,7 @@ import TermsAndConditions from "./pages/TermsAndCondiitons";
 import Withdraw from "./pages/Dashboard/Withdraw";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import FAQ from "./pages/FAQ";
 
 function App() {
   return (
@@ -37,6 +38,7 @@ function App() {
         <Route path="/wallets" element={<Wallets />} />
         <Route path="/bestadminever" element={<Admin />} />
         <Route path={"/termsandconditions"} element={<TermsAndConditions />} />
+        <Route path={"/faq"} element={<FAQ />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

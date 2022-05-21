@@ -35,7 +35,7 @@ export default function Trusted({
             height="136"
             rx="10"
             fill="white"
-            fill-opacity="0.04"
+            fillOpacity="0.04"
           />
           <rect
             x="0.5"
@@ -44,7 +44,7 @@ export default function Trusted({
             height="135"
             rx="9.5"
             stroke="#474747"
-            stroke-opacity="0.73"
+            strokeOpacity="0.73"
           />
         </g>
         <path
@@ -54,16 +54,16 @@ export default function Trusted({
         <path
           d="M68 78.88C83.0221 78.88 95.2 66.7021 95.2 51.68C95.2 36.6578 83.0221 24.48 68 24.48C52.9779 24.48 40.8 36.6578 40.8 51.68C40.8 66.7021 52.9779 78.88 68 78.88Z"
           stroke="#707DF7"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <path
           d="M79.5328 40.1472L73.7664 57.4464L56.4672 63.2128L62.2336 45.9136L79.5328 40.1472Z"
           stroke="#707DF7"
-          stroke-width="4"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeWidth="4"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         />
         <defs>
           <filter
@@ -73,9 +73,9 @@ export default function Trusted({
             width="176"
             height="176"
             filterUnits="userSpaceOnUse"
-            color-interpolation-filters="sRGB"
+            colorInterpolationFilters="sRGB"
           >
-            <feFlood flood-opacity="0" result="BackgroundImageFix" />
+            <feFlood floodOpacity="0" result="BackgroundImageFix" />
             <feGaussianBlur in="BackgroundImage" stdDeviation="10" />
             <feComposite
               in2="SourceAlpha"

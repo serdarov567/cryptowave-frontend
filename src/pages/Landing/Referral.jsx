@@ -10,20 +10,27 @@ import {
   HStack,
 } from "@chakra-ui/react";
 import ReferralIllustration from "src/assets/vectors/referral.svg";
-import ReferralIllustration2 from "src/assets/images/referral2.png";
-import Checkbox from "src/assets/vectors/Checkbox.svg";
+import BackImage from "src/assets/images/spw.png";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore, { Autoplay } from "swiper";
+import "swiper/css";
+import Bitcoin from "src/assets/images/logo_btc.png";
+import BNB from "src/assets/images/logo_bnb.png";
+import Dash from "src/assets/images/logo_dash.png";
+import Tron from "src/assets/images/logo_tron.png";
+import Ripple from "src/assets/images/logo_ripple.png";
+import Ethereum from "src/assets/images/logo_eth.png";
+import LiteCoin from "src/assets/images/logo_ltc.png";
 
 const Referral = ({ langKeys }) => {
+  SwiperCore.use([Autoplay]);
   return (
     <Box
       id={"Referral"}
       pos={"relative"}
-      maxW={"1440px"}
       w={window.outerWidth}
       h={"fit-content"}
       backgroundColor={"#292C35"}
-      borderTopLeftRadius={"50px"}
-      borderTopRightRadius={"50px"}
       alignSelf={"center"}
     >
       <Container
@@ -37,16 +44,19 @@ const Referral = ({ langKeys }) => {
         justifyContent={"center"}
       >
         <Heading
-          textAlign={"center"}
+          px={"20px"}
+          textAlign={"left"}
           fontFamily={"Manrope-ExtraBold"}
           marginBottom={"70px"}
+          color={"#8FC9FF"}
           alignSelf={"center"}
+          fontSize={"30px"}
         >
           {langKeys["referralProgram"]}
         </Heading>
         <Flex
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
-          px={useBreakpointValue({ base: "20px", md: "30px" })}
+          px={useBreakpointValue({ base: "10px", md: "20px" })}
           marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
           justifyContent={"center"}
         >
@@ -64,98 +74,141 @@ const Referral = ({ langKeys }) => {
           >
             <img src={ReferralIllustration} alt={"referralIllustration"} />
           </Flex>
-          <VStack
+          <Flex
             flex={4}
+            flexDir={"column"}
             alignItems={"start"}
-            spacing={4}
             bgColor={"#2f3038"}
-            p={"50px"}
+            px={{ base: "30px", md: "50px" }}
+            py={{ base: "20px", md: "30px" }}
             borderRadius={"30px"}
           >
-            <Heading
+            <Text
+              fontFamily={"Manrope-Bold"}
               fontSize={"20px"}
+              color={"#A9A7FF"}
+              textAlign={"left"}
+            >
+              {langKeys["referralHeaderSmall"]}
+            </Text>
+            <Heading
+              fontSize={"32px"}
               w={"full"}
               fontFamily={"Manrope-ExtraBold"}
-              color={"#A9A7FF"}
+              marginBlock={"10px"}
             >
-              {langKeys["referralHeader"]}
+              {langKeys["referralHeaderBig"]}
             </Heading>
-            <Text fontSize={"16px"} color={"#aeaeae"} textAlign={"left"}>
-              {langKeys["referralProgramContent"]}
+            <Text fontSize={"16px"} textAlign={"left"}>
+              {langKeys["referralContent"]}
             </Text>
-          </VStack>
-        </Flex>
 
-        <Heading
-          textAlign={"center"}
-          fontFamily={"Manrope-ExtraBold"}
-          marginTop={useBreakpointValue({ base: "80px", md: "140px" })}
-          marginBottom={useBreakpointValue({ base: "40px", md: "70px" })}
-          alignSelf={"center"}
-        >
-          {langKeys["keyFeatures"]}
-        </Heading>
-        <Flex
-          flexDir={useBreakpointValue({ base: "column", md: "row" })}
-          px={useBreakpointValue({ base: "20px", md: "30px" })}
-          marginBottom={useBreakpointValue({ base: "15px", md: "50px" })}
-          justifyContent={"center"}
-        >
-          <Flex
-            pos={"relative"}
-            flex={4}
-            justifyContent={"center"}
-            alignItems={"center"}
-            paddingRight={useBreakpointValue({
-              base: "0px",
-              sm: "0px",
-              md: "0px",
-              lg: "100px",
-            })}
-          >
-            <img src={ReferralIllustration2} alt={"referralIllustration2"} />
-          </Flex>
-          <Flex
-            flex={3}
-            alignItems={"center"}
-            spacing={4}
-            marginTop={useBreakpointValue({ base: "20px", md: "0px" })}
-          >
-            <VStack spacing={5} align={"start"}>
-              <HStack spacing={3}>
-                <img src={Checkbox} alt={"icon"} />
-                <Text
-                  fontSize={"20px"}
+            <Flex
+              w={"full"}
+              flexDir={"row"}
+              justifyContent={"space-between"}
+              marginTop={"10px"}
+            >
+              <VStack alignItems={"start"}>
+                <Heading
                   fontFamily={"Manrope-Bold"}
-                  textAlign={"left"}
+                  fontSize={"45px"}
+                  color={"#F34040"}
                 >
-                  {langKeys["feature1"]}
-                </Text>
-              </HStack>
-              <HStack spacing={3}>
-                <img src={Checkbox} alt={"icon"} />
-                <Text
-                  fontSize={"20px"}
+                  5%
+                </Heading>
+                <Text>{langKeys["directReferral"]}</Text>
+              </VStack>
+
+              <VStack alignItems={"start"}>
+                <Heading
                   fontFamily={"Manrope-Bold"}
-                  textAlign={"left"}
+                  fontSize={"45px"}
+                  color={"#2EEC7A"}
                 >
-                  {langKeys["feature2"]}
-                </Text>
-              </HStack>
-              <HStack spacing={3}>
-                <img src={Checkbox} alt={"icon"} />
-                <Text
-                  fontSize={"20px"}
+                  2%
+                </Heading>
+                <Text>{langKeys["seondLineReferral"]}</Text>
+              </VStack>
+
+              <VStack alignItems={"start"}>
+                <Heading
                   fontFamily={"Manrope-Bold"}
-                  textAlign={"left"}
+                  fontSize={"45px"}
+                  color={"#6869FF"}
                 >
-                  {langKeys["feature3"]}
-                </Text>
-              </HStack>
-            </VStack>
+                  1%
+                </Heading>
+                <Text>{langKeys["thirdLineReferral"]}</Text>
+              </VStack>
+            </Flex>
           </Flex>
         </Flex>
       </Container>
+      <Flex
+        pos={"relative"}
+        flexDir={"column"}
+        w={"100vw"}
+        h={"345px"}
+        bgImage={`url(${BackImage})`}
+        bgPos={"center"}
+        paddingTop={"80px"}
+      >
+        <Container
+          maxW={"container.xl"}
+          h={"fit-content"}
+          justifyContent={"center"}
+        >
+          <Heading w={"400px"} fontSize={"30px"} fontFamily={"Manrope-Bold"}>
+            {langKeys['bannerText']}
+          </Heading>
+          <Flex marginTop={"50px"}>
+            <Swiper
+              spaceBetween={30}
+              slidesPerView={
+                window.outerWidth < 1440
+                  ? Math.floor(window.outerWidth / 300)
+                  : 5
+              }
+              centeredSlides={true}
+              autoplay={{
+                delay: 100,
+                disableOnInteraction: false,
+              }}
+              speed={4000}
+              loop={true}
+              freeMode={true}
+            >
+              <SwiperSlide>
+                <img src={Bitcoin} alt={"btc"} />
+              </SwiperSlide>
+              <SwiperSlide>
+                <img src={BNB} alt={"bnb"} />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={Dash} alt={"dash"} />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={Tron} alt={"tron"} />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={Ripple} alt={"ripple"} />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={Ethereum} alt={"eth"} />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                <img src={LiteCoin} alt={"ltc"} />
+              </SwiperSlide>
+            </Swiper>
+          </Flex>
+        </Container>
+      </Flex>
     </Box>
   );
 };

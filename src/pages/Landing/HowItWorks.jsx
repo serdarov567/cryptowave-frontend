@@ -4,14 +4,66 @@ import {
   Container,
   Flex,
   Heading,
+  HStack,
   Text,
   useBreakpointValue,
 } from "@chakra-ui/react";
 import hiw1 from "src/assets/images/hiw1.png";
 import hiw2 from "src/assets/images/hiw2.png";
 import hiw3 from "src/assets/images/hiw3.png";
+import Features1 from "src/assets/vectors/Features1";
+import Features2 from "src/assets/vectors/Features2";
+import Features3 from "src/assets/vectors/Features3";
 
 const HowItWorks = ({ langKeys }) => {
+  const image = {
+    width: useBreakpointValue({ base: "250", md: "250" }),
+  };
+
+  const featureContainer = {
+    flexDir: useBreakpointValue({ base: "column", md: "row" }),
+    alignItems: "center",
+    alignSelf: "center",
+    marginTop: useBreakpointValue({ base: "50px", md: "50px" }),
+  };
+
+  const featureContent = {
+    w: useBreakpointValue({ base: "90vw", md: "700px" }),
+    h: "100%",
+    bgGradient: "linear-gradient(90deg, #2D2D2D, #1D1D1D)",
+    borderRadius: "20px",
+    px: useBreakpointValue({ base: "30px", md: "50px" }),
+    paddingTop: useBreakpointValue({ base: "20px", md: "30px" }),
+    paddingBottom: "50px",
+    zIndex: 2,
+  };
+
+  const headerTextStyle = {
+    alignSelf: "flex-start",
+    fontSize: useBreakpointValue({
+      base: "20px",
+      sm: "16px",
+      md: "20px",
+      lg: "22px",
+    }),
+  };
+
+  const contentTextStyle = {
+    color: "#AAAAAA",
+    marginTop: useBreakpointValue({
+      base: "14px",
+      sm: "10px",
+      md: "10px",
+      lg: "15px",
+    }),
+    fontSize: useBreakpointValue({
+      base: "18px",
+      sm: "14px",
+      md: "16px",
+      lg: "18px",
+    }),
+  };
+
   return (
     <Container
       id={"HowItWorks"}
@@ -36,7 +88,7 @@ const HowItWorks = ({ langKeys }) => {
       />
       <Box
         position={"absolute"}
-        bottom={"0vh"}
+        top={"0vh"}
         right={"-15vw"}
         h={useBreakpointValue({ base: "300px", md: "100vh" })}
         w={useBreakpointValue({ base: "250px", md: "50vw" })}
@@ -44,7 +96,10 @@ const HowItWorks = ({ langKeys }) => {
         opacity={0.2}
         zIndex={-1}
       />
-      <Flex flexDir={"column"}>
+      <Flex
+        flexDir={"column"}
+        marginBottom={useBreakpointValue({ base: "50px", md: "90px" })}
+      >
         <Heading
           fontFamily={"Manrope-ExtraBold"}
           marginBottom={"40px"}
@@ -75,6 +130,99 @@ const HowItWorks = ({ langKeys }) => {
           />
         </Flex>
       </Flex>
+
+      <Flex
+        px={useBreakpointValue({ base: "0px", md: "50px" })}
+        flexDir={"column"}
+        alignItems={"center"}
+        justifyContent={"center"}
+      >
+        <Heading
+          fontFamily={"Manrope-ExtraBold"}
+          marginBottom={"50px"}
+          alignSelf={"center"}
+          px={"30px"}
+          fontSize={useBreakpointValue({ base: "28px" })}
+          textAlign={"center"}
+        >
+          {langKeys["features"]}
+        </Heading>
+
+        <Flex key={"feat1Root"} {...featureContainer}>
+          <Features1
+            style={{
+              ...image,
+              transform: useBreakpointValue({ base: "rotate(90deg)", md: "" }),
+            }}
+            iconStyle={{
+              transform: useBreakpointValue({
+                base: "rotate(-90deg) translateX(-180px)",
+                md: "rotate(0deg)",
+              }),
+            }}
+          />
+          <Box {...featureContent}>
+            <Heading {...headerTextStyle}>{langKeys["featuresCancel"]}</Heading>
+            <Text {...contentTextStyle}>{langKeys["featuresCancelText"]}</Text>
+          </Box>
+        </Flex>
+
+        <Flex
+          key={"feat2Root"}
+          {...featureContainer}
+          flexDir={{ base: "column-reverse", md: "row" }}
+          marginTop={{ base: "70px", md: "40px" }}
+          marginBottom={{ base: "50px", md: "0px" }}
+        >
+          <Box
+            {...featureContent}
+            bgGradient={"linear-gradient(90deg, #1D1D1D, #2D2D2D)"}
+          >
+            <Heading {...headerTextStyle}>
+              {langKeys["featuresReInvest"]}
+            </Heading>
+            <Text {...contentTextStyle}>
+              {langKeys["featuresReInvestText"]}
+            </Text>
+          </Box>
+          <Features2
+            style={{
+              ...image,
+              transform: useBreakpointValue({ base: "rotate(-90deg)", md: "" }),
+              marginBottom: useBreakpointValue({ base: "30px", md: "" }),
+            }}
+            iconStyle={{
+              transform: useBreakpointValue({
+                base: "rotate(-90deg) translateY(125px) translateX(-155px)",
+                md: "",
+              }),
+            }}
+          />
+        </Flex>
+
+        <Flex {...featureContainer}>
+          <Features3
+            style={{
+              ...image,
+              transform: useBreakpointValue({ base: "rotate(90deg)", md: "" }),
+            }}
+            iconStyle={{
+              transform: useBreakpointValue({
+                base: "rotate(-90deg) translateY(30px) translateX(-150px)",
+                md: "",
+              }),
+            }}
+          />
+          <Box {...featureContent}>
+            <Heading {...headerTextStyle}>
+              {langKeys["featuresReferral"]}
+            </Heading>
+            <Text {...contentTextStyle}>
+              {langKeys["featuresReferralText"]}
+            </Text>
+          </Box>
+        </Flex>
+      </Flex>
     </Container>
   );
 };
@@ -84,7 +232,7 @@ const Card = ({ title, content, image }) => {
     <Flex
       position={"relative"}
       flexDir={"column"}
-      w={useBreakpointValue({ base: "80%", sm: "29%", md: "30%" })}
+      w={useBreakpointValue({ base: "90%", sm: "29%", md: "30%" })}
       borderWidth={1}
       borderColor={"#767676"}
       borderRadius={"30px"}

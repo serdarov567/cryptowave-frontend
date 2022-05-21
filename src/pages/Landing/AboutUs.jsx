@@ -7,30 +7,24 @@ import {
   VStack,
   useBreakpointValue,
   Heading,
+  HStack,
 } from "@chakra-ui/react";
 import Logo from "src/assets/images/logo.png";
 import Secured from "src/assets/vectors/Secured";
 import Stable from "src/assets/vectors/Stable";
 import Trusted from "src/assets/vectors/Trusted";
-import BackImage from "src/assets/images/spw.png";
-import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore, { Autoplay } from "swiper";
-import "swiper/css";
-import Bitcoin from "src/assets/images/logo_btc.png";
-import BNB from "src/assets/images/logo_bnb.png";
-import Dash from "src/assets/images/logo_dash.png";
-import Tron from "src/assets/images/logo_tron.png";
-import Ripple from "src/assets/images/logo_ripple.png";
-import Ethereum from "src/assets/images/logo_eth.png";
-import LiteCoin from "src/assets/images/logo_ltc.png";
+import ReferralIllustration2 from "src/assets/images/referral2.png";
+import Checkbox from "src/assets/vectors/Checkbox.svg";
 
 const AboutUs = ({ langKeys }) => {
-  SwiperCore.use([Autoplay]);
   return (
     <Box
       id={"About"}
       w={"full"}
       minH={"100vh"}
+      backgroundColor={"#292C35"}
+      borderTopLeftRadius={"50px"}
+      borderTopRightRadius={"50px"}
       paddingBottom={useBreakpointValue({ base: "30px", md: "100px" })}
     >
       <Container
@@ -46,14 +40,26 @@ const AboutUs = ({ langKeys }) => {
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           px={useBreakpointValue({ base: "20px", md: "30px" })}
         >
-          <VStack flex={1} alignItems={"start"} spacing={4}>
-            <Heading fontFamily={"Manrope-ExtraBold"}>
+          <Flex flexDir={"column"} flex={1} alignItems={"start"}>
+            <Text
+              fontFamily={"Manrope-Bold"}
+              fontSize={"14px"}
+              color={"#E1F1FF"}
+              textAlign={"left"}
+            >
+              {langKeys["welcome"]}
+            </Text>
+            <Heading
+              fontSize={"55px"}
+              color={"#8FC9FF"}
+              fontFamily={"Manrope-ExtraBold"}
+            >
               {langKeys["aboutUs"]}
             </Heading>
-            <Text color={"#aeaeae"} textAlign={"left"}>
+            <Text marginTop={"20px"} textAlign={"left"}>
               {langKeys["aboutText"]}
             </Text>
-          </VStack>
+          </Flex>
           <Flex
             pos={"relative"}
             flex={1}
@@ -104,65 +110,79 @@ const AboutUs = ({ langKeys }) => {
             </Box>
           </Flex>
         </Flex>
-      </Container>
-      <Flex
-        pos={"relative"}
-        flexDir={"column"}
-        w={"100vw"}
-        h={"345px"}
-        bgImage={`url(${BackImage})`}
-        bgPos={"center"}
-        paddingTop={"80px"}
-      >
-        <Container maxW={"container.xl"} h={"fit-content"}>
-          <Heading w={"400px"} fontSize={"30px"} fontFamily={"Manrope-Bold"}>
-            We work with following Crypto Payments
-          </Heading>
-        </Container>
-        <Flex marginTop={"50px"}>
-          <Swiper
-            spaceBetween={30}
-            slidesPerView={
-              window.outerWidth < 1440 ? Math.floor(window.outerWidth / 300) : 5
-            }
-            centeredSlides={true}
-            autoplay={{
-              delay: 100,
-              disableOnInteraction: false,
-            }}
-            speed={4000}
-            loop={true}
-            freeMode={true}
+
+        <Heading
+          px={"20px"}
+          textAlign={"left"}
+          color={"#8FC9FF"}
+          fontFamily={"Manrope-ExtraBold"}
+          marginTop={useBreakpointValue({ base: "80px", md: "140px" })}
+          marginBottom={useBreakpointValue({ base: "40px", md: "70px" })}
+          alignSelf={"center"}
+        >
+          {langKeys["keyFeatures"]}
+        </Heading>
+        <Flex
+          flexDir={useBreakpointValue({ base: "column", md: "row" })}
+          px={useBreakpointValue({ base: "20px", md: "30px" })}
+          marginBottom={useBreakpointValue({ base: "15px", md: "50px" })}
+          justifyContent={"center"}
+        >
+          <Flex
+            pos={"relative"}
+            flex={4}
+            justifyContent={"center"}
+            alignItems={"center"}
+            paddingRight={useBreakpointValue({
+              base: "0px",
+              sm: "0px",
+              md: "0px",
+              lg: "100px",
+            })}
           >
-            <SwiperSlide>
-              <img src={Bitcoin} alt={"btc"} />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={BNB} alt={"bnb"} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img src={Dash} alt={"dash"} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img src={Tron} alt={"tron"} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img src={Ripple} alt={"ripple"} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img src={Ethereum} alt={"eth"} />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              <img src={LiteCoin} alt={"ltc"} />
-            </SwiperSlide>
-          </Swiper>
+            <img src={ReferralIllustration2} alt={"referralIllustration2"} />
+          </Flex>
+          <Flex
+            flex={3}
+            alignItems={"center"}
+            spacing={4}
+            marginTop={useBreakpointValue({ base: "20px", md: "0px" })}
+          >
+            <VStack spacing={5} align={"start"}>
+              <HStack spacing={3}>
+                <img src={Checkbox} alt={"icon"} />
+                <Text
+                  fontSize={"20px"}
+                  fontFamily={"Manrope-Bold"}
+                  textAlign={"left"}
+                >
+                  {langKeys["feature1"]}
+                </Text>
+              </HStack>
+              <HStack spacing={3}>
+                <img src={Checkbox} alt={"icon"} />
+                <Text
+                  fontSize={"20px"}
+                  fontFamily={"Manrope-Bold"}
+                  textAlign={"left"}
+                >
+                  {langKeys["feature2"]}
+                </Text>
+              </HStack>
+              <HStack spacing={3}>
+                <img src={Checkbox} alt={"icon"} />
+                <Text
+                  fontSize={"20px"}
+                  fontFamily={"Manrope-Bold"}
+                  textAlign={"left"}
+                >
+                  {langKeys["feature3"]}
+                </Text>
+              </HStack>
+            </VStack>
+          </Flex>
         </Flex>
-      </Flex>
+      </Container>
     </Box>
   );
 };

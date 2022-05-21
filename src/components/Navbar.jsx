@@ -134,9 +134,9 @@ const Navbar = (props) => {
             </Flex>
 
             <Flex
-              flex={3}
+              flex={5}
               display={{ base: "none", md: "flex" }}
-              ml={10}
+              ml={5}
               justifyContent={"center"}
             >
               <DesktopNav langKeys={langKeys} />
@@ -314,6 +314,13 @@ const MobileNav = ({ langKeys }) => {
           }}
         />
       ))}
+      <MobileNavItem
+        key={"Faq1"}
+        label={langKeys["faq"]}
+        onClick={() => {
+          navigate("/faq");
+        }}
+      />
     </Stack>
   );
 };
@@ -402,16 +409,16 @@ const NAV_ITEMS: Array<NavItem> = [
     href: "#howItWorks",
   },
   {
-    label: "referralProgram",
-    href: "#referral",
+    label: "aboutUs",
+    href: "#aboutus",
   },
   {
     label: "plans",
     href: "#plans",
   },
   {
-    label: "aboutUs",
-    href: "#aboutus",
+    label: "referralProgram",
+    href: "#referral",
   },
   {
     label: "contactUs",
