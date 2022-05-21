@@ -139,7 +139,6 @@ const HowItWorks = ({ langKeys }) => {
       >
         <Heading
           fontFamily={"Manrope-ExtraBold"}
-          marginBottom={"50px"}
           alignSelf={"center"}
           px={"30px"}
           fontSize={useBreakpointValue({ base: "28px" })}
@@ -171,8 +170,6 @@ const HowItWorks = ({ langKeys }) => {
           key={"feat2Root"}
           {...featureContainer}
           flexDir={{ base: "column-reverse", md: "row" }}
-          marginTop={{ base: "70px", md: "40px" }}
-          marginBottom={{ base: "50px", md: "0px" }}
         >
           <Box
             {...featureContent}

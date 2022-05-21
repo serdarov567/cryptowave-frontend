@@ -23,8 +23,7 @@ const AboutUs = ({ langKeys }) => {
       w={"full"}
       minH={"100vh"}
       backgroundColor={"#292C35"}
-      borderTopLeftRadius={"50px"}
-      borderTopRightRadius={"50px"}
+      borderTopRadius={{ base: "30px", md: "50px" }}
       paddingBottom={useBreakpointValue({ base: "30px", md: "100px" })}
     >
       <Container
@@ -33,7 +32,6 @@ const AboutUs = ({ langKeys }) => {
         maxW={"container.xl"}
         h={"auto"}
         paddingTop={useBreakpointValue({ base: "50px", md: "100px" })}
-        paddingBottom={useBreakpointValue({ base: "30px", md: "100px" })}
         alignItems={"center"}
       >
         <Flex
@@ -112,12 +110,12 @@ const AboutUs = ({ langKeys }) => {
         </Flex>
 
         <Heading
-          px={"20px"}
+          px={{ base: "20px", md: "30px" }}
           textAlign={"left"}
           color={"#8FC9FF"}
           fontFamily={"Manrope-ExtraBold"}
-          marginTop={useBreakpointValue({ base: "80px", md: "140px" })}
-          marginBottom={useBreakpointValue({ base: "40px", md: "70px" })}
+          marginTop={useBreakpointValue({ base: "60px", md: "100px" })}
+          marginBottom={useBreakpointValue({ base: "20px", md: "40px" })}
           alignSelf={"center"}
         >
           {langKeys["keyFeatures"]}
@@ -125,7 +123,6 @@ const AboutUs = ({ langKeys }) => {
         <Flex
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           px={useBreakpointValue({ base: "20px", md: "30px" })}
-          marginBottom={useBreakpointValue({ base: "15px", md: "50px" })}
           justifyContent={"center"}
         >
           <Flex
@@ -146,7 +143,7 @@ const AboutUs = ({ langKeys }) => {
             flex={3}
             alignItems={"center"}
             spacing={4}
-            marginTop={useBreakpointValue({ base: "20px", md: "0px" })}
+            marginTop={useBreakpointValue({ base: "30px", md: "0px" })}
           >
             <VStack spacing={5} align={"start"}>
               <HStack spacing={3}>

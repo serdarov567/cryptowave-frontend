@@ -156,14 +156,14 @@ const Plans = ({ isSignedIn, langKeys }) => {
         flexDir={"column"}
         maxW={"container.xl"}
         h={"fit-content"}
-        paddingBottom={"200px"}
+        paddingBottom={"120px"}
         paddingTop={"5vh"}
       >
         <Parallaxes />
         <Heading
           alignSelf={"start"}
-          fontSize={"30px"}
-          fontFamily={"Manrope"}
+          fontSize={"55px"}
+          fontFamily={"Manrope-ExtraBold"}
           color={"#8FC9FF"}
           marginBottom={useBreakpointValue({ base: "20px", md: "40px" })}
           paddingLeft={"20px"}
@@ -382,6 +382,9 @@ const Plans = ({ isSignedIn, langKeys }) => {
           </VStack>
         </PopUp>
       </Container>
+      <Flex w={"full"} justifyContent={"center"}>
+        <Box w={"80vw"} h={"1px"} alignSelf={"center"} bgColor={"#777"} />
+      </Flex>
     </Box>
   );
 };
@@ -443,7 +446,6 @@ const Parallaxes = () => {
       >
         <div style={{ height: "100px" }} />
       </Parallax>
-      >
     </Flex>
   );
 };

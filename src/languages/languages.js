@@ -571,6 +571,30 @@ Personal information includes such items as:
   fourteenText: `Please follow our account security rules for users: \n * Set a strong password of at least 6 characters, including numbers, upper and lower case letters or/and special characters. \n * Never share your login and password with anyone! (Our support will never ask for it). \n * Set a different password than you use to access your E-Mail account.\n \nPlease Note: Our support or administration NEVER CONTACT with users personally via Telegram accounts or other messengers. The only possible contact ways are: E-Mail to: team@cryptowaveclub.com. Cryptowave LTD never ask for payments to external crypto wallets and never promote / recommend any other investment platforms, programs, bots and apps. If you have any doubts, always contact our support.`,
 
   bannerText: "We work with following Cryptocurrencies",
+
+  referralCommission: "Referral Commission",
+
+  referralContentMain:
+    "For each referred user you will receive a commission on the amount of each of his deposits or reinvestments. You can earn unlimited money. There is no upper limit to your future earnings!",
+
+  referralCommissionFeatures: "Important Features",
+
+  referralCommissionFeaturesOne: "No own deposit required",
+
+  referralCommissionFeaturesTwo: "Unlimited earnings",
+
+  referralCommissionFeaturesThree: "Instant on your Balance",
+
+  referralCommissionFeaturesFour: "Withdraw or Reinvest",
+
+  referralHeaderSmallTwo: "How to promote Cryptowave ?",
+
+  referralHeaderBigTwo: "Your activity matters!",
+
+  referralContentTwo:
+    "Use your social media if you don't have one - create additional accounts. Share our offer, your financial results, your withdrawals and deposits on our platform. Record a short video or just share screenshots. Show others how easy it is to multiply your money with us!",
+
+  referralRegister: "REGISTER ACCOUNT",
 };
 
 const rus = {
@@ -1149,6 +1173,30 @@ const rus = {
   fourteenText: `Пожалуйста, соблюдайте правила безопасности нашей учетной записи для пользователей: \n * Установите надежный пароль длиной не менее 6 символов, включая цифры, прописные и строчные буквы и/или специальные символы. \n * Никогда и никому не сообщайте свой логин и пароль! (Наша поддержка никогда не попросит об этом). \n * Установите пароль, отличный от того, который вы используете для доступа к своей учетной записи электронной почты. \n Обратите внимание: Наша поддержка или администрация НИКОГДА не ОБЩАЮТСЯ с пользователями лично через аккаунты Telegram или другие мессенджеры. Единственные возможные способы связи: Электронная почта: team@cryptowaveclub.com. Cryptowave LTD никогда не запрашивает платежи на внешние криптокошельки и никогда не рекламирует/рекомендует какие-либо другие инвестиционные платформы, программы, боты и приложения. Если у вас есть какие-либо сомнения, всегда обращайтесь в нашу службу поддержки.`,
 
   bannerText: "Мы работаем со следующими Криптовалютами",
+
+  referralCommission: "Реферальная Комиссия",
+
+  referralContentMain:
+    "За каждого привлеченного пользователя вы будете получать комиссию от суммы каждого его депозита или реинвестирования. Вы можете зарабатывать неограниченное количество денег. Верхнего предела ваших будущих доходов нет!",
+
+  referralCommissionFeatures: "Ключевые особенности",
+
+  referralCommissionFeaturesOne: "Не требуется собственный депозит",
+
+  referralCommissionFeaturesTwo: "Неограниченный заработок",
+
+  referralCommissionFeaturesThree: "Мгновенно на вашем балансе",
+
+  referralCommissionFeaturesFour: "Вывести или Реинвестировать",
+
+  referralHeaderSmallTwo: "Как продвигать Cryptowave ?",
+
+  referralHeaderBigTwo: "Ваша активность имеет значение!",
+
+  referralContentTwo:
+    "Используйте свои социальные сети, если у вас их нет — создайте дополнительные аккаунты. Поделитесь нашим предложением, своими финансовыми результатами, своими выводами и депозитами на нашей платформе. Запишите короткое видео или просто поделитесь скриншотами. Покажите другим, как легко с нами приумножать свои деньги!",
+
+  referralRegister: "Зарегистрироваться",
 };
 
 const chn = {
@@ -1731,6 +1779,30 @@ La información personal incluye elementos tales como:
   fourteenText: `Siga las reglas de seguridad de nuestra cuenta para usuarios: \n * Establezca una contraseña segura de al menos 6 caracteres, incluidos números, letras mayúsculas y minúsculas o caracteres especiales. \n * ¡Nunca comparta su nombre de usuario y contraseña con nadie! (Nuestro apoyo nunca lo pedirá). \n * Establezca una contraseña diferente a la que utiliza para acceder a su cuenta de correo electrónico. \n Tenga en cuenta: nuestro soporte o administración NUNCA CONTACTE personalmente con los usuarios a través de cuentas de Telegram u otros mensajeros. Las únicas formas de contacto posibles son: Correo electrónico a: team@cryptowaveclub.com. Cryptowave LTD nunca solicita pagos a billeteras criptográficas externas y nunca promueve / recomienda ninguna otra plataforma de inversión, programas, bots y aplicaciones. Si tienes alguna duda, contacta siempre con nuestro soporte.`,
 
   bannerText: "Trabajamos con las siguientes Criptomonedas",
+
+  referralCommission: "Comisión de referencia",
+
+  referralContentMain:
+    "Por cada usuario referido recibirás una comisión sobre el importe de cada uno de sus depósitos o reinversiones. Puedes ganar dinero ilimitado. ¡No hay límite superior para sus ganancias futuras!",
+
+  referralCommissionFeatures: "Características importantes",
+
+  referralCommissionFeaturesOne: "No se requiere depósito propio",
+
+  referralCommissionFeaturesTwo: "Ganancias ilimitadas",
+
+  referralCommissionFeaturesThree: "Instantáneo en su Saldo",
+
+  referralCommissionFeaturesFour: "Retirar o Reinvertir",
+
+  referralHeaderSmallTwo: "Cómo promocionar Cryptowave ?",
+
+  referralHeaderBigTwo: "Tu actividad importa!",
+
+  referralContentTwo:
+    "Use sus redes sociales si no tiene una: cree cuentas adicionales. Comparta nuestra oferta, sus resultados financieros, sus retiros y depósitos en nuestra plataforma. Grabe un video corto o simplemente comparta capturas de pantalla. Muestre a los demás lo fácil que es multiplicar su dinero con nosotros!",
+
+  referralRegister: "REGISTRAR CUENTA",
 };
 
 const deu = {
@@ -2311,6 +2383,30 @@ Personenbezogene Daten umfassen solche Elemente wie:
   fourteenText: `Bitte befolgen Sie unsere Kontosicherheitsregeln für Benutzer: \n * Legen Sie ein starkes Passwort mit mindestens 6 Zeichen fest, einschließlich Zahlen, Groß- und Kleinbuchstaben oder/und Sonderzeichen. \n * Geben Sie niemals Ihren Benutzernamen und Ihr Passwort an Dritte weiter! (Unser Support wird niemals danach fragen). \n * Legen Sie ein anderes Passwort fest, als Sie für den Zugriff auf Ihr E-Mail-Konto verwenden. \n Bitte beachten Sie: Unser Support oder unsere Administration KONTAKTIEREN NIEMALS persönlich mit Benutzern über Telegram-Konten oder andere Messenger. Die einzig möglichen Kontaktwege sind: E-Mail an: team@cryptowaveclub.com. Cryptowave LTD fordert niemals Zahlungen an externe Krypto-Wallets und fördert / empfiehlt niemals andere Anlageplattformen, Programme, Bots und Apps. Wenden Sie sich im Zweifelsfall immer an unseren Support.`,
 
   bannerText: "Wir arbeiten mit folgenden Kryptowährungen",
+
+  referralCommission: "Empfehlungskommission",
+
+  referralContentMain:
+    "Für jeden geworbenen Benutzer erhalten Sie eine Provision auf den Betrag jeder seiner Einzahlungen oder Reinvestitionen. Sie können unbegrenzt Geld verdienen. Es gibt keine Obergrenze für Ihre zukünftigen Einnahmen!",
+
+  referralCommissionFeatures: "Wichtige Funktionen",
+
+  referralCommissionFeaturesOne: "Keine eigene Kaution erforderlich",
+
+  referralCommissionFeaturesTwo: "Unbegrenzter Verdienst",
+
+  referralCommissionFeaturesThree: "Sofort auf Ihrem Guthaben",
+
+  referralCommissionFeaturesFour: "Abheben oder reinvestieren",
+
+  referralHeaderSmallTwo: "Wie man Cryptowave fördert ?",
+
+  referralHeaderBigTwo: "Ihre Aktivität zählt!",
+
+  referralContentTwo:
+    "Nutzen Sie Ihre sozialen Medien, wenn Sie keine haben – erstellen Sie zusätzliche Konten. Teilen Sie unser Angebot, Ihre finanziellen Ergebnisse, Ihre Abhebungen und Einzahlungen auf unserer Plattform. Nehmen Sie ein kurzes Video auf oder teilen Sie einfach Screenshots. Zeigen Sie anderen, wie einfach es ist, Ihr Geld mit uns zu vermehren!",
+
+  referralRegister: "ACCOUNT REGISTRIEREN",
 };
 
 export { eng, rus, chn, esp, deu };

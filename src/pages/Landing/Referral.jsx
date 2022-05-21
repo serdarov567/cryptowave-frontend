@@ -7,7 +7,6 @@ import {
   useBreakpointValue,
   Heading,
   Box,
-  HStack,
 } from "@chakra-ui/react";
 import ReferralIllustration from "src/assets/vectors/referral.svg";
 import BackImage from "src/assets/images/spw.png";
@@ -21,8 +20,12 @@ import Tron from "src/assets/images/logo_tron.png";
 import Ripple from "src/assets/images/logo_ripple.png";
 import Ethereum from "src/assets/images/logo_eth.png";
 import LiteCoin from "src/assets/images/logo_ltc.png";
+import GradientButton from "src/components/GradientButton";
+import { useNavigate } from "react-router-dom";
 
 const Referral = ({ langKeys }) => {
+  const navigate = useNavigate();
+
   SwiperCore.use([Autoplay]);
   return (
     <Box
@@ -39,7 +42,7 @@ const Referral = ({ langKeys }) => {
         maxW={"container.xl"}
         h={"fit-content"}
         paddingTop={useBreakpointValue({ base: "30px", md: "50px" })}
-        paddingBottom={useBreakpointValue({ base: "50px", md: "70px" })}
+        paddingBottom={useBreakpointValue({ base: "70px", md: "120px" })}
         alignItems={"center"}
         justifyContent={"center"}
       >
@@ -47,7 +50,7 @@ const Referral = ({ langKeys }) => {
           px={"20px"}
           textAlign={"left"}
           fontFamily={"Manrope-ExtraBold"}
-          marginBottom={"70px"}
+          marginBottom={"50px"}
           color={"#8FC9FF"}
           alignSelf={"center"}
           fontSize={"30px"}
@@ -57,7 +60,6 @@ const Referral = ({ langKeys }) => {
         <Flex
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           px={useBreakpointValue({ base: "10px", md: "20px" })}
-          marginBottom={useBreakpointValue({ base: "30px", md: "100px" })}
           justifyContent={"center"}
         >
           <Flex
@@ -142,6 +144,10 @@ const Referral = ({ langKeys }) => {
                 <Text>{langKeys["thirdLineReferral"]}</Text>
               </VStack>
             </Flex>
+
+            <GradientButton marginTop={"30px"} onClick={()=> {
+              navigate('/referral-program')
+            }}>Learn more</GradientButton>
           </Flex>
         </Flex>
       </Container>
@@ -160,7 +166,7 @@ const Referral = ({ langKeys }) => {
           justifyContent={"center"}
         >
           <Heading w={"400px"} fontSize={"30px"} fontFamily={"Manrope-Bold"}>
-            {langKeys['bannerText']}
+            {langKeys["bannerText"]}
           </Heading>
           <Flex marginTop={"50px"}>
             <Swiper

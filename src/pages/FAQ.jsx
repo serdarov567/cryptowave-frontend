@@ -9,11 +9,13 @@ import {
   Container,
   Flex,
   Heading,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import HALO from "vanta/dist/vanta.cells.min.js";
 import * as THREE from "three";
 import Navbar from "src/components/Navbar";
 import useLanguage from "src/languages/useLanguage";
+import TextButton from "src/components/TextButton";
 
 const general = [
   { question: "questionOne", answer: "oneText" },
@@ -168,7 +170,7 @@ const FAQ = () => {
         flexDir={"column"}
         maxW={"container.xl"}
         minH={"800px"}
-        h={"100vh"}
+        h={"fit-content"}
         paddingTop={"200px"}
       >
         <Heading
@@ -192,6 +194,21 @@ const FAQ = () => {
           {renderQuestions}
         </Accordion>
       </Container>
+      <Flex
+        pos={"relative"}
+        w={"full"}
+        h={"70px"}
+        bgColor={"background.500"}
+        justifyContent={"center"}
+        alignItems={"center"}
+      >
+        <TextButton
+          href={"/termsandconditions"}
+          fontSize={useBreakpointValue({ base: "12px", md: "14px" })}
+        >
+          {langKeys["terms"]}
+        </TextButton>
+      </Flex>
     </>
   );
 };
