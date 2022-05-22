@@ -14,6 +14,10 @@ import hiw3 from "src/assets/images/hiw3.png";
 import Features1 from "src/assets/vectors/Features1";
 import Features2 from "src/assets/vectors/Features2";
 import Features3 from "src/assets/vectors/Features3";
+import GradientButton from "src/components/GradientButton";
+import { useNavigate } from "react-router-dom";
+import { useIsSignedIn } from "src/utils/user";
+import { scrollHandler } from "src/utils/scrollHandler";
 
 const HowItWorks = ({ langKeys }) => {
   const image = {
@@ -64,6 +68,12 @@ const HowItWorks = ({ langKeys }) => {
     }),
   };
 
+  const navigate = useNavigate();
+
+  const [isSignedIn] = useIsSignedIn();
+
+  const navbarHeight = useBreakpointValue({ base: 60, md: 90 });
+
   return (
     <Container
       id={"HowItWorks"}
@@ -72,7 +82,8 @@ const HowItWorks = ({ langKeys }) => {
       flexDir={"column"}
       maxW={"container.xl"}
       h={"fit-content"}
-      py={"80px"}
+      paddingTop={"40px"}
+      paddingBottom={"80px"}
       justifyContent="center"
       paddingX={0}
     >
@@ -96,10 +107,7 @@ const HowItWorks = ({ langKeys }) => {
         opacity={0.2}
         zIndex={-1}
       />
-      <Flex
-        flexDir={"column"}
-        marginBottom={useBreakpointValue({ base: "50px", md: "90px" })}
-      >
+      <Flex flexDir={"column"}>
         <Heading
           fontFamily={"Manrope-ExtraBold"}
           marginBottom={"40px"}
@@ -130,6 +138,24 @@ const HowItWorks = ({ langKeys }) => {
           />
         </Flex>
       </Flex>
+
+      <GradientButton
+        marginTop={useBreakpointValue({ base: "10px", md: "20px" })}
+        marginBottom={useBreakpointValue({ base: "50px", md: "90px" })}
+        w={"fit-content"}
+        alignSelf={"center"}
+        fontFamily={"Manrope-ExtraBold"}
+        p={"30px"}
+        onClick={() => {
+          if (!isSignedIn) {
+            navigate("/sign/up");
+          } else {
+            scrollHandler("plans", navbarHeight);
+          }
+        }}
+      >
+        {langKeys["tryItNow"]}
+      </GradientButton>
 
       <Flex
         px={useBreakpointValue({ base: "0px", md: "50px" })}
@@ -219,6 +245,23 @@ const HowItWorks = ({ langKeys }) => {
             </Text>
           </Box>
         </Flex>
+
+        <GradientButton
+          marginTop={useBreakpointValue({ base: "20px", md: "40px" })}
+          w={"fit-content"}
+          alignSelf={"center"}
+          fontFamily={"Manrope-ExtraBold"}
+          p={"30px"}
+          onClick={() => {
+            if (!isSignedIn) {
+              navigate("/sign/up");
+            } else {
+              scrollHandler("plans", navbarHeight);
+            }
+          }}
+        >
+          {langKeys["startEarningToday"]}
+        </GradientButton>
       </Flex>
     </Container>
   );

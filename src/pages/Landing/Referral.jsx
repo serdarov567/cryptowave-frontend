@@ -145,9 +145,14 @@ const Referral = ({ langKeys }) => {
               </VStack>
             </Flex>
 
-            <GradientButton marginTop={"30px"} onClick={()=> {
-              navigate('/referral-program')
-            }}>Learn more</GradientButton>
+            <GradientButton
+              marginTop={"30px"}
+              onClick={() => {
+                navigate("/referral-program");
+              }}
+            >
+              {langKeys["learnMore"]}
+            </GradientButton>
           </Flex>
         </Flex>
       </Container>

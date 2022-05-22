@@ -95,11 +95,11 @@ const ReferralProgram = () => {
         maxW={"container.xl"}
         minH={"800px"}
         h={"fit-content"}
-        paddingTop={"200px"}
+        paddingTop={{ base: "180px", md: "200px" }}
       >
         <Heading
           fontFamily={"Manrope-Bold"}
-          fontSize={{ base: "40px", md: "50px" }}
+          fontSize={{ base: "38px", md: "50px" }}
           marginBottom={"10px"}
           zIndex={10}
         >
@@ -111,7 +111,7 @@ const ReferralProgram = () => {
           pos={"relative"}
           flexDir={"column"}
           px={useBreakpointValue({ base: "20px", md: 0 })}
-          marginTop={"120px"}
+          marginTop={{ base: "80px", md: "120px" }}
           paddingBottom={"100px"}
           alignSelf={"center"}
           alignItems={"space-between"}
@@ -172,16 +172,18 @@ const ReferralProgram = () => {
           <Flex
             flexDir={{ base: "column", md: "row" }}
             pos={"relative"}
-            w={"full"}
+            maxW={"1440px"}
             minH={"370px"}
+            marginInline={{ base: "-40px", md: "0px" }}
             bgImage={CoinsBgImage}
             backgroundRepeat={"no-repeat"}
             backgroundSize={"cover"}
             borderRadius={"30px"}
-            px={{ base: "20px", md: "80px" }}
+            px={{ base: "40px", md: "80px" }}
             py={{ base: "40px", md: "0px" }}
             marginBottom={"100px"}
             alignItems={"center"}
+            justifyContent={"center"}
           >
             <Flex flex={1} flexDir={"column"} marginRight={"50px"}>
               <Text

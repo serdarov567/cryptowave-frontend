@@ -595,6 +595,12 @@ Personal information includes such items as:
     "Use your social media if you don't have one - create additional accounts. Share our offer, your financial results, your withdrawals and deposits on our platform. Record a short video or just share screenshots. Show others how easy it is to multiply your money with us!",
 
   referralRegister: "REGISTER ACCOUNT",
+
+  learnMore: "Learn more",
+
+  tryItNow: "Why not? Try it now!",
+
+  startEarningToday: "Start earning today!",
 };
 
 const rus = {
@@ -610,7 +616,7 @@ const rus = {
 
   signIn: "Войти",
 
-  signUp: "Зарегистрироваться",
+  signUp: "Регистрация",
 
   signOut: "Выйти",
 
@@ -1197,6 +1203,12 @@ const rus = {
     "Используйте свои социальные сети, если у вас их нет — создайте дополнительные аккаунты. Поделитесь нашим предложением, своими финансовыми результатами, своими выводами и депозитами на нашей платформе. Запишите короткое видео или просто поделитесь скриншотами. Покажите другим, как легко с нами приумножать свои деньги!",
 
   referralRegister: "Зарегистрироваться",
+
+  learnMore: "Подробнее",
+
+  tryItNow: "Почему нет? Попробуй сейчас!",
+
+  startEarningToday: "Начните зарабатывать уже сегодня!",
 };
 
 const chn = {
@@ -1803,6 +1815,12 @@ La información personal incluye elementos tales como:
     "Use sus redes sociales si no tiene una: cree cuentas adicionales. Comparta nuestra oferta, sus resultados financieros, sus retiros y depósitos en nuestra plataforma. Grabe un video corto o simplemente comparta capturas de pantalla. Muestre a los demás lo fácil que es multiplicar su dinero con nosotros!",
 
   referralRegister: "REGISTRAR CUENTA",
+
+  learnMore: "Más información",
+
+  tryItNow: "¿Por qué no? ¡Pruebalo ahora!",
+
+  startEarningToday: "¡Empieza a ganar hoy!",
 };
 
 const deu = {
@@ -2407,6 +2425,12 @@ Personenbezogene Daten umfassen solche Elemente wie:
     "Nutzen Sie Ihre sozialen Medien, wenn Sie keine haben – erstellen Sie zusätzliche Konten. Teilen Sie unser Angebot, Ihre finanziellen Ergebnisse, Ihre Abhebungen und Einzahlungen auf unserer Plattform. Nehmen Sie ein kurzes Video auf oder teilen Sie einfach Screenshots. Zeigen Sie anderen, wie einfach es ist, Ihr Geld mit uns zu vermehren!",
 
   referralRegister: "ACCOUNT REGISTRIEREN",
+
+  learnMore: "Weitere Infos",
+
+  tryItNow: "Warum nicht? Probieren Sie es jetzt!",
+
+  startEarningToday: "Verdienen Sie noch heute!",
 };
 
 export { eng, rus, chn, esp, deu };

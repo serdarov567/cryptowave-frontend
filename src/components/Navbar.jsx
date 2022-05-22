@@ -134,7 +134,7 @@ const Navbar = (props) => {
             </Flex>
 
             <Flex
-              flex={5}
+              flex={6}
               display={{ base: "none", md: "flex" }}
               ml={5}
               justifyContent={"center"}
@@ -147,7 +147,7 @@ const Navbar = (props) => {
               flex={{ base: 1, md: 2 }}
               justify={"flex-end"}
               direction={"row"}
-              spacing={6}
+              spacing={4}
             >
               <Popover trigger={"hover"} placement={"bottom"}>
                 <PopoverTrigger>
