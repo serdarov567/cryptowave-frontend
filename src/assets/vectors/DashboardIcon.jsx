@@ -2,7 +2,7 @@ import { useBreakpointValue } from "@chakra-ui/react";
 import React from "react";
 
 export default function DashboardIcon(props) {
-  const size = useBreakpointValue({ base: "18", md: "24" });
+  const size = useBreakpointValue({ base: "16", md: "24" });
   return (
     <svg
       width={size}

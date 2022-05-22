@@ -2120,7 +2120,7 @@ Personenbezogene Daten umfassen solche Elemente wie:
   clickTerms:
     "Indem Sie auf die Schaltfläche 'Registrieren' klicken, stimmen Sie unseren zu",
 
-  myWallets: "Meine Geldbörsen",
+  myWallets: "Geldbörsen",
 
   addPlan: "Neuen Plan",
 

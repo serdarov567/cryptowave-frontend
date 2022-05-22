@@ -14,11 +14,12 @@ const Statistics = ({ langKeys, currentLanguage }) => {
   const { users, capitalization, runningDays } = useStatistics();
 
   const headerFontSize = useBreakpointValue({
-    base: "20px",
+    base: "16px",
     md: "30px",
     lg: "28px",
   });
   const headerProps = {
+    maxW: useBreakpointValue({ base: "130px", md: "220px" }),
     fontSize: headerFontSize,
     textAlign: "center",
     fontFamily: "Manrope-ExtraBold",
@@ -40,12 +41,12 @@ const Statistics = ({ langKeys, currentLanguage }) => {
 
   return (
     <Flex
-      flex={8}
+      flex={{ base: 1, md: 3 }}
       w={"full"}
-      marginBlock={"20px"}
+      marginBlock={{ base: "10px", md: "20px" }}
       flexDir={"row"}
       alignSelf={useBreakpointValue({
-        base: "flex-start",
+        base: "center",
         sm: "center",
         md: "center",
       })}

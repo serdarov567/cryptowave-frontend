@@ -159,20 +159,6 @@ function Dashboard() {
         setLanguage={setLanguage}
         langKeys={langKeys}
       >
-        <Text
-          maxW={useBreakpointValue({ base: "50px", md: "100px" })}
-          fontSize={textFontSize}
-          fontFamily={"Manrope"}
-          fontWeight={200}
-          bgGradient={"-webkit-linear-gradient(110deg, violet.200, #fff)"}
-          bgClip={"text"}
-          fill={"transparent"}
-          alignSelf={"center"}
-          overflowWrap={"anywhere"}
-          textOverflow={"ellipsis"}
-        >
-          {localStorage.getItem("username")}
-        </Text>
         <SignOutButton onClick={onToggleAlert} langKeys={langKeys} />
       </Navbar>
       <Container

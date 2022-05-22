@@ -65,19 +65,16 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
       />
       <Container
         pos={"relative"}
-        display={"flex"}
-        flexDir={"column"}
         maxW={"container.xl"}
-        minH={"800px"}
-        h={"100vh"}
+        maxH={"100vh"}
         justifyContent="center"
         paddingX={0}
       >
         <Flex
           pos={"relative"}
-          minH={"50vh"}
-          h={"60vh"}
-          paddingBottom={useBreakpointValue({ base: "150px", md: "40px" })}
+          h={"100vh"}
+          paddingTop={{ base: "50px", md: 0 }}
+          paddingBottom={useBreakpointValue({ base: "120px", md: "40px" })}
           flexDir={useBreakpointValue({ base: "column", md: "row" })}
           overflow="hidden"
           alignContent={"center"}
@@ -94,9 +91,13 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
           })}
         >
           <Flex
-            flex={5}
+            pos={"relative"}
+            flex={{ base: 1, md: 3 }}
             flexDir={"column"}
+            justify={"center"}
             alignSelf={"center"}
+            paddingTop={{ base: "60px", md: 0 }}
+            h={"100vh"}
             px={useBreakpointValue({ base: "25px", md: "0px" })}
             zIndex={1}
           >
@@ -108,10 +109,10 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
                 md: "500px",
                 lg: "8000px",
               })}
-              marginTop={"20px"}
-              marginBottom={"40px"}
+              marginTop={{ base: "10px", md: "20px" }}
+              marginBottom={{ base: "20px", md: "40px" }}
               fontSize={useBreakpointValue({
-                base: "2xl",
+                base: "xl",
                 sm: "4xl",
                 md: "45px",
                 lg: "60px",
@@ -139,20 +140,19 @@ const Home = ({ isSignedIn, loading, langKeys, currentLanguage }) => {
               </span>
             </Heading>
 
-            <HStack
-              alignSelf={"start"}
-              spacing={useBreakpointValue({ base: 2, md: 7 })}
-            >
+            <Flex flexDir={{ base: "column", md: "row" }} alignSelf={"start"}>
               <GradientButton
                 leftIcon={isSignedIn && <DashboardIcon />}
                 as={"a"}
                 href={isSignedIn ? "/dashboard" : "/sign/up"}
                 isLoading={loading}
+                marginBottom={{ base: "10px", md: "0px" }}
+                marginRight={{ base: "0px", md: "28px" }}
               >
                 {isSignedIn ? langKeys["dashboard"] : langKeys["signUp"]}
               </GradientButton>
               {isSignedIn && <WalletButton langKeys={langKeys} />}
-            </HStack>
+            </Flex>
           </Flex>
 
           <Statistics langKeys={langKeys} currentLanguage={currentLanguage} />
@@ -197,12 +197,13 @@ const ScrollDown = ({ langKeys }) => {
   return (
     <VStack
       position={"absolute"}
-      top={"90vh"}
-      width={"fit-content"}
+      bottom={"3vh"}
+      width={"full"}
       height={"50px"}
       display={"flex"}
       flexDirection={"column"}
       alignSelf={"center"}
+      alignItems={"center"}
       zIndex={1}
     >
       <Text

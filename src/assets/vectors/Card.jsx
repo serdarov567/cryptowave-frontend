@@ -3,7 +3,7 @@ import React from "react";
 
 export default function DashboardIcon(props) {
   const big = useBreakpointValue({ base: "40px", md: "55px" });
-  const small = useBreakpointValue({ base: "15px", md: "20px" });
+  const small = useBreakpointValue({ base: "14px", md: "20px" });
   return (
     <svg
       className="Icon"
