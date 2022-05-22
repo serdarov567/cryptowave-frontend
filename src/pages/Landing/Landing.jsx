@@ -110,6 +110,7 @@ const Landing = () => {
           display={{ base: "none", md: "flex" }}
           pos={"fixed"}
           bottom={"30px"}
+          fontFamily={'Manrope-ExtraBold'}
           right={"30px"}
           zIndex={100000}
           onClick={() => {
